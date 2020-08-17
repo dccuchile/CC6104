@@ -1,0 +1,18 @@
+\frametitle{Ejemplo Chernoff Face}
+\scriptsize{
+\begin{verbatim}
+library("aplpack")
+iris_sample<-iris[sample(1:dim(iris)[1],size=16,replace=F),]
+faces(iris_sample[1:4],face.type=1,labels=iris_sample$Species)
+\end{verbatim}
+
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{imagenes/faces.pdf}
+\end{figure}
+
+
+
+
+}
+

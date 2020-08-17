@@ -1,0 +1,3 @@
+\babel@toc {spanish}{}
+\beamer@sectionintoc {1}{Estad\IeC {\'\i }sticas de Resumen}{5}{0}{1}
+\beamer@sectionintoc {2}{Visualizaci\IeC {\'o}n}{21}{0}{2}

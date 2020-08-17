@@ -1,0 +1,3 @@
+\babel@toc {spanish}{}
+\beamer@sectionintoc {1}{Introducci\IeC {\'o}n}{2}{0}{1}
+\beamer@sectionintoc {2}{Comandos b\IeC {\'a}sicos en R}{6}{0}{2}

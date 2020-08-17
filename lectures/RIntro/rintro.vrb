@@ -1,0 +1,25 @@
+\frametitle{Instalando librerías adicionales}
+\scriptsize{
+\begin{itemize}
+ \item R tiene una comunidad muy activa que desarrolla muchas librerías para el análisis y la visualización de datos.
+ \item Se pueden descargar librerías adicionales desde el repositorio CRAN directamente desde R.
+ \item Las librerías se pueden instalar desde Rstudio o con el siguiente comando:
+ \begin{verbatim}
+ install.packages("rpart",dependencies=T)
+\end{verbatim}
+
+\item Luego para poder usarlas se cargan de la siguiente forma: \verb+library(rpart)+.
+
+\item Un conjunto de liberías muy útiles para manipular datos es \textit{tydyverse}:  \url{https://www.tidyverse.org/}.
+
+ \begin{verbatim}
+install.packages("tidyverse")
+\end{verbatim}
+
+
+
+ \end{itemize}
+
+
+}
+

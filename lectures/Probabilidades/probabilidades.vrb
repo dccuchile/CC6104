@@ -1,0 +1,18 @@
+\frametitle {Graficando la PDF de Normales con distinta varianza en R}\scriptsize {
+\begin{verbatim}
+x=seq(-8,8,length=400)
+y1=dnorm(x,mean=0,sd=0.5)
+y2=dnorm(x,mean=0,sd=1)
+y3=dnorm(x,mean=0,sd=2)
+plot(y1~x,type="l",col="red")
+lines(y2~x,type="l",col="green")
+lines(y3~x,type="l",col="blue")
+\end{verbatim}
+}
+ \begin{figure}[h!]
+\centering
+\includegraphics[scale=0.35]{imagenes/normplot.pdf}
+\end{figure}
+
+
+
