@@ -1,4 +1,4 @@
-# statistics
+# Statistical Thinking
 Material of a course on statistics I'm planning to teach in the near future. The goal is to cover both frequentist and bayesian approaches in a practical way.
 
 
