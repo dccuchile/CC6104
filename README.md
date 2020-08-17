@@ -11,6 +11,6 @@ Material of a course on statistics I'm planning to teach in the near future. The
 ## Books
 
 * [Statistical Thinking for the 21st Century](https://statsthinking21.org/)
-* [All of Statistics -  A Concise Course in Statistical Inference by Larry Wasserman](https://link.springer.com/book/10.1007%2F978-0-387-21736-9)
+* [All of Statistics -  A Concise Course in Statistical Inference by Larry Wasserman](http://www.stat.cmu.edu/~larry/all-of-statistics/)
 * [Statistical Rethinking by Richard McElreath](https://xcelab.net/rm/statistical-rethinking/)
 * [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
