@@ -2,6 +2,16 @@
 Material of a course on statistics I'm planning to teach in the near future. The goal is to cover both frequentist and bayesian approaches in a practical way.
 
 
+
+## Slides
+
+1. [Introduction to Statistical Thinking](slides/ST-intro.pdf) | ([tex source file](slides/ST-intro.tex))
+1. [Introduction to R](slides/ST-intro.pdf) | ([tex source file](slides/ST-R.tex))
+1. [Data Exploration](slides/ST-explore.pdf) | ([tex source file](slides/ST-explore.tex))
+1. [Probability](slides/ST-prob.pdf) | ([tex source file](slides/ST-prob.tex))
+1. [Inference](slides/ST-inference.pdf) | ([tex source file](slides/ST-inference.tex))
+1. [Linear Regression](slides/ST-regression.pdf) | ([tex source file](slides/ST-regression.tex))
+
 ## Links
 
 * [Statistical Rethinking with Python and PyMC3](https://github.com/pymc-devs/resources/tree/master/Rethinking)
