@@ -10,6 +10,7 @@ Material of a course on statistics I'm planning to teach in the near future. The
 1. [Data Exploration](slides/ST-explore.pdf) | ([tex source file](slides/ST-explore.tex))
 1. [Probability](slides/ST-prob.pdf) | ([tex source file](slides/ST-prob.tex))
 1. [Inference](slides/ST-inference.pdf) | ([tex source file](slides/ST-inference.tex))
+1. [Bayesian Inference](slides/ST-bayesian.pdf) | ([tex source file](slides/ST-bayesian.tex))
 1. [Linear Regression](slides/ST-regression.pdf) | ([tex source file](slides/ST-regression.tex))
 
 ## Links
