@@ -133,12 +133,124 @@ the data could happen, according to our assumptions \cite{mcelreath2020statistic
  \item These marbles come in two colors: blue and white. 
  \item We know there are four marbles in the bag, but we don't know how many are of each color. 
  \item We do know that there are five possibilities: \includegraphics[scale=0.3]{pics/marbles1.png}
- \item These are the only possibilities consistent with what we know about the contents of the bag. Call these five possibilities the conjectures.
- \item Our goal is to figure out which of these conjectures is most plausible, given some evidence about the contents of the bag. 
+ \item These are the only possibilities consistent with what we know about the contents of the bag. Call these five possibilities the \textbf{conjectures}.
+ \item Our goal is to figure out which of these conjectures is most \textbf{plausible}, given some evidence about the contents of the bag. 
  \item We do have some evidence: A sequence of three marbles is pulled from the bag, one at a time, replacing the marble each time and shaking the bag, in that order. These before drawing another marble.
- \item The sequence that emerges is: \includegraphics[scale=0.3]{pics/marbles2.png}, in that order. These are the data.
+ \item The sequence that emerges is: \includegraphics[scale=0.5]{pics/marbles2.png}, in that order. These are the data.
  
- 
+\end{itemize}
+ } 
+\end{frame}
+
+
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{itemize}
+ \item Now, let's see how to use the data to infer what's in the bag.
+ \item Let's begin by considering just the single conjecture, \includegraphics[scale=0.3]{pics/marbles3.png}, that the bag contains one blue and three white marbles. 
+ \item On the first draw from the bag, one of four things could
+happen, corresponding to one of four marbles in the bag.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/marbles4.png}
+\end{figure}
+
+\item Notice that even though the three white marbles look the same from a data perspective we just record the color of the marbles, after all they are really different events.
+
+\item This is important, because it means that there are three more ways to see \includegraphics[scale=0.3]{pics/marbles5.png} than to see \includegraphics[scale=0.3]{pics/marbles6.png}.
+
+\end{itemize}
+ } 
+\end{frame}
+
+
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{itemize}
+ \item Now consider the garden as we get another draw from the bag. It expands the garden out one layer:
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/marbles7.png}
+\end{figure}
+
+\item Now there are 16 possible paths through the garden, one for each pair of draws.
+
+\item On the second draw from the bag, each of the paths above again forks into four possible paths. Why?
+
+\end{itemize}
+ } 
+\end{frame}
+
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{itemize}
+ \item Because we believe that our shaking of the bag gives each marble a fair chance at being drawn, regardless of which marble was drawn previously. \item The third layer is built in the same way, and the full garden is shown
+ below:
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/marbles8.png}
+\end{figure}
+
+\item There are $4^3 = 64$ possible paths in total.
+
+\end{itemize}
+ } 
+\end{frame}
+
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{itemize}
+ \item As we consider each draw from the bag, some of these paths are logically eliminated.
+ \item The first draw tuned out to be \includegraphics[scale=0.3]{pics/marbles6.png}, recall, so the three white paths at the bottom are eliminated right away. 
+ \item If you imagine the real data tracing out a path, it must have passed through the one blue path near the origin. 
+ \item The second draw from the bag produces \includegraphics[scale=0.3]{pics/marbles5.png}, so three of the paths forking out of the first blue marble remain.
+ \end{itemize}
+ } 
+\end{frame}
+
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{itemize}
+ \item As the data trace out a path, we know it must have passed through one of those three white paths (after the first blue path).
+ \item But we don't know which one, because we recorded only the color of each marble.
+ \item Finally, the third draw is \includegraphics[scale=0.3]{pics/marbles6.png}. 
+ \item Each of the remaining three paths in the middle layer sustain one blue path, leaving a total of three ways for the sequence\includegraphics[scale=0.3]{pics/marbles2.png} to appear, assuming the bag contains \includegraphics[scale=0.3]{pics/marbles3.png}.
+
+\end{itemize}
+ } 
+\end{frame}
+
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{itemize}
+ \item The figure below shows the forking paths again, now with logically eliminated paths grayed out.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.33]{pics/marbles9.png}
+\end{figure}
+\end{itemize}
+ } 
+\end{frame}
+
+
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{itemize}
+\item We can't be sure which of those three paths the actual data took.
+\item But as long as we're considering only the possibility that the bag contains one blue and three white marbles, we can be sure that the data took one of those three paths.
+
+\item Those are the only paths consistent with both our knowledge of the bag's contents (four marbles, white or blue) and the data (\includegraphics[scale=0.3]{pics/marbles2.png}).
+
 \end{itemize}
  } 
 \end{frame}
