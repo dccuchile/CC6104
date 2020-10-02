@@ -73,13 +73,28 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Useful references: http://www.buders.com/UNIVERSITE/Universite_Dersleri/istatistik/sampling_distributions_and_point_estimation_of_parameters.pdf
+% http://homepage.divms.uiowa.edu/~rdecook/stat2020/notes/ch7_pt1.pdf
 
-\begin{frame}{Statistical Inference}
+\begin{frame}{Populations and Samples}
 \scriptsize{
 \begin{itemize}
- \item In order to draw conclusions about a \textbf{population}, it is generally not feasible to gather all the data about it.
+ \item The main goal of statistical inference is investigate properties about a target \textbf{population}.
+ \item Example: What is the average height of the Chilean people? 
+  \item In order to draw conclusions about a \textbf{population}, it is generally not feasible to gather all the data about it.
  \item We must make reasonable conclusions about a population based on the evidence provided by \textbf{sample data}.
- \item The process of drawing conclusions about a population from sample data is known as \textbf{statistical inference}.
+
+ \item A \textbf{sample staticic} or simply \textbf{statistic} is a quantitative measure calculated from the data. Examples: the mean, the standard deviation, the minimum, the maximum.
+ 
+ 
+ \item Our goal in sampling is to determine the value of a statistic for an entire population of interest, using just a small subset of the population.
+ 
+ \item We do this primarily to save time and effort.
+ 
+ \item Idea: Why go to the trouble of measuring every individual in the population when just a small sample is sufficient to accurately estimate the statistic of interest? \cite{poldrack2019statistical}
+ 
+ 
+
 \end{itemize}
 
 } 
@@ -89,14 +104,13 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \begin{frame}{Statistical Inference (2)}
 \scriptsize{
 \begin{itemize}
-\item In statistical inference we try to \textbf{infer} the distribution that generates the observed data
+ \item The process of drawing conclusions about a population from sample data is known as \textbf{statistical inference}.
+\item In statistical inference we try to \textbf{infer} the distribution that generates the observed data.
 \item Example: Given a sample $X_1, \dots, X_n \sim F$, how do we infer $F$? 
-\item In some cases we are only interested in inferring some property of $F$ (e.g., its \textbf{mean} value).
+\item However, in most cases we are only interested in inferring some property of $F$ (e.g., its \textbf{mean} value).
 \item Statistical models that assume that the distribution can be modeled with a finite set of parameters $\theta= (\theta_{1},\theta_{2},\dots,\theta_{k})$ are called \textbf{parametric models}. 
 \item Example: if we assume that the data comes from a normal distribution $N(\mu,\sigma^2)$, $\mu$ and $\sigma$ would be the parameters of the model. 
-\item A \textbf{sample staticic} is a quantitative measure calculated from the data.
 \end{itemize}
-
 
 } 
 \end{frame}
@@ -104,38 +118,43 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 
 \begin{frame}{Frequentist Aproaches}
 \scriptsize{
-The satistical methods to be presented is this class are known as \textbf{frquentist (or classical)} methods. They are based on the following postulates  \cite{wasserman2013all}:
+The satistical methods to be presented is this class are known as \textbf{frequentist (or classical)} methods. They are based on the following postulates  \cite{wasserman2013all}:
 \begin{itemize}
 \item Probability refers to limiting relative frequencies. Probabilities are objective properties of the real world.
 \item Parameters are fixed, unknown constants. Because they are not fluctuating, no useful probability statements can be made about parameters.
 \item Statistical procedures should be designed to have well-defined long run frequency properties. For example, a 95 percent confidence interval should trap the true value of the parameter with limiting frequency at least 95 percent.
 \end{itemize}
-There is another approach to inference called \textbf{Bayesian inference} to be discussed later in the course.
+There is another approach to inference called \textbf{Bayesian inference}, which is based on different posulated, to be discussed later in the course.
 
 } 
 \end{frame}
 
+\section{Point Estimation}
 
 \begin{frame}{Point Estimation}
 \scriptsize{
 \begin{itemize}
  \item Point estimation is the process of finding the \textbf{best guess} for some quantity of interest from a \textbf{statistical sample}.
- \item The quantity of interest could be a parameter in a parametric model, a CDF $F$, a probability density function $f$, a regression function $r$, or a prediction for a future value $Y$ of some random variable.
-  \item By convention, we denote a point estimate of $\theta$ by $\hat{\theta}$ or $\hat{\theta}_n$ 
- \item Es importante remarcar que mientras $\theta$ es un valor fijo desconocido, $\hat{\theta}$  depende de los datos y por ende es una variable aleatoria. 
-
+ \item In a general sence, this quantity of interest could be a parameter in a parametric model, a CDF $F$, a probability density function $f$, a regression function $r$, or a prediction for a future value $Y$ of some random variable.
+ \item In this class we will consider this quantity of interest as a \textbf{population parameter} $\theta$. 
+  \item By convention, we denote a point estimate of $\theta$ by $\hat{\theta}$ or $\hat{\theta}_n$.
+ \item It is important to remark that while $\theta$ is an unknown fixed value, $\hat{\theta}$  depends on the data and is therefore a random variable. 
+ \item We need to bear in mind that the process of sampling is by definition a random experiment. 
+ 
 \end{itemize}
 
 } 
 \end{frame}
 
-\begin{frame}{Estimación Puntual (2)}
+\begin{frame}{Point Estimation}
+
+%http://homepage.divms.uiowa.edu/~rdecook/stat2020/notes/ch7_pt1.pdf
 
 \scriptsize{
-\begin{block}{Definición Formal}
+\begin{block}{Formal Definition}
 \begin{itemize}
- \item Sean $X_1, \dots, X_n$ $n$ observaciones IID de una distribución $F$
- \item Un estimador puntual $\hat{\theta}_n$  de un parámetro $\theta$ es una función de $X_1, \dots, X_n$:
+ \item Let $X_1, \dots, X_n$ be $n$ IID data points  from some distribution  $F$.
+ \item A point estimator $\hat{\theta}_n$  of a parameter $\theta$ is some function of $X_1, \dots, X_n$:
  \begin{displaymath}
  \hat{\theta}_n=g(X_1, \dots, X_n) 
  \end{displaymath}
@@ -146,60 +165,94 @@ There is another approach to inference called \textbf{Bayesian inference} to be 
 \end{block}
 
 \begin{itemize}
- \item El \textbf{sesgo} (bias) de un estimador se define como: 
+ \item The \textbf{bias} of an estimator is defined as: 
 \begin{displaymath}
  \text{bias}(\hat{\theta}_n)=\mathbb{E}(\hat{\theta}_n)-\theta
 \end{displaymath}
-\item Un estimador es insesgado si $\mathbb{E}(\hat{\theta}_n)=\theta$ o  $\text{bias}(\hat{\theta}_n)=0 $
+\item An estimator is unbiased if $\mathbb{E}(\hat{\theta}_n)=\theta$ or  $\text{bias}(\hat{\theta}_n)=0 $
 \end{itemize}
 
 } 
 \end{frame}
 
 
-\begin{frame}{Estimación Puntual (3)}
+\begin{frame}{Sample Distribution}
 
 \scriptsize{
 
 \begin{itemize}
-\item La distribución de $\hat{\theta}_n$ se conoce como la \textbf{distribución muestral}
-\item La desviación estándar de $\hat{\theta}_n$ se conoce como \textbf{error estándar} $se$:
+\item If we take multiple samples, the value of our statistical estimate $\hat{\theta}_n$ will also vary from sample to sample.
+
+\item We refer to this distribution of our estimator across samples as the   \textbf{sampling distribution} \cite{poldrack2019statistical}.
+
+\item The sampling distribution may be considered as the distribution of  $\hat{\theta}_n$ for all possible samples from the same population of size $n$\footnote{\url{https://courses.lumenlearning.com/boundless-statistics/chapter/sampling-distributions/}}.
+
+\item We need to bear in mind this is an imaginary concept, since we can't obtain all possible samples.
+
+\end{itemize}
+
+} 
+\end{frame}
+
+
+\begin{frame}{Standard Error}
+
+\scriptsize{
+
+\begin{itemize}
+\item The standard deviation of $\hat{\theta}_n$ is called the \textbf{standard error} $se$:
 \begin{displaymath}
 se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \end{displaymath}
-\item El error estándar nos habla sobre la variabilidad del estimador entre todas las posibles muestras de un mismo tamaño.
+\item The standard error tells us about the variability of the estimator between all possible samples of the same size.
 \end{itemize}
 
 } 
 \end{frame}
 
 
-\begin{frame}{Estimación Puntual (4)}
+
+
+
+\begin{frame}{The Sample Mean}
 \scriptsize{
 
 \begin{itemize}
- \item Sea $X_1,X_2,\dots,X_n$ una muestra aleatoria de una población de media $\mu$ y varianza $\sigma^2$
- \item Se define la \textbf{media muestral} $\overline{X_{n}}$ o $\hat{\mu}$ como:
+ \item Let $X_1,X_2,\dots,X_n$ be a random sample of a population of mean $\mu$ and variance $\sigma^2$
+ \item  A sample statistic we can derive from the data is the  \textbf{sample mean} $\overline{X_{n}}$
  \begin{displaymath}
   \overline{X_{n}}=\frac{1}{n}\sum_{i=1}^{n} X_i
  \end{displaymath}
-\item Es un estimador insesgado:
+ \item The sample mean is a statitical estimate of the mean $\overline{X_{n}} = \hat{\mu}$.
+ \item The sampling distribution of the sample mean: 
+ 
+ 
+\item We can show that the sample mean is an unbiased estimator of $\mu$:
 \begin{displaymath}
 \mathbb{E}(\overline{X_{n}}) = \mathbb{E}(\frac 1n \sum_{i=1}^{n} X_i)  =  \frac 1n \times \mathbb{E}(\sum_{i=1}^{n} X_i) = \frac 1n (n \times \mu) = \mu  
 \end{displaymath}
+\end{itemize}
 
-\item Su error estándar sería $se(\overline{X_{n}}) = \sqrt{\mathbb{V}(\overline{X_{n}})}$ donde
+} 
+\end{frame}
+
+\begin{frame}{Point Estimation (4)}
+\scriptsize{
+
+\begin{itemize}
+\item The standard error of the sample mean $se(\overline{X_{n}}) = \sqrt{\mathbb{V}(\overline{X_{n}})}$ can be calulated as:
 \begin{displaymath}
  \mathbb{V}(\overline{X_{n}})=\mathbb{V}(\frac 1n \sum_{i=1}^{n} X_i) = \frac{1}{n^2} \mathbb{V}(\sum_{i=1}^{n} X_i) = \frac{n}{n^2} \mathbb{V}(X_i)=\frac{\sigma^2}{n} 
 \end{displaymath}
 
-\item Entonces $se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}$
+\item Then,  $se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}$
 
 \end{itemize}
 
 
 } 
 \end{frame}
+
 
 
 \begin{frame}{Ejemplos de Estimación Puntual (5)}
@@ -255,6 +308,13 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 
 \begin{itemize}
 \item Se espera que un buen estimador sea insesgado y de mínima varianza.
+
+\item Unbiased ness used to receive much attention but these days is considered less important
+
+\item Many of the estimators we will use are biased. 
+
+\item A reasonable requirement for an estimator is that it should converge to the true parameter value as we collect more and more data.
+
 \item Un estimador puntual $\hat{\theta}_n$ de un parámetro $\theta$ es \textbf{consistente} si converge al valor verdadero cuando el número de datos de la muestra tiende a infinito.
 \item La calidad de un estimador se puede medir usando el \textbf{error cuadrático medio} (MSE)
 \begin{displaymath}
