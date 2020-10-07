@@ -221,8 +221,7 @@ happen, corresponding to one of four marbles in the bag.
  \item As the data trace out a path, we know it must have passed through one of those three white paths (after the first blue path).
  \item But we don't know which one, because we recorded only the color of each marble.
  \item Finally, the third draw is \includegraphics[scale=0.3]{pics/marbles6.png}. 
- \item Each of the remaining three paths in the middle layer sustain one blue path, leaving a total of three ways for the sequence\includegraphics[scale=0.3]{pics/marbles2.png} to appear, assuming the bag contains \includegraphics[scale=0.3]{pics/marbles3.png}.
-
+ \item Each of the remaining three paths in the middle layer sustain one blue path, leaving a total of three ways for the sequence \includegraphics[scale=0.3]{pics/marbles2.png} to appear, assuming the bag contains \includegraphics[scale=0.3]{pics/marbles3.png}.
 \end{itemize}
  } 
 \end{frame}
@@ -249,8 +248,62 @@ happen, corresponding to one of four marbles in the bag.
 \item We can't be sure which of those three paths the actual data took.
 \item But as long as we're considering only the possibility that the bag contains one blue and three white marbles, we can be sure that the data took one of those three paths.
 
-\item Those are the only paths consistent with both our knowledge of the bag's contents (four marbles, white or blue) and the data (\includegraphics[scale=0.3]{pics/marbles2.png}).
+\item Those are the only paths consistent with both our knowledge of the bag's contents (four marbles, white or blue) and the data (\includegraphics[scale=0.3]{pics/marbles2.png}).  
 
+ \item This demonstrates that there are three (out of 64) ways for a bag containing to produce the data.
+ \item We have no way to decide among these three ways. 
+\end{itemize}
+ } 
+\end{frame}
+
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{itemize}
+ \item The inferential power comes from comparing this count to the numbers of ways each of the other conjectures of the bag's contents could produce the same data. 
+ \item For example, consider the conjecture \includegraphics[scale=0.3]{pics/marbles10.png}. 
+ \item There are zero ways for this conjecture to produce the observed data, because even one \includegraphics[scale=0.3]{pics/marbles6.png} is logically incompatible with it. 
+\item The conjecture \includegraphics[scale=0.3]{pics/marbles11.png} is likewise logically incompatible with the data. 
+\item So we can eliminate these two conjectures, because neither provides even a single path that is consistent with the data.
+\item The next slide's figure displays all the paths for the reamaining three conjectures: \includegraphics[scale=0.3]{pics/marbles3.png}, \includegraphics[scale=0.3]{pics/marbles13.png}, and \includegraphics[scale=0.3]{pics/marbles14.png}.
+
+\end{itemize}
+ } 
+\end{frame}
+
+
+
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{pics/marbles12.png}
+\end{figure}
+ } 
+\end{frame}
+
+\begin{frame}{Counting Possibilities}
+\scriptsize{
+\begin{itemize}
+ \item The number of ways to produce the data, for each conjecture, can be computed by first counting the number of paths in each ``ring'' of the garden and then by multiplying these counts together.
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/marbles15.png}
+\end{figure}
+\item By comparing these counts, we have part a way to rate the relative \textbf{plausibility} of each conjectured bag composition.
+\end{itemize}
+ } 
+\end{frame}
+
+\begin{frame}{Combining other information}
+\scriptsize{
+\begin{itemize}
+ \item We may have additional information about the relative plausibility of each conjecture. 
+ \item This information could arise from knowledge of how the contents of the bag were generated. 
+ \item It could also arise from previous data. 
+ \item Whatever the source, it would help to have a way to combine different sources of information to update the plausibilities. 
+ \item Luckily there is a natural solution: Just multiply the counts.
 \end{itemize}
  } 
 \end{frame}
