@@ -341,22 +341,6 @@ as the new observation is logically independent of the previous observations.
 \end{frame}
 
 
-\begin{frame}{Combining other information}
-\scriptsize{
-\begin{itemize}
- \item Option 1: draw a forking path with four layers and do the counting again.
-\item Option 2: Update previous counts (0, 3, 8, 9, 0) with the new information by multiplying the new count by the old count.
-\item Both approach are matematically identical as long
-as the new observation is logically independent of the previous observations. 
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.33]{pics/marbles16.png}
-\end{figure}
-\end{itemize}
- } 
-\end{frame}
-
 
 \begin{frame}{Combining other information}
 \scriptsize{
@@ -382,6 +366,33 @@ as the new observation is logically independent of the previous observations.
 \item Now the conjecture \includegraphics[scale=0.3]{pics/marbles13.png} is most plausible, but barely better than \includegraphics[scale=0.3]{pics/marbles14.png}.
 \item Is there a threshold difference in these counts at which we can safely decide that one of the conjectures is the correct one? 
 \item We will explore this question next.
+\end{itemize}
+ } 
+\end{frame}
+
+\begin{frame}{From counts to probability}
+\scriptsize{
+\begin{itemize}
+ \item  So far, we have defined the updated plausibility of each possible composition of the bag, after seeing the data, as:
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/marbles19.png}
+\end{figure}
+\item The problem of representing plausibilities as counts is that these numbers grow very quickly  as  the amount of data grows. 
+ \item It is better to standardize them to turn them into probabilities.
+ \item Next, we will formalize the Bayesian framework using probabilities.
+\item Let index our conjecture with a parameter $\theta$ defined as the number of marbles that are blue.  $\theta=1 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles14.png} 
+
+
+\item We construct probabilities by standardizing the plausibility so that the sum of the plausibilities for all possible conjectures will be one.
+
+\item This can be done using the Bayes theorem.
+
+\begin{equation}
+ \text{plausibility of $\theta$ after $d$} = \frac{\text{ways $\theta$ can produce $d$} \times \text{prior plausibility $\theta$}}{\text{sum of products}}
+\end{equation}
+
+
 \end{itemize}
  } 
 \end{frame}
