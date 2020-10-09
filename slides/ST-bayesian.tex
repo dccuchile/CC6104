@@ -308,6 +308,85 @@ happen, corresponding to one of four marbles in the bag.
  } 
 \end{frame}
 
+
+\begin{frame}{Combining other information}
+\scriptsize{
+\begin{itemize}
+ \item Suppose that each conjecture is equally plausible at the start.
+ \item So we just compare the counts of ways in which each conjecture is compatible with the observed data: \includegraphics[scale=0.3]{pics/marbles2.png}.
+ \item This comparison suggests that \includegraphics[scale=0.3]{pics/marbles14.png} is slightly more plausible than \includegraphics[scale=0.3]{pics/marbles13.png}, and both are about three times more plausible than \includegraphics[scale=0.3]{pics/marbles3.png}. 
+\item Since these are our initial counts, and we are going to update them next, let's label them \textbf{prior}.
+\item Now suppose we draw another marble from the bag to get another observation: \includegraphics[scale=0.3]{pics/marbles6.png}. 
+\item How can we update our plausibilities about each conjecture based on this new evidence?
+\item There are two choices discussed next. 
+\end{itemize}
+ } 
+\end{frame}
+
+
+\begin{frame}{Combining other information}
+\scriptsize{
+\begin{itemize}
+ \item Option 1: draw a forking path with four layers and do the counting again.
+\item Option 2: Update previous counts (0, 3, 8, 9, 0) with the new information by multiplying the new count by the old count.
+\item Both approach are matematically identical as long
+as the new observation is logically independent of the previous observations. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.33]{pics/marbles16.png}
+\end{figure}
+\end{itemize}
+ } 
+\end{frame}
+
+
+\begin{frame}{Combining other information}
+\scriptsize{
+\begin{itemize}
+ \item Option 1: draw a forking path with four layers and do the counting again.
+\item Option 2: Update previous counts (0, 3, 8, 9, 0) with the new information by multiplying the new count by the old count.
+\item Both approach are matematically identical as long
+as the new observation is logically independent of the previous observations. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.33]{pics/marbles16.png}
+\end{figure}
+\end{itemize}
+ } 
+\end{frame}
+
+
+\begin{frame}{Combining other information}
+\scriptsize{
+\begin{itemize}
+ \item In the previous example, the prior data and new data are of the same type: marbles drawn from the bag. 
+ \item But in general, the prior data and new data can be of different types. 
+ \item Suppose for example that someone from the marble factory tells you that blue marbles are rare.
+ \item So for every bag containing \includegraphics[scale=0.3]{pics/marbles14.png}, they made two bags containing \includegraphics[scale=0.3]{pics/marbles13.png} and three bags containing \includegraphics[scale=0.3]{pics/marbles17.png} . 
+ \item They also ensured that every bag contained at least one blue and one white marble. 
+\end{itemize}
+ } 
+\end{frame}
+
+
+\begin{frame}{Combining other information}
+\scriptsize{
+\begin{itemize}
+ \item We can update our counts again:
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.33]{pics/marbles18.png}
+\end{figure}
+\item Now the conjecture \includegraphics[scale=0.3]{pics/marbles13.png} is most plausible, but barely better than \includegraphics[scale=0.3]{pics/marbles14.png}.
+\item Is there a threshold difference in these counts at which we can safely decide that one of the conjectures is the correct one? 
+\item We will explore this question next.
+\end{itemize}
+ } 
+\end{frame}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
 \frametitle{References}
