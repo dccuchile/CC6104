@@ -21,6 +21,7 @@ Material of a course on statistics I'm planning to teach in the near future. The
 * [On Bayesian and frequentist, latent variables and parameters By Dustin Tran](http://dustintran.com/blog/on-bayesian-and-frequentist-latent-variables-and-parameters)
 * [What is statistics by Michael Jordan](https://www.youtube.com/watch?v=EYIKy_FM9x0&t=4742s)
 * [Foundations of Statistics – Frequentist and Bayesian by Mary Parker](https://www.austincc.edu/mparker/stat/nov04/talk_nov04.pdf)
+* [The Permutation Test by Jared Wilber](https://www.jwilber.me/permutationtest/)
 
 ## Books
 
