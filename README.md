@@ -20,6 +20,7 @@ Material of a course on statistics I'm planning to teach in the near future. The
 * [Demystifying hypothesis testing with simple Python examples](https://towardsdatascience.com/demystifying-hypothesis-testing-with-simple-python-examples-4997ad3c5294)
 * [On Bayesian and frequentist, latent variables and parameters By Dustin Tran](http://dustintran.com/blog/on-bayesian-and-frequentist-latent-variables-and-parameters)
 * [What is statistics by Michael Jordan](https://www.youtube.com/watch?v=EYIKy_FM9x0&t=4742s)
+* [Foundations of Statistics – Frequentist and Bayesian by Mary Parker](https://www.austincc.edu/mparker/stat/nov04/talk_nov04.pdf)
 
 ## Books
 
