@@ -129,15 +129,15 @@ the data could happen, according to our assumptions \cite{mcelreath2020statistic
 \begin{frame}{Counting Possibilities}
 \scriptsize{
 \begin{itemize}
- \item Suppose there's a bag, and it contains four marbles.
- \item These marbles come in two colors: blue and white. 
+ \item Suppose there's a bag, and it contains \textbf{four} marbles.
+ \item These marbles come in two colors: \textbf{blue} and \textbf{white}. 
  \item We know there are four marbles in the bag, but we don't know how many are of each color. 
  \item We do know that there are five possibilities: \includegraphics[scale=0.3]{pics/marbles1.png}
  \item These are the only possibilities consistent with what we know about the contents of the bag. Call these five possibilities the \textbf{conjectures}.
- \item Our goal is to figure out which of these conjectures is most \textbf{plausible}, given some evidence about the contents of the bag. 
- \item We do have some evidence: A sequence of three marbles is pulled from the bag, one at a time, replacing the marble each time and shaking the bag, in that order. These before drawing another marble.
- \item The sequence that emerges is: \includegraphics[scale=0.5]{pics/marbles2.png}, in that order. These are the data.
- 
+ \item Our goal is to figure out which of these conjectures is most \textbf{plausible}, given some \textbf{evidence} about the contents of the bag. 
+ \item Evidence: A sequence of three marbles is pulled from the bag, one at a time, replacing the marble each time and shaking the bag, in that order. 
+ \item The sequence that emerges is: \includegraphics[scale=0.5]{pics/marbles2.png}, which is our \textbf{data}. 
+  
 \end{itemize}
  } 
 \end{frame}
@@ -206,7 +206,7 @@ happen, corresponding to one of four marbles in the bag.
 \begin{frame}{Counting Possibilities}
 \scriptsize{
 \begin{itemize}
- \item As we consider each draw from the bag, some of these paths are logically eliminated.
+ \item As we consider each draw from the bag to get \includegraphics[scale=0.5]{pics/marbles2.png}, some of these paths are logically eliminated.
  \item The first draw tuned out to be \includegraphics[scale=0.3]{pics/marbles6.png}, recall, so the three white paths at the bottom are eliminated right away. 
  \item If you imagine the real data tracing out a path, it must have passed through the one blue path near the origin. 
  \item The second draw from the bag produces \includegraphics[scale=0.3]{pics/marbles5.png}, so three of the paths forking out of the first blue marble remain.
@@ -389,9 +389,11 @@ as the new observation is logically independent of the previous observations.
 \scriptsize{
 \begin{itemize}
  \item Now  we will formalize the Bayesian framework using probabilities.
-\item Let index our conjecture with a parameter $\theta$ defined as the number of marbles that are blue:  $\theta=1 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles14.png}, $\theta=2 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles14.png}, $\theta=3 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles14.png}, $\theta=4 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles14.png}.
-\item The main differente
+\item Let index our conjecture with a parameter $\theta$ defined as the fractions of marbles from the bag that are blue:
 
+$\theta=0 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles10.png}, $\theta=0.25 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles17.png}, $\theta=0.5 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles13.png},  $\theta=0.75 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles14.png}, $\theta=1 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles11.png}.
+
+\item Let's call our data \includegraphics[scale=0.3]{pics/marbles2.png} $d$. 
 
 \item We construct probabilities by standardizing the plausibility so that the sum of the plausibilities for all possible conjectures will be one.
 
@@ -405,26 +407,74 @@ as the new observation is logically independent of the previous observations.
  \mathbb{P}(\theta|d) = \frac{\mathbb{P}(d|\theta) \times \mathbb{P}(\theta)}{\mathbb{P}(d)}
 \end{equation}
 
-\item The denominator can be expressed by the law of total probabilities as 
-\begin{equation}
- \mathbb{P}(d) =  \sum_\theta \mathbb{P}(d|\theta) \times \mathbb{P}(\theta) 
-\end{equation}
-
 
 \end{itemize}
  } 
  
- \begin{tabular}{ccccc}
-$\theta$ & $P(\theta)$ & Ways to Produce Data & $P(d|\theta)$ & $P(\theta|d) = P(d|\theta)*P(\theta) / P(d)$ \\
-0 & 1/5 & 0 & 0/64 & 1/5*0/64 / 0.0625 =0 \\
-1 & 1/5 & 3 & 3/64 & 1/5*3/64 / 0.0625 = 0.15
-\\
-2 & 1/5 & 8 & 8/64 & 1/5*8/64 / 0.0625 = 0.4 \\
-3 & 1/5 & 9 & 9/64 & 1/5*9/64 / 0.0625 = 0.45 \\
-4 & 1/5 & 0 & 0/64 & 1/5*0/64 / 0.0625 = 0 \\
-\end{tabular} 
+ \end{frame}
+
+
+
+\begin{frame}{From counts to probability}
+\scriptsize{
+\begin{itemize}
+\item The denominator $\mathbb{P}(d)$ (that standardizes values to sum one) can be expressed by the law of total probabilities as: 
+\begin{equation}
+ \mathbb{P}(d) =  \sum_\theta \mathbb{P}(d|\theta) \times \mathbb{P}(\theta) 
+\end{equation}
+
+ \item Let's consider the prior assumptions that all conjectures are equally plausible at the start, then $\mathbb{P}(\theta)$ is uniformly distributed.  \\ 
  
-P(d)= 1/5 * 0/64 + 1/5*3/64 + 1/5*8/64+1/5*9/64+1/5*0/64 = 0.0625 
+ \vspace{0.3cm}
+  \begin{tabular}{c|c|c|c|c} \hline
+$\theta$ & $P(\theta)$ & Ways to Produce Data & $P(d|\theta)$ & $P(\theta|d) = P(d|\theta)*P(\theta) / P(d)$  \\ \hline
+0 & 1/5 & 0 & 0/64 &  $\frac{0/64*1/5}{0.0625}$ =0 \\
+0.25 & 1/5 & 3 & 3/64 & $\frac{3/64*1/5}{0.0625}$ = 0.15
+\\
+0.5 & 1/5 & 8 & 8/64 & $\frac{8/64*1/5}{0.0625}$ = 0.4 \\
+0.75 & 1/5 & 9 & 9/64 & $\frac{9/64*1/5}{0.0625}$ = 0.45 \\
+1 & 1/5 & 0 & 0/64 & $\frac{0/64*1/5}{0.0625}$ = 0 \\ 
+\end{tabular} 
+\vspace{0.3cm} 
+ 
+\item where P(d)= 1/5 * 0/64 + 1/5*3/64 + 1/5*8/64+1/5*9/64+1/5*0/64 = 0.0625 
+ 
+ 
+\end{itemize}
+ } 
+ 
+
+\end{frame}
+
+
+\begin{frame}{From counts to probability}
+\scriptsize{
+\begin{itemize}
+\item Let's use the factory counts information (blue marbles are are) now in our prior assumptions of $P(\theta)$.  \\ 
+\item This can be done by normalizing the factory counts.  
+
+\item Notice that this new prior assumption doesn't affect the ways each conjecture can generate the data and $P(d|\theta)$ remains unchanged.
+ 
+ \vspace{0.3cm}
+  \begin{tabular}{c|c|c|c|c} \hline
+$\theta$ & Factory count & $P(\theta)$ &  $P(d|\theta)$ & $P(\theta|d) = P(d|\theta)*P(\theta) / P(d)$  \\ \hline
+0 & 0 & 0/6 &  0/64 &  $\frac{0/64*0/6}{0.08854167}$ =0 \\
+0.25 & 3 & 3/6 & 3/64 & $\frac{3/64*3/6}{0.08854167}$ = 0.2647059
+\\
+0.5 & 2 & 2/6  & 8/64 & $\frac{8/64*2/6}{0.08854167}$ = 0.4705882 \\
+0.75 & 1 &  1/6 & 9/64 & $\frac{9/64*1/6}{0.08854167}$ = 0.2647059  \\
+1 &  0 & 0/6 &  0/64 & $\frac{0/64*0/6}{0.08854167}$ = 0 \\ 
+\end{tabular} 
+\vspace{0.3cm} 
+ 
+\item where P(d)= 0/6 * 0/64 + 3/6*3/64 + 2/6*8/64+1/6*9/64+0/6*0/64 =  0.08854167
+
+\item Two different prior assumptions led us to different values of $\mathbb{P}(d|\theta)$.
+ 
+\end{itemize}
+ } 
+ 
+
 \end{frame}
 
 
