@@ -427,7 +427,7 @@ $\theta=0 \rightarrow$ \includegraphics[scale=0.3]{pics/marbles10.png}, $\theta=
  
  \vspace{0.3cm}
   \begin{tabular}{c|c|c|c|c} \hline
-$\theta$ & $P(\theta)$ & Ways to Produce Data & $P(d|\theta)$ & $P(\theta|d) = P(d|\theta)*P(\theta) / P(d)$  \\ \hline
+$\theta$ & $\mathbb{P}(\theta)$ & Ways to Produce Data & $\mathbb{P}(d|\theta)$ & $\mathbb{P}(\theta|d) = \mathbb{P}(d|\theta)*\mathbb{P}(\theta) / \mathbb{P}(d)$  \\ \hline
 0 & 1/5 & 0 & 0/64 &  $\frac{0/64*1/5}{0.0625}$ =0 \\
 0.25 & 1/5 & 3 & 3/64 & $\frac{3/64*1/5}{0.0625}$ = 0.15
 \\
@@ -437,7 +437,7 @@ $\theta$ & $P(\theta)$ & Ways to Produce Data & $P(d|\theta)$ & $P(\theta|d) = P
 \end{tabular} 
 \vspace{0.3cm} 
  
-\item where P(d)= 1/5 * 0/64 + 1/5*3/64 + 1/5*8/64+1/5*9/64+1/5*0/64 = 0.0625 
+\item where $\mathbb{P}(d)$ = 1/5 * 0/64 + 1/5*3/64 + 1/5*8/64+1/5*9/64+1/5*0/64 = 0.0625 
  
  
 \end{itemize}
@@ -450,14 +450,14 @@ $\theta$ & $P(\theta)$ & Ways to Produce Data & $P(d|\theta)$ & $P(\theta|d) = P
 \begin{frame}{From counts to probability}
 \scriptsize{
 \begin{itemize}
-\item Let's use the factory counts information (blue marbles are are) now in our prior assumptions of $P(\theta)$.  \\ 
+\item Let's use the factory counts information (blue marbles are are) now in our prior assumptions of $\mathbb{P}(\theta)$.  \\ 
 \item This can be done by normalizing the factory counts.  
 
-\item Notice that this new prior assumption doesn't affect the ways each conjecture can generate the data and $P(d|\theta)$ remains unchanged.
+\item Notice that this new prior assumption doesn't affect the ways each conjecture can generate the data and $\mathbb{P}(d|\theta)$ remains unchanged.
  
  \vspace{0.3cm}
   \begin{tabular}{c|c|c|c|c} \hline
-$\theta$ & Factory count & $P(\theta)$ &  $P(d|\theta)$ & $P(\theta|d) = P(d|\theta)*P(\theta) / P(d)$  \\ \hline
+$\theta$ & Factory count & $\mathbb{P}(\theta)$ &  $\mathbb{P}(d|\theta)$ & $\mathbb{P}(\theta|d) = \mathbb{P}(d|\theta)*\mathbb{P}(\theta) / \mathbb{P}(d)$  \\ \hline
 0 & 0 & 0/6 &  0/64 &  $\frac{0/64*0/6}{0.08854167}$ =0 \\
 0.25 & 3 & 3/6 & 3/64 & $\frac{3/64*3/6}{0.08854167}$ = 0.2647059
 \\
@@ -467,13 +467,57 @@ $\theta$ & Factory count & $P(\theta)$ &  $P(d|\theta)$ & $P(\theta|d) = P(d|\th
 \end{tabular} 
 \vspace{0.3cm} 
  
-\item where P(d)= 0/6 * 0/64 + 3/6*3/64 + 2/6*8/64+1/6*9/64+0/6*0/64 =  0.08854167
+\item where $\mathbb{P}(d)$= 0/6 * 0/64 + 3/6*3/64 + 2/6*8/64+1/6*9/64+0/6*0/64 =  0.08854167
 
-\item Two different prior assumptions led us to different values of $\mathbb{P}(d|\theta)$.
+\item Two different prior assumptions led us to different values of $\mathbb{P}(\theta|d)$.
  
 \end{itemize}
  } 
+
+\end{frame}
+
+
+\begin{frame}{From counts to probability}
+\scriptsize{
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.63]{pics/marbles_dist.pdf}
+\end{figure}
+ } 
  
+
+\end{frame}
+
+
+\begin{frame}{Bayesian Components}
+\scriptsize{
+\begin{itemize}
+\item Now we will introduce the names of the components of our Bayesian model.  \\ 
+
+\item \textbf{Parameter} $\theta$:  A way of indexing possible explanations of the data. In our example is a conjectured proportion of blue marbles. 
+
+\item It is important to remark that in the Bayesian setting a parameter is random variable, whereas in the frequentist approach they are unknown quantities. 
+
+\item \textbf{Likelihood} $\mathbb{P}(d|\theta)$: The relative number of ways that a value $\theta$ can produce the data. It is derived by enumerating all the possible data sequences that could have happened and then eliminating those sequences inconsistent with the data.
+\item \textbf{Prior probability} $\mathbb{P}(\theta)$: The prior plausibility of any specific value of $\theta$.
+ 
+\end{itemize}
+ } 
+
+\end{frame}
+
+
+\begin{frame}{Bayesian Components}
+\scriptsize{
+\begin{itemize}
+\item \textbf{Prior probability} $\mathbb{P}(\theta)$: The prior plausibility of any specific value of $\theta$.
+\item \textbf{Posterior probability} $\mathbb{P}(\theta|d)$: The new, updated plausibility of any specific $\theta$. 
+
+\item \textbf{Evidence} or \textbf{Average Likelihood} $\mathbb{P}(d)$: is literally the average probability of the data. 
+\item Averaged over what? Averaged over the prior. It’s job is just to standardize the posterior, to ensure it sums (integrates) to one.
+ 
+\end{itemize}
+ } 
 
 \end{frame}
 
