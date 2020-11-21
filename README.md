@@ -26,6 +26,7 @@ Material of a course on statistics I'm planning to teach in the near future. The
 * [Foundations of Statistics – Frequentist and Bayesian by Mary Parker](https://www.austincc.edu/mparker/stat/nov04/talk_nov04.pdf)
 * [The Permutation Test by Jared Wilber](https://www.jwilber.me/permutationtest/)
 * [Spurious Correlations](https://tylervigen.com/old-version.html)
+* [Research Methods and Statistics Bristol University](http://www.bristol.ac.uk/medical-school/media/rms/red/index.html)
 ## Books
 
 * [Statistical Thinking for the 21st Century](https://statsthinking21.org/)
