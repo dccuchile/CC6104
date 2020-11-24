@@ -33,6 +33,7 @@ Material of a course on statistics I'm planning to teach in the near future. The
 * [All of Statistics -  A Concise Course in Statistical Inference by Larry Wasserman](http://www.stat.cmu.edu/~larry/all-of-statistics/)
 * [Statistical Rethinking by Richard McElreath](https://xcelab.net/rm/statistical-rethinking/)
 * [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
+* [Answering questions with data] (https://crumplab.github.io/statistics/)
 
 ## Videos
 
