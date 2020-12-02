@@ -450,7 +450,7 @@ $\theta$ & $\mathbb{P}(\theta)$ & Ways to Produce Data & $\mathbb{P}(d|\theta)$ 
 \begin{frame}{From counts to probability}
 \scriptsize{
 \begin{itemize}
-\item Let's use the factory counts information (blue marbles are are) now in our prior assumptions of $\mathbb{P}(\theta)$.  \\ 
+\item Let's use the factory counts information (blue marbles are rare) now in our prior assumptions of $\mathbb{P}(\theta)$.  \\ 
 \item This can be done by normalizing the factory counts.  
 
 \item Notice that this new prior assumption doesn't affect the ways each conjecture can generate the data and $\mathbb{P}(d|\theta)$ remains unchanged.
@@ -491,16 +491,41 @@ $\theta$ & Factory count & $\mathbb{P}(\theta)$ &  $\mathbb{P}(d|\theta)$ & $\ma
 
 \begin{frame}{Bayesian Components}
 \scriptsize{
+Now we will introduce the names of the components of our Bayesian model. 
+
 \begin{itemize}
-\item Now we will introduce the names of the components of our Bayesian model.  \\ 
-
 \item \textbf{Parameter} $\theta$:  A way of indexing possible explanations of the data. In our example is a conjectured proportion of blue marbles. 
-
-\item It is important to remark that in the Bayesian setting a parameter is random variable, whereas in the frequentist approach they are unknown quantities. 
 
 \item \textbf{Likelihood} $\mathbb{P}(d|\theta)$: The relative number of ways that a value $\theta$ can produce the data. It is derived by enumerating all the possible data sequences that could have happened and then eliminating those sequences inconsistent with the data.
 \item \textbf{Prior probability} $\mathbb{P}(\theta)$: The prior plausibility of any specific value of $\theta$.
  
+\item \textbf{Posterior probability} $\mathbb{P}(\theta|d)$: The new, updated plausibility of any specific $\theta$. 
+
+\item \textbf{Evidence} or \textbf{Average Likelihood} $\mathbb{P}(d)$: the average probability of the data averaged over the prior. It’s job is just to standardize the posterior, to ensure it sums (integrates) to one. 
+ 
+\end{itemize}
+ } 
+
+All these components are connected by the Bayes theorem!
+ 
+\end{frame}
+
+
+\begin{frame}{Bayesian Components}
+\scriptsize{
+\begin{itemize}
+
+\item It is important to remark that in the Bayesian setting a parameter $\theta$ is random a variable, so we can make probability staments about it.
+
+\item Whereas in the frequentist approach parameters are considered unknown quantities. 
+
+\item This is an important property of Bayesian inference: despite $\theta$ is an \textbf{unobseved variable} we can treat is a random variable and calculate $\mathbb{P}(\theta)$ or $\mathbb{P}(\theta|d)$.
+
+\item The likelihood function  $\mathbb{P}(d|\theta)$ is very similar to the likelihood function in the frequentist approach $\mathbb{P}(d;\theta)$ but now we can condition of $\theta$ instead of just using it as function parameter.
+
+\item All the probability functions of a Bayesian model can correspond to either 1) a probability mass or 2) a density functions depending if the variable (observed or unobserved) are discrete or continous.
+
+
 \end{itemize}
  } 
 
@@ -510,16 +535,26 @@ $\theta$ & Factory count & $\mathbb{P}(\theta)$ &  $\mathbb{P}(d|\theta)$ & $\ma
 \begin{frame}{Bayesian Components}
 \scriptsize{
 \begin{itemize}
-\item \textbf{Prior probability} $\mathbb{P}(\theta)$: The prior plausibility of any specific value of $\theta$.
-\item \textbf{Posterior probability} $\mathbb{P}(\theta|d)$: The new, updated plausibility of any specific $\theta$. 
 
-\item \textbf{Evidence} or \textbf{Average Likelihood} $\mathbb{P}(d)$: is literally the average probability of the data. 
-\item Averaged over what? Averaged over the prior. It’s job is just to standardize the posterior, to ensure it sums (integrates) to one.
+\item In the marble example $\theta$ is discrete so the prior and the posterior are probability mass functions.
+
+\item When $\theta$ is continous, the \textbf{evidence} is calculated with an integral called \textbf{marginal}
+
+\begin{equation}
+ \mathbb{P}(d) = \int_{\theta}\mathbb{P}(d|\theta)\mathbb{P}(\theta)d\theta  
+\end{equation}
+
+\item In most cases this integral doesn't have a closed solution.
+
+\item But there some nice computational methods available that can efficiently approximate the posterior. 
+
+\item Next, we will go deeper into these concepts by building another Bayesian toy model.
  
 \end{itemize}
  } 
 
 \end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
