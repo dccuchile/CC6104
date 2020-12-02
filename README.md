@@ -14,7 +14,7 @@ Material of a course on statistics I'm planning to teach in the near future. The
 1. [Linear Regression, GLMs](slides/ST-regression.pdf) | ([tex source file](slides/ST-regression.tex))
 1. MCMC (placeholder)
 1. Multi-level Models (placeholder)
-1. Graphical Models (placeholder)
+1. DAGs (placeholder)
 
 ## Links
 
@@ -33,7 +33,11 @@ Material of a course on statistics I'm planning to teach in the near future. The
 * [All of Statistics -  A Concise Course in Statistical Inference by Larry Wasserman](http://www.stat.cmu.edu/~larry/all-of-statistics/)
 * [Statistical Rethinking by Richard McElreath](https://xcelab.net/rm/statistical-rethinking/)
 * [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
-* [Answering questions with data] (https://crumplab.github.io/statistics/)
+* [Answering questions with data](https://crumplab.github.io/statistics/)
+
+## Courses
+
+* [Richard McElreath - Statistical Rethinking Winter 2020](https://github.com/rmcelreath/stat_rethinking_2020)
 
 ## Videos
 
