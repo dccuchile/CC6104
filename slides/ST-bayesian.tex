@@ -557,6 +557,85 @@ All these components are connected by the Bayes theorem!
 
 
 
+\begin{frame}{A Globe Model}
+\scriptsize{
+\begin{itemize}
+
+\item We have a globe representing our planet. 
+\item We want to estimate much of the surface is covered in water. 
+\item We adopt the following strategy: we toss the globe up in the air, we catch it, record whether or not the surface under your right index finger is water or
+land. 
+\item Then we toss the globe up in the air again and repeat the procedure.
+\item The first nine samples are:
+W L W W W L W L W
+where W indicates water and L indicates land.
+\item We observed 6 W and 3 L. This is our data.
+\end{itemize}
+ } 
+ 
+\scriptsize{
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/globe.png}
+\end{figure}
+ }  
+
+\end{frame}
+
+\begin{frame}{A Globe Model}
+Designing a simple Bayesian model benefits from a design loop with three steps.
+\begin{enumerate}
+ \item Data story: Motivate the model by narrating how the data might arise.
+\item Update: Educate your model by feeding it the data.
+\item Evaluate: All statistical models require supervision, leading to model revision.
+\end{enumerate}
+
+\end{frame}
+
+
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+\begin{itemize}
+
+\item Bayesian data analysis usually means producing a story for how the data came to be.
+\item This story may be descriptive, specifying associations that can be used to predict outcomes, given observations. 
+\item Or it may be causal, a theory of how some events
+produce other events.
+\item You can motivate your data story by trying to explain how each piece of data is born. 
+\item This usually means describing aspects of the underlying reality as well as the sampling process.
+\end{itemize}
+ } 
+\end{frame}
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+\begin{itemize}
+\item You can motivate your data story by trying to explain how each piece of data is born. 
+\item This usually means describing aspects of the underlying reality as well as the sampling process.
+\item The data story in this case is simply a restatement of the sampling process:
+
+\begin{enumerate}
+\scriptsize{
+ \item The true proportion of water covering the globe is $p$.
+ \item A single toss of the globe has a probability $p$ of producing W and $1-p$ of producing L.
+\item Each toss of the globe is independent of the others.}
+\end{enumerate}
+
+\item The data story is then translated into a formal probability model where we assign distributions to our Bayesian components.
+\end{itemize}
+
+
+
+
+} 
+ 
+ 
+
+\end{frame}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
 \frametitle{References}
