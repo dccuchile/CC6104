@@ -523,7 +523,7 @@ All these components are connected by the Bayes theorem!
 
 \item The likelihood function  $\mathbb{P}(d|\theta)$ is very similar to the likelihood function in the frequentist approach $\mathbb{P}(d;\theta)$ but now we can condition of $\theta$ instead of just using it as function parameter.
 
-\item All the probability functions of a Bayesian model can correspond to either 1) a probability mass or 2) a density functions depending if the variable (observed or unobserved) are discrete or continous.
+\item All the probability functions of a Bayesian model can correspond to either 1) a probability mass or 2) a density functions depending if the variable (observed or unobserved) is discrete or continous.
 
 
 \end{itemize}
@@ -538,7 +538,7 @@ All these components are connected by the Bayes theorem!
 
 \item In the marble example $\theta$ is discrete so the prior and the posterior are probability mass functions.
 
-\item When $\theta$ is continous, the \textbf{evidence} is calculated with an integral called \textbf{marginal}
+\item When $\theta$ is continous, the prior and the posterior are density functions, and the \textbf{evidence} is calculated with an integral called \textbf{marginal}
 
 \begin{equation}
  \mathbb{P}(d) = \int_{\theta}\mathbb{P}(d|\theta)\mathbb{P}(\theta)d\theta  
@@ -546,7 +546,7 @@ All these components are connected by the Bayes theorem!
 
 \item In most cases this integral doesn't have a closed solution.
 
-\item But there some nice computational methods available that can efficiently approximate the posterior. 
+\item However, there nice computational methods available that can efficiently approximate the posterior even when the evidence cannot be calculated. 
 
 \item Next, we will go deeper into these concepts by building another Bayesian toy model.
  
@@ -623,6 +623,7 @@ produce other events.
 \end{enumerate}
 
 \item The data story is then translated into a formal probability model where we assign distributions to our Bayesian components.
+\item Keep in mind that distribution functions are esentially shortcuts to the process of counting forking paths of the previous example.
 \end{itemize}
 
 
@@ -634,6 +635,77 @@ produce other events.
 
 \end{frame}
 
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+Let's define the variables of our model:
+\begin{itemize}
+\item The first variable is the unobserved parameter $p$, the proportion of water on the globe which is our target of inference.
+\item The other variables are observed in our data: the count of water W and the count of land L. 
+\item The sum of these two variables is the number of globe tosses: N = W + L
+\end{itemize}
+Now, we can assign a \textbf{likelihood} function  to our observed variables given the parameter that respects the two assumptions of our data story:
+\begin{enumerate}
+ \item  Every toss is independent of the other tosses.
+ \item The probability of W is the same on every toss.
+\end{enumerate}
+} 
+ 
+ 
+
+\end{frame}
+
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+
+\begin{itemize}
+\item The binomial distribution is the de facto distribution for this kind of ``coin tossing'' problem:
+\begin{displaymath}
+ \mathbb{P}(W,L|p) = \frac{(W+L)!}{W!L!}p^W(1-p)^L
+\end{displaymath}
+\item Next, we need to assign initial probability values (our beliefs before observing data) for each possible value of $p$ using a \textbf{prior} distribution.
+\item Recall that $p$ (the proportion of water) can take any real value between 0 and 1.
+\item We will assume that all possible values are equally likely, which implies that p follows a \textbf{continous Uniform distribution} between 0 and 1.
+\begin{displaymath}
+ \mathbb{P}(p) = \text{Uniform}(0,1)
+\end{displaymath}
+
+\item This flat prior assumes that $p=0$, $p=0.5$ and $p=1$ are all equally plausible.
+\item This is not the best prior information we can declare, considering that we already know that the earth cannot be completely covered by the earth ($p=0$) or by water ($p=1$).
+
+\end{itemize}
+
+} 
+
+
+\end{frame}
+
+
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+
+\begin{itemize}
+\item Now that we have defined our model: variables, likelihood and prior, we can feed it with our data to  to obtain the \textbf{posterior distribution} of $p$.
+\item The posterior distribution encodes updated plausabilities (or beliefs) for all parameter values condioned on the data.
+\item It can be obtained using the Bayes formula:
+
+\begin{displaymath}
+ \mathbb{P}(p|W,L) = \frac{\mathbb{P}(W,L|p)* \mathbb{P}(p)}{\mathbb{P}(W,L)}
+\end{displaymath}
+
+\item Where the denominator (evidence) makes sure that the posterior is a valid density function that integrates to one.
+
+
+\end{itemize}
+
+} 
+
+
+\end{frame}
+
+% Binomial + uniform = Beta https://stats.stackexchange.com/questions/185221/binomial-uniform-prior-bayesian-statistics
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
