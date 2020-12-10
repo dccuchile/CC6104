@@ -5,16 +5,25 @@ Material of a course on statistics I'm planning to teach in the near future. The
 
 ## Slides
 
+### PART I: Foundations 
 1. [Introduction to Statistical Thinking](slides/ST-intro.pdf) | ([tex source file](slides/ST-intro.tex))
 1. [Introduction to R](slides/ST-R.pdf) | ([tex source file](slides/ST-R.tex))
-1. [Data Exploration](slides/ST-explore.pdf) | ([tex source file](slides/ST-explore.tex))
+1. [Descriptive Statistics](slides/ST-explore.pdf) | ([tex source file](slides/ST-explore.tex))
 1. [Probability](slides/ST-prob.pdf) | ([tex source file](slides/ST-prob.tex))
-1. [Inference](slides/ST-inference.pdf) | ([tex source file](slides/ST-inference.tex))
-1. [Bayesian Inference](slides/ST-bayesian.pdf) | ([tex source file](slides/ST-bayesian.tex))
-1. [Linear Regression, GLMs](slides/ST-regression.pdf) | ([tex source file](slides/ST-regression.tex))
-1. MCMC (placeholder)
-1. Multi-level Models (placeholder)
-1. DAGs (placeholder)
+
+### PART II: Frequentist Inference
+
+1. [Introduction to Statistical Inference](slides/ST-inference.pdf) | ([tex source file](slides/ST-inference.tex))
+1. [Hypothesis Testing](slides/ST-hypothesis.pdf) | ([tex source file](slides/ST-hypothesis.tex))
+1. [Linear Regression](slides/ST-regression.pdf) | ([tex source file](slides/ST-regression.tex))
+
+### Part III: Bayesian Inference 
+1. [Introduction to Bayesian Inference](slides/ST-bayesian.pdf) | ([tex source file](slides/ST-bayesian.tex))
+1. Linear Models Revisited  ( Chapters 4,5,6 of Statistical Rethinking)
+1. MCMC (Chapter 9 of Statistical Rethinking)
+1. Model Evaluation  (Chapter 7 of Statistical Rethinking)
+1. Multi-level Models (Chapter 13 of Statistical Rethinking)
+1. DAGs (Chapter 6 of Statistical Rethinking)
 
 ## Links
 
