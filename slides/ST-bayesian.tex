@@ -668,7 +668,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \item Recall that $p$ (the proportion of water) can take any real value between 0 and 1.
 \item We will assume that all possible values are equally likely, which implies that p follows a \textbf{continous Uniform distribution} between 0 and 1.
 \begin{displaymath}
- \mathbb{P}(p) = \text{Uniform}(0,1)
+ \mathbb{P}(p) = \text{Uniform}(0,1) = 1/(b-a) \text{ where b=1, and a=0} = 1
 \end{displaymath}
 
 \item This flat prior assumes that $p=0$, $p=0.5$ and $p=1$ are all equally plausible.
@@ -697,6 +697,41 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \item Where the denominator (evidence) makes sure that the posterior is a valid density function that integrates to one.
 
+\item It is not always possible to compute the posterior analytically unless we constrain our prior to special forms that are easy to do mathematics with.
+
+\item But bear in mind that in many of the interesting models in contemporary science we will need to approximate the posterior using computational techniques such as Markov Chain Montecarlo. 
+\end{itemize}
+
+} 
+
+
+\end{frame}
+
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+
+\begin{itemize}
+\item The posterior of our globe model with binomial likelihood and uniform prior has a closed and follows a Beta distribution.
+\begin{displaymath}
+\mathbb{P}(p|W,L) = \text{Beta}(W+1 , L+1)
+\end{displaymath}
+
+\item This distribution is defined on the interval $[0, 1]$ and is parameterized by two positive shape parameters, denoted by $\alpha$ and $\beta$.
+
+
+\begin{displaymath}
+\text{Beta}(\alpha,\beta)=\frac{x^{\alpha-1}(1-x)^{\beta-1}}{\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}}
+\end{displaymath}
+
+
+\item Our posterior $\mathbb{P}(p|W,L)$ is proportional to $\mathbb{P}(W,L|p)*\mathbb{P}(p)$.
+\item Since $\mathbb{P}(p)=1$ we have that
+\begin{displaymath}
+\mathbb{P}(p|W,L) \sim  p^W(1-p)^L*1
+\end{displaymath}
+
+
 
 \end{itemize}
 
@@ -704,6 +739,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 
 \end{frame}
+
 
 % Binomial + uniform = Beta https://stats.stackexchange.com/questions/185221/binomial-uniform-prior-bayesian-statistics
 
