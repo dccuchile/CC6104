@@ -721,25 +721,58 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 
 \begin{displaymath}
-\text{Beta}(\alpha,\beta)=\frac{x^{\alpha-1}(1-x)^{\beta-1}}{\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}}
+\text{Beta}(\alpha,\beta)=\frac{p^{\alpha-1}(1-p)^{\beta-1}}{\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}}
 \end{displaymath}
 
+\item For any positive integer (such as W and L) $\Gamma(n) = (n-1)!$
 
-\item Our posterior $\mathbb{P}(p|W,L)$ is proportional to $\mathbb{P}(W,L|p)*\mathbb{P}(p)$.
-\item Since $\mathbb{P}(p)=1$ we have that
+\item Hence, \begin{displaymath}
+\text{Beta}(W+1 , L+1) = \frac{p^W(1-p)^L}{\frac{\Gamma(W+1)\Gamma(L+1)}{\Gamma(W+1 + L+1)}} = \frac{p^W(1-p)^L}{\frac{W!L!}{(W+L)!}} = \frac{(W+L)!}{W!L!}p^W(1-p)^L
+\end{displaymath}
+
+\item This surprisingly looks identical to the binomial distribution.
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{A Globe Model}
+\scriptsize{
+
+\begin{itemize}
+\item Let's build our posterior:
 \begin{displaymath}
-\mathbb{P}(p|W,L) \sim  p^W(1-p)^L*1
+\mathbb{P}(p|W,L) = \frac{\mathbb{P}(W,L|p)*\mathbb{P}(p)}{\mathbb{P}(W,L)} = \frac{\mathbb{P}(W,L|p)*\mathbb{P}(p)}{\int_0^1\mathbb{P}(W,L|p)*\mathbb{P}(p)dp} 
 \end{displaymath}
 
+\item Since $\mathbb{P}(p)=1$ (uniform prior) we have that
+
+\begin{displaymath}
+\mathbb{P}(p|W,L) = \frac{\mathbb{P}(W,L|p)}{\int_0^1\mathbb{P}(W,L|p)dp} 
+\end{displaymath}
+
+\item The integral of the denominator is equal to 1:
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{pics/wolphram.png}
+\end{figure}
+
+\item So, we get 
+
+\begin{displaymath}
+\mathbb{P}(p|W,L) =  \frac{(W+L)!}{W!L!}p^W(1-p)^L = \text{Beta}(W+1 , L+1) 
+\end{displaymath}
 
 
 \end{itemize}
 
 } 
 
-
 \end{frame}
-
 
 % Binomial + uniform = Beta https://stats.stackexchange.com/questions/185221/binomial-uniform-prior-bayesian-statistics
 
