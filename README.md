@@ -25,6 +25,30 @@ Material of a course on statistics I'm planning to teach in the near future. The
 1. Multi-level Models (Chapter 13 of Statistical Rethinking)
 1. DAGs (Chapter 6 of Statistical Rethinking)
 
+
+
+## Books
+
+* [Statistical Thinking for the 21st Century](https://statsthinking21.org/)
+* [All of Statistics -  A Concise Course in Statistical Inference by Larry Wasserman](http://www.stat.cmu.edu/~larry/all-of-statistics/)
+* [Statistical Rethinking by Richard McElreath](https://xcelab.net/rm/statistical-rethinking/)
+* [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
+* [Answering questions with data](https://crumplab.github.io/statistics/)
+* [Introduction to Modern Statistics by Mine Çetinkaya-Rundel and Johanna Hardin](https://openintro-ims.netlify.app)
+* [Let's Explore Statistics by Colin Quirk](https://bookdown.org/cquirk/LetsExploreStatistics/)
+
+
+## Courses
+
+* [Richard McElreath - Statistical Rethinking Winter 2020](https://github.com/rmcelreath/stat_rethinking_2020)
+
+## Videos
+
+* [Richard McElreath - Statistical Rethinking Winter 2019 Videolectures](https://www.youtube.com/playlist?list=PLDcUM9US4XdNM4Edgs7weiyIguLSToZRI)
+
+
+
+
 ## Links
 
 * [Statistical Rethinking with Python and PyMC3](https://github.com/pymc-devs/resources/tree/master/Rethinking)
@@ -36,19 +60,4 @@ Material of a course on statistics I'm planning to teach in the near future. The
 * [The Permutation Test by Jared Wilber](https://www.jwilber.me/permutationtest/)
 * [Spurious Correlations](https://tylervigen.com/old-version.html)
 * [Research Methods and Statistics Bristol University](http://www.bristol.ac.uk/medical-school/media/rms/red/index.html)
-## Books
-
-* [Statistical Thinking for the 21st Century](https://statsthinking21.org/)
-* [All of Statistics -  A Concise Course in Statistical Inference by Larry Wasserman](http://www.stat.cmu.edu/~larry/all-of-statistics/)
-* [Statistical Rethinking by Richard McElreath](https://xcelab.net/rm/statistical-rethinking/)
-* [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
-* [Answering questions with data](https://crumplab.github.io/statistics/)
-
-## Courses
-
-* [Richard McElreath - Statistical Rethinking Winter 2020](https://github.com/rmcelreath/stat_rethinking_2020)
-
-## Videos
-
-* [Richard McElreath - Statistical Rethinking Winter 2019 Videolectures](https://www.youtube.com/playlist?list=PLDcUM9US4XdNM4Edgs7weiyIguLSToZRI)
 
