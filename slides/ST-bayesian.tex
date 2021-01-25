@@ -491,17 +491,22 @@ $\theta$ & Factory count & $\mathbb{P}(\theta)$ &  $\mathbb{P}(d|\theta)$ & $\ma
 
 \begin{frame}{Bayesian Components}
 \scriptsize{
-Now we will introduce the names of the components of our Bayesian model. 
+Now we will introduce the names of the components of our Bayesian model. \\
+
+
+\begin{block}{Density and Mass functions}
+Because the Bayesian framework applies to both discrete and continuos random variables, we will use function $f$ (instead of $\mathbb{P}$) to refer to both probability mass and density functions.
+\end{block}
 
 \begin{itemize}
-\item \textbf{Parameter} $\theta$:  A way of indexing possible explanations of the data. In our example is a conjectured proportion of blue marbles. 
+\item \textbf{Parameter} $\theta$:  A way of indexing possible explanations of the data. In our example $\theta$ is a conjectured proportion of blue marbles. 
 
-\item \textbf{Likelihood} $\mathbb{P}(d|\theta)$: The relative number of ways that a value $\theta$ can produce the data. It is derived by enumerating all the possible data sequences that could have happened and then eliminating those sequences inconsistent with the data.
-\item \textbf{Prior probability} $\mathbb{P}(\theta)$: The prior plausibility of any specific value of $\theta$.
+\item \textbf{Likelihood} $f(d|\theta)$: The relative number of ways that a value $\theta$ can produce the data. It is derived by enumerating all the possible data sequences that could have happened and then eliminating those sequences inconsistent with the data.
+\item \textbf{Prior probability} $f(\theta)$: The prior plausibility of any specific value of $\theta$.
  
-\item \textbf{Posterior probability} $\mathbb{P}(\theta|d)$: The new, updated plausibility of any specific $\theta$. 
+\item \textbf{Posterior probability} $f(\theta|d)$: The new, updated plausibility of any specific $\theta$. 
 
-\item \textbf{Evidence} or \textbf{Average Likelihood} $\mathbb{P}(d)$: the average probability of the data averaged over the prior. It’s job is just to standardize the posterior, to ensure it sums (integrates) to one. 
+\item \textbf{Evidence} or \textbf{Average Likelihood} $f(d)$: the average probability of the data averaged over the prior. It’s job is just to standardize the posterior, to ensure it sums (integrates) to one. 
  
 \end{itemize}
  } 
@@ -519,11 +524,18 @@ All these components are connected by the Bayes theorem!
 
 \item Whereas in the frequentist approach parameters are considered unknown quantities. 
 
-\item This is an important property of Bayesian inference: despite $\theta$ is an \textbf{unobseved variable} we can treat is a random variable and calculate $\mathbb{P}(\theta)$ or $\mathbb{P}(\theta|d)$.
+\item This is an important property of Bayesian inference: despite $\theta$ is an \textbf{unobseved variable} we can treat is a random variable and calculate $f(\theta)$ or $f(\theta|d)$.
 
-\item The likelihood function  $\mathbb{P}(d|\theta)$ is very similar to the likelihood function in the frequentist approach $\mathbb{P}(d;\theta)$ but now we can condition of $\theta$ instead of just using it as function parameter.
+\item The likelihood function  $f(d|\theta)$ is very similar to the likelihood function in the frequentist approach $f(d;\theta)$ but now we can condition of $\theta$ instead of just using it as function parameter.
 
 \item All the probability functions of a Bayesian model can correspond to either 1) a probability mass or 2) a density functions depending if the variable (observed or unobserved) is discrete or continous.
+
+\item A general equation that relates all Bayesian components (for both density and mass functions) is the following:
+
+\begin{equation}
+ f(\theta|d) = \frac{f(d|\theta) \times f(\theta)}{f(d)}
+\end{equation}
+
 
 
 \end{itemize}
@@ -541,7 +553,7 @@ All these components are connected by the Bayes theorem!
 \item When $\theta$ is continous, the prior and the posterior are density functions, and the \textbf{evidence} is calculated with an integral called \textbf{marginal}
 
 \begin{equation}
- \mathbb{P}(d) = \int_{\theta}\mathbb{P}(d|\theta)\mathbb{P}(\theta)d\theta  
+ f(d) = \int_{\theta}f(d|\theta)f(\theta)d\theta  
 \end{equation}
 
 \item In most cases this integral doesn't have a closed solution.
@@ -597,20 +609,6 @@ Designing a simple Bayesian model benefits from a design loop with three steps.
 \begin{frame}{A Globe Model}
 \scriptsize{
 \begin{itemize}
-
-\item Bayesian data analysis usually means producing a story for how the data came to be.
-\item This story may be descriptive, specifying associations that can be used to predict outcomes, given observations. 
-\item Or it may be causal, a theory of how some events
-produce other events.
-\item You can motivate your data story by trying to explain how each piece of data is born. 
-\item This usually means describing aspects of the underlying reality as well as the sampling process.
-\end{itemize}
- } 
-\end{frame}
-
-\begin{frame}{A Globe Model}
-\scriptsize{
-\begin{itemize}
 \item You can motivate your data story by trying to explain how each piece of data is born. 
 \item This usually means describing aspects of the underlying reality as well as the sampling process.
 \item The data story in this case is simply a restatement of the sampling process:
@@ -660,19 +658,19 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \scriptsize{
 
 \begin{itemize}
-\item The binomial distribution is the de facto distribution for this kind of ``coin tossing'' problem:
+\item The binomial distribution is the de facto discrete distribution for this kind of ``coin tossing'' problem:
 \begin{displaymath}
- \mathbb{P}(W,L|p) = \frac{(W+L)!}{W!L!}p^W(1-p)^L
+ f(W,L|p) = \frac{(W+L)!}{W!L!}p^W(1-p)^L
 \end{displaymath}
 \item Next, we need to assign initial probability values (our beliefs before observing data) for each possible value of $p$ using a \textbf{prior} distribution.
 \item Recall that $p$ (the proportion of water) can take any real value between 0 and 1.
-\item We will assume that all possible values are equally likely, which implies that p follows a \textbf{continous Uniform distribution} between 0 and 1.
+\item We will assume that all possible values of $p$ are equally likely, which implies that $p$ follows a \textbf{continous Uniform distribution} between 0 and 1.
 \begin{displaymath}
- \mathbb{P}(p) = \text{Uniform}(0,1) = 1/(b-a) \text{ where b=1, and a=0} = 1
+ f(p) = \text{Uniform}(0,1) = 1/(b-a) \text{ where b=1, and a=0} = 1
 \end{displaymath}
 
 \item This flat prior assumes that $p=0$, $p=0.5$ and $p=1$ are all equally plausible.
-\item This is not the best prior information we can declare, considering that we already know that the earth cannot be completely covered by the earth ($p=0$) or by water ($p=1$).
+\item This is not the best prior information we can declare, considering that we already know that the earth cannot be completely covered by land ($p=0$) or by water ($p=1$).
 
 \end{itemize}
 
@@ -689,10 +687,10 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \begin{itemize}
 \item Now that we have defined our model: variables, likelihood and prior, we can feed it with our data to  to obtain the \textbf{posterior distribution} of $p$.
 \item The posterior distribution encodes updated plausabilities (or beliefs) for all parameter values condioned on the data.
-\item It can be obtained using the Bayes formula:
+\item As we have already seen, it can be obtained using the Bayes formula:
 
 \begin{displaymath}
- \mathbb{P}(p|W,L) = \frac{\mathbb{P}(W,L|p)* \mathbb{P}(p)}{\mathbb{P}(W,L)}
+ f(p|W,L) = \frac{f(W,L|p)* f(p)}{f(W,L)}
 \end{displaymath}
 
 \item Where the denominator (evidence) makes sure that the posterior is a valid density function that integrates to one.
@@ -700,6 +698,9 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \item It is not always possible to compute the posterior analytically unless we constrain our prior to special forms that are easy to do mathematics with.
 
 \item But bear in mind that in many of the interesting models in contemporary science we will need to approximate the posterior using computational techniques such as Markov Chain Montecarlo. 
+
+\item This example is one the cases where the posterior can be found analytically as shown next.
+
 \end{itemize}
 
 } 
@@ -712,25 +713,23 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \scriptsize{
 
 \begin{itemize}
-\item The posterior of our globe model with binomial likelihood and uniform prior has a closed and follows a Beta distribution.
+\item The posterior of our globe model with binomial likelihood and uniform prior has a closed form which is a Beta distribution.
 \begin{displaymath}
 \mathbb{P}(p|W,L) = \text{Beta}(W+1 , L+1)
 \end{displaymath}
 
 \item This distribution is defined on the interval $[0, 1]$ and is parameterized by two positive shape parameters, denoted by $\alpha$ and $\beta$.
 
+\item The Beta distribution is a continous distribution on probabilities.
 
 \begin{displaymath}
 \text{Beta}(\alpha,\beta)=\frac{p^{\alpha-1}(1-p)^{\beta-1}}{\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}}
 \end{displaymath}
 
-\item For any positive integer (such as W and L) $\Gamma(n) = (n-1)!$
-
-\item Hence, \begin{displaymath}
-\text{Beta}(W+1 , L+1) = \frac{p^W(1-p)^L}{\frac{\Gamma(W+1)\Gamma(L+1)}{\Gamma(W+1 + L+1)}} = \frac{p^W(1-p)^L}{\frac{W!L!}{(W+L)!}} = \frac{(W+L)!}{W!L!}p^W(1-p)^L
-\end{displaymath}
-
-\item This surprisingly looks identical to the binomial distribution.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/Beta(a,b).png}
+\end{figure}
 
 \end{itemize}
 
@@ -739,14 +738,41 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \end{frame}
 
 
-\begin{frame}[fragile]{A Globe Model}
+
+
+\begin{frame}{A Globe Model}
 \scriptsize{
 
 \begin{itemize}
-\item Let's build our posterior:
+\item For any positive integer (such as W and L) the gamma function $\Gamma(n) = (n-1)!$
+
+\item Hence, \begin{displaymath}
+\text{Beta}(W+1 , L+1) = \frac{p^W(1-p)^L}{\frac{\Gamma(W+1)\Gamma(L+1)}{\Gamma(W+1 + L+1)}} = \frac{p^W(1-p)^L}{\frac{W!L!}{(W+L)!}} = \frac{(W+L)!}{W!L!}p^W(1-p)^L
+\end{displaymath}
+
+\item This surprisingly looks identical to the binomial distribution.
+
+\item This is because both distributions are very similar. The binomial distribution models the number of successes (W) and the beta distribution models the probaility $p$ of sucess. 
+
+
+\item Let's build our posterior from the likelihood and the prior:
 \begin{displaymath}
 \mathbb{P}(p|W,L) = \frac{\mathbb{P}(W,L|p)*\mathbb{P}(p)}{\mathbb{P}(W,L)} = \frac{\mathbb{P}(W,L|p)*\mathbb{P}(p)}{\int_0^1\mathbb{P}(W,L|p)*\mathbb{P}(p)dp} 
 \end{displaymath}
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+
+\begin{itemize}
+
 
 \item Since $\mathbb{P}(p)=1$ (uniform prior) we have that
 
@@ -754,11 +780,11 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \mathbb{P}(p|W,L) = \frac{\mathbb{P}(W,L|p)}{\int_0^1\mathbb{P}(W,L|p)dp} 
 \end{displaymath}
 
-\item The integral of the denominator is equal to 1:
+\item The integral of the denominator is equal to 1 (essentially we are integrating a Beta distribution over its complete space of p):
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.2]{pics/wolphram.png}
+	\includegraphics[scale=0.25]{pics/wolphram.png}
 \end{figure}
 
 \item So, we get 
@@ -773,6 +799,79 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 } 
 
 \end{frame}
+
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+
+\begin{itemize}
+
+
+\item So, in our globe tossing model $(W=6,L=3)$ we can calculate the posterior distribution analytically 
+
+\begin{displaymath}
+\mathbb{P}(p|W=6,L=3) =  \text{Beta}(7,4) 
+\end{displaymath}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.55]{pics/beta(7,4).pdf}
+\end{figure}
+
+
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+
+\begin{itemize}
+
+\item We could calculate the posterior analytically because a property called \textbf{conjugate priors}.
+
+\item First of all, we must understand the Beta distribution is very flexible and can model a uniform distributions by setting $\alpha$ and $\beta$ to 1,  Beta(1,1)=Uniform
+
+\item We can change now our prior to a more general one using a Beta distribution $f(p)=$Beta($\alpha$, $\beta$).
+
+\item Now we can consider values of $\alpha$, $\beta$ that are more in line with our prior beliefs.
+
+\item The nice thing here is that when the prior follows a Beta distribution  and the likelihood $f(W,L|p)=$ a Binomial one, he posterior takes the form of another Beta distribution with parameters  $(\alpha+W,\beta+L)$.
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{A Globe Model}
+\scriptsize{
+
+\begin{itemize}
+\item The Beta distribution is conjugate distribution to binomial distribution, which means that the posterior distribution in the same probability distribution family as the prior.
+
+\item In simple words there are some families of conjugate distributions that can be used to calculate posterior distributions analytically.
+
+\item A very complete table of conjugate distributions is given in \url{https://en.wikipedia.org/wiki/Conjugate_prior}.
+
+\item In essence, conjugate priors constrain our choice of prior to special forms that are easy to do mathematics with.
+
+\item However, there are numerical techniques that allow us to accommodate any prior that is most useful for our inference problem, such as Markov Chain Monte Carlo (MCMC).
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
 
 % Binomial + uniform = Beta https://stats.stackexchange.com/questions/185221/binomial-uniform-prior-bayesian-statistics
 
