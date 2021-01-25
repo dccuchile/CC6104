@@ -774,10 +774,10 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \begin{itemize}
 
 
-\item Since $\mathbb{P}(p)=1$ (uniform prior) we have that
+\item Since $f(p)=1$ (uniform prior) we have that
 
 \begin{displaymath}
-\mathbb{P}(p|W,L) = \frac{\mathbb{P}(W,L|p)}{\int_0^1\mathbb{P}(W,L|p)dp} 
+f(p|W,L) = \frac{f(W,L|p)}{\int_0^1f(W,L|p)dp} 
 \end{displaymath}
 
 \item The integral of the denominator is equal to 1 (essentially we are integrating a Beta distribution over its complete space of p):
@@ -790,7 +790,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \item So, we get 
 
 \begin{displaymath}
-\mathbb{P}(p|W,L) =  \frac{(W+L)!}{W!L!}p^W(1-p)^L = \text{Beta}(W+1 , L+1) 
+f(p|W,L) =  \frac{(W+L)!}{W!L!}p^W(1-p)^L = \text{Beta}(W+1 , L+1) 
 \end{displaymath}
 
 
@@ -810,7 +810,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \item So, in our globe tossing model $(W=6,L=3)$ we can calculate the posterior distribution analytically 
 
 \begin{displaymath}
-\mathbb{P}(p|W=6,L=3) =  \text{Beta}(7,4) 
+f(p|W=6,L=3) =  \text{Beta}(7,4) 
 \end{displaymath}
 
 
@@ -842,7 +842,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \item Now we can consider values of $\alpha$, $\beta$ that are more in line with our prior beliefs.
 
-\item The nice thing here is that when the prior follows a Beta distribution  and the likelihood $f(W,L|p)=$ a Binomial one, he posterior takes the form of another Beta distribution with parameters  $(\alpha+W,\beta+L)$.
+\item The nice thing here is that when the prior follows a Beta distribution  and the likelihood $f(W,L|p)=$ a Binomial one, he posterior takes the form of another Beta distribution with parameters $(\alpha+W,\beta+L)$.
 
 \end{itemize}
 
