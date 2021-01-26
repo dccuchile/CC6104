@@ -689,7 +689,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \item Next, we need to assign initial probability values (our beliefs before observing data) for each possible value of $p$ using a \textbf{prior} distribution.
 \item Recall that $p$ (the proportion of water) can take any real value between 0 and 1.
-\item We will assume that all possible values of $p$ are equally likely, which implies that $p$ follows a \textbf{continous Uniform distribution} between 0 and 1.
+\item We will assume that all possible values of $p$ are equally likely, which implies that $p$ follows a \textbf{continous Uniform distribution} between 0 and 1, $p\sim$Uniform$(0,1)$:
 \begin{displaymath}
  f(p) = \text{Uniform}(0,1) = 1/(b-a) \text{ where b=1, and a=0} = 1
 \end{displaymath}
@@ -704,13 +704,45 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \end{frame}
 
-
-
-\begin{frame}{A Globe Model}
+\begin{frame}{Bayesian Updating}
 \scriptsize{
 
 \begin{itemize}
 \item Now that we have defined our model: variables, likelihood and prior, we can feed it with our data to  to obtain the \textbf{posterior distribution} of $p$.
+\item The process of going from the prior $f(\theta)$ to the posterior $f(\theta|d)$ is called \textbf{Bayesian Updating}.
+\item We can view the prior as our initial belief of the possible values that $\theta$ can take.
+\item Then we collect some data $d$ and update our prior using the likelihood to obtain the posterior.
+\item This process can be repeated iteratively: the posterior becomes a new prior, we collect more data and update our posterior.
+\item In practice we feed the data only once to our statistical model, but it important to think that Bayesian updating is an iterated learning process.
+\item  The hyper-parameters of our prior, for example $\alpha$ and $\beta$ for a Beta prior can be seen as ``pseudo-counts'' of successes and failures before collecting the data.  
+\item The next slide shows the Bayesian updating process for the Globe tossing example.
+\item The dashed line shows the prior (or the previous posterior) and the solid line shows the curren posterior after seeing each example.
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Bayesian Updating}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{pics/bayesUpdate.png}
+\end{figure}
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{Calculating the Posterior}
+\scriptsize{
+
+\begin{itemize}
+
 \item The posterior distribution encodes updated plausabilities (or beliefs) for all parameter values condioned on the data.
 \item As we have already seen, it can be obtained using the Bayes formula:
 
@@ -734,7 +766,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \end{frame}
 
 
-\begin{frame}{A Globe Model}
+\begin{frame}{Calculating the Posterior}
 \scriptsize{
 
 \begin{itemize}
@@ -765,7 +797,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 
 
-\begin{frame}{A Globe Model}
+\begin{frame}{Calculating the Posterior}
 \scriptsize{
 
 \begin{itemize}
@@ -793,7 +825,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 
 
-\begin{frame}{A Globe Model}
+\begin{frame}{Calculating the Posterior}
 \scriptsize{
 
 \begin{itemize}
@@ -826,7 +858,7 @@ f(p|W,L) =  \frac{(W+L)!}{W!L!}p^W(1-p)^L = \text{Beta}(W+1 , L+1)
 \end{frame}
 
 
-\begin{frame}{A Globe Model}
+\begin{frame}{Calculating the Posterior}
 \scriptsize{
 
 \begin{itemize}
@@ -900,36 +932,7 @@ f(p|W=6,L=3) =  \text{Beta}(7,4)
 \end{frame}
 
 
-\begin{frame}{Bayesian Updating}
-\scriptsize{
 
-\begin{itemize}
-\item The process of going from the prior $f(\theta)$ to the posterior $f(\theta|d)$ is called \textbf{Bayesian Updating}.
-\item We can view the prior as our initial belief of the possible values that $\theta$ can take.
-\item Then we collect some data $d$ and update our prior using the likelihood to obtain the posterior.
-\item This process can be repeated iteratively: the posterior becomes a new prior, we collect more data and update our posterior.
-\item In practice we feed the data only once to our statistical model, but it important to think that Bayesian updating is an iterated learning process.
-\item  The hyper-parameters of our prior, for example $\alpha$ and $\beta$ for a Beta prior can be seen as ``pseudo-counts'' of successes and failures before collecting the data.  
-\item The next slide shows the Bayesian updating process for the Globe tossing example.
-\item The dashed line shows the prior (or the previous posterior) and the solid line shows the curren posterior after seeing each example.
-\end{itemize}
-
-} 
-
-\end{frame}
-
-
-\begin{frame}{Bayesian Updating}
-\scriptsize{
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.35]{pics/bayesUpdate.png}
-\end{figure}
-
-} 
-
-\end{frame}
 
 
 \begin{frame}{Subjective Bayesian approach}
@@ -967,6 +970,36 @@ proportional to the likelihood. Middle: A step prior, assigning zero probability
 
 \end{frame}
 
+
+
+\begin{frame}{Motors}
+\scriptsize{
+
+\begin{itemize}
+\item In many uteresting models in contemporary science the posterior cannot be calculated anlytically, no matter your
+skill in mathematics.
+
+\item Various numerical techniques are needed to approximate the mathematics that follows from the definition of the posterior.
+
+\item The most popular ones are the following:
+
+
+\begin{enumerate}
+ \item Grid approximation
+ \item Quadratic approximation
+ \item Markov chain Monte Carlo (MCMC)
+ \item Variational Inference
+\end{enumerate}
+
+\end{itemize}
+% https://medium.com/analytics-vidhya/bayesian-inference-how-quadratic-approximation-works-40cc70e79fb0
+
+
+
+
+
+} 
+\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
