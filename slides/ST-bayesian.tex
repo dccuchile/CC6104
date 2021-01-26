@@ -511,7 +511,8 @@ Because the Bayesian framework applies to both discrete and continuos random var
 \end{itemize}
  } 
 
-All these components are connected by the Bayes theorem!
+ 
+ 
  
 \end{frame}
 
@@ -530,14 +531,6 @@ All these components are connected by the Bayes theorem!
 
 \item All the probability functions of a Bayesian model can correspond to either 1) a probability mass or 2) a density functions depending if the variable (observed or unobserved) is discrete or continous.
 
-\item A general equation that relates all Bayesian components (for both density and mass functions) is the following:
-
-\begin{equation}
- f(\theta|d) = \frac{f(d|\theta) \times f(\theta)}{f(d)}
-\end{equation}
-
-
-
 \end{itemize}
  } 
 
@@ -548,9 +541,38 @@ All these components are connected by the Bayes theorem!
 \scriptsize{
 \begin{itemize}
 
+\item The general equation that relates all Bayesian components (for both density and mass functions) is the following:
+
+\begin{equation}
+ f(\theta|d) = \frac{f(d|\theta) \times f(\theta)}{f(d)}
+\end{equation}
+
+\item This equation is esentially the Bayes theorem (for both density and mass functions).
+
+\item It says that the probability of any particular value of $\theta$ considering the data $d$, is proportional to the product of the relative plausibility of the data, conditional on $\theta$, and the prior plausibility of $\theta$.
+
+\item This product is then divided by the average probability of the data to produce a valid probability distribution for the posterior (to sum or integrate to one).
+
+\item We must bear in mind that Bayesian statistics is not only about using Bayes theorem. 
+
+\item There are many non-Bayesian techniques that use this theorem.
+
+\item Bayesian inference uses the Bayes theorem more generally, to quantify uncertainty about unobserved variables such as parameters.
+\end{itemize}
+ } 
+
+\end{frame}
+
+
+
+
+\begin{frame}{Bayesian Components}
+\scriptsize{
+\begin{itemize}
+
 \item In the marble example $\theta$ is discrete so the prior and the posterior are probability mass functions.
 
-\item When $\theta$ is continous, the prior and the posterior are density functions, and the \textbf{evidence} is calculated with an integral called \textbf{marginal}
+\item When $\theta$ is continous, the prior and the posterior are density functions, and the \textbf{evidence} or \textbf{average likelihood} is calculated with an integral called \textbf{marginal}
 
 \begin{equation}
  f(d) = \int_{\theta}f(d|\theta)f(\theta)d\theta  
@@ -558,7 +580,7 @@ All these components are connected by the Bayes theorem!
 
 \item In most cases this integral doesn't have a closed solution.
 
-\item However, there nice computational methods available that can efficiently approximate the posterior even when the evidence cannot be calculated. 
+\item However, there are nice computational methods available that can efficiently approximate the posterior even when the evidence cannot be calculated (e.g., MCMC, Variational Inference). 
 
 \item Next, we will go deeper into these concepts by building another Bayesian toy model.
  
@@ -599,14 +621,14 @@ Designing a simple Bayesian model benefits from a design loop with three steps.
 \begin{enumerate}
  \item Data story: Motivate the model by narrating how the data might arise.
 \item Update: Educate your model by feeding it the data.
-\item Evaluate: All statistical models require supervision, leading to model revision.
+\item Evaluate: All statistical models require supervision, leading to model revision. \footnote{We won't elaborate on this part until later in the course..}
 \end{enumerate}
 
 \end{frame}
 
 
 
-\begin{frame}{A Globe Model}
+\begin{frame}{Data Story}
 \scriptsize{
 \begin{itemize}
 \item You can motivate your data story by trying to explain how each piece of data is born. 
@@ -634,7 +656,7 @@ Designing a simple Bayesian model benefits from a design loop with three steps.
 \end{frame}
 
 
-\begin{frame}{A Globe Model}
+\begin{frame}{Variables}
 \scriptsize{
 Let's define the variables of our model:
 \begin{itemize}
@@ -662,6 +684,9 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \begin{displaymath}
  f(W,L|p) = \frac{(W+L)!}{W!L!}p^W(1-p)^L
 \end{displaymath}
+
+\item This can be also written as $W\sim$ Binomial$(W+L,p)$.
+
 \item Next, we need to assign initial probability values (our beliefs before observing data) for each possible value of $p$ using a \textbf{prior} distribution.
 \item Recall that $p$ (the proportion of water) can take any real value between 0 and 1.
 \item We will assume that all possible values of $p$ are equally likely, which implies that $p$ follows a \textbf{continous Uniform distribution} between 0 and 1.
@@ -829,7 +854,7 @@ f(p|W=6,L=3) =  \text{Beta}(7,4)
 
 
 
-\begin{frame}{A Globe Model}
+\begin{frame}{Beta Prior}
 \scriptsize{
 
 \begin{itemize}
@@ -842,7 +867,9 @@ f(p|W=6,L=3) =  \text{Beta}(7,4)
 
 \item Now we can consider values of $\alpha$, $\beta$ that are more in line with our prior beliefs.
 
-\item The nice thing here is that when the prior follows a Beta distribution  and the likelihood $f(W,L|p)=$ a Binomial one, he posterior takes the form of another Beta distribution with parameters $(\alpha+W,\beta+L)$.
+\item The nice thing here is that when the prior follows a Beta distribution  and the likelihood $f(W,L|p)$ a Binomial one, the posterior takes the form of another Beta distribution with parameters $(\alpha+W,\beta+L)$.
+
+\item This shows that our previous result for the uniform prior was a special case of this property.
 
 \end{itemize}
 
@@ -852,7 +879,7 @@ f(p|W=6,L=3) =  \text{Beta}(7,4)
 
 
 
-\begin{frame}{A Globe Model}
+\begin{frame}{Conjugate Priors}
 \scriptsize{
 
 \begin{itemize}
@@ -873,7 +900,73 @@ f(p|W=6,L=3) =  \text{Beta}(7,4)
 \end{frame}
 
 
-% Binomial + uniform = Beta https://stats.stackexchange.com/questions/185221/binomial-uniform-prior-bayesian-statistics
+\begin{frame}{Bayesian Updating}
+\scriptsize{
+
+\begin{itemize}
+\item The process of going from the prior $f(\theta)$ to the posterior $f(\theta|d)$ is called \textbf{Bayesian Updating}.
+\item We can view the prior as our initial belief of the possible values that $\theta$ can take.
+\item Then we collect some data $d$ and update our prior using the likelihood to obtain the posterior.
+\item This process can be repeated iteratively: the posterior becomes a new prior, we collect more data and update our posterior.
+\item In practice we feed the data only once to our statistical model, but it important to think that Bayesian updating is an iterated learning process.
+\item  The hyper-parameters of our prior, for example $\alpha$ and $\beta$ for a Beta prior can be seen as ``pseudo-counts'' of successes and failures before collecting the data.  
+\item The next slide shows the Bayesian updating process for the Globe tossing example.
+\item The dashed line shows the prior (or the previous posterior) and the solid line shows the curren posterior after seeing each example.
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Bayesian Updating}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{pics/bayesUpdate.png}
+\end{figure}
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Subjective Bayesian approach}
+\scriptsize{
+
+\begin{itemize}
+\item Priors are engineering assumptions, chosen to help the machine learn.
+\item They are also  scientific assumptions, chosen to reflect what we know about a phenomenon.
+\item \textbf{Subjective Bayesian approach}:  a school of Bayesian inference that emphasizes choosing priors based upon the personal beliefs of the analyst. 
+\item This subjective Bayesian approach is rare in the sciences.
+\item The prior is considered to be just part of the model.
+\item It should be chosen, evaluated, and revised just like all of the other components of the model.
+\item The following diagram shows the effect of changing the prior in the globe tossing example.
+
+
+
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
+\begin{frame}{Different Priors}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.285]{pics/priorsGlobe.png}
+\end{figure}
+ 
+Top: A flat prior constructs a posterior that is simply
+proportional to the likelihood. Middle: A step prior, assigning zero probability to all values less than 0.5, results in a truncated posterior. \\ Bottom: A peaked prior that shifts and skews the posterior, relative to the likelihood.
+} 
+
+\end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
