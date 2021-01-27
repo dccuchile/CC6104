@@ -714,7 +714,6 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \item Then we collect some data $d$ and update our prior using the likelihood to obtain the posterior.
 \item This process can be repeated iteratively: the posterior becomes a new prior, we collect more data and update our posterior.
 \item In practice we feed the data only once to our statistical model, but it important to think that Bayesian updating is an iterated learning process.
-\item  The hyper-parameters of our prior, for example $\alpha$ and $\beta$ for a Beta prior can be seen as ``pseudo-counts'' of successes and failures before collecting the data.  
 \item The next slide shows the Bayesian updating process for the Globe tossing example.
 \item The dashed line shows the prior (or the previous posterior) and the solid line shows the curren posterior after seeing each example.
 \end{itemize}
@@ -785,7 +784,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.6]{pics/Beta(a,b).png}
+	\includegraphics[scale=0.4]{pics/Beta(a,b).png}
 \end{figure}
 
 \end{itemize}
@@ -814,7 +813,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \item Let's build our posterior from the likelihood and the prior:
 \begin{displaymath}
-\mathbb{P}(p|W,L) = \frac{\mathbb{P}(W,L|p)*\mathbb{P}(p)}{\mathbb{P}(W,L)} = \frac{\mathbb{P}(W,L|p)*\mathbb{P}(p)}{\int_0^1\mathbb{P}(W,L|p)*\mathbb{P}(p)dp} 
+f(p|W,L) = \frac{f(W,L|p)*f(p)}{f(W,L)} = \frac{f(W,L|p)*f(p)}{\int_0^1f(W,L|p)*f(p)dp} 
 \end{displaymath}
 
 \end{itemize}
@@ -901,6 +900,8 @@ f(p|W=6,L=3) =  \text{Beta}(7,4)
 
 \item The nice thing here is that when the prior follows a Beta distribution  and the likelihood $f(W,L|p)$ a Binomial one, the posterior takes the form of another Beta distribution with parameters $(\alpha+W,\beta+L)$.
 
+\item  The hyper-parameters of our Beta prior $\alpha$ and $\beta$  can be seen as ``pseudo-counts'' of successes and failures before collecting the data.  
+
 \item This shows that our previous result for the uniform prior was a special case of this property.
 
 \end{itemize}
@@ -979,10 +980,7 @@ proportional to the likelihood. Middle: A step prior, assigning zero probability
 \item In many uteresting models in contemporary science the posterior cannot be calculated anlytically, no matter your
 skill in mathematics.
 
-\item Various numerical techniques are needed to approximate the mathematics that follows from the definition of the posterior.
-
-\item The most popular ones are the following:
-
+\item Below are some numerical techniques for approximating the mathematics that follows from the definition of the posterior.
 
 \begin{enumerate}
  \item Grid approximation
@@ -992,10 +990,221 @@ skill in mathematics.
 \end{enumerate}
 
 \end{itemize}
-% https://medium.com/analytics-vidhya/bayesian-inference-how-quadratic-approximation-works-40cc70e79fb0
 
 
 
+} 
+\end{frame}
+
+
+
+\begin{frame}{Grid Approximation}
+\scriptsize{
+
+\begin{itemize}
+
+\item Idea: consider only a finite grid of parameter values, and evaluate the posterior for all these points.
+
+
+\item This approach scales very poorly, as the number of parameters increases.
+
+
+\item It is mainly be useful as a pedagogical tool, as learning it forces to really understand the nature of Bayesian updating.
+
+
+\end{itemize}
+
+\begin{block}{Process}
+\begin{enumerate}
+
+  \item Define the grid. This means you decide how many points to use in estimating the posterior, and then you make a list of the parameter values on the grid.
+\item Compute the value of the prior at each parameter value on the grid.
+\item Compute the likelihood at each parameter value.
+\item Compute the unstandardized posterior at each parameter value, by multiplying the prior by the likelihood.
+\item  Finally, standardize the posterior, by dividing each value by the sum of all values.
+\end{enumerate}
+\end{block}
+
+} 
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Grid Approximation}
+\begin{scriptsize}
+ \begin{verbatim}
+# define grid
+p_grid <- seq( from=0 , to=1 , length.out=20 )
+# define prior
+prior <- rep( 1 , 20 )
+# compute likelihood at each value in grid
+likelihood <- dbinom( 6 , size=9 , prob=p_grid )
+# compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+# standardize the posterior, so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+plot( p_grid , posterior,type="b",
+xlab="probability of water",ylab="posterior probability")
+mtext("20 points")
+\end{verbatim}
+\end{scriptsize}
+
+
+\end{frame}
+
+
+\begin{frame}{Grid Approximation}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/grid.png}
+\end{figure}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Quadratic Approximation}
+\scriptsize{
+
+\begin{itemize}
+\item Under quite general conditions, the region near the peak of the posterior distribution will be nearly Gaussian in shape.
+\item Idea: approximate the posterior distribution by a Gaussian distribution.
+\item Gaussians are convenient because can be completely described by two parameters: $\mu$ and $\sigma$. 
+\item A Gaussian approximation is called ``quadratic approximation'' because the logarithm of
+a Gaussian distribution forms a parabola. 
+\item A a parabola is a quadratic function.
+\item Quadratic approximation essentially represents any log-posterior with a parabola.
+\end{itemize}
+
+
+\begin{block}{Process}
+\begin{enumerate}
+  \item Maximum a Posteriori (MAP): Find the posterior mode using some optimization algorithm, a procedure that virtually “climbs” the posterior distribution.
+  \item Once you find the peak of the posterior, you must estimate the curvature near the
+peak.
+\end{enumerate}
+\end{block}
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Quadratic Approximation}
+\begin{scriptsize}
+ \begin{verbatim}
+library(rethinking)
+globe.qa <- quap(
+  alist(
+    W ~ dbinom( W+L ,p) , # binomial likelihood
+    p ~ dunif(0,1)   # uniform prior
+  ) ,
+  data=list(W=6,L=3) )
+
+  # display summary of quadratic approximation
+> precis( globe.qa )
+  mean   sd 5.5% 94.5%
+p 0.67 0.16 0.42  0.92
+
+\end{verbatim}
+Assuming the posterior is Gaussian, it is maximized at 0.67, and its standard deviation is 0.16.
+\end{scriptsize}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Quadratic Approximation}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/quadratic.png}
+\end{figure}
+ 
+\begin{itemize}
+ \item Blue Curve: the exact posterior distribution. 
+ \item Black Curve: the quadratic approximation.
+ \item Left: The globe tossing data with n = 9 tosses and w = 6 waters.
+ \item Middle: Double the amount of data, with the same fraction of water, n = 18 and w = 12.
+ \item Right: Four times as much data, n = 36 and w = 24.
+\end{itemize}
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Maximum a Posteriori and Maximum Likelihood}
+\scriptsize{
+
+\begin{itemize}
+\item The quadratic approximation, either with a uniform prior or with a lot of data, is often equivalent to a maximum likelihood estimate (MLE) and its standard error.
+\item In other words: maximum a posteriori with a uniform prior is equivalent to maximum likelihood estimation.
+\item More info: \url{https://wiseodd.github.io/techblog/2017/01/01/mle-vs-map/}.
+\item This helps re-interpret many non-Bayesian models in Bayesian terms.
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Markov Chain Monte Carlo}
+\scriptsize{
+
+\begin{itemize}
+\item There are lots of important model types, like multilevel (mixed-effects) models, for  quadratic approximation doesn't work,
+\item Such models may have hundreds or thousands or tens-of-thousands of parameters so we can't use Grid approximation.
+\item Multilevel models do not always allow us to write down a single, unified function for the posterior distribution.
+\item This means that the function to maximize (when finding the MAP) is not known, but must be computed in pieces. 
+\item As a result, various counterintuitive model fitting techniques have arisen. 
+\item The most popular of these is Markov chain Monte Carlo (MCMC).
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Markov Chain Monte Carlo}
+\scriptsize{
+
+\begin{itemize}
+\item Instead of attempting to compute or approximate the posterior distribution directly, MCMC techniques merely draw samples from the posterior.
+\item You end up with a collection of parameter values, and the frequencies of these values correspond to the posterior plausibilities.
+\item You can then build a picture of the posterior from the histogram of these samples.
+We nearly always work directly with these samples, rather than first constructing some
+mathematical estimate from them.
+\item It is fair to say that MCMC is largely responsible for the insurgence of Bayesian data analysis that began in the 1990s. 
+\item While MCMC is older than the 1990s, affordable computer power is not, so we must also thank the engineers.
+\item Probabilistic programming: environments for designing Bayesian models and performing inference using numerical techniques (e.g., STAN, Pyro).
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Conclusions}
+\scriptsize{
+
+\begin{itemize}
+\item The target of inference in Bayesian inference is a posterior probability distribution. P\item Posterior probabilities state the relative numbers of ways each conjectured cause of the data could have produced the data. 
+\item These relative numbers indicate plausibilities of the different conjectures.
+\item These plausibilities are updated in light of observations through Bayesian updating.
+\item Bayesian models are fit to data using numerical techniques.
+\item Each method imposes different trade-offs.
+
+\end{itemize}
 
 
 } 
