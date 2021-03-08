@@ -37,7 +37,7 @@ Material of a course on statistics I'm planning to teach in the near future. The
 * [Answering questions with data](https://crumplab.github.io/statistics/)
 * [Introduction to Modern Statistics by Mine Çetinkaya-Rundel and Johanna Hardin](https://openintro-ims.netlify.app)
 * [Let's Explore Statistics by Colin Quirk](https://bookdown.org/cquirk/LetsExploreStatistics/)
-
+* [Probabilistic Machine Learning: An Introduction by Kevin Patrick Murphy](https://probml.github.io/pml-book/book1.html)
 
 ## Courses
 
