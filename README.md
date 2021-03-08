@@ -19,13 +19,12 @@ Material of a course on statistics I'm planning to teach in the near future. The
 
 ### Part III: Bayesian Inference 
 1. [Introduction to Bayesian Inference](slides/ST-bayesian.pdf) | ([tex source file](slides/ST-bayesian.tex))
-1. Bayesian Linear Models ( Chapters 4,5,6 of Statistical Rethinking)
+1. Bayesian Models (lineal and multi-level) (Chapters 4,5,6,13 of Statistical Rethinking)
 1. MCMC (Chapter 9 of Statistical Rethinking)
 
 ### Part IV: Other Topics
-1. Model Evaluation  (Chapter 7 of Statistical Rethinking)
-1. Multi-level Models (Chapter 13 of Statistical Rethinking)
-1. DAGs (Chapter 6 of Statistical Rethinking)
+1. Model Evaluation and Information Theory (Chapter 7 of Statistical Rethinking)
+1. Probabilistic Graphical Models and DAGs (Chapter 6 of Statistical Rethinking)
 
 
 
