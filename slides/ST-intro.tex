@@ -34,10 +34,28 @@
 \newcommand{\factorial}{\ensuremath{\mbox{\sc Factorial}}}
 \newcommand{\BIGOP}[1]{\mathop{\mathchoice%
 {\raise-0.22em\hbox{\huge $#1$}}%
+{\raise-0.05em\hbox{\L
+\usepackage{fontenc}
+\usepackage{framed,color}
+\usepackage{palatino, url, multicol}
+\usepackage{listings}
+%\algsetup{indent=2em}
+\newcommand{\factorial}{\ensuremath{\mbox{\sc Factorial}}}
+\newcommand{\BIGOP}[1]{\mathop{\mathchoice%
+{\raise-0.22em\hbox{\huge $#1$}}%
 {\raise-0.05em\hbox{\Large $#1$}}{\hbox{\large $#1$}}{#1}}}
 \newcommand{\bigtimes}{\BIGOP{\times}}
 \vspace{-0.5cm}
-\title{Statistical Thinking}
+\title{Introduction to Statistical Inference}
+\vspace{-0.5cm}
+\author[Felipe Bravo Márquez]{\footnotesize
+%\author{\footnotesize  
+ \textcolor[rgb]{0.00,0.00,1.00}{Felipe José Bravo Márquez}} 
+\date{ \today }
+arge $#1$}}{\hbox{\large $#1$}}{#1}}}
+\newcommand{\bigtimes}{\BIGOP{\times}}
+\vspace{-0.5cm}
+\title{Introduction to Bayesian Inference}
 \vspace{-0.5cm}
 \author[Felipe Bravo Márquez]{\footnotesize
 %\author{\footnotesize  
@@ -56,7 +74,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Introduction}
+\begin{frame}{Introduction to Statistical Thinking}
+\scriptsize{
+\begin{itemize}
+ \item Statistical thinking is a way of understanding a complex world by describing it in relatively simple terms.
+ \item The idea is to capture essential aspects of its structure and to  provide us some idea of how uncertain we are about that knowledge. 
+ 
+ \item The foundations of statistical thinking come primarily from mathematics and statistics, but also from computer science, psychology, and other fields of study. \cite{poldrack2019statistical}
+\end{itemize}
+
+} 
+\end{frame}
 
 \begin{frame}{Motivation}
 
@@ -95,21 +123,18 @@
 \end{frame}
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
-\frametitle{Bilbiografía}
-%\bibliography{bio}
-%\bibliographystyle{apalike}
-\begin{thebibliography}{8}
-
-\bibitem{William}
-Venables, William N., David M. Smith, and R Development Core Team. \emph{An introduction to R.}, 2002.
-\end{thebibliography}
-
-
+\frametitle{References}
+\bibliography{bio}
+\bibliographystyle{apalike}
 %\bibliographystyle{flexbib}
-\end{frame}
+\end{frame}  
+
+
+
+
+
 
 
 
