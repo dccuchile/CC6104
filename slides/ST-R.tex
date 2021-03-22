@@ -43,8 +43,7 @@
 %\author{\footnotesize  
  \textcolor[rgb]{0.00,0.00,1.00}{Felipe José Bravo Márquez}} 
 
-%\vspace{-0.3cm}
-%\institute{Universidad Técnica Federico Santa María - Diplomado Base de Datos}
+
 \date{ \today }
 
 
@@ -59,40 +58,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Introducción}
-
-\begin{frame}{Motivación}
-
-\scriptsize{
-\begin{itemize}
- \item Diaramente se almacenan masivamente grandes colecciones de datos. 
- \item Ej: La Web, comercio electrónico, datos transaccionales.
- \item Los computadores se vuelven cada vez más baratos y con mayor poder de procesamiento.
- \item Analizar estos datos permite encontrar patrones ocultos. 
- \item Un buen uso de los datos puede traer beneficios de negocio. Ej: segmentación de clientes, predicción de demanda.
-\end{itemize}
-
-}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.5]{pics/supermercado.png}
-\end{figure}
- 
-\end{frame}
+\section{Introduction}
 
 
-\begin{frame}{El proyecto R para la estadística computacional}
+
+
+\begin{frame}{The R project for computational statistics}
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.6]{pics/Rlogo.png}
 \end{figure}
 \scriptsize{
 \begin{itemize}
- \item R es un ambiente de programación estadístico totalmente gratuito: \url{http://www.r-project.org/}
- \item Permite manipular y almacenar datos de manera efectiva.
- \item Es un lenguaje de programación completo: variables, loop, condiciones, funciones.
- \item Provee muchas librerías para realizar distintos tipos de análisis sobre colecciones de datos, ej: visualización de datos, análisis de series temporales, análisis de grafos, análisis de texto.
- \item Las librerías junto a sus dependencias se encuentra ordenadas en un repositorio llamado \textbf{CRAN}: \url{http://cran.r-project.org/}
+ \item R is a free statistical programming environment: \url{http://www.r-project.org/}
+ \item It allows to manipulate and store data in an effective way.
+ \item R is a complete programming language: variables, loops, conditions, functions.
+ \item It provides many libraries that implement pretty much any statistical method.
+ \item These libraries together with their dependencies are organized in a repository called \textbf{CRAN}: \url{http://cran.r-project.org/}
+
+
 
 \end{itemize}
 
@@ -103,16 +87,18 @@
 \end{frame}
 
 
-\begin{frame}{¿Por qué usar R?}
+\begin{frame}{Why use R?}
 
 
 \scriptsize{
 \begin{itemize}
- \item R es software libre a diferencia de Matlab, SPSS, STATA.
- \item Esta disponible para muchos sistemas operativos: Windows, MAC OS X, Linux.
- \item Hasta el año 2013 la encuesta de \textbf{KDnuggets} mostraba a R como el lenguaje de programación preferido para realizar análisis de datos, minería de datos y ciencia de datos.
+ \item R is free software unlike Matlab, SPSS, STATA.
+ \item It is available for many operating systems: Windows, MAC OS X, Linux.
+ \item As of 2013 \textbf{KDnuggets} survey showed R as the preferred programming language for performing data analysis, data mining and data science.
  \item \url{http://www.kdnuggets.com/2013/08/languages-for-analytics-data-mining-data-science.html}
- \item Hoy en día Python ha tomado mucha popularidad.
+ \item Today Python has become a very strong competitor.
+
+
 \end{itemize}
 
 }
@@ -128,9 +114,9 @@
 \begin{frame}{RStudio}
 \scriptsize{
 \begin{itemize}
- \item R funciona a través de la línea de comandos.
- \item Para trabajar en un entorno más amigable usaremos RStudio.
- \item También es gratis y se puede descargar para distintos sistemas operativos en este link: \url{http://www.rstudio.com/ide/download/desktop}
+  \item R works through the command line.
+ \item To work in a more friendly environment we will use RStudio.
+ \item It is also free and can be downloaded for different operating systems at this link: \url{http://www.rstudio.com/ide/download/desktop}
 \end{itemize}
 
 } 
@@ -144,9 +130,9 @@
 \end{frame}
 
 
-\section{Comandos básicos en R}
+\section{R basic commands}
 
-\begin{frame}[fragile]{R puede ser usado como una calculadora}
+\begin{frame}[fragile]{R as a calculator}
 \begin{verbatim}
 > 4*5
 [1] 20
@@ -165,31 +151,31 @@
 
 
 
-\begin{frame}[fragile]{Declarando Variables}
+\begin{frame}[fragile]{Declaring Variables}
 \scriptsize{
 \begin{itemize}
- \item Las variables se pueden asignar usando \verb+<-+ , \verb+=+ o la función \verb+assign+ 
+ \item Variables can be assigned using \verb+<-+ , \verb+=+ or the function \verb+assign+.
  
   \begin{verbatim}
 a<-1
 b=3
-assign("tres",3)
+assign("three",3)
 d<-a+b
-ver<-T # equivalente a TRUE
-pal<-"hola"
+ver<-T # equivalent to TRUE
+word<-"hello"
 \end{verbatim}
  
- \item Por convención usamos la primera forma (\verb+<-+).
+ \item By convention we use the first form (\verb+<-+).
  
-\item Las variables pueden ser de clase \textbf{numeric}, \textbf{factor}, \textbf{character}, \textbf{logical}, entre otras.
+\item Variables can be of class \textbf{numeric}, \textbf{factor}, \textbf{character}, \textbf{logical}, among others.
  
-\item Para ver el tipo de una variable usamos el comando \verb+class+.
+\item To see the type of a variable we use the command \verb+class+.
  \begin{verbatim}
   > class(a) 
 [1] "numeric"
 > class(ver)
 [1] "logical"
-> class(pal)
+> class(word)
 [1] "character"
  \end{verbatim}
 
@@ -203,10 +189,10 @@ pal<-"hola"
 \end{frame}
 
 
-\begin{frame}[fragile]{Funciones}
+\begin{frame}[fragile]{Functions}
 \scriptsize{
 \begin{itemize}
- \item Las funciones se declaran como variables y se crean con la expresión \textbf{function}:
+ \item Functions are declared as variables and are created with the expression \textbf{function}:
 
 \begin{verbatim}
 suma<-function(a=2,b=1){
@@ -219,7 +205,7 @@ fac<-function(n){
 
 \end{verbatim}
 
-\item Los parámetros de la función se pueden declaran con un valor específico para usarlos como valores predeterminados cuando no entregamos valores para esos parámetros:
+\item Function parameters can be declared with a specific value to be used as default values when we do not provide values for those parameters:
 \begin{verbatim}
 > suma(3,4)
 [1] 7
@@ -228,7 +214,7 @@ fac<-function(n){
  
 \end{verbatim}
 
-\item Las funciones son del tipo \textbf{function}:
+\item The functions are of the type \textbf{function}:
 \begin{verbatim}
 > class(suma)
 [1] "function" 
@@ -242,19 +228,18 @@ fac<-function(n){
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Ayuda y el Workspace}
+\begin{frame}[fragile]{Help and Workspace}
 \scriptsize{
 \begin{itemize}
- \item Para leer documentación sobre una función usamos \textbf{help} o \textbf{?}:
+ \item To read documentation about a function we use either \textbf{help} or \textbf{?}:
 \begin{verbatim}
 help(ls)
 ?ls
-#Para un comando particular
+#for a particular command
 help("for")
-
 \end{verbatim}
 
-\item Todas las variables quedan en mi ambiente \textbf{workspace}. Para listarlos se usa el comando \textbf{objects} o \textbf{ls}. Para borrar una variable usamos \textbf{rm}:
+\item All variables are stored in my \textbf{workspace} environment. To list them we use the command \textbf{objects} or \textbf{ls}. To delete a variable we use \textbf{rm}:
 
 \begin{verbatim}
 objects()
@@ -266,7 +251,7 @@ rm(list=ls())
 \end{verbatim}
 
 
-\item Puedo grabar todas mis variables de workspace en un archivo y así recuperar mi trabajo en una sesión futura:
+\item I can save all my workspace variables in a file and then retrieve my work in a future session:
 \begin{verbatim}
 save.image("myworkspace.RData")
 #Luego lo cargamos
@@ -287,15 +272,15 @@ load("myworkspace.RData")
  
 \end{frame}
 
-\begin{frame}[fragile]{Vectores}
+\begin{frame}[fragile]{Vectors}
 \scriptsize{
 \begin{itemize}
- \item Para trabajar con colecciones de elementos declaramos \textbf{vectores} que se construyen con el comando \textbf{c}:
+ \item To work with collections of elements we declare \textbf{vectors} which are constructed with the command \textbf{c}:
  \begin{verbatim}
 edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
           88,11,55,24,13,11,56,28,33)
  \end{verbatim}
- \item Para obtener el largo de un vector usamos el comando \textbf{length}, luego para obtener la suma de todos los elementos usamos \textbf{sum}:
+ \item To get the length of a vector we use the command \textbf{length}, then to get the sum of all elements we use \textbf{sum}:
  \begin{verbatim}
 > suma<-sum(edades)
 > largo<-length(edades)
@@ -305,7 +290,7 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
 [1] 21
  \end{verbatim}
  
-\item Si operamos un vector por un escalar este valor se recicla para todos los elementos del vector:
+\item If we operate a vector by a scalar this value is recycled for all elements of the vector:
  \begin{verbatim}
 > numeros<-c(1,2,3)
 > numeros+3
@@ -323,16 +308,16 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
  
 \end{frame}
 
-\begin{frame}[fragile]{Vectores (2)}
+\begin{frame}[fragile]{Vectors (2)}
 \scriptsize{
 \begin{itemize}
- \item Calcular la media y la varianza del vector edades usando los comandos \textbf{sum} y \textbf{length} en base a las siguientes ecuaciones:
+ \item Calculate the mean and variance of the vector ages using the commands \textbf{sum} and \textbf{length} based on the following equations:
  \begin{equation}
-  \text{media}(\text{edades})=\frac{\sum_{i=1}^n\text{edades}_{i}}{n}
+  \text{mean}(\text{edades})=\frac{\sum_{i=1}^n\text{edades}_{i}}{n}
  \end{equation}
  
  \begin{equation}
- \text{varianza}(\text{edades})=\frac{\sum_{i=1}^n(\text{edades}_{i}-\text{media}(\text{edades}))^2 }{n-1} 
+ \text{variance}(\text{edades})=\frac{\sum_{i=1}^n(\text{edades}_{i}-\text{media}(\text{edades}))^2 }{n-1} 
  \end{equation}
 
  
@@ -347,10 +332,10 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
 
 
 
-\begin{frame}[fragile]{Vectores (4)}
+\begin{frame}[fragile]{Vectors (3)}
 \scriptsize{
 \begin{itemize}
- \item Respuesta:
+ \item Answer:
  \begin{verbatim}
 > media<-sum(edades)/length(edades)
 > media
@@ -360,7 +345,7 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
 [1] 747.9476
  \end{verbatim}
  
- \item R dispone de funciones \textbf{mean} y \textbf{var}:
+ \item R has \textbf{mean} and \textbf{var} functions:
  \begin{verbatim}
 > mean(edades)
 [1] 34.95238
@@ -379,11 +364,11 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
 \end{frame}
  
  
-\begin{frame}[fragile]{Vectores (5)}
+\begin{frame}[fragile]{Vectors (4)}
 \scriptsize{
 \begin{itemize}
  
-\item Cuando construimos vectores con elementos de distinto tipo, R los convierte todos a un tipo único:
+\item When we construct vectors with elements of different types, R converts them all to a single type:
 \begin{verbatim}
 > c("hola",2,T)
 [1] "hola" "2"    "TRUE"
@@ -391,14 +376,14 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
 [1]   1   0 500 
 \end{verbatim}
 
- \item Los elementos de un vector pueden se declarados con nombres para luego recuperarlos con el comando \textbf{names}:
+ \item The elements of a vector can be declared with names and then retrieved with the \textbf{names} command:
 \begin{verbatim}
 > notas<-c(Juan=4.5,Luis=6.2,Romina=3.9,Felipe=2.8,Mariana=6.7)
 > names(notas)
 [1] "Juan"    "Luis"    "Romina"  "Felipe"  "Mariana"
  
 \end{verbatim}
-\item Podemos ordenar un vector usando el comando \textbf{sort}:
+\item We can sort a vector using the \textbf{sort} command:
 \begin{verbatim}
 > names(sort(x=notas,decreasing=T))
 [1] "Mariana" "Luis"    "Juan"    "Romina"  "Felipe" 
@@ -411,34 +396,34 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
 }
 \end{frame}
 
-\begin{frame}[fragile]{Acceso  Vectores}
+\begin{frame}[fragile]{Vector Access}
 \scriptsize{
 \begin{itemize}
 
- \item R permite acceder a los elmentos de un vector por medio de índices numéricos \verb+[i]+: 
+ \item R allows access to the elements of a vector by means of numerical indexes \verb+[i]+: 
 \begin{verbatim}
-> notas[1] # primer elemento
+> notas[1] # first element
 Juan 
  4.5
 \end{verbatim}
 
-\item El índice puede ser otro vector númerico para acceder a más de un elemento:
+\item The index can be another numeric vector to access more than one element:
 \begin{verbatim}
-> notas[c(1,5)] # primer y quinto elemento
+> notas[c(1,5)] # first and fifth element
    Juan Mariana 
     4.5     6.7 
 \end{verbatim}
 
-\item Si queremos omitir algún elemento usamos índices negativos:
+\item If we want to omit any element we use negative indexes:
 \begin{verbatim}
-> notas[-2] # Todos menos el segundo
+> notas[-2] # All but the second one
    Juan  Romina  Felipe Mariana 
     4.5     3.9     2.8     6.7 
 \end{verbatim}
 
-\item También se pueden acceder a los elementos por sus nombres:
+\item The elements can also be accessed by their names:
 \begin{verbatim}
-> notas[c("Juan","Mariana")] # Sólo Juan y Mariana
+> notas[c("Juan","Mariana")] # Only Juan and Mariana
    Juan Mariana 
     4.5     6.7 
 \end{verbatim}
@@ -453,11 +438,11 @@ Juan
 \end{frame}
 
 
-\begin{frame}[fragile]{Operando Vectores}
+\begin{frame}[fragile]{Operating Vectors}
 \scriptsize{
 \begin{itemize}
- \item Vimos anteriormente que si opero un escalar por un vector, el escalar se aplica a todos los elementos del vector.
- \item Si tengo ahora dos vectores del mismo largo y los opero, la operación se hace elemento por elemento:
+ \item We saw earlier that if I operate a scalar by a vector, the scalar applies to all the elements of the vector.
+ \item If I now have two vectors of the same length and operate on them, the operation is done element by element (element-wise):
 \begin{verbatim}
 a<-c(1,2)
 b<-c(3,4)
@@ -473,10 +458,10 @@ b<-c(3,4)
 
 
 
-\begin{frame}[fragile]{Operando Vectores (2)}
+\begin{frame}[fragile]{Operating Vectors (2)}
 \scriptsize{
 \begin{itemize}
-\item Si los vectores son de largo distinto, el más pequeño recicla sus elementos:
+\item If the vectors are of different lengths, the smaller one recycles its elements:
 \begin{verbatim}
 > d<-c(4,5,6,9)
 > a+d
@@ -485,7 +470,7 @@ b<-c(3,4)
 [1]  5  7  7 11
 \end{verbatim}
 
-\item Si el largo del mayor no es múltiplo del largo del menor, recibimos una advertencia:
+\item If the length of the longest is not a multiple of the length of the shortest, we get a warning:
 \begin{verbatim}
 > c(1,2)+c(-9,2,3)
 [1] -8  4  4
@@ -500,23 +485,23 @@ In c(1, 2) + c(-9, 2, 3) :
 
 
 
-\begin{frame}[fragile]{Comparando Vectores}
+\begin{frame}[fragile]{Comparing Vectors}
 \scriptsize{
 \begin{itemize}
- \item R soporta los operadores de comparación para variables numéricas:\verb+>,<, ==, <=, >=, !=+ además de \verb+& |+ como los operadores \textbf{and} y \textbf{or} para variables lógicas:
+ \item R supports the comparison operators for numeric variables:\verb+ >,<, ==, <=, >=, !=+ in addition to \verb+& |+ as well as the operators \textbf{and} and \textbf{or} for logical variables:
 \begin{verbatim}
 > menores<-edades<18
 > menores
  [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE
 [17]  TRUE  TRUE FALSE FALSE FALSE
 \end{verbatim}
-\item Si le damos a un vector un índice de variables lógicas recuperamos los valores donde el índice toma el valor verdadero: 
+\item If we give a vector an index of logical variables we retrieve the values where the index takes the true value: 
 \begin{verbatim}
 > edades[menores] 
 [1] 12  7 14  2 11 13 11
 \end{verbatim}
 
-\item Ejercicio: calcular el promedio de edad de los elementos mayores o iguales a 18 años. 
+\item Exercise: calculate the average age of the elements older or equal to 18 years old.
 \begin{verbatim}
 mean(edades[edades>=18]) 
 \end{verbatim}
@@ -529,17 +514,17 @@ mean(edades[edades>=18])
 }
 \end{frame}
 
-\begin{frame}[fragile]{Valores Nulos}
+\begin{frame}[fragile]{Null Values}
 \scriptsize{
 \begin{itemize}
-\item En R, los valores faltantes se escriben como \verb+NA+. Es común que aparezcan cuando leemos datos de alguna base de datos. Algunas funciones no aceptan valores nulos por lo que hay que tenerlos en cuenta.
+\item In R, missing values are written as \verb+NA+. It is common that they appear when we read data from a database. Some functions do not accept null values so they must be taken into account.
 \begin{verbatim}
 > missing_vector<-c(12,15,NA)
 > missing_vector
 [1] 12 15 NA
 \end{verbatim}
 
-\item Para chequear si una variable es nula usamos el comando \verb+is.na+:
+\item To check if a variable is null we use the command \verb+is.na+:
 \begin{verbatim}
 > missing_vector[!is.na(missing_vector)]
 [1] 12 15 
