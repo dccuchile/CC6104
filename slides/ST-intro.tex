@@ -55,7 +55,7 @@
 arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \newcommand{\bigtimes}{\BIGOP{\times}}
 \vspace{-0.5cm}
-\title{Introduction to Bayesian Inference}
+\title{Introduction to Statistical Thinking}
 \vspace{-0.5cm}
 \author[Felipe Bravo Márquez]{\footnotesize
 %\author{\footnotesize  
@@ -77,50 +77,62 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \begin{frame}{Introduction to Statistical Thinking}
 \scriptsize{
 \begin{itemize}
- \item Statistical thinking is a way of understanding a complex world by describing it in relatively simple terms.
- \item The idea is to capture essential aspects of its structure and to  provide us some idea of how uncertain we are about that knowledge. 
+\item Statistical thinking is a systematic way of thinking about how we describe the \textbf{world} and use \textbf{data} make decisions and predictions.
+
+\item Taking into account the inherent \textbf{uncertainty} that exists in the real world.  \cite{poldrack2019statistical}
+
  
  \item The foundations of statistical thinking come primarily from mathematics and statistics, but also from computer science, psychology, and other fields of study. \cite{poldrack2019statistical}
+ 
+ \item \textbf{Statistics}, in particular, is the discipline that concerns the collection, organization, analysis, interpretation, and presentation of data \cite{wiki:Statistics}.
+ 
 \end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{pics/stats.png}
+\end{figure}
 
 } 
 \end{frame}
 
-\begin{frame}{Motivation}
+
+
+\begin{frame}{Statistical Thinking and Intuition}
 
 \scriptsize{
 \begin{itemize}
-\item Collections of data are stored on a daily basis. For example: The Web, e-commerce, transactional data.
-\item Computers are becoming cheaper and more powerful.
-\item Analyzing this data allows to find hidden patterns. 
-\item A good use of data can bring business benefits. Ex: customer segmentation, demand prediction.
+\item Human \textbf{intuition} often tries to answer the same questions that we can answer using statistical thinking, but often gets the answer \textbf{wrong}. 
+\item For example, in recent years most Americans have reported that they think that violent crime was worse compared to the previous year (Pew Research Center). 
+\item However, a statistical analysis of the actual crime data shows that in fact violent crime has steadily decreased since the 1990’s. 
+\item Intuition fails us because we rely upon \textbf{best guesses} (which psychologists refer to as heuristics) that can often get it wrong. \cite{poldrack2019statistical}
+
+
 \end{itemize}
 
 }
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.5]{pics/supermercado.png}
-\end{figure}
  
 \end{frame}
 
 
-\begin{frame}{Probability and Statistics}
+\begin{frame}{What can statistics do for us?}
+There are three major things that we can do with statistics:
 
-\scriptsize{
 \begin{itemize}
- \item Probability is the language of uncertainty that is also the basis for statistical inference.
- \item The problem studied in probabilities is: given a data generating process, which are the properties of the outputs?
- \item The problem studied in statistical inference, data mining and machine learning is: given the outputs, what can we say about the process that generates the observed data? 
+\item \textbf{Describe}: The world is complex and we often need to describe it in a simplified way that we can understand.
+\item \textbf{Decide}: We often need to make decisions based on data, usually in the face of uncertainty.
+\item \textbf{Predict}: We often wish to make predictions about new situations based on our knowledge of previous situations.
+
+
+
 \end{itemize}
 
-}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.6]{pics/proceso.pdf}
-\end{figure}
+
  
 \end{frame}
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
