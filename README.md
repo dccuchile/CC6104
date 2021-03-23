@@ -19,7 +19,7 @@ Material of a course on statistics I'm planning to teach in the near future. The
 
 ### Part III: Bayesian Inference 
 1. [Introduction to Bayesian Inference](slides/ST-bayesian.pdf) | ([tex source file](slides/ST-bayesian.tex))
-1. Bayesian Lineal Models (Chapters 4,5,6,13 of Statistical Rethinking)
+1. Bayesian Lineal Models (Chapters 4,5 of Statistical Rethinking)
 1. MCMC (Chapter 9 of Statistical Rethinking)
 
 
