@@ -144,7 +144,7 @@
 [1] 1.386294
 \end{verbatim}
 
-
+\footnotemark{The following slides are based on \cite{venables2009introduction}}
  
 \end{frame}
 
@@ -546,7 +546,7 @@ mean(edades[edades>=18])
  \scriptsize{
  
  \begin{itemize}
-  \item Para crear un vector formado por una secuencia de números usamos el comando \textbf{seq}:
+  \item To create a vector consisting of a sequence of numbers we use the command \textbf{seq}:
  
  \begin{verbatim}
 > pares<-seq(from=2,to=20,by=2)
@@ -554,7 +554,7 @@ mean(edades[edades>=18])
 > pares
  [1]  2  4  6  8 10 12 14 16 18 20
  \end{verbatim} 
- \item También se pueden crear usando el operador (\verb+:+):
+ \item It can also be created using the operator (\verb+:+):
  \begin{verbatim}
 > 1:10
  [1]  1  2  3  4  5  6  7  8  9 10 
@@ -566,17 +566,18 @@ mean(edades[edades>=18])
  }
 \end{frame}
 
-\begin{frame}[fragile]{Repeticiones}
+\begin{frame}[fragile]{Repetitions}
 \scriptsize{
 \begin{itemize}
- \item Para crear vectores que repitan un valor u otro vector varias veces usamos el comando \textbf{rep}. El primer valor es el objeto a repetir y el segundo es el número de repeticiones:
+ \item To create vectors that repeat a value or another vector multiple times we use the command \textbf{rep}. The first value is the object to repeat and the second is the number of repetitions:
  \begin{verbatim}
 > rep(10,3)
 [1] 10 10 10
-> rep(c("hola","chao"),4)
-[1] "hola" "chao" "hola" "chao" "hola" "chao" "hola" "chao"
+> rep(c("hello", "bye"),4)
+[1] "hello" "bye" "hello" "bye" "hello" "bye"
+"hello" "bye" "hello" "bye"
  \end{verbatim}
- \item Problema: Crear una secuencia que repita 3 veces los 4 primeros múltiplos de 7. \pause
+  \item Problem: Create a sequence that repeats 3 times the first 4 multiples of 7.
  \begin{verbatim}
 > rep(seq(from=7,by=7,length=4),3)
  [1]  7 14 21 28  7 14 21 28  7 14 21 28
@@ -590,16 +591,16 @@ mean(edades[edades>=18])
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Generación de vectores aleatorios}
+\begin{frame}[fragile]{Random vector generation}
 \scriptsize{
 \begin{itemize}
- \item Para realizar experimentos o simular fenómenos de comportamiento conocido es muy útil generar vectores aleatorios. 
- \item Si queremos números uniformemente distribuidos entre un máximo y un mínimo usamos \textbf{runif}:
+ \item To perform experiments or simulate phenomena of known behavior it is very useful to generate random vectors.
+ \item  If we want uniformly distributed numbers between a maximum and a minimum we use \textbf{runif}:
  \begin{verbatim}
 > runif(n=5, min = 1, max = 10)
 [1] 5.058862 1.737830 9.450956 9.149376 2.652774
  \end{verbatim}
- \item Si queremos números centrados en una media $\mu$ y con una desviación estándar $\sigma$, usamos una distribución normal con \textbf{rnorm} donde sabemos que el $68\%$ de las observaciones estarán alrededor $\mu\pm\sigma$, el $95\%$ en $\mu\pm2\sigma$ y el $99.7\%$ en $\mu\pm3\sigma$:
+ \item  If we want numbers centered on a mean $\mu$ with a standard deviation $\sigma$, we use a normal distribution with the command \textbf{rnorm} where we know that $68\%$  of the observationswill be within the range $\mu\pm\sigma$, $95\%$ in $\mu\pm2\sigma$ and $99.7\%$ in $\mu\pm3\sigma$:
  
  \begin{verbatim}
 > rnorm(n=5, mean = 10, sd = 4)
@@ -611,16 +612,16 @@ mean(edades[edades>=18])
 }
 \end{frame}
 
-\begin{frame}[fragile]{Generación de vectores aleatorios (2)}
+\begin{frame}[fragile]{Random Vector Generation (2)}
 \scriptsize{
 \begin{itemize}
- \item Cuando queremos modelar un número de arribos por unidad de tiempo para simular modelos de colas, usamos la distribución de \textbf{Poisson} con \textbf{rpos}. El parámetro $\lambda$ nos dice la cantidad promedio de llegadas en un período:
+ \item When we want to model the number of arrivals per unit of time to simulate queuing models, we use the \textbf{Poisson} distribution with \textbf{rpos}. The parameter $\lambda$ tells us the average number of arrivals per time period
  \begin{verbatim}
 > rpois(n=10, lambda = 3)
  [1] 1 3 8 6 1 1 6 3 4 7
  \end{verbatim}
 
- \item Un experimento de distribución binomial se basa en tener $n$ experimentos, donde en cada experimento  realizamos $k$ intentos de un fenómeno cuya probabilidad de acierto en cada intento es $p$. Con el comando \textbf{rbinom} podemos simular la cantidad de aciertos obtenidos en cada experimento.
+ \item In a binomial distribution experiment we repeat $n$ times, where in each one we perform $k$ trials of a phenomenon whose probability of success in each trial is $p$.  We can simulate the number of hits obtained in each experimentWith the command \textbf{rbinom}.
 \begin{verbatim}
 > rbinom(n=10,size=2,prob=0.5)
  [1] 0 1 2 1 1 0 2 0 0 1
@@ -1190,20 +1191,16 @@ install.packages("tidyverse")
 
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
-\frametitle{Bilbiografía}
-%\bibliography{bio}
-%\bibliographystyle{apalike}
-\begin{thebibliography}{8}
-
-\bibitem{William}
-Venables, William N., David M. Smith, and R Development Core Team. \emph{An introduction to R.}, 2002.
-\end{thebibliography}
-
-
+\frametitle{References}
+\bibliography{bio}
+\bibliographystyle{apalike}
 %\bibliographystyle{flexbib}
-\end{frame}
+\end{frame}  
+
+
 
 
 
