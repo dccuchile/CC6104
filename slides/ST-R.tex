@@ -277,13 +277,13 @@ load("myworkspace.RData")
 \begin{itemize}
  \item To work with collections of elements we declare \textbf{vectors} which are constructed with the command \textbf{c}:
  \begin{verbatim}
-edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
+ages<-c(21,33,12,34,23,70,90,80,7,29,14,2,
           88,11,55,24,13,11,56,28,33)
  \end{verbatim}
  \item To get the length of a vector we use the command \textbf{length}, then to get the sum of all elements we use \textbf{sum}:
  \begin{verbatim}
-> suma<-sum(edades)
-> largo<-length(edades)
+> suma<-sum(ages)
+> largo<-length(ages)
 > suma
 [1] 734
 > largo
@@ -292,10 +292,10 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
  
 \item If we operate a vector by a scalar this value is recycled for all elements of the vector:
  \begin{verbatim}
-> numeros<-c(1,2,3)
-> numeros+3
+> numbers<-c(1,2,3)
+> numbers+3
 [1] 4 5 6
-> numeros*5
+> numbers*5
 [1]  5 10 15
  \end{verbatim}
 \end{itemize}
@@ -313,11 +313,11 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
 \begin{itemize}
  \item Calculate the mean and variance of the vector ages using the commands \textbf{sum} and \textbf{length} based on the following equations:
  \begin{equation}
-  \text{mean}(\text{edades})=\frac{\sum_{i=1}^n\text{edades}_{i}}{n}
+  \text{mean}(\text{ages})=\frac{\sum_{i=1}^n\text{ages}_{i}}{n}
  \end{equation}
  
  \begin{equation}
- \text{variance}(\text{edades})=\frac{\sum_{i=1}^n(\text{edades}_{i}-\text{media}(\text{edades}))^2 }{n-1} 
+ \text{variance}(\text{ages})=\frac{\sum_{i=1}^n(\text{ages}_{i}-\text{media}(\text{ages}))^2 }{n-1} 
  \end{equation}
 
  
@@ -337,19 +337,19 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
 \begin{itemize}
  \item Answer:
  \begin{verbatim}
-> media<-sum(edades)/length(edades)
+> media<-sum(ages)/length(ages)
 > media
 [1] 34.95238
-> varianza<-sum((edades-media)^2)/(length(edades)-1)
+> varianza<-sum((ages-media)^2)/(length(ages)-1)
 > varianza
 [1] 747.9476
  \end{verbatim}
  
  \item R has \textbf{mean} and \textbf{var} functions:
  \begin{verbatim}
-> mean(edades)
+> mean(ages)
 [1] 34.95238
-> var(edades)
+> var(ages)
 [1] 747.9476
 
  \end{verbatim}
@@ -370,22 +370,22 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
  
 \item When we construct vectors with elements of different types, R converts them all to a single type:
 \begin{verbatim}
-> c("hola",2,T)
-[1] "hola" "2"    "TRUE"
+> c("hello",2,T)
+[1] "hello" "2"    "TRUE"
 > c(TRUE,FALSE,500)
 [1]   1   0 500 
 \end{verbatim}
 
  \item The elements of a vector can be declared with names and then retrieved with the \textbf{names} command:
 \begin{verbatim}
-> notas<-c(Juan=4.5,Luis=6.2,Romina=3.9,Felipe=2.8,Mariana=6.7)
-> names(notas)
+> grades<-c(Juan=4.5,Luis=6.2,Romina=3.9,Felipe=2.8,Mariana=6.7)
+> names(grades)
 [1] "Juan"    "Luis"    "Romina"  "Felipe"  "Mariana"
  
 \end{verbatim}
 \item We can sort a vector using the \textbf{sort} command:
 \begin{verbatim}
-> names(sort(x=notas,decreasing=T))
+> names(sort(x=grades,decreasing=T))
 [1] "Mariana" "Luis"    "Juan"    "Romina"  "Felipe" 
 \end{verbatim}
 
@@ -402,28 +402,28 @@ edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
 
  \item R allows access to the elements of a vector by means of numerical indexes \verb+[i]+: 
 \begin{verbatim}
-> notas[1] # first element
+> grades[1] # first element
 Juan 
  4.5
 \end{verbatim}
 
 \item The index can be another numeric vector to access more than one element:
 \begin{verbatim}
-> notas[c(1,5)] # first and fifth element
+> grades[c(1,5)] # first and fifth element
    Juan Mariana 
     4.5     6.7 
 \end{verbatim}
 
 \item If we want to omit any element we use negative indexes:
 \begin{verbatim}
-> notas[-2] # All but the second one
+> grades[-2] # All but the second one
    Juan  Romina  Felipe Mariana 
     4.5     3.9     2.8     6.7 
 \end{verbatim}
 
 \item The elements can also be accessed by their names:
 \begin{verbatim}
-> notas[c("Juan","Mariana")] # Only Juan and Mariana
+> grades[c("Juan","Mariana")] # Only Juan and Mariana
    Juan Mariana 
     4.5     6.7 
 \end{verbatim}
@@ -490,20 +490,20 @@ In c(1, 2) + c(-9, 2, 3) :
 \begin{itemize}
  \item R supports the comparison operators for numeric variables:\verb+ >,<, ==, <=, >=, !=+ in addition to \verb+& |+ as well as the operators \textbf{and} and \textbf{or} for logical variables:
 \begin{verbatim}
-> menores<-edades<18
-> menores
+> younger<-ages<18
+> younger
  [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE
 [17]  TRUE  TRUE FALSE FALSE FALSE
 \end{verbatim}
 \item If we give a vector an index of logical variables we retrieve the values where the index takes the true value: 
 \begin{verbatim}
-> edades[menores] 
+> ages[younger] 
 [1] 12  7 14  2 11 13 11
 \end{verbatim}
 
 \item Exercise: calculate the average age of the elements older or equal to 18 years old.
 \begin{verbatim}
-mean(edades[edades>=18]) 
+mean(ages[ages>=18]) 
 \end{verbatim}
 
  
@@ -542,15 +542,15 @@ mean(edades[edades>=18])
 
 
 
-\begin{frame}[fragile]{Secuencias}
+\begin{frame}[fragile]{Sequences}
  \scriptsize{
  
  \begin{itemize}
   \item To create a vector consisting of a sequence of numbers we use the command \textbf{seq}:
  
  \begin{verbatim}
-> pares<-seq(from=2,to=20,by=2)
-> cuatro_mult<-seq(from=4,by=4,length=100)
+> my_pairs<-seq(from=2,to=20,by=2)
+> mult_four<-seq(from=4,by=4,length=100)
 > pares
  [1]  2  4  6  8 10 12 14 16 18 20
  \end{verbatim} 
@@ -621,7 +621,7 @@ mean(edades[edades>=18])
  [1] 1 3 8 6 1 1 6 3 4 7
  \end{verbatim}
 
- \item In a binomial distribution experiment we repeat $n$ times, where in each one we perform $k$ trials of a phenomenon whose probability of success in each trial is $p$.  We can simulate the number of hits obtained in each experimentWith the command \textbf{rbinom}.
+ \item The binomial distribution can be used to represent experiments in which $k$ independent trials of a coin tossing Bernoulli experiment are performed. The probability of success (e.g., getting a head) in each trial is $p$.  We can simulate the number of hits obtained for $n$ different Binomial experiments with the command \textbf{rbinom} ($k$ is named as ``size'').
 \begin{verbatim}
 > rbinom(n=10,size=2,prob=0.5)
  [1] 0 1 2 1 1 0 2 0 0 1
@@ -640,23 +640,23 @@ mean(edades[edades>=18])
 \end{frame}
 
 
-\begin{frame}[fragile]{Variables Categóricas o Factores}
+\begin{frame}[fragile]{Categorical Variables or Factors}
 \scriptsize{
 \begin{itemize}
- \item Además de las variables numéricas o lógicas, se puede trabajar con variables categóricas. Ej: color, sexo, clase social.
- \item Se crean con el comando \textbf{factor} y los posibles valores de la variable se guardan en el atributo \textbf{levels}.
+ \item In addition to numerical or logical variables, it is possible to work with categorical variables. E.g.: color, gender, social class.
+ \item They are created with the command \textbf{factor} and the possible values of the variable are stored in the attribute \textbf{levels}.
 \begin{verbatim}
-> gente<-factor(c("Hombre","Mujer","Mujer","Mujer","Hombre"))
-> gente
+> people<-factor(c("Hombre","Mujer","Mujer","Mujer","Hombre"))
+> people
 [1] Hombre Mujer  Mujer  Mujer  Hombre
 Levels: Hombre Mujer
-> class(gente)
+> class(people)
 [1] "factor"
-> levels(gente)
+> levels(people)
 [1] "Hombre" "Mujer" 
-#Puedo renombrar a los niveles
-> levels(gente)<-c("Man","Woman")
-> gente
+#I can rename the levels
+> levels(people)<-c("Man","Woman")
+> people
 [1] Man   Woman Woman Woman Man  
 Levels: Man Woman
 \end{verbatim}
@@ -667,32 +667,31 @@ Levels: Man Woman
 \end{frame}
 
 
-\begin{frame}[fragile]{Agregando variables por categorías con \textbf{tapply}}
+\begin{frame}[fragile]{Aggregating variables by category with \textbf{tapply}}
 \scriptsize{
 \begin{itemize}
- \item Si tenemos un vector numérico y otro categórico del mismo largo podemos aplicar una función de agregación.
- \item Ejemplo: Creo una categoría para el vector edades de niveles \emph{niño}, \emph{adolescente}, \emph{adulto}:
+ \item If we have a numeric vector and a categorical vector of the same length we can apply the aggregation function \textbf{tapply}.
+ \item Example: let's create a category for the vector ``ages'' with levels \emph{child}, \emph{adolescent}, \emph{adult}:
  \begin{verbatim}
-categ_edades<-ifelse(edades<12,"niño",
-                      ifelse(edades<18,"adolescente","adulto"))
-class(categ_edades)
+categ_ages<-ifelse(ages<12,"child",
+                      ifelse(ages<18,"adolescent","adult"))
+class(categ_ages)
 [1] "character"
 #Convierto a factor con as.factor
-categ_edades<-as.factor(categ_edades)
+categ_ages<-as.factor(categ_ages)
  \end{verbatim}
 
- \item Ahora cuento la cantidad de personas por categoría, y calculo la media y la desviación estándar para cada grupo:
+ \item Now, I can count the number of people per category, and calculate the mean and standard deviation for each group:
 \begin{verbatim}
-tapply(edades,categ_edades,length)
-adolescente      adulto        niño 
-          3          14           4 
-> tapply(edades,categ_edades,mean)
-adolescente      adulto        niño 
-   13.00000    47.42857     7.75000 
-> tapply(edades,categ_edades,sd)
-adolescente      adulto        niño 
-   1.000000   25.294312    4.272002 
-  
+> tapply(ages,categ_ages,length)
+adolescent      adult      child 
+         3         14          4 
+> tapply(ages,categ_ages,mean)
+adolescent      adult      child 
+  13.00000   47.42857    7.75000 
+> tapply(ages,categ_ages,sd)
+adolescent      adult      child 
+  1.000000  25.294312   4.272002  
 \end{verbatim}
 
  
@@ -704,33 +703,33 @@ adolescente      adulto        niño
 \end{frame}
 
 
-\begin{frame}[fragile]{Manejo de Strings}
+\begin{frame}[fragile]{Strings handling}
 \scriptsize{
  \begin{itemize}
-  \item Puedo imprimir un string usando el comando \textbf{cat}:
+  \item I can print a string using the command \textbf{cat}:
 \begin{verbatim}
-> saludo<-"Hola Mundo"
-> cat(saludo)
-Hola Mundo
+> greeting<-"Hello World"
+> cat(greeting)
+Hello World
 \end{verbatim}
 
-\item Para concatenar dos strings uso el comando \textbf{paste}:
+\item To concatenate two strings we can use the command \textbf{paste}:
 \begin{verbatim}
-> paste("Hola","Chao",sep="-")
-[1] "Hola-Chao"
-> paste("persona",1:4, sep="")
-[1] "persona1" "persona2" "persona3" "persona4"
-> paste(saludo,1:3, sep=" ")
-[1] "Hola Mundo 1" "Hola Mundo 2" "Hola Mundo 3" 
+> paste("Hello","Bye",sep="-")
+[1] "Hola-Bye"
+> paste("person",1:4, sep="")
+[1] "person1" "person2" "person3" "person4"
+> paste(greeting,1:3, sep=" ")
+[1] "Hello World 1" "Hello World 2" "Hello World 3"
 \end{verbatim}
 
-\item Para extraer sub-cadenas usamos el comando \textbf{substr}:
+\item To extract substrings we use the command \textbf{substr}:
 \begin{verbatim}
-> substr(saludo,1,4)
-[1] "Hola" 
+> substr(greeting,1,4)
+[1] "Hell" 
 \end{verbatim}
 
-\item Existe un vector llamado \textbf{letters} que tiene todas las letras del abecedario, útil para nombrar variables:
+\item There is a vector called \textbf{letters} that has all the letters of the alphabet. It is useful for naming variables:
 \begin{verbatim}
 > letters[1:4]
 [1] "a" "b" "c" "d" 
@@ -746,19 +745,19 @@ Hola Mundo
 \begin{frame}[fragile]{Matrices}
 \scriptsize{
  \begin{itemize}
-  \item Las matrices son vectores de dos dimensiones. Por defecto se van llenando por columna:
+  \item Matrices are two-dimensional vectors. By default they are filled by column:
  \begin{verbatim}
-> matriz_por_col<-matrix(data=1:12,nrow=3,ncol=4)
-> matriz_por_col
+> matrix_by_col<-matrix(data=1:12,nrow=3,ncol=4)
+> matrix_by_col
      [,1] [,2] [,3] [,4]
 [1,]    1    4    7   10
 [2,]    2    5    8   11
 [3,]    3    6    9   12 
  \end{verbatim}
- \item Para llenarlas por fila uso el parámetro \textbf{byrow}:
+ \item To fill them per row, we can use the parameter \textbf{byrow}:
  \begin{verbatim}
-> matriz_por_fil<-matrix(data=1:12,nrow=4,ncol=3,byrow=T)
-> matriz_por_fil
+> matrix_per_row<-matrix(data=1:12,nrow=4,ncol=3,byrow=T)
+> matrix_per_row
      [,1] [,2] [,3]
 [1,]    1    2    3
 [2,]    4    5    6
@@ -766,9 +765,9 @@ Hola Mundo
 [4,]   10   11   12  
  \end{verbatim}
 
- \item Accedemos a la dimensión de la matriz con el comando \textbf{dim}.
+ \item We access the dimension of the matrix with the command \textbf{dim}.
  \begin{verbatim}
- > dim(matriz_por_fil)
+ > dim(matrix_per_row)
 [1] 4 3 
  \end{verbatim}
 
@@ -780,23 +779,23 @@ Hola Mundo
 \begin{frame}[fragile]{Matrices (2)}
 \scriptsize{
  \begin{itemize}
-  \item Para acceder a los elementos de una matriz tengo que especificar las filas $i$ y las columnas $j$ \verb+[i,j]+. Si dejo alguno de los dos valores vacío se recuperan todos las filas o columnas: 
+  \item To access the elements of a matrix we have to specify the rows $i$ and columns $j$ \verb+[i,j]+. If we leave any of the two values empty, all rows or columns are retrieved:  
  \begin{verbatim}
- > matriz_por_fil[2,] #Segunda fila, todas las columnas
+ > matrix_per_row[2,] #Second row, all columns
 [1] 4 5 6
-> matriz_por_fil[2,1] # Segunda fila, primera columna
+> matrix_per_row[2,1] # Second row, first column
 [1] 4
-> matriz_por_fil[-1,-2] # Descarto fila 1 y columna 2
+> matrix_per_row[-1,-2] # All but row 1 and column 2
      [,1] [,2]
 [1,]    4    6
 [2,]    7    9
 [3,]   10   12 
  \end{verbatim}
-\item Para acceder a los nombres de las filas o columnas usamos \textbf{rownames} y \textbf{colnames} de forma análoga a como usamos \textbf{names} para los vectores.
+\item To access row or column names, we use \textbf{rownames} and \textbf{colnames} analogously to how we use \textbf{names} for vectors.
 \begin{verbatim}
-> rownames(matriz_por_fil)<-paste("r",1:4,sep="")
-> colnames(matriz_por_fil)<-paste("c",1:3,sep="")
-> matriz_por_fil["r2","c3"]
+> rownames(matrix_per_row)<-paste("r",1:4,sep="")
+> colnames(matrix_per_row)<-paste("c",1:3,sep="")
+> matrix_per_row["r2","c3"]
 [1] 6
 \end{verbatim}  
  \end{itemize}
@@ -807,16 +806,16 @@ Hola Mundo
 \begin{frame}[fragile]{Matrices (3)}
 \scriptsize{
 \begin{itemize}
- \item Puedo agregarle nuevas filas o nuevas columnas a una matriz usando \textbf{rbind} y \textbf{cbind} respectivamente:
+ \item We can add new rows or new columns to a matrix using \textbf{rbind} and \textbf{cbind} respectively:
  \begin{verbatim}
-  > rbind(matriz_por_fil,r5=1:3)
+  > rbind(matrix_per_row,r5=1:3)
    c1 c2 c3
 r1  1  2  3
 r2  4  5  6
 r3  7  8  9
 r4 10 11 12
 r5  1  2  3
-> cbind(matriz_por_fil,c4=4:1)
+> cbind(matrix_per_row,c4=4:1)
    c1 c2 c3 c4
 r1  1  2  3  4
 r2  4  5  6  3
@@ -834,9 +833,9 @@ r4 10 11 12  1
 \begin{frame}[fragile]{Matrices (4)}
 \scriptsize{
 \begin{itemize}
- \item Operaciones algebraicas como la multiplicación de matrices se hace con \verb+%*%+:
+ \item Matrix multiplication is done with command \verb+%*%+:
  \begin{verbatim}
->a<-matriz_por_col %*% matriz_por_fil
+>a<-matrix_by_col %*% matrix_per_row
       c1  c2  c3
 [1,] 166 188 210
 [2,] 188 214 240
@@ -844,7 +843,7 @@ r4 10 11 12  1
  \end{verbatim}
 
  
-\item  Si usamos solamente el operador \verb+*+, la multiplicación se hace elemento por elemento (sólo para matrices de igual dimensión). Esto aplica también para la suma, la resta, la división y otro tipo de operadores.
+\item  If we use only the operator \verb+*+, the multiplication is done element by element (only for arrays of equal dimension). This also applies to addition, subtraction, division and other operators.
 
 \end{itemize}
 
@@ -857,7 +856,7 @@ r4 10 11 12  1
 \begin{frame}[fragile]{Matrices (5)}
 \scriptsize{
 \begin{itemize}
-\item Podemos transponer una matriz con \textbf{t}:
+\item We can transpose a matrix with the command \textbf{t}:
  \begin{verbatim}
 > t(a)
    [,1] [,2] [,3]
@@ -865,7 +864,7 @@ c1  166  188  210
 c2  188  214  240
 c3  210  240  270
 \end{verbatim}
-\item Los valores y vectores propios se calculan con \textbf{eigen}:
+\item Eigenvalues and eigenvectors are calculated with \textbf{eigen}:
 \begin{verbatim}
 > eigen(a)
 $values
@@ -886,13 +885,13 @@ $vectors
 
 \end{frame}
 
-\begin{frame}[fragile]{Arreglos o Tensores}
+\begin{frame}[fragile]{Arrays or Tensors}
 \scriptsize{
 \begin{itemize}
- \item Los arreglos (o tensores) son como las matrices pero de más dimensiones:
+ \item Arrays (or tensors) are like matrices but with more dimensions:
  \begin{verbatim}
-> arreglo<-array(1:8, dim=c(2,2,2))
-> arreglo
+> my_array<-array(1:8, dim=c(2,2,2))
+> my_array
 , , 1
 
      [,1] [,2]
@@ -905,7 +904,7 @@ $vectors
 [1,]    5    7
 [2,]    6    8
 
-> arreglo[1,2,1]
+> my_array[1,2,1]
 [1] 3
  \end{verbatim}
 
@@ -918,28 +917,28 @@ $vectors
 
 
 
-\begin{frame}[fragile]{Listas}
+\begin{frame}[fragile]{Lists}
 \scriptsize{
 \begin{itemize}
- \item Las matrices me restringen a que todos los vectores sean del mismo largo y del mismo tipo.
- \item Las listas me permiten agrupar objetos de cualquier tipo y de cualquier largo:
+ \item Arrays are restricted to have all vectors of the same length and of the same type.
+ \item Lists allow us to group objects of any type and any length:
  \begin{verbatim}
-milista<-list(hombre="Pepe",mujer="Juana",
-              hijos=3,edades=c(4,8,12))
+my_list<-list(man="Pepe",woman="Juana",
+              children=3,ages=c(4,8,12))
  \end{verbatim}
- \item Cuando accedo a sus elementos usando \verb+[i]+ recupero una sub-lista:
+ \item When we access its elements using \verb+[i]+ we get a sublist:
  \begin{verbatim}
-> milista[c(3,4)] # Sublista
-$hijos
+> my_list[c(3,4)] # sublist
+$children
 [1] 3
-$edades
+$ages
 [1]  4  8 12
  \end{verbatim}
-\item Para acceder a una elemento particular tengo tres opciones:
+\item We have three options to access a particular item in a list:
 \begin{verbatim}
-milista[[1]]
-milista[["hombre"]]
-milista$hombre
+my_list[[1]]
+my_list[["man"]]
+my_list$man
 
 [1] "Pepe"
 \end{verbatim}
@@ -952,26 +951,26 @@ milista$hombre
 }
 \end{frame}
 
-\begin{frame}[fragile]{Ejercicio Lista}
+\begin{frame}[fragile]{Exercise List}
 \scriptsize{
 
 \begin{itemize}
- \item Crear una lista que tenga tres vectores de largo 100  generado por alguno de los mecanismos vistos para generar vectores aleatorios. Pueden variar las distribuciones o los parámetros. Asígnele nombres a cada uno de los vectores. \pause
+ \item Create a list with three vectors of length 100 generated by one of the mechanisms seen for generating random vectors. You can vary the distributions or parameters. Assign names to each of the vectors.
  \begin{verbatim}
- vectores<-list(normal=rnorm(n=100,mean=10,sd=5),
-               poisson=rpois(n=100,lambda=10),
-               uniforme=runif(n=100,min=5,max=15))
+vectors<-list(normal=rnorm(n=100,mean=10,sd=5),
+              poisson=rpois(n=100,lambda=10),
+              uniform=runif(n=100,min=5,max=15))
  \end{verbatim}
 
-\item Calcule la media y la desviación estándar de cada uno de los vectores de la lista. \pause
+\item Calculate the mean and standard deviation of each of the vectors in the list. 
 \begin{verbatim}
-medias<-vector()
+means<-vector()
 desv<-vector()
-for(i in 1:length(vectores)){
-  medias[i]<-mean(vectores[[i]])
-  desv[i]<-sd(vectores[[i]])
+for(i in 1:length(vectors)){
+  means[i]<-mean(vectors[[i]])
+  desv[i]<-sd(vectors[[i]])
 }
-> medias
+> means
 [1] 10.589222 10.390000  9.579866
 > desv
 [1] 5.155478 2.711349 2.905810
@@ -983,28 +982,28 @@ for(i in 1:length(vectores)){
 }
 \end{frame}
 
-\begin{frame}[fragile]{Cálculos agregados a Listas con \textbf{sapply} y \textbf{lapply}}
+\begin{frame}[fragile]{Aggregated calculations to Lists with \textbf{sapply} and \textbf{lapply}}
  \scriptsize{
  \begin{itemize}
-  \item El ejercicio anterior se puede resolver de manera mucho más sencilla en R con unas funciones especiales para realizar agregación sobre listas.
-  \item El comando \textbf{sapply} permite aplicar una función a cada elemento de una lista y devuelve los resultados en un vector. Luego \textbf{lapply} hace lo mismo pero retorna una lista:
+  \item The previous exercise can be solved in a much simpler way in R with some special functions to perform aggregation over lists.
+  \item The command \textbf{sapply} allows to apply a function to each element of a list and returns the results in a vector. Then \textbf{lapply} does the same but returns a list:
  \begin{verbatim}
- > sapply(vectores,mean)
-   normal   poisson  uniforme 
+ > sapply(vectors,mean)
+   normal   poisson  uniform 
 10.589222 10.390000  9.579866 
-> sapply(vectores,sd)
-  normal  poisson uniforme 
+> sapply(vectors,sd)
+  normal  poisson uniform 
 5.155478 2.711349 2.905810  
  \end{verbatim}  
 
- \item Ejercicio, programar una propia versión de \textbf{sapply}. Hint: En R una funciones puede recibir otra  función como parámetro y aplicarla de manera genérica. \pause
+ \item Exercise: program your own version of \textbf{sapply}. Hint: In R, a function can receive another function as parameter. 
 \begin{verbatim}
- myapply<-function(lista,fun,...){
-  resultado<-vector(length=length(lista))
-  for(i in 1:length(lista)){
-    resultado[i]<-fun(lista[[i]],...)
+my_apply<-function(a_list,fun,...){
+  result<-vector(length=length(a_list))
+  for(i in 1:length(a_list)){
+    result[i]<-fun(a_list[[i]],...)
   }
-  resultado  
+  result 
 }
 \end{verbatim}
   
@@ -1017,24 +1016,24 @@ for(i in 1:length(vectores)){
 \begin{frame}[fragile]{Data Frames}
 \scriptsize{
 \begin{itemize}
- \item El data.frame es el tipo de colección de datos más utilizada para trabajar con datasets en R.
+ \item The data.frame is the most commonly used object type to handle datasets in R.
  
- \item Un data.frame se compone de varios vectores, donde cada vector puede ser de distintos tipos, pero del mismo largo. Es equivalente a una tabla de una base de datos:
+ \item A data.frame is composed of several vectors, where each vector can be of different types, but of the same length. It is equivalent to a database table:
  \begin{verbatim}
-edades.frame<-data.frame(edad=edades,categoria=categ_edades)
+ages.frame<-data.frame(edad=ages,categoria=categ_ages)
 
-> edades.frame
+> ages.frame
    edad   categoria
-1    21      adulto
-2    33      adulto
-3    12 adolescente
+1    21      adult
+2    33      adult
+3    12 adolescent
 \end{verbatim}
 
-\item Las dimensiones de un data.frame se acceden de la misma manera que en una matriz:
+\item The cells of a data.frame can be accessed in the same way as in a matrix:
 \begin{verbatim}
-> length(edades.frame)
+> length(ages.frame)
 [1] 2
-> dim(edades.frame)
+> dim(ages.frame)
 [1] 21  2 
 \end{verbatim}
  
@@ -1048,28 +1047,28 @@ edades.frame<-data.frame(edad=edades,categoria=categ_edades)
 \begin{frame}[fragile]{Data Frames (2)}
 \scriptsize{ 
 \begin{itemize}
- \item Puedo acceder a los elementos como si fuese una matriz o una lista:
+ \item We can access the elements of a data.frame as if it were an array or a list:
  \begin{verbatim}
-> edades.frame[3,1] # La edad del tercer elemento
+> ages.frame[3,1] # The age of the third element
 [1] 12
-> edades.frame$edad[1:6] # La edad de los primeros 6 elementos
+> ages.frame$age[1:6] # The age of the first 6 elements
 [1] 21 33 12 34 23 70
  \end{verbatim}
  
-\item También puede pasar cada variable del data.frame a mi workspace con el comando \textbf{attach} y así accederlas directamente:
+\item We can also pass each variable from the data.frame to the workspace with the command \textbf{attach} and thus access them directly:
 \begin{verbatim}
-attach(edades.frame)
-> categoria[1:3]
-[1] adulto      adulto      adolescente
-Levels: adolescente adulto niño
+> attach(ages.frame)
+> categ[1:3]
+[1] adult      adult      adolescent
+Levels: adolescent adult child
 \end{verbatim}
 
-\item Puedo guardar un data.frame en un archivo csv (separado por comas u otra carácter) usando \textbf{write.table}:
+\item We can save a data.frame in a csv file (comma separated or other character) using \textbf{write.table}:
 \begin{verbatim}
-write.table(x=edades.frame,file="edades.csv",sep=",",row.names=F) 
+write.table(x=ages.frame,file="ages.csv",sep=",",row.names=F) 
 \end{verbatim}
 
-\item Pongo \verb+row.names=F+ para que no ponga los nombres de las columnas en el archivo.
+\item We set \verb+row.names=F+ so that it doesn't put the column names in the file.
 
  
 \end{itemize}
@@ -1078,25 +1077,25 @@ write.table(x=edades.frame,file="edades.csv",sep=",",row.names=F)
 \end{frame}
 
 
-\begin{frame}[fragile]{Cargando Data Frames}
+\begin{frame}[fragile]{Loading Data Frames}
 \scriptsize{
 \begin{itemize}
- \item Puedo leer un data.frame desde archivos \textbf{csv} de manera nativa y desde otras fuentes (Excel, base de datos, etc.) usando librerías especiales:
+ \item We can read a data.frame from \textbf{csv} files using \textbf{read.table} and from other sources (Excel, database, etc.) using special libraries:
  \begin{verbatim}
-  my.frame<-read.table(file="edades.csv",header=T,sep=",")
+  my.frame<-read.table(file="ages.csv",header=T,sep=",")
  \end{verbatim}
-\item El parámetro \verb+header+ específica si quiero usar la primera fila para asignarle nombres a las columnas.
+\item The parameter \verb+header+ specifies whether we want to use the first row to assign names to the columns.
 
-\item Además R provee varias colecciones de datos para experimentar. Se pueden ver como el comando \verb+data()+.
+\item In addition R comes with several datasets to experiment with. They can be viewed with the command \verb+data()+.
 
-\item Para ver todos los datasets disponibles de todas las librerías:
+\item To view all available datasets from all libraries:
 \begin{verbatim}
 data(package = .packages(all.available = TRUE)) 
 \end{verbatim}
 
-\item Ahora podemos cargar un dataset, que se incluye como data.frame en mi workspace:
+\item Now we can load a dataset which will be included as a data.frame in my workspace:
 \begin{verbatim}
-data(USArrests) # Arrestos en Estados Unidos por estado 
+data(USArrests) # US arrests by state 
 \end{verbatim}
 
  
@@ -1109,20 +1108,20 @@ data(USArrests) # Arrestos en Estados Unidos por estado
 
 
 
-\begin{frame}[fragile]{Muestreo}
+\begin{frame}[fragile]{Sampling}
 \scriptsize{
 \begin{itemize}
- \item Cuando tenemos datasets muy grandes algunas técnicas estadísticas o de visualización pueden ser muy costosas computacionalmente.
- \item Se puede trabajar con una muestra aleatoria de los datos. 
+ \item When we have very large datasets some statistical or visualization techniques can be very computationally expensive. 
+ \item  In those cases we can work with a random sample of the data. 
  
- \item La idea es que si la muestra es representativa, la propiedades observadas serán equivalentes a las de la población.  
+ \item The idea is that if the sample is representative, the observed properties will be equivalent to those of the population.   
  
- \item En R se realiza el muestreo con el comando \textbf{sample}.
+ \item In R the sampling is performed with the command \textbf{sample}.
  
- \item Si la muestra es sin reemplazo, sacamos datos de manera aleatoria sin reponer el elemento. Entonces la muestra debe ser de menor tamaño que el dataset:
+ \item If the sample is without replacement, we draw data randomly without replacing elements. Then the sample must be smaller than the dataset:
 
  \begin{verbatim}
-> sample(edades,size=4,replace=F)
+> sample(ages,size=4,replace=F)
 [1] 80 88 12 23
 \end{verbatim}
 \end{itemize}
@@ -1133,18 +1132,18 @@ data(USArrests) # Arrestos en Estados Unidos por estado
 \end{frame}
 
 
-\begin{frame}[fragile]{Muestreo (2)}
+\begin{frame}[fragile]{Sampling (2)}
 \scriptsize{
 \begin{itemize}
- \item Si la muestra es con reemplazo poddemos observar datos duplicados. De esta forma, la muestra puede ser incluso de mayor tamaño que la colección original: 
+ \item If the sample is done with replacement we may observe duplicate data. In this way, the sample can be even larger than the original collection:: 
 
 \begin{verbatim}
-sample(edades,size=100,replace=T)
+sample(ages,size=100,replace=T)
 \end{verbatim}
  
- \item Cuando tenemos que los datos vienen etiquetados por alguna categoría y tomamos una muestra donde cada categoría tiene una participación proporcional a la de la colección original, tenemos un muestreo estratificado. 
+ \item When our data examples are labeled by some category and we take a sample where each category has a proportional participation to that of the original dataset, we have a stratified sample.  
  
- \item Ejercicio: extraer una muestra aleatoria sin reemplazo que tenga 10 filas del data.frame \textbf{USArrests}. \pause
+ \item Exercise: extract a random sample without replacement that has 10 rows from the data.frame \textbf{USArrests}. 
  
  \begin{verbatim}
  USArrests[sample(1:(dim(USArrests)[1]),size=10,replace=F),]
@@ -1162,19 +1161,19 @@ sample(edades,size=100,replace=T)
 
 
 
-\begin{frame}[fragile]{Instalando librerías adicionales}
+\begin{frame}[fragile]{Installing additional libraries}
 \scriptsize{
 \begin{itemize}
- \item R tiene una comunidad muy activa que desarrolla muchas librerías para el análisis y la visualización de datos.
- \item Se pueden descargar librerías adicionales desde el repositorio CRAN directamente desde R.
- \item Las librerías se pueden instalar desde Rstudio o con el siguiente comando:
+ \item R has a very active community that develops many libraries for data analysis and visualization.
+ \item Additional libraries can be downloaded from the CRAN repository directly from the command line.
+ \item The libraries can be installed from Rstudio interface or with the following command:
  \begin{verbatim}
  install.packages("rpart",dependencies=T)
 \end{verbatim} 
 
-\item Luego para poder usarlas se cargan de la siguiente forma: \verb+library(rpart)+.
+\item Then to be able to use them they are loaded as follows: \verb+library(rpart)+.
 
-\item Un conjunto de liberías muy útiles para manipular datos es \textit{tydyverse}:  \url{https://www.tidyverse.org/}.
+\item A very useful set of libraries to manipulate data is \textit{tydyverse}:  \url{https://www.tidyverse.org/}.
 
  \begin{verbatim}
 install.packages("tidyverse")
