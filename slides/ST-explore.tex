@@ -37,7 +37,7 @@
 {\raise-0.05em\hbox{\Large $#1$}}{\hbox{\large $#1$}}{#1}}}
 \newcommand{\bigtimes}{\BIGOP{\times}}
 \vspace{-0.5cm}
-\title{Data Exploration}
+\title{Descriptive Statistics}
 \vspace{-0.5cm}
 \author[Felipe Bravo Márquez]{\footnotesize
 %\author{\footnotesize  
@@ -63,11 +63,13 @@
 \begin{frame}{Exploratory Data Analysis}
 \scriptsize{
 \begin{itemize}
- \item Exploratory Data Analysis or (EDA) encompasses a set of techniques to quickly understand the nature of a data collection or \textbf{dataset}.
+ \item Descriptive Statistics or Exploratory Data Analysis or (EDA) encompasses a set of techniques to quickly understand the nature of a data collection or \textbf{dataset}.
+ 
+ \item The main goal of descriptive statistics is to explore the data to find some patterns that can be exploited to generate hypotheses.
  
  \item It was proposed by the statistician John Tukey.
  
- \item It is based mainly on two criteria: \textbf{summary statistics} and \textbf{data visualization}.
+ \item It is based mainly on two types of techniques: \textbf{summary statistics} and \textbf{data visualization}.
  
  \item In this class you will see both types of techniques, in addition to their application in R for some toy datasets.
 \end{itemize}
@@ -76,20 +78,20 @@
 
 \end{frame}
 
-\begin{frame}{El dataset Iris}
+\begin{frame}{The Iris dataset}
 \scriptsize{
 \begin{itemize}
- \item Trabajaremos con un dataset muy conocido en análisis de datos llamado \textbf{Iris}.
- \item El dataset se compone de 150 observaciones de flores de la planta iris. 
- \item Existen tres tipos de clases de flores iris: \textbf{virginica}, \textbf{setosa} y \textbf{versicolor}.
- \item Hay 50 observaciones de cada una.
-\item Las variables o atributos que se miden de cada flor son:
+ \item We will work with a well-known dataset called \textbf{Iris}.
+ \item The dataset consists of 150 observations of iris plant flowers. 
+ \item There are three types of iris flower classes: \textbf{virginica}, \textbf{setosa} and \textbf{versicolor}.
+ \item There are 50 observations of each.
+\item The variables or attributes measured for each flower are:
 
 \begin{enumerate}
 \scriptsize{
- \item El tipo de flor como variable categórica.
- \item El largo y el ancho del pétalo en cm como variables numéricas.
- \item El largo y el ancho del sépalo en cm como variables numéricas.
+  \item The type of flower as a categorical variable.
+ \item The length and width of the petal in cm as numerical variables.
+ \item The length and width of the sepal in cm as numeric variables.
   }
 \end{enumerate}
 
@@ -99,7 +101,7 @@
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=1.2]{pics/petalosepalo.jpg}
+	\includegraphics[scale=0.4]{pics/Petal-sepal.jpg}
 	
 	
 \end{figure}
@@ -108,7 +110,7 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{El dataset Iris}
+\begin{frame}[fragile]{The Iris dataset}
 \scriptsize{
 
 
@@ -126,15 +128,15 @@
 \end{figure}
 
 \begin{itemize}
- \item El dataset se encuentra disponible en R:
+ \item The dataset is available in R:
  \begin{verbatim}
->data(iris) # cara cargar el dataset al workspace
+>data(iris) #  to load the dataset into the workspace
 > names(iris)
 [1] "Sepal.Length" "Sepal.Width"  "Petal.Length" 
 		    "Petal.Width"  "Species"     
  \end{verbatim}
 
- \item Para poder acceder a las variables directamente usamos el comando \verb+attach(iris)+.
+ \item In order to access the variables directly in our workspace we use the command \verb+attach(iris)+.
  
  
 \end{itemize}
@@ -147,21 +149,22 @@
 
 
 
-\section{Estadísticas de Resumen}
-\begin{frame}[fragile]{Estadísticas de Resumen}
+
+\section{Summary Statistics}
+\begin{frame}[fragile]{Summary Statistics}
 \scriptsize{
 \begin{itemize}
- \item Las estadísticas de resumen son valores que explican propiedades de los datos.
- \item Algunas de estas propiedades incluyen: frecuencias, medidas de tendencia central y dispersión.
- \item Ejemplos: 
+\item Summary statistics are values that explain properties of the data.
+ \item Some of these properties include: frequencies, measures of central tendency and dispersion.
+ \item Example: 
  \begin{itemize}
   \scriptsize{
-  \item Tendencia central: media, mediana, moda.
-  \item Dispersión: miden la variabilidad de los datos, como la desviación estándar, el rango, etc..
+  \item Central tendency: mean, median, mode.
+  \item Variation: measure the variability of the data, such as standard deviation, range, etc..
  }
  \end{itemize}
  
- \item La mayor parte de las estadísticas de resumen se pueden calcular haciendo una sola pasada por los datos.
+ \item Most summary statistics can be calculated by making a single pass through the data.
 
 \end{itemize}
 
@@ -171,11 +174,12 @@
  
 \end{frame}
 
-\begin{frame}[fragile]{Frecuencia y Moda}
+\begin{frame}[fragile]{Frequency and Mode}
 \scriptsize{
 \begin{itemize}
- \item La frecuencia de un valor de atributo es el porcentaje de veces que éste es observado.
- \item En R podemos contar las frecuencias de aparición de cada valor distinto de un vector usando el comando \verb+table+: 
+ \item The absolute frequency of an attribute value is the number of times it is observed.
+ \item The relative frequency is the absolute frequency divided by the total number of examples.
+ \item In R we can count the frequencies of occurrence of each distinct value of a vector using the command \verb+table+: 
  \begin{verbatim}
 > table(iris$Species)
     setosa versicolor  virginica 
@@ -186,9 +190,9 @@ vec
 0 1 2 3 
 2 3 1 4 
  \end{verbatim} 
- \item Ejercicio: Calcular las frecuencias porcentuales del vector anterior. \pause
+ \item Exercise: Calculate the relative frequencies of the above vector. 
  \begin{verbatim}
-> table(vec)/length(vec)  # Frecuencia porcentual
+> table(vec)/length(vec)  # Relative frequencies
 vec
   0   1   2   3 
 0.2 0.3 0.1 0.4   
