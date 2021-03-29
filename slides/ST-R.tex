@@ -1179,6 +1179,7 @@ sample(ages,size=100,replace=T)
 install.packages("tidyverse")
 \end{verbatim} 
 
+\item Tidyverse includes a set of packages that provide various tools for working with data, as well as a few special ways of using those functions.
 
  
  \end{itemize}
@@ -1188,6 +1189,116 @@ install.packages("tidyverse")
  
 \end{frame}
 
+
+\begin{frame}[fragile]{Tibble}
+\scriptsize{
+\begin{itemize}
+ \item The tidyverse provides its own version of a data frame, which is known as a tibble.
+ \item It comes with some smart tweaks that make it easier to work with.
+ \item A data.frame can be converted to a tibble using the command \textbf{as\_tibble}:
+ \begin{verbatim}
+> library(tidyverse)
+> ages.tibble<-as_tibble(ages.frame)
+> print(ages.tibble)
+# A tibble: 21 x 2
+     age categ     
+   <dbl> <fct>     
+ 1    21 adult     
+ 2    33 adult     
+ 3    12 adolescent
+ 4    34 adult     
+ 5    23 adult     
+ 6    70 adult     
+ 7    90 adult     
+ 8    80 adult     
+ 9     7 child     
+10    29 adult     
+# … with 11 more rows
+ \end{verbatim}
+
+ 
+ 
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Tibble}
+\scriptsize{
+\begin{itemize}
+ \item We can select specific rows with the command \textbf{filter}:
+ \begin{verbatim}
+ages.tibble %>% filter(age < 20)
+ \end{verbatim}
+\item The command \verb+%>%+ is a pipe: it takes the output from one command and feeds it as input to the next command.
+ 
+\item Let's add a the column using the command \textbf{bind\_cols}:
+ 
+ \begin{verbatim}
+weights<-c(60,80,31,70,71,101,59,67,11,78,55,11,
+        90,31,65,78,39,35,69,115,63)
+
+ages.tibble <-ages.tibble %>% bind_cols("weights"=weights)   
+ \end{verbatim}
+ 
+\item Now, let's get all the people who are over 20 years old and weigh over 80
+ \begin{verbatim}
+ ages.tibble %>% filter(age > 20 & weights > 80) 
+ \end{verbatim}
+
+
+
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Tibble}
+\scriptsize{
+\begin{itemize}
+\item You can create a new column using the command \textbf{mutate}:
+ \begin{verbatim} 
+ages.tibble <- ages.tibble %>%
+#create a new variable called future.age with the age in 10 years
+mutate(future.age = age + 10) 
+ \end{verbatim}
+ 
+\item The command \textbf{mutate} can also be used to modify a column:
+\begin{verbatim}
+ ages.tibble %>% mutate(age=1:21)
+\end{verbatim}
+
+\item The command \textbf{select} selects out only those columns you specify using their names:
+\begin{verbatim}
+ ages.tibble %>% select(c(weights,categ))
+\end{verbatim}
+
+
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+\begin{frame}[fragile]{Conclusions}
+\scriptsize{
+\begin{itemize}
+\item We have introduced R, a very popular programming language for statistical analysis.
+\item R provides several functionalities for manipulating datasets.
+\item There are several libraries that extend the basic R functionality.
+\end{itemize}
+
+
+
+}
+\end{frame}
 
 
 

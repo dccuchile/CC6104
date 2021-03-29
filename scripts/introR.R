@@ -60,20 +60,20 @@ load("~/la.RData")
 
 # Vectores tipo básico de dato en R
 c(1,3,4)
-edades<-c(21,33,12,34,23,70,90,80,7,29,14,2,
+ages<-c(21,33,12,34,23,70,90,80,7,29,14,2,
           88,11,55,24,13,11,56,28,33)
-suma<-sum(edades)
-largo<-length(edades)
-numeros<-c(1,2,3)
-numeros+3
-numeros*5
-numeros^2
+suma<-sum(ages)
+largo<-length(ages)
+numbers<-c(1,2,3)
+numbers+3
+numbers*5
+numbers^2
 
 #Si opero un vector a un escalar este se recicla
-media<-sum(edades)/length(edades)
-varianza<-sum((edades-media)^2)/(length(edades)-1)
-var(edades)
-mean(edades)
+media<-sum(ages)/length(ages)
+varianza<-sum((ages-media)^2)/(length(ages)-1)
+var(ages)
+mean(ages)
 
 
 
@@ -94,16 +94,16 @@ a+d
 
 
 #Los elementos de un vector pueden tener nombres
-notas<-c(Juan=4.5,Luis=6.2,Romina=3.9,Felipe=2.8,Mariana=6.7)
-names(notas)
+grades<-c(Juan=4.5,Luis=6.2,Romina=3.9,Felipe=2.8,Mariana=6.7)
+names(grades)
 # El ranking de los alumnos
-names(sort(x=notas,decreasing=T))
+names(sort(x=grades,decreasing=T))
 
 #acceso a elementos
-notas[1] #primer elemento
-notas[-2] # Todos menos el segundo
-notas[c(1,5)] # primer y quinto elemento
-notas[c("Juan","Mariana")] # Sólo Juan y Mariana
+grades[1] #primer elemento
+grades[-2] # Todos menos el segundo
+grades[c(1,5)] # primer y quinto elemento
+grades[c("Juan","Mariana")] # Sólo Juan y Mariana
 
 # Si concateno vectores de disinto tipo R los pasa al mismo
 c("hola",2,T)
@@ -115,11 +115,11 @@ missing_vector
 missing_vector[!is.na(missing_vector)]
 
 # Secuencias
-pares<-seq(from=2,to=20,by=2)
+my_pairs<-seq(from=2,to=20,by=2)
 # se simplifica como
 unoadiez<-1:10
 # 100 multiplos de 4
-cuatro_mult<-seq(from=4,by=4,length=100)
+mult_fourt<-seq(from=4,by=4,length=100)
 
 #Repeticiones
 #repetir 10 15 veces
@@ -137,79 +137,79 @@ binom<-rbinom(n=10,size=2,prob=0.5)
 
 # Gente menor de edad, creo un vector logico 
 # R soporta los operadores logicos >,<, ==, <=, >=, != además de & | para and y or
-menores<-edades<18
-menores
-edades[menores]
+younger<-ages<18
+younger
+ages[younger]
 
 #promedio de edad de los mayores
-mean(edades[edades>=18])
+mean(ages[ages>=18])
 
 
 # Variables factor
 factor(c("Hombre","Mujer","Mujer","Mujer","Hombre"))
-gente<-factor(c("Hombre","Mujer","Mujer","Mujer","Hombre"))
-gente
-class(gente)
-levels(gente)
-levels(gente)<-c("Man","Woman")
-gente
+people<-factor(c("Hombre","Mujer","Mujer","Mujer","Hombre"))
+people
+class(people)
+levels(people)
+levels(people)<-c("Man","Woman")
+people
 
 #Si queremos trabajar con variables categóricas R tiene un tipo llamado factor
-#menores y mayores de edad
-categ_edades<-ifelse(edades<12,"niño",
-                     ifelse(edades<18,"adolescente","adulto"))
-class(categ_edades)
+#younger y mayores de edad
+categ_ages<-ifelse(ages<12,"child",
+                     ifelse(ages<18,"adolescent","adult"))
+class(categ_ages)
 #Convierto a factor con as.factor
-categ_edades<-as.factor(categ_edades)
-levels(categ_edades)
+categ_ages<-as.factor(categ_ages)
+levels(categ_ages)
 
 
-#Quiero saber el tamaña, media y la desviación de cada categoria
+#Quiero saber el tamaño, media y la desviación de cada categoria
 #tapply recibe un vector además de otro con algún factor y una función
 #aplica la función a cada subconjunto
-tapply(edades,categ_edades,length)
-tapply(edades,categ_edades,mean)
-tapply(edades,categ_edades,sd)
+tapply(ages,categ_ages,length)
+tapply(ages,categ_ages,mean)
+tapply(ages,categ_ages,sd)
 
 
 
 
 #Carácteres
-saludo<-"Hola Mundo"
-cat(saludo)
+greeting<-"Hello World"
+cat(greeting)
 letters
 
-paste("Hola","Chao",sep="-")
-paste("persona",1:4, sep="")
-paste(saludo,1:3, sep=" ")
+paste("Hello","Bye",sep="-")
+paste("person",1:4, sep="")
+paste(greeting,1:3, sep=" ")
 
-substr(saludo,1,4)
+substr(greeting,1,4)
 #Matrices y arreglos
 #se llenan por defecto por columna
-matriz_por_col<-matrix(data=1:12,nrow=3,ncol=4)
+matrix_by_col<-matrix(data=1:12,nrow=3,ncol=4)
 
 
-matriz_por_fil<-matrix(data=1:12,nrow=4,ncol=3,byrow=T)
-dim(matriz_por_fil)
+matrix_per_row<-matrix(data=1:12,nrow=4,ncol=3,byrow=T)
+dim(matrix_per_row)
 
 
 #Accediendo a los elementos 
-matriz_por_fil[2,] #Segunda fila, todas las columnas
-matriz_por_fil[2,1] # Segunda fila, primera columna
-matriz_por_fil[-1,-2] # Todo menos la primera fila y la segunda columna
+matrix_per_row[2,] #Segunda fila, todas las columnas
+matrix_per_row[2,1] # Segunda fila, primera columna
+matrix_per_row[-1,-2] # Todo menos la primera fila y la segunda columna
 
 #Para asignarle nombres a las filas
-rownames(matriz_por_fil)<-paste("r",1:4,sep="")
-colnames(matriz_por_fil)<-paste("c",1:3,sep="")
-matriz_por_fil["r2","c3"]
+rownames(matrix_per_row)<-paste("r",1:4,sep="")
+colnames(matrix_per_row)<-paste("c",1:3,sep="")
+matrix_per_row["r2","c3"]
 
 # concatenado
-rbind(matriz_por_fil,r5=1:3)
-cbind(matriz_por_fil,c4=4:1)
+rbind(matrix_per_row,r5=1:3)
+cbind(matrix_per_row,c4=4:1)
 
 
 #Multiplicacion de matrices
-a<-matriz_por_col %*% matriz_por_fil
+a<-matrix_by_col %*% matrix_per_row
 t(a)
 eigen(a)
 
@@ -217,56 +217,58 @@ eigen(a)
 
 
 #Arreglos son matrices de más dimensiones (también conocidos como tensores)
-arreglo<-array(1:8, dim=c(2,2,2))
-arreglo[1,2,1]
+my_array<-array(1:8, dim=c(2,2,2))
+my_array[1,2,1]
 
 #Listas y Data Frames
-milista<-list(hombre="Pepe",mujer="Juana",
-              hijos=3,edades=c(4,8,12))
-milista[c(3,4)] # Sublista
-milista[[1]]
-milista[["hombre"]]
-milista$hombre
+my_list<-list(man="Pepe",woman="Juana",
+              children=3,ages=c(4,8,12))
+my_list[c(3,4)] # sublist
+my_list[[1]]
+my_list[["man"]]
+my_list$man
 
 
-vectores<-list(normal=rnorm(n=100,mean=10,sd=5),
-               poisson=rpois(n=100,lambda=10),
-               uniforme=runif(n=100,min=5,max=15))
+vectors<-list(normal=rnorm(n=100,mean=10,sd=5),
+              poisson=rpois(n=100,lambda=10),
+              uniform=runif(n=100,min=5,max=15))
 
 # Como saco la media se cada grupo
 #forma mala
-medias<-vector()
+means<-vector()
 desv<-vector()
-for(i in 1:length(vectores)){
-  medias[i]<-mean(vectores[[i]])
-  desv[i]<-sd(vectores[[i]])
+for(i in 1:length(vectors)){
+  means[i]<-mean(vectors[[i]])
+  desv[i]<-sd(vectors[[i]])
 }
 medias
 desv
 # Forma inteligente
-lapply(vectores,mean)
-lapply(vectores,sd)
-sapply(vectores,mean)
-sapply(vectores,sd)
+lapply(vectors,mean)
+lapply(vectors,sd)
+sapply(vectors,mean)
+sapply(vectors,sd)
 
 # En R puedo pasar funciones como parámetros y podría hacer mi propio lapply
-myapply<-function(lista,fun,...){
-  resultado<-vector(length=length(lista))
-  for(i in 1:length(lista)){
-    resultado[i]<-fun(lista[[i]],...)
+my_apply<-function(a_list,fun,...){
+  result<-vector(length=length(a_list))
+  for(i in 1:length(a_list)){
+    result[i]<-fun(a_list[[i]],...)
   }
-  resultado  
+  result 
 }
 
+my_apply(vectors,mean)
+
 # Los data.frame soportan vectores de distinto tipo pero de distinos elementos
-edades.frame<-data.frame(edad=edades,categoria=categ_edades)
-names(edades.frame)
-edades.frame[3,1] # La edad del tercer elemento
-edades.frame$edad[1:6] # La edad de los primeros 6 elementos
-attach(edades.frame)
-edad[1:3]
+ages.frame<-data.frame(age=ages,categ=categ_ages)
+names(ages.frame)
+ages.frame[3,1] # La edad del tercer elemento
+ages.frame$age[1:6] # La edad de los primeros 6 elementos
+attach(ages.frame)
+age[1:3]
 #Guardando 
-write.table(x=edades.frame,file="edades.csv",sep=",",row.names=F)
+write.table(x=ages.frame,file="ages.csv",sep=",",row.names=F)
 
 # Los data.frames se pueden leer desde archivos csv
 iris<-read.table(file="iris.csv",header=T,sep="\t")
@@ -278,9 +280,9 @@ data(package = .packages(all.available = TRUE))
 data(USArrests)
 
 # Muestreo 
-sample(edades,size=4,replace=F)
+sample(ages,size=4,replace=F)
 
-sample(edades,size=100,replace=T)
+sample(ages,size=100,replace=T)
 
 # Muestreo de un data.frame
 USArrests[sample(1:(dim(USArrests)[1]),size=3,replace=F),]
@@ -297,4 +299,36 @@ cor(USArrests)
 
 #Instalar librerías
 install.packages("rpart",dependencies=T)
+install.packages("NHANES")
+install.packages("tidyverse")
+
+library(tidyverse)
+library(NHANES)
+
+
+# first create the individual variables
+library(tidyverse)
+ages.tibble<-as_tibble(ages.frame)
+print(ages.tibble)
+
+ages.tibble %>% filter(age < 20)
+
+
+weights<-c(60,80,31,70,71,101,59,67,11,78,55,11,
+        90,31,65,78,39,35,69,115,63)
+
+ages.tibble <-ages.tibble %>% bind_cols("weights"=weights)
+
+ages.tibble %>% filter(age > 20 & weights > 80)
+
+
+ages.tibble <- ages.tibble %>%
+  # create a new variable called future.age with the age in 10 years
+  mutate(future.age = age + 10) 
+
+#modify a variable
+ages.tibble %>% mutate(age=1:21)
+
+# select specififc columns
+ages.tibble %>% select(c(weights,categ))
 
