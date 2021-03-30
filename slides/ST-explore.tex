@@ -207,16 +207,17 @@ vec
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Frecuencia y Moda (2)}
+\begin{frame}[fragile]{Frequency and Mode (2)}
 \scriptsize{
 \begin{itemize}
- \item La moda de un atributo es el valor más frecuente observado.
- \item No existe la función moda directamente en R, pero es fácil de calcular usando \verb+table+ y \verb+max+:
+ \item The mode of an attribute is the most frequent value observed.
+ \item The mode function is not implemented natively in R, but it is easy to calculate using \verb+table+ and \verb+max+:
  \begin{verbatim}
 my_mode<-function(var){
   frec.var<-table(var)
-  valor<-which(frec.var==max(frec.var))  # Elementos con el valor máximo
-  names(valor)
+  valor<-which(frec.var==max(frec.var))# Elements with 
+  the maximum value
+  as.numeric(names(value))
 }
 > my_mode(vec)
 [1] "3"
@@ -224,7 +225,7 @@ my_mode<-function(var){
 [1] "5"
  \end{verbatim}
  
-\item Generalmente usamos la frecuencia y la moda para estudiar variables categóricas.
+\item We generally use frequencies and mode to study categorical variables.
 
 \end{itemize}
  
@@ -233,25 +234,25 @@ my_mode<-function(var){
 \end{frame}
 
 
-\begin{frame}[fragile]{Medidas de Tendencia Central}
+\begin{frame}[fragile]{Central Tendency Measures}
 \scriptsize{
 \begin{itemize}
- \item Estas medidas tratan de resumir los valores observados en único valor asociado al valor localizado en el centro.
- \item La media es la medida más común de tendencia central para una variable numérica. 
- \item Si tenemos $m$ observaciones se calcula como la media aritmética o promedio.
+ \item These measures attempt to summarize the observed values into a single value associated with the centrally located value.
+ \item The mean is the most common measure of central tendency for a numeric variable.  
+ \item If we have $m$ observations it is calculated as the arithmetic mean or average.
  \begin{displaymath}
    \text{mean}(x) = \overline{x} = \frac{1}{m} \sum_{i=1}^{m} x_i
  \end{displaymath}
 
- \item El mayor problema de la media es que es una medida muy sensible a \textbf{outliers} o valores atípicos.
+ \item The major problem with the mean is that it is very sensitive to \textbf{outliers} or outliers.
  
- \item Ejemplo: Tomamos un vector aleatorio de media $20$ y luego le agregamos un elemento aleatorio que proviene de una distribución de media mucho mayor.  Vemos que la media es fuertemente afectada por el ruido:
+ \item We take a random vector of mean $20$ and then add a random element that comes from a distribution of much larger mean.  We see that the mean is strongly affected by noise:
  \begin{verbatim}
 > vec<-rnorm(10,20,10)
 > mean(vec)
 [1] 16.80036
-> vec.ruid<-c(vec,rnorm(1,300,100))
-> mean(vec.ruid)
+> vec.noise<-c(vec,rnorm(1,300,100))
+> mean(vec.noise)
 [1] 35.36422
  \end{verbatim}
 
@@ -263,17 +264,17 @@ my_mode<-function(var){
  
 \end{frame}
 
-\begin{frame}[fragile]{Medidas de Tendencia Central (2)}
+\begin{frame}[fragile]{Central Tendency Measures (2)}
 \scriptsize{
 \begin{itemize}
- \item Podemos robustecer la media eliminando una fracción de los valores extremos usando la \textbf{media truncada} o \textbf{trimmed mean}.
- \item En R podemos darle un segundo parámetro a la función \verb+mean+ llamado \verb+trim+ que define la fracción de elementos extremos a descartar. 
- \item Ejemplo: Descartamos el $10\%$ de los valores extremos en el ejemplo anterior:
+ \item We can robust the mean by removing a fraction of the extreme values using the \textbf{trimmed mean}.
+ \item In R we can give a second parameter to the function \verb+mean+ called \verb+trim+ that defines the fraction of extreme elements to discard. 
+ \item Example: We discard $10\%$ of the extreme values in the previous example:
  \begin{verbatim}
 > mean(vec,trim=0.1)
 [1] 17.78799
-> mean(vec.ruid,trim=0.1)
-[1] 19.51609  # Mucho más robusto 
+> mean(vec.noise,trim=0.1)
+[1] 19.51609  # much more robust  
 \end{verbatim}
 
  
@@ -285,23 +286,23 @@ my_mode<-function(var){
 \end{frame}
 
 
-\begin{frame}[fragile]{Medidas de Tendencia Central (3)}
+\begin{frame}[fragile]{Central Tendency Measures (3)}
 \scriptsize{
 \begin{itemize}
- \item La mediana representa de posición central de la variable que separa la mitad inferior y la mitad superior de las observaciones.
- \item Intuitivamente, consiste el valor donde para una mitad de las observaciones todos los valores son mayores que ésta, y para la otra mitad todos son menores.
+ \item The median represents the central ranking position of the variable that separates the lower half and the upper half of the observations.
+ \item Intuitively, it consists of the value where for one half of the observations all values are greater than it, and for the other half all are less.
    \begin{displaymath}
   \text{median}(x) =  \left\{ \begin{array}{rl}
-    x_{r+1} &\mbox{ Si $m$ es impar con $m=2r+1$} \\
-   \frac{1}{2}(x_r + x_{r+1}) &\mbox{ Si $m$ es par con $m=2r$ }
+    x_{r+1} &\mbox{ If $|x|$ (vector length) is odd, $|x|=2r+1$} \\
+   \frac{1}{2}(x_r + x_{r+1}) &\mbox{ If $|x|$ is even, $|x|=2r$ }
        \end{array} \right.
   \end{displaymath}
  
- \item Para el ejemplo anterior, vemos que la mediana es más robusta al ruido que la media:
+ \item For the above example, we see that the median is more robust to noise than the mean:
  \begin{verbatim}
 > median(vec)
 [1] 17.64805
-> median(vec.ruid)
+> median(vec.noise)
 [1] 17.64839
  \end{verbatim}
 
@@ -313,7 +314,7 @@ my_mode<-function(var){
  
 \end{frame}
 
-\begin{frame}{Comparación entre la moda, la mediana y la media}
+\begin{frame}{Comparison between mode, median and mean}
  
  \begin{figure}[h!]
 	\centering
@@ -330,31 +331,31 @@ my_mode<-function(var){
 
 
 
-\begin{frame}[fragile]{Percentiles o Cuantiles}
+\begin{frame}[fragile]{Percentiles or Quantiles}
 \scriptsize{
 \begin{itemize}
- \item El $k$-ésimo percentil de una variable numérica es un valor tal que el $k\%$ de las observaciones se encuentran debajo del percentil y el $(100-k)\%$ se encuentran sobre este valor.
+ \item The $k$-th percentile of a numerical variable is a value such that $k\%$ of the observations are below the percentile and $(100-k)\%$ are above this value.
  
- \item En estadística se usan generalmente los \textbf{cuantiles} que son equivalentes a los percentiles expresados en fracciones en vez de porcentajes.
+ \item Quantiles are equivalent to percentiles but expressed in fractions instead of percentages. 
  
- \item En R se calculan con el comando \verb+quantile+:
+ \item In R they are calculated with the command \verb+quantile+:
  \begin{verbatim}
-# Todos los percentiles
+# All percentiles
 quantile(Sepal.Length,seq(0,1,0.01))
  \end{verbatim}
 
  
- \item Además es muy común hablar de los \textbf{cuartiles} que son tres percentiles específicos: 
+ \item In addition it is very common to talk about the \textbf{quartiles} which are three specific percentiles:
  
  \begin{itemize}
  \scriptsize{
-  \item El primer cuartil $Q_1$ (lower quartile) es el percentil con $k=25$. 
-  \item El segundo cuartil $Q_2$ es con  $k=50$  que equivale a la mediana. 
-  \item El tercer cuartil $Q_3$ (upper quartile) es con $k=75$.
+  \item The first quartile $Q_1$ (lower quartile) is the percentile with $k=25$. 
+  \item The second quartile $Q_2$ is with $k=50$ which is equivalent to the median. 
+  \item The third quartile $Q_3$ (upper quartile) is with $k=75$.
   }
  \end{itemize}
 \begin{verbatim}
-# El mínimo, los tres cuartiles y el máximo
+# The minimum, the three quartiles and the maximum.
 > quantile(Sepal.Length,seq(0,1,0.25))
   0%  25%  50%  75% 100% 
  4.3  5.1  5.8  6.4  7.9  
@@ -369,12 +370,12 @@ quantile(Sepal.Length,seq(0,1,0.01))
 \end{frame}
 
 
-\begin{frame}[fragile]{Resumiendo un Data Frame}
+\begin{frame}[fragile]{Summarizing a Data Frame}
 \scriptsize{
 \begin{itemize}
- \item En R podemos resumir varias estadísticas de resumen de una variable o de un data.frame usando el comando \verb+summary+.
- \item Para las variables numéricas nos entrega el mínimo, los cuartiles, la media y el máximo. 
- \item Para las variables categóricas nos entrega la tabla de frecuencias.
+ \item In R we can summarize various summary statistics of a variable or of a data.frame using the command \verb+summary+.
+ \item For numerical variables it gives us the minimum, the quartiles, the mean and the maximum.  
+ \item For categorical variables it gives us the frequency table.
 \end{itemize}
 
 
@@ -399,14 +400,13 @@ quantile(Sepal.Length,seq(0,1,0.01))
 \end{frame}
 
 
-\begin{frame}[fragile]{Ejercicio}
+\begin{frame}[fragile]{Exercise}
 \scriptsize{
 \begin{itemize}
- \item Usando el comando \verb+tapply+ analice la media, la mediana y los cuartiles para las tres especies de \textbf{Iris} para las cuatro variables.
- \item ¿Nota alguna diferencia en las distintas especies?
+\item Using the command \verb+tapply+ analyze the mean, median and quartiles for the three species of \textbf{Iris} for the four variables.
+ \item Do you notice any differences in the different species?
 \end{itemize}
 
-\pause
 
 \begin{verbatim}
 tapply(iris$Petal.Length,iris$Species,summary)
@@ -415,20 +415,20 @@ tapply(iris$Sepal.Length,iris$Species,summary)
 tapply(iris$Sepal.Width,iris$Species,summary) 
 \end{verbatim}
 
- 
+
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Medidas de Dispersión}
+\begin{frame}[fragile]{Variability Measures}
 \scriptsize{ 
 \begin{itemize}
- \item Estas medidas nos dicen que tan distintas o similares tienden a ser las observaciones respecto a un valor particular. Generalmente este valor se refiere a alguna medida de tendencia central.
- \item El rango es la diferencia entre el valor máximo y el mínimo:
+ \item Variability mesaures or dispersion measures tell us how different or similar the observations tend to be with respect to a particular value. Usually this value refers to some measure of central tendency.
+ \item  The range is the difference between the maximum and minimum value:
  \begin{verbatim}
 > max(Sepal.Length)-min(Sepal.Length)
 [1] 3.6
  \end{verbatim}
- \item La desviación estándar es la raíz cuadrada de la varianza que mide las diferencias cuadráticas promedio de las observaciones con la media. 
+ \item The standard deviation is the square root of the variance that measures the mean squared differences of the observations from the mean.  
  \begin{displaymath}
   \text{var}(x)=\frac{1}{m-1}\sum_{i=1}^{m}(x_{i} - \overline{x} )^2
  \end{displaymath}
@@ -453,19 +453,18 @@ tapply(iris$Sepal.Width,iris$Species,summary)
 \end{frame}
 
 
-\begin{frame}[fragile]{Medidas de Dispersión (2)}
+\begin{frame}[fragile]{Variability Measures (2)}
 \scriptsize{ 
 \begin{itemize}
- \item Al igual que la media, la desviación estándar es sensible a outliers.
- \item Las medidas más robustas se basan generalmente en la mediana.
+ \item Like the mean, the standard deviation is sensitive to outliers.
+ \item The most robust measures are usually based on the median.
 
-  \item Sea $m(x)$ una medida de tendencia central de $x$ (usualmente la mediana), se define la \textbf{desviación absoluta promedio} o \textbf{average absolute deviation} (AAD)  como:
+  \item Let $m(x)$ be a measure of central tendency of $x$ (usually the median), we define the textbf{average absolute deviation} (AAD)  as:
   \begin{displaymath}
    \text{AAD}(x) = \frac{1}{m}\sum_{i=1}^{m}|x_i-m(x)| 
   \end{displaymath}
   
-  \item Programe la función \verb+add+ en R, como una función que recibe un vector \verb+x+ y una función de media central \verb+fun+. El valor absoluto se calcula con el comando \verb+abs+:
-  \pause
+  \item Excercise: Program the function \verb+add+ in R, as a function that receives a vector \verb+x+ and a central mean function \verb+fun+. The absolute value is calculated with the command \verb+abs+:
   
   \begin{verbatim}
 aad<-function(x,fun=median){
@@ -486,20 +485,20 @@ aad<-function(x,fun=median){
 \end{frame}
 
 
-\begin{frame}[fragile]{Medidas de Dispersión (3)}
+\begin{frame}[fragile]{Variability Measures (3)}
 \scriptsize{ 
 \begin{itemize}
- \item Sea $b$ una constante de escala se define la \textbf{desviación media absoluta} o \textbf{median absolute deviation} como: 
+ \item Let $b$ be a constant we define the \textbf{mean absolute deviation} as: 
  \begin{displaymath}
   \text{MAD}(x) = b \times \text{median}(|x_{i}-\text{m}(x)|)
  \end{displaymath}
- \item En R se calcula con el comando \verb+mad+ con los parámetros  \verb+center+ como una función que mide la tendencia central de la variable y \verb+constant+ como la constante $b$. Por defecto se usa la mediana y el valor $1.482$. 
+ \item In R is calculated with the command \verb+mad+ with the parameters \verb+center+ as a function measuring the central tendency of the variable and \verb+constant+ as the constant $b$. By default the median and the value $1.482$ is used. 
  \begin{verbatim}
  > mad(Sepal.Length)
 [1] 0.7 
  \end{verbatim}
 
- \item Finalmente, se define el rango inter-cuartil (IQR) como la diferencia entre el tercer y el primer cuartil ($Q_3 - Q_1$).
+ \item Finally, the inter-quartile range (IQR) is defined as the difference between the third and the first quartile ($Q_3 - Q_1$).
  \begin{verbatim}
 IQR(Sepal.Length)
 [1] 1.3  
@@ -512,21 +511,21 @@ IQR(Sepal.Length)
 
 
 
-\begin{frame}[fragile]{Estadísticas de Resumen Multivariadas}
+\begin{frame}[fragile]{Multivariate Summary Statistics}
 \scriptsize{
 \begin{itemize}
- \item Para comparar como varía una variable  respecto a otra, usamos medidas multivariadas.
- \item La covarianza $cov(x,y)$  mide el grado de variación lineal conjunta de un par de variables $x$, $y$ :
+ \item To compare how one variable varies with respect to another, we use multivariate measures.
+ \item The covariance $cov(x,y)$ measures the degree of joint linear variation of a pair of variables $x$, $y$:
  \begin{displaymath}
   cov(x,y)=\frac{1}{m-1}\sum_{i=1}^{n}(x-\overline{x})(y-\overline{y})
  \end{displaymath}
- \item Donde $cov(x,x)=var(x)$
-\item En R se calcula con el comando \verb+cov+:
+ \item Where $cov(x,x)=var(x)$
+\item In R it is computed with the command  \verb+cov+:
 \begin{verbatim}
 > cov(Sepal.Length,Sepal.Width)
 [1] -0.042434 
 \end{verbatim}
-\item Si le damos una matriz o un data.frame de variables numéricas, calcula una matriz de covarianzas:
+\item If we give it a matrix or a data.frame of numeric variables, it computes a covariance matrix:
 \begin{verbatim}
 > cov(iris[,1:4])
              Sepal.Length Sepal.Width Petal.Length Petal.Width
@@ -538,6 +537,7 @@ Petal.Width     0.5162707  -0.1216394    1.2956094   0.5810063
 
  
  
+ 
 \end{itemize}
 
 
@@ -546,17 +546,34 @@ Petal.Width     0.5162707  -0.1216394    1.2956094   0.5810063
 \end{frame}
 
 
-\begin{frame}[fragile]{Estadísticas de Resumen Multivariadas (2)}
+\begin{frame}[fragile]{Multivariate Summary Statistics (2)}
 \scriptsize{
 \begin{itemize}
- \item Si dos variables son independientes entre sí, su covarianza es cero.
- \item Para tener una medida de relación que no dependa de la escala de cada variable, usamos la \textbf{correlación lineal}.
- \item Se define a la correlación lineal o coefiente de correlación de \textbf{Pearson} $r(x,y)$ como:
+ \item If two variables are independent of each other, their covariance is zero.
+ \item A measure of relationship that does not depend on the scale of each variable is the \textbf{linear correlation}.
+ \item The linear correlation or \textbf{Pearson's} correlation coefficient $r(x,y)$ is defined as: 
  \begin{displaymath}
   r(x,y)=\frac{cov(x,y)}{sd(x)sd(y)}
  \end{displaymath}
-\item La correlación lineal varía entre $-1$ a $1$. Un valor cercano a 1 indica que mientras una variable crece  la otra también lo hace en una proporción lineal. Un valor cercano a -1 indica una relación inversa (una crece la otra decrece). Si la correlación es cercana a cero tenemos independencia lineal. Ojo que eso no implica que no pueda haber una relación no-lineal entre las variables.
-\item En R se calcula con el comando \verb+cor+.
+\item  The linear correlation varies between $-1$ to $1$. 
+
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Multivariate Summary Statistics (3)}
+\scriptsize{
+\begin{itemize}
+\item A value close to 1 indicates that as one variable grows the other also grows in a linear proportion. 
+\item A value close to -1 indicates an inverse relationship (one is growing and the other is decreasing). 
+\item If the correlation is close to zero we have linear independence. 
+\item Note that a correlation of zero does not imply that there cannot be a non-linear relationship between the variables.
+\item In R, the correlation is calculated with the command \verb+cor+.
 \begin{verbatim}
 > cor(iris[,1:4])
              Sepal.Length Sepal.Width Petal.Length Petal.Width
@@ -576,22 +593,22 @@ Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
 \end{frame}
 
 
-\begin{frame}[fragile]{Tablas de Contingencia}
+\begin{frame}[fragile]{Contingency Tables}
 \scriptsize{
 \begin{itemize}
  \item Para analizar la relación entre variables de naturaleza categórica usamos \textbf{tablas de contingencia}.
  \item La tabla se llena con las frecuencias marginales de todos los pares de valores entre dos variables categóricas.
  \item En R se crean usando el comando \verb+table+ que usábamos para frecuencias, pero entregándole dos vectores:
  \begin{verbatim}
-sexo<-c("Hombre","Hombre","Mujer","Hombre","Mujer","Mujer")
-estudios<-c("universitario","secundario","secundario",
-            "postgrado","secundario","universitario")
+gender<-c("Male", "Female", "Male", "Female", "Female", "Male")
+studies<-c("college","postgraduate","high school",
+            "postgraduate","high school","college")
             
-> table(sexo,estudios)
-        estudios
-sexo     postgrado secundario universitario
-  Hombre         1          1             1
-  Mujer          0          2             1    
+>table(gender,studies)
+        studies
+gender   college high school postgraduate
+  Female       0           1            2
+  Male         2           1            0
  \end{verbatim}
 
  
@@ -603,21 +620,34 @@ sexo     postgrado secundario universitario
 \end{frame}
 
 
+\begin{frame}{Skweness and Kurtosis}
+\scriptsize{
+\begin{itemize}
+\item There are other two summary statistics that focus on more complex properties of the data distribution called skeweness and kurtosis
+\item Skeweness: is a measure of the asymmetry of the probability distribution. The skewness value can be positive, zero, negative, or undefined. 
+\item Kurtosis: it  describe the ``tailedness'' of the distribution.
+
+\item More details here: \url{https://www.r-bloggers.com/2020/11/skewness-and-kurtosis-in-statistics/}.
+
+\end{itemize}
+}
+ 
+\end{frame}
 
 
 
 %%% Tablas de contingencia
 %%% Correlaciones
 
-\section{Visualización}
+\section{Visualization}
 
 
-\begin{frame}[fragile]{Visualización de Datos}
+\begin{frame}[fragile]{Data Visualization}
 \scriptsize{
-\begin{itemize}
- \item La visualización de datos es la transformación de un dataset a un formato visual que permita a las personas identificar las características y las relaciones entre los elementos del dataset.
+\begin{itemize} 
+ \item Data visualization is the transformation of a dataset into a visual format that allows people to identify the characteristics and relationships between examples in the dataset.
  
- \item La visualización permite que las personas reconozcan patrones o tendencias en base a su criterio o expertiz en el dominio particular.
+ \item Visualization allows people to recognize patterns or trends based on their judgment or expertise in the particular domain.
  
    \begin{figure}[h!]
 	\centering
@@ -632,14 +662,14 @@ sexo     postgrado secundario universitario
  
 \end{frame}
 
-\begin{frame}{Representación}
+\begin{frame}{Representation}
 \scriptsize{
 \begin{itemize}
- \item Se entiende por representación como el mapeo que se hace a partir de los datos hacia un formato visual.
- \item Se traducen los datos, sus atributos y relaciones a elementos gráficos como puntos, líneas, formas y colores. 
-  \item Los objetos son usualmente representados como puntos.
-  \item Los valores de atributos se representan como la posición de los puntos o las características de los puntos, ej: color, tamaño y forma.
-  \item Cuando se usa la posición para representar los valores es simple detectar si es que se forman grupos de obejtos o la presencia de objetos atípicos. 
+ \item Representation is understood as the mapping of data into a visual format
+ \item Examples, their attributes and relationships are translated into graphical elements such as points, lines, shapes and colors.  
+  \item Examples are usually represented as points.
+  \item Attribute values are represented as the position of the points or the characteristics of the points, e.g. color, size and shape.
+  \item When using position to represent values it is simple to detect if groups of objects are formed or the presence of outliers. 
   
  
  
@@ -652,21 +682,21 @@ sexo     postgrado secundario universitario
 \end{frame}
 
 
-\begin{frame}[fragile]{Graficando en R}
+\begin{frame}[fragile]{Plotting in R}
 \scriptsize{
 \begin{itemize}
- \item  En R la función de visualización más frecuente en \verb+plot+. 
- \item Es una función genérica cuyo resultado depende de la naturaleza de las variables usadas. 
+ \item  In R the most frequent display function is \verb+plot+. 
+ \item t is a generic function whose result depends on the nature of the variables given as input.  
  
- \item  A todos los gráficos les podemos agregar parámetros adicionales como: \verb+main+ para el título, \verb+xlab+ e \verb+ylab+  para el nombre del eje x y del el eje y.
+ \item  To all plots we can add additional parameters such as: \verb+main+ for the title, \verb+xlab+ and \verb+ylab+ for the name of the x-axis and y-axis.
  
- \item Otras propiedades son \verb+col+ para definir el color, \verb+type+ para definir el tipo de gráfico: (p) para puntos o (l) para líneas.
+ \item Other properties are: \verb+col+ to define the color, \verb+type+ to define the chart type: (p) for points or (l) for lines.
  
- \item Además podemos agregarle nuevas capas a un gráfico con el comando \verb+lines+.
+ \item We can also add new layers to a plot with the command \verb+lines+.
  
- \item Para grabar una imagen en un archivo podemos usar el botón \textbf{export} de Rstudio.
+ \item To save an image to a file we can use Rstudio's \textbf{export} button.
  
- \item Para hacerlo de la línea de comandos en R:
+ \item To do it from the R command line:
  \begin{verbatim}
 png("imagen.png")
 plot(1:10)
@@ -686,21 +716,20 @@ dev.off()
 \end{frame}
 
 
-\begin{frame}[fragile]{Ejemplo}
+\begin{frame}[fragile]{Example}
 \scriptsize{
   \begin{verbatim}
-plot(rnorm(15,10,5),col="red",type="l")
+plot(rnorm(15,10,5),col="red",type="p",pch=1)
 lines(rnorm(15,10,5),col="blue",type="p",pch=1)
 lines(rnorm(15,10,5),col="green",type="b",pch=2)
-title(main="Mi gráfico")
-legend('topright', c("lineas","puntos","ambos") , 
-       lty=1:3, col=c("red", "blue","green"), bty='n', cex=.75)  
- \end{verbatim}
- 
- 
+title(main="My Plot")
+legend('topright', c("lines","dots","both") , 
+       lty=1:3, col=c("red", "blue","green"), bty='n', cex=.75)
+\end{verbatim}
+  
   \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.38]{pics/rplot.pdf}
+	\includegraphics[scale=0.43]{pics/rplot.pdf}
 	
 	
 \end{figure} 
@@ -713,13 +742,13 @@ legend('topright', c("lineas","puntos","ambos") ,
 
 
 
-\begin{frame}[fragile]{Histogramas}
+\begin{frame}[fragile]{Histograms}
 \scriptsize{
 \begin{itemize}
- \item Muestran la distribución de los valores de una variable.
- \item Los valores de los elementos se dividen en contenedores (bins) y se crean gráficos de barra por cada contenedor.
- \item La altura de cada barra indica el número de elementos o frecuencia del contenedor.
- \item En R se crean con el comando \verb+hist+.
+ \item They show the distribution of the values of a variable.
+ \item The values of the elements are divided into bins and bar charts are created for each of them.
+ \item The height of each bar indicates the number of examples in the corresponding bin.
+ \item In R they are created with the command \verb+hist+.
  \begin{verbatim}
 > hist(Sepal.Length)
  \end{verbatim}
@@ -739,11 +768,11 @@ legend('topright', c("lineas","puntos","ambos") ,
 \end{frame}
 
 
-\begin{frame}[fragile]{Histogramas (2) }
+\begin{frame}[fragile]{Histograms (2) }
 \scriptsize{
 \begin{itemize}
- \item La forma del histograma depende de el número de contenedores.
- \item En R se puede definir esa cantidad con el parámetro \verb+nclass+.
+ \item The shape of the histogram depends on the number of bins.
+ \item In R this number can be defined with the parameter  \verb+nclass+.
  \begin{verbatim}
 > hist(Sepal.Length,nclass=100)
  \end{verbatim}
@@ -760,12 +789,11 @@ legend('topright', c("lineas","puntos","ambos") ,
 \end{frame}
 
 
-\begin{frame}[fragile]{Histogramas (3) }
+\begin{frame}[fragile]{Histograms (3) }
 \scriptsize{
 \begin{itemize}
- \item Una librería muy popular para hacer visualizaciones en R es \emph{ggplot2}.
- \item Se basa en la idea de descomponer el gráfico en componentes semánticos como escalas y capas.
- 
+ \item A very popular library for making visualizations in R, which is part of tidyverse, is \emph{ggplot2}.
+ \item It is based on the idea of decomposing the plot into semantic components such as scales and layers.
  \begin{verbatim}
 >install.packages("ggplot2")
 >library(ggplot2)
@@ -785,20 +813,20 @@ legend('topright', c("lineas","puntos","ambos") ,
 \end{frame}
 
 
-\begin{frame}[fragile]{Densidad }
+\begin{frame}[fragile]{Density}
 \scriptsize{
 \begin{itemize}
- \item Otra forma de visualizar como se distribuyen los datos es estimando una densidad.
- \item Se calculan usando técnicas estadísticas no paramétricas llamadas estimación de densidad de \textbf{kernel}.
- \item La densidad es una versión suavizada del histograma y nos permite determinar más claramente si los datos observados se comportan como una densidad conocida ej: normal. 
- \item En R se crean con el comando \verb+density+, para luego visualizarlas con el comando \verb+plot+.
+ \item Another way to visualize how the data are distributed is to estimate a density.
+ \item These are calculated using nonparametric statistical techniques called \textbf{kernel} density estimation.
+ \item The density is a smoothed version of the histogram and allows us to determine more clearly if the observed data behaves like a known density e.g. Gaussian.  
+ \item In R they are created with the command \verb+density+, and then visualized with the command \verb+plot+.
 
  \begin{verbatim}
-plot(density(iris$Sepal.Length),main="Densidad de Sepal.Length")
+plot(density(iris$Sepal.Length),main=""Density of Sepal.Length")
  \end{verbatim}
  \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.5]{pics/density.pdf}
+	\includegraphics[scale=0.38]{pics/density.pdf}
 	
 	
 \end{figure} 
@@ -812,12 +840,12 @@ plot(density(iris$Sepal.Length),main="Densidad de Sepal.Length")
 \end{frame}
 
 
-\begin{frame}[fragile]{Gráficos de Torta o Pie Charts }
+\begin{frame}[fragile]{Pie Charts }
 \scriptsize{
 \begin{itemize}
- \item Los gráficos de torta, gráficos circulares o pie charts representan la frecuencia de los elementos en un círculo.
- \item Cada elemento tiene una participación proporcional a su frecuencia relativa.
- \item Se usan generalmente para variables categóricas:
+ \item The pie charts represent the frequency of the elements in a circle.
+ \item Each category has a share proportional to its relative frequency.
+ \item They are generally used for categorical variables:
  \begin{verbatim}
 pie(table(iris$Species))
  \end{verbatim}
@@ -840,16 +868,16 @@ pie(table(iris$Species))
 \begin{frame}[fragile]{Boxplots}
 \scriptsize{
 \begin{itemize}
- \item Los Boxplots o diagramas de caja se construyen a partir de los percentiles. 
- \item Se construye una rectángulo usando entre el primer y el tercer cuartil ($Q_1$ y $Q_3$).
- \item La altura del rectángulo es el rango intercuartil RIC ($Q_3 - Q_1$).
- \item La mediana es una línea que divide el rectángulo.
- \item Cada extremo del rectángulo se extiende con una recta o brazos de largo $Q1-1.5*$RIC para la recta inferior y  $Q_3+1.5*$RIC para la recta superior.
- \item Los valores más extremos que el largo de los brazos son considerados atípicos.
+ \item Boxplots are built from the percentiles. 
+ \item A rectangle is constructed between the first and third quartiles ($Q_1$ and $Q_3$).
+ \item The height of the rectangle is the interquartile range RIC ($Q_3 - Q_1$).
+ \item The median is a line that divides the rectangle.
+ \item Each end of the rectangle is extended with a line or arms of length $Q1-1.5*$IQR for the lower line and $Q_3+1.5*$IQR for the upper line.
+ \item Values more extreme than the length of the arms are considered outliers.
  
- \item El boxplot nos entrega información sobre la simetría de la distribución de los datos.
-  \item Si la mediana no está en el centro del rectángulo, la distribución no es simétrica.
- \item Son útiles para ver la presencia de valores atípicos u outliers.
+ \item The boxplot gives us information about the symmetry of the data distribution.
+  \item If the median is not in the center of the rectangle, the distribution is not symmetrical.
+ \item They are useful to detect the presence of outliers.
  
 \end{itemize}
 
@@ -862,8 +890,8 @@ pie(table(iris$Species))
 \begin{frame}{Boxplots (2)}
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.35]{pics/boxplot.png}
-	\caption{Fuente: \url{http://commons.wikimedia.org/wiki/File:Boxplot.svg}}
+	\includegraphics[scale=0.1]{pics/boxplot.png}
+	\caption{\url{https://www.laboneconsultoria.com.br/wp-content/uploads/2018/07/Boxplot-04.png}}
 	
 \end{figure} 
 \end{frame}
@@ -872,7 +900,7 @@ pie(table(iris$Species))
 \begin{frame}{Boxplots (3)}
 \scriptsize{
 \begin{itemize}
- \item El largo de los brazos así como el criterio para identificar valores atípicos se basa en el comportamiento de una normal.
+ \item The length of the arms as well as the criteria for identifying outliers is based on the behavior of a normal distribution.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -888,7 +916,7 @@ pie(table(iris$Species))
 \begin{frame}[fragile]{Boxplots (4)}
 \scriptsize{
 \begin{itemize}
- \item En R los boxplots se grafican con el comando \verb+boxplot+:
+ \item In R boxplots are plotted with the command \verb+boxplot+:
  \begin{verbatim}
 > boxplot(Sepal.Length,main="Boxplot Sepal.Length")
  \end{verbatim}
@@ -911,7 +939,7 @@ pie(table(iris$Species))
 \scriptsize{
 \begin{itemize}
 
-\item Si tenemos una variable factor podemos crear un boxplot para cada categoría de la siguiente manera:
+\item If we have a factor variable we can create a boxplot for each category as follows:
 \begin{verbatim}
 > boxplot(Sepal.Length~Species,ylab="Sepal.Length")
 \end{verbatim}
@@ -929,7 +957,7 @@ pie(table(iris$Species))
 \scriptsize{
 \begin{itemize}
 
-\item También podemos podemos comparar varios boxplots en un mismo gráfico:
+\item We can also compare several boxplots in the same plot:
 \begin{verbatim}
 > boxplot(x=iris[,1:4],main="Boxplots Iris")
 \end{verbatim}
@@ -950,7 +978,7 @@ pie(table(iris$Species))
 \scriptsize{
 \begin{itemize}
 
-\item Ahora usando \emph{ggplot2}:
+\item Now using \emph{ggplot2}:
 \begin{verbatim}
 > ggplot(iris, aes(x = Species, y = Sepal.Length, 
   fill = Species)) +  geom_boxplot()
@@ -967,19 +995,20 @@ pie(table(iris$Species))
 \end{frame}
 
 
-\begin{frame}[fragile]{Diagramas de Dispersión}
+\begin{frame}[fragile]{Scatter Plots}
 \scriptsize{
 \begin{itemize}
- \item Los diagramas de dispersión o scatter plots usan coordenadas cartesianas para mostrar los valores de dos variables númericas del mismo largo.
- \item Los valores de los atributos determinan la posición de los elementos.
- \item Otros atributos pueden usarse para definir el tamaño, la forma o el color de los objetos.
+ \item Scatter plots use Cartesian coordinates to display the values of two numerical variables of the same length.
+ \item The values of the attributes determine the position of the elements.
+ \item Other attributes can be used to define the size, shape or color of objects.
  
-  \item En R podemos graficar un scatterplot de dos variables numéricas usando el comando \verb+plot(x,y)+, que sería $y$ vs $x$.
-  \item También se pueden definir fórmulas $f(x)=y$  usando la notación \verb+y~x+. 
+  \item In R we can plot a scatterplot of two numeric variables using the command \verb+plot(x,y)+, which would be $y$ vs $x$.
   
- \item De esta manera el comando \verb+plot(y~x)+ es equivalente a \verb+plot(x,y)+.
+  \item We can also define formulas $f(x)=y$ using the notation \verb+y~x+.  
+  
+ \item Thus, the command \verb+plot(y~x)+ is equivalent to \verb+plot(x,y)+.
  
- \item Si tenemos un data.frame o matriz numérica podemos ver los scatterplots de todos los pares usando el comando \verb+pairs(x)+.
+ \item If we have a data.frame or a numerical matrix, we can see the scatterplots of all pairs using the command \verb+pairs(x)+.
   
  
  
@@ -993,24 +1022,24 @@ pie(table(iris$Species))
 \end{frame}
 
 
-\begin{frame}[fragile]{Diagramas de Dispersión (2)}
+\begin{frame}[fragile]{Scatter Plots (2)}
 \scriptsize{
 \begin{itemize}
- \item Ejemplos:
+ \item Examples:
  \begin{verbatim}
-# El ancho del sépalo vs el largo del sépalo  
+# Sepal width vs. sepal length 
 plot(Sepal.Width~Sepal.Length, col=Species)
-# Equivalente
+# Equivalent
 plot(Sepal.Length, Sepal.Width,col=Species,
      pch=as.numeric(Species))
-# Le agregamos una leyenda
+# We add a legend
 legend('topright', levels(Species) , 
        lty=1, col=1:3, bty='n', cex=.75)  
  \end{verbatim}
 
   \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.5]{pics/scatter1.pdf}		
+	\includegraphics[scale=0.45]{pics/scatter1.pdf}		
 \end{figure} 
  
  
@@ -1024,10 +1053,10 @@ legend('topright', levels(Species) ,
 \end{frame}
 
 
-\begin{frame}[fragile]{Diagramas de Dispersión (3)}
+\begin{frame}[fragile]{Scatter Plots (3)}
 \scriptsize{
 \begin{itemize}
- \item Lo mismo usando \emph{ggplot2}:
+ \item The same using \emph{ggplot2}:
  \begin{verbatim}
 ggplot(iris, aes(x=Sepal.Length,
 y=Sepal.Width, color=Species)) + 
@@ -1049,10 +1078,10 @@ geom_point(size=3,shape=4)
 \end{frame}
 
 
-\begin{frame}[fragile]{Diagramas de Dispersión (4)}
+\begin{frame}[fragile]{Scatter Plots (4)}
 \scriptsize{
 \begin{itemize}
- \item Todos los pares de las 4 variables del dataset iris usando un color y un carácter distinto para cada especie:
+ \item All pairs of the 4 variables of the iris dataset using a different color and character for each species:
  \begin{verbatim}
 pairs(iris[,1:4],pch=as.numeric(iris$Species),col=iris$Species)
  \end{verbatim}
@@ -1070,19 +1099,19 @@ pairs(iris[,1:4],pch=as.numeric(iris$Species),col=iris$Species)
 \end{frame}
 
 
-\begin{frame}[fragile]{Diagramas de Dispersión (5)}
+\begin{frame}[fragile]{Scatter Plots (5)}
 \scriptsize{
 \begin{itemize}
- \item También se pueden crear scatterplots en tres dimensiones.
- \item Se debe instalar la librería \verb+scatterplot3d+ usando el siguiente comando:
+ \item Three-dimensional scatterplots can also be created.
+ \item The \verb+scatterplot3d+ library must be installed using the following command:
  
  \begin{verbatim}
  install.packages("scatterplot3d",dependencies=T)
  \end{verbatim}
  
- \item Luego cargan la librería escribiendo \verb+library(scatterplot3d)+.
+ \item Then load the library by typing \verb+library(scatterplot3d)+.
  
- \item Un scatterplot 3d para el ancho del pétalo, el largo del sépalo y el ancho del sépalo:
+ \item A 3d scatterplot for petal width, sepal length and sepal width:
  \begin{verbatim}
 scatterplot3d(iris$Petal.Width, iris$Sepal.Length, 
               iris$Sepal.Width, color=as.numeric(iris$Species),
@@ -1101,7 +1130,7 @@ scatterplot3d(iris$Petal.Width, iris$Sepal.Length,
 \end{frame}
 
 
-\begin{frame}[fragile]{Diagramas de Dispersión (6)}
+\begin{frame}[fragile]{Scatter Plots (6)}
 
  
  
@@ -1117,27 +1146,27 @@ scatterplot3d(iris$Petal.Width, iris$Sepal.Length,
 
 
 
-\begin{frame}[fragile]{Gráficos de Coordenadas Paralelas}
+\begin{frame}[fragile]{Parallel Coordinate Plots}
 \scriptsize{
  \begin{itemize}
-  \item Los gráficos de coordenadas paralelas son otra forma de visualizar datos multi-dimensionales.
-  \item En vez de usar ejes perpendiculares (x-y-z) usamos varios ejes paralelos entre sí.
-  \item Cada atributo es representado por uno de los ejes paralelo con sus respectivos valores.
-  \item Los valores de los distintos atributos son escalados para que cada eje tenga la misma altura.
-  \item Cada observación representa una línea que une los distintos ejes de acuerdo a sus valores.
-  \item De esta manera, objetos similares entre sí tienden a agruparse en líneas con trayectoria similar.
-  \item En muchas ocasiones es necesario realizar un re-ordenamiento de los ejes para poder visualizar un patrón.
+  \item Parallel coordinate plots are another way to visualize multi-dimensional data.
+  \item Instead of using perpendicular axes (x-y-z) we use several axes parallel to each other.
+  \item Each attribute is represented by one of the parallel axes with its respective values.
+  \item The values of the different attributes are scaled so that each axis has the same height.
+  \item  Each observation represents a line that joins the different axes according to their values.
+  \item In this way, examples similar to each other tend to be grouped in lines with similar trajectory.
+  \item In many occasions it is necessary to re-order the axes in order to visualize a pattern.
  \end{itemize} 
  
  }  
 \end{frame}
 
 
-\begin{frame}[fragile]{Gráficos de Coordenadas Paralelas (2)}
+\begin{frame}[fragile]{Parallel Coordinate Plots (2)}
 \scriptsize{
  \begin{itemize}
-  \item En R podemos crear gráficos de coordenadas paralelas con el comando \verb+parcoord+ de la librería \verb+MASS+.
-  \item Ejemplo:
+  \item  In R we can create parallel coordinate graphs with the command \verb+parcoord+ from the \verb+MASS+ library.
+  \item Example:
   \begin{verbatim}
 library(MASS)
 parcoord(iris[1:4], col=iris$Species,var.label=T)   
@@ -1153,82 +1182,22 @@ parcoord(iris[1:4], col=iris$Species,var.label=T)
  }  
 \end{frame}
 
-
-
-\begin{frame}[fragile]{Otras técnicas de Visualización}
+\begin{frame}[fragile]{Conclusions}
 \scriptsize{
-\begin{block}{Gráficos de Estrellas}
-\begin{itemize}
-  \item También conocidos como \textbf{gráficos radiales}.
-  \item Cada estrella representa una observación, formando un polígono a partir de cada variables con dirección a las agujas del reloj hasta formar un polígono.
-  \item El tamaño de cada línea respecto al centro de la estrella corresponde al valor re-escalado de la variable.
-  \item Sirve para comparar objetos o detectar valores atípicos.
-  \end{itemize} 
-  
-\end{block}
-
-\begin{block}{Caras de Chernoff}
-\begin{itemize}
- \item Enfoque creado por Herman Chernoff basado en la capacidad humana para distinguir rostros. 
- \item Cada atributo corresponde a alguna característica de la cara (boca, ojos, nariz, etc..)
- \item El valor de los atributos determina la apariencia de la característica facial.
- \item Cada observación es una cara.
-\end{itemize}
- 
- 
-\end{block}
-
-
+ \begin{itemize}
+  \item We have learned how to describe a dataset using various metrics and visualizations.
+  \item These techniques give us a general understanding of the data.  
+ \end{itemize} 
  
  }  
 \end{frame}
 
-\begin{frame}[fragile]{Ejemplo Star Plot}
-\scriptsize{
-\begin{verbatim}
-iris_sample1<-iris[sample(1:dim(iris)[1],size=6,replace=F),]
-rownames(iris_sample1)<-paste(as.character(iris_sample1$Species),1:6)
-stars(iris_sample1[1:4]) 
-\end{verbatim}
-
-  \begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.4]{pics/star.pdf}		
-\end{figure}   
-
-
-
-
-}
- 
-\end{frame}
-
-
-\begin{frame}[fragile]{Ejemplo Chernoff Face}
-\scriptsize{
-\begin{verbatim}
-library("aplpack")
-iris_sample<-iris[sample(1:dim(iris)[1],size=16,replace=F),]
-faces(iris_sample[1:4],face.type=1,labels=iris_sample$Species)
-\end{verbatim}
-
-  \begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.6]{pics/faces.pdf}		
-\end{figure}   
-
-
-
-
-}
- 
-\end{frame}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
-\frametitle{Bilbiografía}
+\frametitle{Bibliography}
 %\bibliography{bio}
 %\bibliographystyle{apalike}
 \begin{thebibliography}{8}

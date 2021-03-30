@@ -24,8 +24,8 @@ table(vec)/length(vec)  # Frecuencia porcentual
 # La moda
 my_mode<-function(var){
   frec.var<-table(var)
-  valor<-which(frec.var==max(frec.var))  # Elementos con el valor máximo
-  names(valor)
+  value<-which(frec.var==max(frec.var))# Elements with  the maximum value
+  as.numeric(names(value))
 }
 
 my_mode(vec)
@@ -40,14 +40,14 @@ mean(Sepal.Length, trim=0.1)
 # Creamos un vector de tamaño 10, con media 20 y sd 10
 vec<-rnorm(10,20,10)
 mean(vec)
-vec.ruid<-c(vec,rnorm(1,300,100))
-mean(vec.ruid)
+vec.noise<-c(vec,rnorm(1,300,100))
+mean(vec.noise)
 
 mean(vec,trim=0.1)
-mean(vec.ruid,trim=0.1)
+mean(vec.noise,trim=0.1)
 
 median(vec)
-median(vec.ruid)
+median(vec.noise)
 
 
 # Todos los percentiles
@@ -103,10 +103,10 @@ cor(iris[,1:4])
 
 
 # Tablas de Contingencia
-sexo<-c("Hombre","Hombre","Mujer","Hombre","Mujer","Mujer")
-estudios<-c("universitario","secundario","secundario",
-            "postgrado","secundario","universitario")
-table(sexo,estudios)
+gender<-c("Male", "Female", "Male", "Female", "Female", "Male")
+studies<-c("college","postgraduate","high school",
+            "postgraduate","high school","college")
+table(gender,studies)
 weather<-read.table("weather.nominal.csv",header=T,sep=",")
 table(weather$outlook,weather$play)
 table(weather$temperature,weather$play)
@@ -123,8 +123,8 @@ dev.off()
 plot(rnorm(15,10,5),col="red",type="p",pch=1)
 lines(rnorm(15,10,5),col="blue",type="p",pch=1)
 lines(rnorm(15,10,5),col="green",type="b",pch=2)
-title(main="Mi gráfico")
-legend('topright', c("lineas","puntos","ambos") , 
+title(main="My Plot")
+legend('topright', c("lines","dots","both") , 
        lty=1:3, col=c("red", "blue","green"), bty='n', cex=.75)
 
 
@@ -143,7 +143,7 @@ library(ggplot2)
 ggplot(iris, aes(x=Sepal.Length)) + geom_histogram(bins = 10, color="black", fill="white")
 
 
-plot(density(iris$Sepal.Length),main="Densidad de Sepal.Length")
+plot(density(iris$Sepal.Length),main="Density of Sepal.Length")
 plot(density(iris$Sepal.Length),col="red",main="Densidad")
 
 
