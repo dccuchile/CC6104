@@ -59,8 +59,29 @@
 
 \scriptsize{
 \begin{itemize}
- \item Probability is the language of uncertainty that is also the basis for statistical inference.
- \item The problem studied in probabilities is: given a data generating process, which are the properties of the outputs?
+ \item Probability is the language of \textbf{uncertainty} that is also the basis for statistical inference \cite{poldrack2019statistical}. 
+
+ \item It forms an important part of the foundation for statistics, because it provides us with the mathematical tools to describe uncertain events. 
+ \item The study of probability arose in part due to interest in understanding games of chance, like cards or dice. 
+ \item These games provide useful examples of many statistical concepts, because when we repeat these games the likelihood of different outcomes remains (mostly) the same.
+\end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{pics/gambling.png}
+\end{figure}
+
+
+}
+
+\end{frame}
+
+
+\begin{frame}{Probability and Statistics}
+
+\scriptsize{
+\begin{itemize}
+  \item The problem studied in probabilities is: given a data generating process, which are the properties of the outputs?
  \item The problem studied in statistical inference, data mining and machine learning is: given the outputs, what can we say about the process that generates the observed data? 
 \end{itemize}
 
@@ -74,13 +95,29 @@
 
 \end{frame}
 
-\begin{frame}\frametitle{Probability}
+\begin{frame}\frametitle{What is Probability?}
 \scriptsize{
 
 \begin{itemize}
- \item A \textbf{random experiment} in the act of measuring a process whose output is uncertain.
- \item The set with all possible outputs of a random experiment is the \textbf{sample space} $\Omega$.
- \item For example, $\Omega = \{ 1,2,3,4,5,6 \}$ is the sample space of the experiment of rolling of a die.
+ \item We think of probability as a number that describes the likelihood of some event occurring, which ranges from zero (impossibility) to one (certainty).
+ \item Probabilities can also be expressed in percentages: when the weather forecast predicts a twenty percent chance of rain today. 
+ \item In each case, these numbers are expressing how likely that particular event is, ranging from absolutely impossible to absolutely certain.
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Probability Concepts}
+\scriptsize{
+
+\begin{itemize}
+ \item A \textbf{random experiment} in the act of measuring a process whose output is uncertain. 
+ \item Examples: flipping a coin, rolling a 6-sided die, or trying a new route to work to see if it’s faster than the old route.
+ \item The set with all possible outputs of a random experiment is the \textbf{sample space} $\Omega$ (it can be discrete or continuous).
+ \item For a coin flip  $\Omega = \{$heads, tails$\}$, for the 6-sided die  $\Omega = \{1,2,3,4,5,6\}$, and  for the amount of time it takes to get to work $\Omega$ is all possible real numbers greater than zero.
  \item An \textbf{event} $E \subseteq \Omega$ corresponds to a subset of those outputs.
  \item For example, $E = \{ 2,4,6 \}$ is the event of observing an even number when rolling a die.
 \end{itemize}
@@ -89,24 +126,48 @@
 
 \end{frame}
 
-\begin{frame}\frametitle{Probabilidades (II)}
+\begin{frame}\frametitle{Probability}
 \begin{scriptsize}
 \begin{itemize}
- \item Una probabilidad $\mathbb{P}$ es una función de valor real definida sobre $\Omega$ que satisface las siguientes propiedades:
+\item Now we can outline the formal features of a probability, which were first defined by the Russian mathematician Andrei Kolmogorov.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.15]{pics/kolmogorov.jpeg}
+\end{figure}
+
+
+
+ \item A probability $\mathbb{P}$ is a real-valued function defined over $\Omega$ that satisfies the following properties:
 \end{itemize}
 
-\begin{block}{Propiedades}
+\begin{block}{Properties}
 \begin{enumerate}
- \item Para cualquier evento $E \subseteq \Omega$ , $0 \leq \mathbb{P}(E) \leq 1$
- \item $\mathbb{P}(\Omega)=1$
- \item Sean $E_{1},E_{2},\dots,E_{k} \in \Omega$ conjuntos disjuntos 
+ \item For any event $E \subseteq \Omega$ , $0 \leq \mathbb{P}(E) \leq 1$.
+ \item The probability of the sample space is 1: $\mathbb{P}(\Omega) =1$
+ \item Let $E_{1},E_{2},\dots,E_{k} \in \Omega$ be disjoint sets 
  \begin{displaymath}
   \mathbb{P}(\bigcup_{i=1}^{k}E_{i}) = \sum_{i}^{k}P(E_{i})
  \end{displaymath}
 \end{enumerate}
 \end{block}
+
+Probabilities cannot be negative or greater than 1.
+
+\end{scriptsize} 
+
+\end{frame}
+
+
+\begin{frame}\frametitle{Interpretation of Probabilities}
+\begin{scriptsize}
 \begin{itemize}
- \item La probabilidad de un evento $E$, $\mathbb{P}(E)$ es la fracción de veces que se observaría el evento al repetir infinitamente el experimento.
+\item The are two common interpretations of probabilities: frequencies and degrees of beliefs. 
+\item In the frequency interpretation, $\mathbb{P}(E)$ is the long run proportion of times that $E$ is true in repetitions. 
+\item For example, if we say that the probability of heads is 1/2, we mean that if we flip the coin many times then the proportion of times we get heads tends to 1/2 as the number of tosses increases. 
+\item The degree-of-belief interpretation is that $\mathbb{P}(E)$ measures an observer's strength of belief that $E$ is true.
+\item In either interpretation, we require that properties 1 to 3 hold. 
+\item The difference in interpretation will not matter much until we deal with statistical inference. 
+\item There, the differing interpretations lead to two schools of inference: the frequentist and the Bayesian schools.
 \end{itemize}
 
 
@@ -115,20 +176,22 @@
 \end{frame}
 
 
-\begin{frame}{Variable Aleatoria}
+\begin{frame}{Random Variable}
 \scriptsize{
 
 \begin{itemize}
- \item Una \textbf{variable aleatoria} es un mapeo 
+ \item A \textbf{random variable} is a mapping (or function)
 \begin{displaymath}
  X: \Omega \rightarrow \mathbb{R}
 \end{displaymath}
-que asigna un valor real $X(e)$ a cualquier evento de $\Omega$
+which assigns a real value $X(e)$ to any event of $\Omega$.
 
 
-\item Ejemplo: Tiramos una moneda 10 veces. Sea $X(\omega)$ la cantidad de caras en la secuencia de resultados.
+\item Example: We flip a fair coin 10 times. The outcome of each toss is a head $H$ or a tail $T$.
+
+\item  Let $X(e)$ be the number of heads in the sequence of outcomes.
 \begin{itemize}
- \item Si $w=CCSCCSCCSS$, entonces $X(\omega)=6$ 
+ \item If $e=HHTHHTHHTT$, then $X(e)=6$ 
 \end{itemize}
 
 
@@ -300,6 +363,28 @@ Chi-cuadrado & $f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/
 
 }
 \end{frame}
+
+
+
+\begin{frame}{Binomial Distribution}
+
+\scriptsize{
+\begin{itemize}
+ \item  The binomial distribution is a discrete distribution that provides a way to compute the probability of some number of successes out of a number of trials.
+ \item In each trial there is either success or failure and nothing in between (known as “Bernoulli trials”) given some known probability of success on each trial.
+ \item Let $n$ be the number of trials, $x$ the number of successes, and $p$ the probability of a success, the probability mass function of the Binomial distribution is as follows:
+ \begin{displaymath}
+  f_x(n,p)= {n \choose x}p^{x}(1-p)^{n-x} 
+ \end{displaymath}
+\item The binomial coefficient ${n \choose x}$ describes the number of different ways that one can choose $x$ items out of $n$ total items.
+ 
+ 
+ \end{itemize}}
+ 
+ \end{frame}
+ 
+ 
+
 
 \begin{frame}{Distribución Normal}
 
