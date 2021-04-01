@@ -41,6 +41,10 @@ The course introduces the fundamentals of statistical thinking, which are descri
 * [Introduction to Modern Statistics by Mine Çetinkaya-Rundel and Johanna Hardin](https://openintro-ims.netlify.app)
 * [Let's Explore Statistics by Colin Quirk](https://bookdown.org/cquirk/LetsExploreStatistics/)
 * [Probabilistic Machine Learning: An Introduction by Kevin Patrick Murphy](https://probml.github.io/pml-book/book1.html)
+* [Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing by Ron Kohavi, Diane Tang, and Ya Xu](https://www.cambridge.org/core/books/trustworthy-online-controlled-experiments/D97B26382EB0EB2DC2019A7A7B518F59)
+
+
+
 
 ## Courses
 
@@ -49,7 +53,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 ## Videos
 
 * [Richard McElreath - Statistical Rethinking Winter 2019 Videolectures](https://www.youtube.com/playlist?list=PLDcUM9US4XdNM4Edgs7weiyIguLSToZRI)
-
+* [Detecting Network Effects: Randomizing Over Randomized Experiments](https://youtu.be/1v5_CzdRVAc)
 
 
 
