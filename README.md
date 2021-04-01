@@ -1,5 +1,5 @@
 # Statistical Thinking
-d
+
 The purpose of this course is to introduce students to statistical thinking, a systematic way of thinking to describe "real world" phenomena taking into account their inherent uncertainty and using data for decision making.
 
 The course introduces the fundamentals of statistical thinking, which are descriptive data analysis, statistical programming in R, and probability theory. It then teaches the two most important schools of statistical inference: frequentist inference and Bayesian inference. Finally, advanced topics such as model evaluation using information theory, directed graphical models for modeling conditional dependencies between variables, and multilevel models are discussed.
