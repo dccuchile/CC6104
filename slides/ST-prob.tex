@@ -201,11 +201,11 @@ which assigns a real value $X(e)$ to any event of $\Omega$.
 
 \end{frame}
 
-\begin{frame}{Ejemplo}
+\begin{frame}{Example}
 
 \begin{itemize}
- \item Tiramos una moneda 2 veces. Sea $X$ la la cantidad de sellos obtenidos.
- \item La variable aleatoria y su distribución se resume como:
+ \item We flip a coin 2 times. Let $X$ be the number of tails obtained.
+ \item The random variable and its distribution is summarized as:
 \end{itemize}
 
 \begin{table}
@@ -213,10 +213,10 @@ which assigns a real value $X(e)$ to any event of $\Omega$.
 \hline
  $e$ & $\mathbb{P}(e)$ & $X(e)$   \\ 
 \hline
-CC & 1/4 & 0 \\
-CS & 1/4 & 1 \\
-SC & 1/4 & 1 \\
-SS & 1/4 & 2 \\
+HH & 1/4 & 0 \\
+HT & 1/4 & 1 \\
+TC & 1/4 & 1 \\
+TT & 1/4 & 2 \\
 \hline
 \end{tabular}
 \end{table}
@@ -238,21 +238,21 @@ SS & 1/4 & 2 \\
 
 
 
-\begin{frame}{Definiciones de V.A}
+\begin{frame}{R.V Definitions}
 \scriptsize{
 \begin{itemize}
- \item Sea $X$ una V.A , se define \textbf{función de distribución acumulada} (CDF) o \ $F_{X}: \mathbb{R} \rightarrow [0,1]$
+ \item  Let $X$ be a R.V , we define \textbf{cumulative distribution function} (CDF) or $F_{X}: \mathbb{R} \rightarrow [0,1]$ as:
 \begin{displaymath}
  F_{X}(x)=\mathbb{P}(X\leq x)
 \end{displaymath}
 \end{itemize}
 
-\begin{block}{Variables Aleatorias Discretas}
+\begin{block}{Discrete Random Variables}
 \begin{itemize}
-\item Una V.A $X$ es \textbf{discreta} si mapea las salidas a un conjunto contable.
-\item Se define la \textbf{función de probabilidad} o \textbf{función de masa de probabilidad} de una V.A $X$ discreta como $f_{X}(x)=\mathbb{P}(X=x)$
-\item Entonces $f_{X}(x) \geq 0$  $\forall x \in \mathbb{R}$ y $\sum_{i}f_{X}(x_{i})=1$
-\item La CDF de $X$ se relaciona con $f_{X}$ de la siguiente manera: 
+\item A R.V $X$ is \textbf{discrete} if it maps the outputs to a countable set.
+\item We define the \textbf{probability function} or \textbf{probability mass function} of a discrete R.V $X$ as $f_{X}(x)=\mathbb{P}(X=x)$.
+\item Then $f_{X}(x) \geq 0$  $\forall x \in \mathbb{R}$, and $\sum_{i}f_{X}(x_{i})=1$
+\item The CDF of $X$ is related to $f_{X}$ as follows: 
 \begin{displaymath}
 F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})  
 \end{displaymath}
@@ -266,16 +266,16 @@ F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})
 } 
 \end{frame}
 
-\begin{frame}{Definiciones de V.A II}
+\begin{frame}{R.V Definitions II}
 \scriptsize{
-\begin{block}{Variable Aleatoria continua}
+\begin{block}{Continuous Random Variable}
 \begin{itemize}
- \item Una V.A $X$ es continua si:
- \item existe una función $f_{X}$ tal que $f_{X}(x) \geq 0$ $\forall x$,  $\int_{-\infty}^{\infty}f_{X}(x)dX=1$
+ \item A R.V $X$ is continuous if:
+ \item there exists a function  $f_{X}$ such that $f_{X}(x) \geq 0$ $\forall x$,  $\int_{-\infty}^{\infty}f_{X}(x)dX=1$
  \begin{displaymath}
       \int_{-\infty}^{\infty}f_{X}(x)dX=1
        \end{displaymath}
-\item Para todo $a \geq b$:
+\item For all $a \geq b$:
 \begin{displaymath}
  \mathbb{P}(a < X < b) = \int_{a}^{b} f_{X}(x)dx
 \end{displaymath}
@@ -284,13 +284,13 @@ F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})
 \end{block}
 
 \begin{itemize}
- \item La función $f_{X}$ recibe el nombre de \textbf{función densidad de probabilidad} (PDF). 
- \item La PDF se relaciona con la CDF como:
+ \item The function $f_{X}$ is called the probability density function (PDF). 
+ \item The PDF is related to the CDF as follows:
  \begin{displaymath}
  F_{X}(x)=\int_{-\infty}^{x}f_{X}(t)dt 
  \end{displaymath}
-\item Luego $f_{X}(x) = F'_X(x)$ en todos los puntos $x$ donde $F_{X}$ es diferenciable
-\item Para distribuciones continuas la probabilidad que $X$ tomo un \textbf{valor particular} vale siempre \textbf{cero}.
+\item Then $f_{X}(x) = F'_X(x)$ at all points $x$ where $F_{X}$ is differentiable.
+\item For continuous distributions the probability that $X$ takes a particular value $x$ is always zero.
 
 \end{itemize}
 
@@ -300,7 +300,7 @@ F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})
 }
 \end{frame}
 
-\begin{frame}{Algunas Propiedades}
+\begin{frame}{Some Properties}
 
 \begin{enumerate}
  \item $ \mathbb{P}( x < X \leq y) = F(y) - F(x)$
@@ -308,7 +308,7 @@ F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})
 
 \item $ \mathbb{P}(X > x) = 1 - F(x)$ 
 
-\item Si $X$ es continua luego 
+\item If $X$ is continuous: 
 \begin{eqnarray*}
  F(b) - F(a) = \mathbb{P}(a < X < b) = \mathbb{P} ( a \leq X < b)  \\
    = \mathbb{P} ( a < X \leq b) = \mathbb{P} ( a \leq X \leq b) 
@@ -323,14 +323,14 @@ F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})
 
 
 
-\begin{frame}{Cuantiles}
+\begin{frame}{Quantiles}
 \scriptsize{
 \begin{itemize}
- \item Sea $X$ una V.A con CDF $F$. La CDF inversa o función cuantía se define como \begin{displaymath}
+ \item Let $X$ be a R.V with CDF $F$. The inverse CDF or quantile function is defined as \begin{displaymath}
                                                                                    F^{-1}(q)= inf \left\{ x: \ F(x) > q \right\}
                                                                                      \end{displaymath}
- \item Para $q \in [0,1]$ si $F$ es estrictamente creciente y continua, $F^{-1}(q)$ es el único valor real tal que $F(x)=q$
- \item Luego $F^{-1}(1/4)$ es l primer cuartil, $F^{-1}(1/2)$ la mediana (o segundo cuartil) y $F^{-1}(3/4)$ el tercer cuartil.
+ \item For $q \in [0,1]$ if $F$ is strictly increasing and continuous, $F^{-1}(q)$ is the only real value such that $F(x)=q$.
+ \item Then $F^{-1}(1/4)$ is the first quartile, $F^{-1}(1/2)$ the median (or second quartile) and $F^{-1}(3/4)$ the third quartile.
  
  
 \end{itemize}
@@ -342,21 +342,21 @@ F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})
 
 
 
-\begin{frame}{Algunas distribuciones}
+\begin{frame}{Some distributions}
 \scriptsize{ 
 
 \begin{table}
 \centering
 \begin{tabular}{c|c|c}
 \hline
-  & Función de Probabilidad & Parámetros   \\ 
+  & Probability Function & Parameters   \\ 
 \hline
 Normal & $f_x=\frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}}$ & $\mu, \sigma$ \\ \hline
 Binomial & $f_x= {n \choose x}p^{x}(1-p)^{n-x} $ & $n,p$ \\ \hline
 Poisson & $f_x=\frac{1}{x!}\lambda^{x}\exp^{-\lambda}$ & $\lambda$ \\ \hline
-Exponencial & $f_x= \lambda \exp^{-\lambda x}$  & $\lambda$ \\ \hline
+Exponential & $f_x= \lambda \exp^{-\lambda x}$  & $\lambda$ \\ \hline
 Gamma & $f_x= \frac{\lambda^{\alpha}}{\Gamma(\alpha)} x^{\alpha -1}\exp^{-\lambda x} $ & $\lambda , \alpha$ \\ \hline
-Chi-cuadrado & $f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/2} $  & $k$  \\
+Chi-square & $f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/2} $  & $k$  \\
 \hline
 \end{tabular}
 \end{table}
@@ -386,25 +386,25 @@ Chi-cuadrado & $f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/
  
 
 
-\begin{frame}{Distribución Normal}
+\begin{frame}{Normal Distribution}
 
 \scriptsize{
 \begin{itemize}
- \item $X$ tiene una distribución Normal o Gaussiana de parámetros  $\mu$ y $\sigma$, $X \sim N(\mu,\sigma^2)$ si
+ \item $X$ has a Normal or Gaussian distribution of parameters $\mu$ and $\sigma$, $X \sim N(\mu,\sigma^2)$ if
  \begin{displaymath}
  f_x=\frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}} 
  \end{displaymath}
- \item Donde $\mu \in \mathbb{R}$ es el ``centro'' o la \textbf{media} de la distribución y $\sigma > 0$ es la \textbf{desviación estándar}.
- \item Cuando $\mu = 0$ y $\sigma =1$ tenemos una \textbf{Distribución Normal Estándar} denotada por $Z$.
- \item Denotamos por $\phi(z)$ a la PDF y por $\Phi(z)$ a la CDF de una Normal estándar.
- \item Los valores de  $\Phi(z)$, $\mathbb{P}(Z \leq z)$ se encuentran tabulados.
+ \item Where $\mu \in \mathbb{R}$ is the ``center'' or the ``mean'' of the distribution and $\sigma > 0$ is the ``standard deviation''.
+ \item When $\mu = 0$ and $\sigma =1$ we have a \textbf{Standard Normal Distribution} denoted by $Z$.
+ \item We refer to the PDF by $\phi(z)$ and to the CDF of a Standard Normal by $\Phi(z)$.
+ \item The values of $\Phi(z)$, $\mathbb{P}(Z \leq z)$ are tabulated.
  \end{itemize}
 
-\begin{block}{Propiedades Útiles}
+\begin{block}{Useful Properties}
 \begin{enumerate}
- \item Si $X \sim N(\mu, \sigma^2)$, luego $Z=(X-\mu)/\sigma \sim N(0,1)$
- \item Si $Z \sim N(0,1)$, luego $X=\mu+\sigma Z \sim N(\mu, \sigma^2)$
- \item Sean $X_{i} \sim N(\mu_{i},\sigma_{i}^{2})$ ,$i=1,\dots,n$ \ V.As independientes:
+ \item If $X \sim N(\mu, \sigma^2)$, then $Z=(X-\mu)/\sigma \sim N(0,1)$
+ \item If $Z \sim N(0,1)$, then $X=\mu+\sigma Z \sim N(\mu, \sigma^2)$
+ \item Let $X_{i} \sim N(\mu_{i},\sigma_{i}^{2})$ ,$i=1,\dots,n$ \  be independt R.Vs:
  \begin{displaymath}
   \sum_{i=1}^{n}X_{i}\sim N( \sum_{i=1}^{n}\mu_{i}, \sum_{i=1}^{n}\sigma_{i}^{2})
  \end{displaymath}
@@ -420,11 +420,11 @@ Chi-cuadrado & $f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/
 }
 \end{frame}
 
-\begin{frame}[fragile]{Ejemplo Normal}
+\begin{frame}[fragile]{Example Normal}
 \scriptsize{
 \begin{itemize}
- \item En R podemos acceder a las PDF, CDF, función cuantía y generación de números aleatorios de las distribuciones.
- \item Para una Normal son:
+ \item In R we can access the PDF, CDF, quantile function and random number generation of the distributions.
+ \item For a Normal distribution the R commands are:
 \begin{verbatim}
 dnorm(x, mean = 0, sd = 1, log = FALSE)
 pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
@@ -434,15 +434,15 @@ rnorm(n, mean = 0, sd = 1)
  
 \end{itemize}
 
-\begin{block}{Ejemplo}
-Sea $X\sim N(3,5)$, encontrar $\mathbb{P}(X > 1)$ \\
+\begin{block}{Example}
+Let $X\sim N(3,5)$, calculate $\mathbb{P}(X > 1)$ \\
 $\mathbb{P}(X >1) = 1-\mathbb{P}(X<1) = 1-\mathbb{P}(Z < \frac{1-3}{\sqrt{5}})=1-\Phi(-0.8944)= 0.81$ \\
-En R:
+In R:
 \begin{verbatim}
  > 1-pnorm(q=(1-3)/sqrt(5))
 [1] 0.8144533
 \end{verbatim}
-O directamente:
+Or directly:
 \begin{verbatim}
 > 1-pnorm(q=1,mean=3,sd=sqrt(5))
 [1] 0.8144533 
@@ -452,20 +452,20 @@ O directamente:
 \end{frame}
 
 
-\begin{frame}[fragile]{La regla 68-95-99.7 de una Normal}
+\begin{frame}[fragile]{The 68-95-99.7 rule of a Normal Distribution}
 \scriptsize{
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.3]{pics/gaussian.png}
 \end{figure} 
-Sea $X$ una V.A $\sim N(\mu,\sigma^2)$
+Let $X$ be a R.V $sim N(\mu,\sigma^2)$.
 \begin{itemize}
  \item $\mathbb{P}( \mu - \sigma \leq X \leq \mu+ \sigma) \approx 0.6827$  
  \item $\mathbb{P}( \mu - 2 \sigma \leq X \leq \mu+ 2 \sigma) \approx 0.9545$               
  \item $\mathbb{P}( \mu - 3 \sigma \leq X \leq \mu+ 3 \sigma) \approx 0.9973$ 
 
 \end{itemize}
-En R para $X\sim N(0,1)$:
+In R for $X\sim N(0,1)$:
 \begin{verbatim}
 > pnorm(1)-pnorm(-1)
 [1] 0.6826895
@@ -477,10 +477,10 @@ En R para $X\sim N(0,1)$:
 }
 \end{frame}
 
-\begin{frame}[fragile]{Simetría de la Normal}
+\begin{frame}[fragile]{Symmetry of the Normal Distribution}
 \begin{itemize}
- \item La PDF de una normal es simétrica alrededor de $\mu$
- \item Entonces $\phi(z)= \phi(-z) $ 
+ \item The PDF of a normal is symmetric around $\mu$.
+ \item Then $\phi(z)= \phi(-z) $ 
  \item $\Phi(z)=1-\Phi(-z)$
 \end{itemize}
 \begin{verbatim}
@@ -497,7 +497,7 @@ En R para $X\sim N(0,1)$:
 
 \end{frame}
 
-\begin{frame}[fragile]{Graficando la PDF de Normales con distinta varianza en R}
+\begin{frame}[fragile]{Plotting the PDF of Normals with different variance in R}
 \scriptsize{
 \begin{verbatim}
 x=seq(-8,8,length=400)
@@ -521,19 +521,19 @@ lines(y3~x,type="l",col="blue")
 
 
 
-\begin{frame}{Probabilidades Conjuntas y Condicionales}
+\begin{frame}{Joint and Conditional Probabilities}
 \scriptsize{
 \begin{itemize}
- \item La noción de función probabilidad (masa o densidad) se puede \textbf{extender} a más de una V.A 
- \item Sean $X$  $Y$ dos V.A, $\mathbb{P}(X,Y)$ representa la \textbf{función de probabilidad conjunta}.
- \item Las variables son independientes entre sí, si \begin{displaymath}
-                                                      \mathbb{P}(X,Y)=\mathbb{P}(X)\times \mathbb{P}(Y)
-                                                     \end{displaymath}
-\item La \textbf{probabilidad condicional} para $Y$ dado $X$ se define como
+ \item The notion of probability function (mass or density) can be \textbf{extended} to more than one R.V.  
+ \item Let $X$ $Y$ be two V.A, $\mathbb{P}(X,Y)$ represents the joint probability function.
+ \item $X$ and $Y$ are independent of each other, if
+ \begin{displaymath}
+\mathbb{P}(X,Y)=\mathbb{P}(X)\times \mathbb{P}(Y)                                                     \end{displaymath}
+\item The \textbf{conditional probability} for $Y$ given $X$ is defined as:
  \begin{displaymath}
   \mathbb{P}(Y|X) = \frac{\mathbb{P}(X,Y)}{\mathbb{P}(X)}
  \end{displaymath}
-\item Si $X$ e $Y$ son independientes $\mathbb{P}(Y|X)=\mathbb{P}(Y)$
+\item  If $X$ and $Y$ are independent $\mathbb{P}(Y|X)=\mathbb{P}(Y)$
 \end{itemize}
 
 
@@ -543,19 +543,19 @@ lines(y3~x,type="l",col="blue")
 \end{frame}
 
 
-\begin{frame}{Probabilidades Conjuntas y Condicionales (2)}
+\begin{frame}{Joint and Conditional Probabilities (2)}
  \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.3]{pics/condicional.png}
-	\caption{Fuente: \url{en.wikipedia.org/wiki/Conditional_probability}}
+	\caption{Source: \url{en.wikipedia.org/wiki/Conditional_probability}}
 \end{figure}
 
 
 
 \scriptsize{
 \begin{itemize}
- \item Sea $S$ el espacio muestral, $A$ y $B_n$ eventos.
- \item Las probabilidades son proporcionales al área.
+ \item Let $S$ be the sample space, $A$ and $B_n$ events.
+ \item The probabilities are proportional to the area.
  \item $\mathbb{P}(A) \sim 0.33$, $\mathbb{P}(A|B_1)=1$
  \item $\mathbb{P}(A|B_2)\sim 0.85$ y $\mathbb{P}(A|B_3)=0$ 
 \end{itemize}
@@ -569,15 +569,15 @@ lines(y3~x,type="l",col="blue")
 
 
 
-\begin{frame}{Teorema de Bayes y Probabilidades Totales}
+\begin{frame}{Bayes' Theorem and Total Probabilities}
 \scriptsize{
 \begin{itemize}
- \item La probabilidad condicional $\mathbb{P}(Y|X)$ y $\mathbb{P}(X|Y)$ pueden ser expresadas en función de la otra usando el \textbf{teorema de Bayes}
+ \item The conditional probability $\mathbb{P}(Y|X)$ and $\mathbb{P}(X|Y)$ can be expressed as a function of each other using Bayes' theorem.
 \begin{displaymath}
  \mathbb{P}(Y|X)=\frac{\mathbb{P}(X|Y)\mathbb{P}(Y)}{\mathbb{P}(X)}
 \end{displaymath}
-\item Se entiende a $P(Y|X)$ como la fracción  de veces que $Y$ ocurre cuando se sabe que ocurre $X$.
-\item Luego sea $\{ Y_1,Y_2,\dots, Y_k \} $ un conjunto de salidas mutuamente excluyentes de una V.A $X$, el denominador del teorema de Bayes se puede expresar como:
+\item $P(Y|X)$ can be interpreted as the fraction of times $Y$ occurs when $X$ is known to occur.
+\item Then let $\{ Y_1,Y_2,\dots, Y_k \} $ be a set of mutually exclusive events of the sample space of a R.V $X$, the denominator of Bayes' theorem can be expressed as:
 \begin{displaymath}
 \mathbb{P}(X)= \sum_{i=1}^{k} \mathbb{P}(X,Y_i) = \sum_{i=1}^{k} \mathbb{P}(X|Y_i)\mathbb{P}(Y_i)
 \end{displaymath}
@@ -586,15 +586,15 @@ lines(y3~x,type="l",col="blue")
 }
 \end{frame}
 
-\begin{frame}{Ejemplo}
+\begin{frame}{Example}
 \scriptsize{
 \begin{itemize}
- \item Divido mis correos en tres categorías: $A_1$=``spam'', $A_2$=``baja prioridad'', $A_3$=``alta prioridad''
- \item Sabemos que $\mathbb{P}(A_1)=0.7$, $\mathbb{P}(A_2)=0.2$ y $\mathbb{P}(A_3)=0.1$, claramente $0.7+0.2+0.1=1$
- \item Sea $B$ el evento de que el correo contenga la palabra ``gratis''.
- \item Sabemos que $\mathbb{P}(B|A_1)=0.9$ $\mathbb{P}(B|A_2)=0.01$ y $\mathbb{P}(B|A_3)=0.01$ claramente $0.9+0.01+0.01 \neq 1$
- \item Cual es la probabilidad de que sea ``spam'' un correo que tiene la palabra ``gratis''?
- \item Usando Bayes y Probabilidades totales:
+ \item I split my emails into three categories: $A_1$=```spam'', $A_2$=```low priority'', $A_3$=```high priority''.'
+ \item We know that $\mathbb{P}(A_1)=0.7$, $\mathbb{P}(A_2)=0.2$ and $\mathbb{P}(A_3)=0.1$, clearly $0.7+0.2+0.1=1$.
+ \item Let $B$ be the event that the mail contains the word ``free''.
+ \item We know that $\mathbb{P}(B|A_1)=0.9$ $\mathbb{P}(B|A_2)=0.01$ y $\mathbb{P}(B|A_3)=0.01$ clearly $0.9+0.01+0.01 \neq 1$
+ \item  What is the probability that an email with the word ``free'' in it is ``spam''?
+ \item Using Bayes and Total Probabilities:
  \begin{displaymath}
   \mathbb{P}(A_1|B) = \frac{0.9 \times 0.7}{(0.9 \times 0.7) + (0.01 \times 0.2) + (0.01 \times 0.1)} = 0.995
  \end{displaymath}
@@ -613,26 +613,26 @@ lines(y3~x,type="l",col="blue")
 
 
 
-\begin{frame}{Esperanza}
+\begin{frame}{Expectation}
 \scriptsize{
 \begin{itemize}
- \item Sea $X$ una V.A, se define su \textbf{esperanza} o \textbf{momento de primer orden} como:
+ \item Let $X$ be a R.V, we define its \textbf{expectation} or \textbf{first-order moment} as:
   \begin{displaymath}
   \mathbb{E}(X) = \left\{ \begin{array}{rl}
-  \sum_{x}(x\times f(x)) &\mbox{ Si $X$ es discreta} \\
-   \int_{-\infty}^{\infty}(x\times f(x))dx &\mbox{ Si $X$ es continua}
+  \sum_{x}(x\times f(x)) &\mbox{ If $X$ is discrete} \\
+   \int_{-\infty}^{\infty}(x\times f(x))dx &\mbox{If $X$ is continuous}
        \end{array} \right.
   \end{displaymath}
-\item Es el promedio ponderado de todos los posibles valores que puede tomar una variable aleatoria
+\item The expectation is the weighted average of all the possible values that a random variable can take.
 
-\item Para el caso de lanzar dos veces una moneda con $X$ el número de caras:
+\item For the case of tossing a coin twice with $X$ the number of heads:
  \begin{eqnarray*}
   \mathbb{E}(X) & = & (0 \times f(0)) + (1 \times f(1)) + (2 \times f(2)) \nonumber \\
        & = & (0 \times (1/4)) + (1 \times (1/2)) + (2 \times (1/4)) =1  \nonumber \\
  \end{eqnarray*}
 
 
-\item Sean las variables aleatorias $X_1, X_2, \dots , X_n$ y las constantes $a_1, a_2, \dots, a_n$,
+\item Let the random variables $X_1, X_2, \dots , X_n$ and the constants $a_1, a_2, \dots, a_n$,
 \begin{displaymath}
  \mathbb{E}\left(\sum_{i}a_i X_i \right) = \sum_{i} a_{i} \mathbb{E}(X_i)
 \end{displaymath}
@@ -645,25 +645,25 @@ lines(y3~x,type="l",col="blue")
 \end{frame}
 
 
-\begin{frame}{Varianza}
+\begin{frame}{Variance}
 \scriptsize{
 \begin{itemize}
- \item La varianza mide la ``dispersión'' de una distribución
- \item Sea $X$ una V.A de media $\mu$, se define la varianza de $X$ denotada como $\sigma^2$, $\sigma^{2}_{X}$ o $\mathbb{V}(X)$ como:
+ \item The variance measures the ``dispersion'' of a distribution.
+ \item Lex $X$ be a R.V of mean $\mu$, we define the variance of $X$ denoted as $\sigma^2$, $\sigma^{2}_{X}$ or $\mathbb{V}(X)$ as:
   \begin{displaymath}
   \mathbb{V}(X) = \mathbb{E}(X - \mu)^2 =  \left\{ \begin{array}{rl}
-  \sum_{i=1}^{n} f_{x}(x_{i})(x_{i} - \mu)^2 &\mbox{ Si $X$ es discreta} \\
-   \int (x- \mu)^{2}f_X(x)dx &\mbox{ Si $X$ es continua}
+  \sum_{i=1}^{n} f_{x}(x_{i})(x_{i} - \mu)^2 &\mbox{  If $X$ is discrete} \\
+   \int (x- \mu)^{2}f_X(x)dx &\mbox{ If $X$ is continuous}
        \end{array} \right.
   \end{displaymath}
-\item La \textbf{desviación estándar} $\sigma$ se define como $\sqrt{\mathbb{V}(X)}$ 
+\item The \textbf{standard deviation} $\sigma$ is defined as $\sqrt{\mathbb{V}(X)}$ 
 \end{itemize}
 
-\begin{block}{Propiedades}
+\begin{block}{Properties}
 \begin{itemize}
 \item $\mathbb{V}(X)=  \mathbb{E}(X^2)- \mathbb{E}(X)^2 =  \mathbb{E}(X^2)-\mu^2 $ 
-\item Si $a$ y $b$ son constantes, luego $\mathbb{V}(aX+b)=a^2\mathbb{V}(X)$
-\item Si $X_1,\dots,X_n$ son independientes y $a_1,\dots,a_n$ son constantes, luego
+\item If $a$ and $b$ are constants, then  $\mathbb{V}(aX+b)=a^2\mathbb{V}(X)$
+\item If $X_1,\dots,X_n$ are independent and $a_1,\dots,a_n$ are constants, then
 \begin{displaymath}
  \mathbb{V}\left(\sum_{i=1}^{n}a_i X_i \right) = \sum_{i=1}^{n} a_{i}^{2} \mathbb{V}(X_{i})
 \end{displaymath}
@@ -680,27 +680,27 @@ lines(y3~x,type="l",col="blue")
 
 
 
-\begin{frame}{Ley de los Grandes Números}
+\begin{frame}{Law of the Large Numbers}
 \scriptsize{
-\begin{block}{Forma Débil}
+\begin{block}{Weak Form}
 \begin{itemize}
- \item Sean $X_{1},X_{2},\dots X_{n}$ variables aleatorias IID de media $\mu$ y varianza $\sigma^2$
- \item El promedio $\overline{X_{n}} =\frac{\sum_{i=1}^{n}X_{i}}{n}$ converge en probabilidad a $\mu$, $\overline{X_{n}} \overset{P}{\rightarrow} \mu$   
- \item Esto es equivalente a decir que para todo $\epsilon > 0$
+ \item Let $X_{1},X_{2},\dots X_{n}$ be IID random variables of mean $\mu$ and variance $\sigma^2$.
+ \item The mean $\overline{X_{n}} =\frac{\sum_{i=1}^{n}X_{i}}{n}$ onverges in probability to $\mu$, $\overline{X_{n}} \overset{P}{\rightarrow} \mu$   
+ \item This is equivalent to saying that for all $\epsilon > 0$
  \begin{displaymath}
   \lim_{n\rightarrow \infty} \mathbb{P}(|\overline{X_{n}} - \mu| < \epsilon)=1
  \end{displaymath}
-\item Entonces la distribución de $\overline{X_{n}}$ se concentra alrededor de $\mu$ cuando $n$ crece.
+\item Then the distribution of  $\overline{X_{n}}$ becomes centered around $\mu$ as $n$ grows.
 \end{itemize}
 \end{block}
-\begin{block}{Ejemplo}
+\begin{block}{Example}
 \begin{itemize}
- \item Sea el experimento de lanzar una moneda donde la probabilidad de cara es $p$
- \item Para una V.A de distribución Bernoulli $E(X)=p$
- \item Sea $\overline{X_{n}}$ la fracción de caras después de $n$ lanzamientos.
- \item La ley de los grandes números nos dice que  $\overline{X_{n}}$ converge en probabilidad a $p$
- \item Esto no implica que  $\overline{X_{n}}$ sea numéricamente igual a $p$
- \item Si $n$ en grande la distribución de  $\overline{X_{n}}$ estará concentrada alrededor de $p$.
+ \item Let be the experiment of flipping a coin where the probability of heads is $p$.
+ \item For a Bernoulli distributed R.V $E(X)=p$.
+ \item Let be $\overline{X_{n}}$ the fraction of heads after $n$ tosses.
+ \item The law of large numbers tells us that  $\overline{X_{n}}$ converges in probability to $p$.
+ \item This does not imply that  $\overline{X_{n}}$ is numerically equal to $p$.
+ \item  But if $n$ in large enough, the distribution of $\overline{X_{n}}$ will be centered around $p$.
 \end{itemize}
 
  
@@ -712,22 +712,22 @@ lines(y3~x,type="l",col="blue")
  
 \end{frame}
 
-\begin{frame}{Teorema Central del Límite}
+\begin{frame}{Central Limit Theorem}
 \scriptsize{
 \begin{itemize}
- \item Si bien la ley de los grandes números nos dice que $\overline{X_{n}}$ se acerca a $\mu$
- \item Esto no es suficiente para afirmar algo sobre la distribución de $\overline{X_{n}}$
+ \item  While the law of large numbers tells us that  $\overline{X_{n}}$ approaches $\mu$ as $n$ grows.
+ \item This is not sufficient to say anything about the distribution of  $\overline{X_{n}}$.
 \end{itemize}
 
-\begin{block}{Teorema Central del Límite (CLT)}
+\begin{block}{Central Limit Theorem (CLT)}
 \begin{itemize}
- \item Sean $X_1, \dots , X_n$ variables aleatorias IID de media $\mu$ y varianza $\sigma^2$
- \item Sea $\overline{X_{n}}=\frac{\sum_{i=1}^{n} X_i}{n}$
+ \item Let $X_1, X_n$ be IID random variables of mean $\mu$ and variance $\sigma^2$.
+ \item Let $\overline{X_{n}}=\frac{\sum_{i=1}^{n} X_i}{n}$
 \begin{displaymath}
  Z_{n} \equiv \frac{\overline{X_{n}}-\mu}{\sqrt{\mathbb{V}(\overline{X_{n}})}}=\frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}}  \rightsquigarrow Z
 \end{displaymath}
-donde $Z\sim N(0,1)$
-\item Esto es equivalente a:
+where $Z\sim N(0,1)$
+\item This is equivalent to:
 \begin{displaymath}
  \lim_{n\rightarrow \infty} \mathbb{P}(Z_{n} \leq z) = \Phi(z) = \int_{-\infty}^{z}\frac{1}{\sqrt{2\pi}}e^{-x^2/2}dx
 \end{displaymath}
@@ -738,15 +738,15 @@ donde $Z\sim N(0,1)$
 } 
 \end{frame}
 
-\begin{frame}{Teorema Central del Límite (2)}
+\begin{frame}{Central Limit Theorem (2)}
 \begin{itemize}
- \item El teorema nos permite aproximar la distribución de $\overline{X_{n}}$ a una normal cuando $n$ es grande. 
- \item Aunque no sepamos la distribución de $X_{i}$, podemos aproximar la distribución de la media.
+ \item The theorem allows us to approximate the distribution of $\overline{X_{n}}$ to a Gaussian distribution when $n$ is large. 
+ \item Even if we do not know the distribution of $X_{i}$, we can approximate the distribution of its mean.
 \end{itemize}
 
 
 \scriptsize{
-\begin{block}{Notaciones alternativas que muestran que $Z_{n}$ converge a una  Normal}
+\begin{block}{Alternative notations showing that $Z_{n}$ converges to a Normal}
 \begin{eqnarray*}
   Z_n  &\approx &N(0,1)     \nonumber \\
   \overline{X_{n}} & \approx & N \left(\mu, \frac{\sigma^2}{n} \right)   \nonumber \\
@@ -763,13 +763,13 @@ donde $Z\sim N(0,1)$
 \end{frame}
 
 
-\begin{frame}{Teorema Central del Límite (3)}
+\begin{frame}{Central Limit Theorem (3)}
 \scriptsize{
 \begin{itemize}
- \item Supongamos que el número de errores de un programa computacional sigue una distribución de Poisson con parámetro $\lambda=5$
- \item Si $X \sim Poisson(\lambda)$, $\mathbb{E}(X)=\lambda$ y $\mathbb{V}(X)=\lambda$.
- \item Si tenemos 125 programas independientes $X_{1},\dots,X_{125}$ nos gustaría aproximar $\mathbb{P}(\overline{X_{n}} < 5.5)$
- \item Usando el CLT tenemos que
+ \item Suppose that the number of errors of a computer program follows a Poisson distribution with parameter $\lambda=5$
+ \item If$X \sim Poisson(\lambda)$, $\mathbb{E}(X)=\lambda$ and $\mathbb{V}(X)=\lambda$.
+ \item If we have 125 independent programs $X_{1},\dots,X_{125}$ we would like to approximate $\mathbb{P}(\overline{X_{n}} < 5.5)$
+ \item Using the CLT we have that
  \begin{eqnarray*}
  \mathbb{P}(\overline{X_{n}} < 5.5) & = & \mathbb{P} \left( \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}} <  \frac{5.5 -\mu}{\frac{\sigma}{\sqrt{n}}}  \right) \nonumber \\ 
                                     & \approx & \mathbb{P}\left( Z < \frac{5.5 - 5}{\frac{\sqrt{5}}{\sqrt{125}}}  \right) = \mathbb{P}( Z < 2.5) =0.9938
