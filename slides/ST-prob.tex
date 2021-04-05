@@ -160,17 +160,93 @@ Probabilities cannot be negative or greater than 1.
 
 \begin{frame}\frametitle{Interpretation of Probabilities}
 \begin{scriptsize}
-\begin{itemize}
-\item The are two common interpretations of probabilities: frequencies and degrees of beliefs. 
-\item In the frequency interpretation, $\mathbb{P}(E)$ is the long run proportion of times that $E$ is true in repetitions. 
+
+The are two common interpretations of probabilities: frequencies and degrees of beliefs (or Bayesian probabilities).
+\begin{block}{Frequentist probability}
+\begin{itemize} 
+ \item In the frequency interpretation, $\mathbb{P}(E)$ is the long run proportion (limiting frequency) of times that $E$ is true in repetitions.\footnote{\url{https://en.wikipedia.org/wiki/Frequentist_probability}} 
 \item For example, if we say that the probability of heads is 1/2, we mean that if we flip the coin many times then the proportion of times we get heads tends to 1/2 as the number of tosses increases. 
-\item The degree-of-belief interpretation is that $\mathbb{P}(E)$ measures an observer's strength of belief that $E$ is true.
-\item In either interpretation, we require that properties 1 to 3 hold. 
+\item When the sample space $\Omega$ is finite, we can say that
+\begin{displaymath}
+ \mathbb{P}(E) = \frac{\text{Favorable cases}}{\text{total cases}} = \frac{|E|}{|\Omega|}
+ \end{displaymath}
+\end{itemize} 
+\end{block}
+
+
+
+\end{scriptsize} 
+
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Interpretation of Probabilities}
+\begin{scriptsize}
+
+
+\begin{block}{Probability as a degree of belief}
+\begin{itemize} 
+\item The degree-of-belief interpretation (a.k.a Bayesian interpretation or Subjective interpretation) is that $\mathbb{P}(E)$ measures an observer's strength of belief that $E$ is true.
+\item If I were to ask you ``How likely is it that the US will return to the moon by 2026'', you can provide an answer to this question based on your knowledge and beliefs.
+\item Even though there are no relevant frequencies to compute a frequentist probability.
+\end{itemize}
+\end{block}
+
+\begin{itemize}
+\item In either interpretation, we require that properties 1 to 3 hold.
 \item The difference in interpretation will not matter much until we deal with statistical inference. 
 \item There, the differing interpretations lead to two schools of inference: the frequentist and the Bayesian schools.
-\end{itemize}
+\end{itemize} 
 
 
+
+\end{scriptsize} 
+
+\end{frame}
+
+\begin{frame}\frametitle{Combinatorial methods}
+\begin{scriptsize}
+
+
+\begin{itemize} 
+ \item There are a few facts from counting theory that are useful for calculating probabilities.
+ \item Given $n$ objects, the number of ways of ordering these objects is $n!=n(n-1)(n-2)\cdots3\cdot2\cdot1$.
+ \item For convenience, we define $0!=1$.
+ \item We also define 
+ \begin{displaymath}
+  {n \choose k} = \frac{n!}{k!(n-k)!}
+ \end{displaymath}
+read ``n choose k'', which is the number of distinct ways of choosing k objects from n.
+\end{itemize} 
+
+\end{scriptsize} 
+
+\end{frame}
+
+\begin{frame}\frametitle{Combinatorial methods}
+\begin{scriptsize}
+
+
+\begin{itemize} 
+\item For example, if we have a class of 20 people and we want to select a committee of 3 students, then there are
+ \begin{displaymath}
+  {20 \choose 3} = \frac{20!}{3!17!}=1140
+ \end{displaymath}
+ possible committees.
+ \item We note the following properties: 
+ \begin{displaymath}
+  {n \choose 0} = {n \choose n}=1
+ \end{displaymath}
+and
+ \begin{displaymath}
+  {n \choose k} = {n \choose n-k}.
+ \end{displaymath}
+
+ 
+ 
+\end{itemize} 
+ 
 \end{scriptsize} 
 
 \end{frame}
@@ -196,6 +272,7 @@ which assigns a real value $X(e)$ to any event of $\Omega$.
 
 
 \end{itemize}
+\footnotemark{sdfsdffsd}
 
 }
 
@@ -404,7 +481,7 @@ Chi-square & $f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/2}
 \begin{enumerate}
  \item If $X \sim N(\mu, \sigma^2)$, then $Z=(X-\mu)/\sigma \sim N(0,1)$
  \item If $Z \sim N(0,1)$, then $X=\mu+\sigma Z \sim N(\mu, \sigma^2)$
- \item Let $X_{i} \sim N(\mu_{i},\sigma_{i}^{2})$ ,$i=1,\dots,n$ \  be independt R.Vs:
+ \item Let $X_{i} \sim N(\mu_{i},\sigma_{i}^{2})$ ,$i=1,\dots,n$ \  be independent R.Vs:
  \begin{displaymath}
   \sum_{i=1}^{n}X_{i}\sim N( \sum_{i=1}^{n}\mu_{i}, \sum_{i=1}^{n}\sigma_{i}^{2})
  \end{displaymath}
@@ -525,7 +602,7 @@ lines(y3~x,type="l",col="blue")
 \scriptsize{
 \begin{itemize}
  \item The notion of probability function (mass or density) can be \textbf{extended} to more than one R.V.  
- \item Let $X$ $Y$ be two V.A, $\mathbb{P}(X,Y)$ represents the joint probability function.
+ \item Let $X$ and $Y$ be two R.Vs, $\mathbb{P}(X,Y)$ represents the joint probability function.
  \item $X$ and $Y$ are independent of each other, if
  \begin{displaymath}
 \mathbb{P}(X,Y)=\mathbb{P}(X)\times \mathbb{P}(Y)                                                     \end{displaymath}
