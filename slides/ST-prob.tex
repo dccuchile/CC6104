@@ -205,6 +205,24 @@ The are two common interpretations of probabilities: frequencies and degrees of 
 
 \end{frame}
 
+
+\begin{frame}\frametitle{The rule of subtraction}
+\scriptsize{
+
+\begin{itemize}
+ \item The probability of some event $E$ not happening is one minus the probability of the event happening:
+ \begin{displaymath}
+ \mathbb{P}(\neg E) = 1 - \mathbb{P}(E) 
+ \end{displaymath}
+\item For example, if the probability of rolling a one in a single die throw is 1/6, then the probability of rolling anything other than a one is 5/6.
+ 
+\end{itemize}
+
+}
+
+\end{frame}
+
+
 \begin{frame}\frametitle{Combinatorial methods}
 \begin{scriptsize}
 
@@ -271,8 +289,15 @@ which assigns a real value $X(e)$ to any event of $\Omega$.
 \end{itemize}
 
 
+\item A random variable can in many cases be the identity function. Example, if we roll a 6-sided die once and $X(e)$ is the resulting die value, then $X(e)=e$ for $e \in \{1,2,3,4,5,6\}$.   
+
+\item  It is important to understand that we can easily have different random variables from a same sample space. Example: we roll a die two times, $X(e)$ is the sum of the resulting two rolls and $Y(e)$ is the product of these two numbers.
+
+\item In most cases we work directly with the random variable and the sample space becomes implicit.
+
+
 \end{itemize}
-\footnotemark{sdfsdffsd}
+
 
 }
 
@@ -428,8 +453,8 @@ F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})
 \hline
   & Probability Function & Parameters   \\ 
 \hline
-Normal & $f_x=\frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}}$ & $\mu, \sigma$ \\ \hline
 Binomial & $f_x= {n \choose x}p^{x}(1-p)^{n-x} $ & $n,p$ \\ \hline
+Normal & $f_x=\frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}}$ & $\mu, \sigma$ \\ \hline
 Poisson & $f_x=\frac{1}{x!}\lambda^{x}\exp^{-\lambda}$ & $\lambda$ \\ \hline
 Exponential & $f_x= \lambda \exp^{-\lambda x}$  & $\lambda$ \\ \hline
 Gamma & $f_x= \frac{\lambda^{\alpha}}{\Gamma(\alpha)} x^{\alpha -1}\exp^{-\lambda x} $ & $\lambda , \alpha$ \\ \hline
@@ -438,12 +463,18 @@ Chi-square & $f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/2}
 \end{tabular}
 \end{table}
 
+\begin{block}{Warning}
+We defined random variables to be mappings from a sample space $\Omega$ to $\mathbb{R}$ but we did not mention the sample space in any of the distributions above. The sample space often becomes implicit but it is really there in the background. 
+\end{block}
+
+
+
 }
 \end{frame}
 
 
 
-\begin{frame}{Binomial Distribution}
+\begin{frame}[fragile]{Binomial Distribution}
 
 \scriptsize{
 \begin{itemize}
@@ -454,14 +485,31 @@ Chi-square & $f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/2}
   f_x(n,p)= {n \choose x}p^{x}(1-p)^{n-x} 
  \end{displaymath}
 \item The binomial coefficient ${n \choose x}$ describes the number of different ways that one can choose $x$ items out of $n$ total items.
- 
- 
+
  \end{itemize}}
  
  \end{frame}
  
  
+\begin{frame}[fragile]{Binomial Distribution}
 
+\scriptsize{
+\begin{itemize}
+\item Example: on Jan 20 2018, the basketball player Steph Curry hit only 2 out of 4 free throws in a game against the Houston Rockets.
+\item We know that Curry’s overall probability of hitting free throws across the entire season was 0.91.
+\item What is probability that he would hit only 50\% of his free throws in a game?
+\begin{displaymath}
+ f_2(4,0.91) = {4 \choose 2}0.91^{2}(1-0.91)^{4-2}=0.040 
+\end{displaymath}
+In R: 
+\begin{verbatim}
+ > dbinom(x=2,size=4,p=0.91)
+[1] 0.04024566
+\end{verbatim}
+ 
+ \end{itemize}}
+ 
+ \end{frame}
 
 \begin{frame}{Normal Distribution}
 
@@ -496,6 +544,74 @@ Chi-square & $f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/2}
 
 }
 \end{frame}
+
+
+
+\begin{frame}{Normal Distribution}
+
+\scriptsize{
+\begin{itemize}
+ \item  Suppose you and a thousand of your closest friends line up on the halfway line of a soccer field (football pitch).
+ \item Each of you has a coin in your hand. At the sound of the whistle, you begin flipping the coins. 
+ \item Each time a coin comes up heads, that person moves one step
+towards the left-hand goal. Each time a coin comes up tails, that person moves one step towards the right-hand goal. 
+\item Each person flips the coin 16 times, follows the implied moves,
+and then stands still.
+\item Now we measure the distance of each person from the halfway line.
+\item Can you predict what proportion of the thousand people who are standing on the halfway line? How about the proportion 5 yards left of the line?
+\item It’s hard to say where any individual person will end up, but you can say with great confidence what the collection of positions will be. 
+\item The distances will be distributed in approximately normal, or Gaussian, fashion.
+\item This is true even though the underlying distribution is binomial. 
+\item It does this because there are so many more possible ways to realize a sequence of left-right steps that sums to zero. 
+\item There are slightly fewer ways to realize a sequence that ends
+up one step left or right of zero, and so on, with the number of possible sequences declining in the characteristic bell curve of the normal distribution.
+ \end{itemize}}
+ 
+ \end{frame}
+ 
+
+
+
+
+\begin{frame}{Soccer 1}
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/soccer1.png}
+\end{figure}
+
+
+\end{frame}
+
+
+\begin{frame}{Soccer 2}
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/soccer2.png}
+\end{figure}
+
+
+\end{frame}
+
+\begin{frame}{Soccer 3}
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/soccer3.png}
+\end{figure}
+
+
+\end{frame}
+
+
+\begin{frame}{Soccer 4}
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/soccer4.png}
+\end{figure}
+
+
+\end{frame}
+
+
 
 \begin{frame}[fragile]{Example Normal}
 \scriptsize{
