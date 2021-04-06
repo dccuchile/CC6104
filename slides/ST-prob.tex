@@ -511,39 +511,27 @@ In R:
  
  \end{frame}
 
-\begin{frame}{Normal Distribution}
+
+ 
+
+\begin{frame}{The Normal Distribution}
 
 \scriptsize{
 \begin{itemize}
- \item $X$ has a Normal or Gaussian distribution of parameters $\mu$ and $\sigma$, $X \sim N(\mu,\sigma^2)$ if
- \begin{displaymath}
- f_x=\frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}} 
- \end{displaymath}
- \item Where $\mu \in \mathbb{R}$ is the ``center'' or the ``mean'' of the distribution and $\sigma > 0$ is the ``standard deviation''.
- \item When $\mu = 0$ and $\sigma =1$ we have a \textbf{Standard Normal Distribution} denoted by $Z$.
- \item We refer to the PDF by $\phi(z)$ and to the CDF of a Standard Normal by $\Phi(z)$.
- \item The values of $\Phi(z)$, $\mathbb{P}(Z \leq z)$ are tabulated.
- \end{itemize}
-
-\begin{block}{Useful Properties}
-\begin{enumerate}
- \item If $X \sim N(\mu, \sigma^2)$, then $Z=(X-\mu)/\sigma \sim N(0,1)$
- \item If $Z \sim N(0,1)$, then $X=\mu+\sigma Z \sim N(\mu, \sigma^2)$
- \item Let $X_{i} \sim N(\mu_{i},\sigma_{i}^{2})$ ,$i=1,\dots,n$ \  be independent R.Vs:
- \begin{displaymath}
-  \sum_{i=1}^{n}X_{i}\sim N( \sum_{i=1}^{n}\mu_{i}, \sum_{i=1}^{n}\sigma_{i}^{2})
- \end{displaymath}
-
+ \item  The normal or Gaussian distribution is extremely important in statistics, in part because it shows up all the time in nature. 
+ \item It is controlled by two parameters, a mean $\mu$ and a standard deviation $\sigma$. 
  
-\end{enumerate}
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.13]{pics/gaussian.jpg}
+\end{figure}
  
-\end{block}
-
-
-
-
-}
-\end{frame}
+ \item As we will see in the following example~\cite{mcelreath2020statistical}, the normal distribution is observed whenever many small, independent variations are summed together to produce a value.
+ \end{itemize}}
+ 
+ \footnotemark{Figure source: \url{http://sfonline.barnard.edu/wp-content/uploads/2015/12/gaussian-distribution.jpg}}
+ 
+ \end{frame}
 
 
 
@@ -554,11 +542,20 @@ In R:
  \item  Suppose you and a thousand of your closest friends line up on the halfway line of a soccer field (football pitch).
  \item Each of you has a coin in your hand. At the sound of the whistle, you begin flipping the coins. 
  \item Each time a coin comes up heads, that person moves one step
-towards the left-hand goal. Each time a coin comes up tails, that person moves one step towards the right-hand goal. 
+towards the left-hand goal. 
+\item Each time a coin comes up tails, that person moves one step towards the right-hand goal. 
 \item Each person flips the coin 16 times, follows the implied moves,
 and then stands still.
 \item Now we measure the distance of each person from the halfway line.
 \item Can you predict what proportion of the thousand people who are standing on the halfway line? How about the proportion 5 yards left of the line?
+ \end{itemize}}
+ 
+ \end{frame}
+ 
+\begin{frame}{Normal Distribution}
+
+\scriptsize{
+\begin{itemize}
 \item It’s hard to say where any individual person will end up, but you can say with great confidence what the collection of positions will be. 
 \item The distances will be distributed in approximately normal, or Gaussian, fashion.
 \item This is true even though the underlying distribution is binomial. 
@@ -572,11 +569,11 @@ up one step left or right of zero, and so on, with the number of possible sequen
 
 
 
-
 \begin{frame}{Soccer 1}
  \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.3]{pics/soccer1.png}
+	\caption{Source: \url{https://github.com/rmcelreath/stat_rethinking_2020}}
 \end{figure}
 
 
@@ -607,10 +604,159 @@ up one step left or right of zero, and so on, with the number of possible sequen
 	\centering
 	\includegraphics[scale=0.3]{pics/soccer4.png}
 \end{figure}
+\end{frame}
 
+
+\begin{frame}{Soccer 5}
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.25]{pics/soccer5.png}
+\end{figure}
+
+\begin{scriptsize}
+\begin{itemize}
+ \item  Random walks on the soccer field converge to a normal distribution. 
+ \item The more steps are taken, the closer the match between the real empirical distribution of positions and the ideal normal distribution, superimposed in the last plot in the bottom panel.
+\end{itemize}
+\end{scriptsize}
 
 \end{frame}
 
+
+\begin{frame}{The Normal Distribution}
+
+\scriptsize{
+\begin{itemize}
+ \item $X$ has a Normal or Gaussian distribution of parameters $\mu$ and $\sigma$, $X \sim N(\mu,\sigma^2)$ if  
+ \begin{displaymath}
+ f_x=\frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}} 
+ \end{displaymath}
+ \item Where $\mu \in \mathbb{R}$ is the ``center'' or the ``mean'' of the distribution and $\sigma > 0$ is the ``standard deviation''.
+ \item The mean shifts the distribution along the x axis. 
+ \item The standard deviation affects the shape such that the larger the $\sigma$, the wider the shape.
+ 
+ \item When $\mu = 0$ and $\sigma =1$ we have a \textbf{Standard Normal Distribution} denoted by $Z$.
+ \item We refer to the PDF by $\phi(z)$ and to the CDF of a Standard Normal by $\Phi(z)$.
+ 
+ \item The values of $\Phi(z)= \mathbb{P}(Z \leq z)$ are tabulated.
+ 
+    
+ \end{itemize}
+}
+\end{frame}
+
+
+
+\begin{frame}{The Normal Distribution}
+
+
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/gaussianTable.jpg}
+\end{figure}
+ 
+
+\end{frame}
+
+
+
+
+\begin{frame}{The Normal Distribution}
+
+\scriptsize{
+\begin{itemize}
+ \item Let's try to understand the main components of $\phi(z)$ as showed in \cite{colin2020}.
+ 
+  \begin{displaymath}
+  \phi(z) = \frac{1}{\sqrt{2\pi}} \exp^{-\frac{1}{2}x^2}
+ \end{displaymath}
+ 
+ \item Here's a plot of just the exponent $-\frac{1}{2}x^2$.
+ 
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{pics/gauss_exp.png}
+\end{figure}
+ 
+ \item As you can see, this is a simple parabola. 
+
+ \end{itemize}
+
+}
+\end{frame}
+
+
+
+\begin{frame}{The Normal Distribution}
+
+\scriptsize{
+\begin{itemize}
+ \item When we raise $\exp$ to the power of $-\frac{1}{2}x^2$ we get the following plot.
+ 
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{pics/gauss_exp2.png}
+\end{figure}
+ 
+ \item Taking the exponential of a negative parabola is what gives us the bell curve. 
+ \item As is, the area under the curve is $2\pi$, so the constant $\frac{1}{2\pi}$ is included to make it equal to 1.
+ \item Finally, the $\frac{1}{2}$ in the exponent ensures that the variance is equal to 1. 
+ \end{itemize}
+
+}
+\end{frame}
+
+\begin{frame}{The  Normal Distribution}
+
+\scriptsize{
+\begin{itemize}
+ \item In order to generalize to any normal distribution we simply include the parameters $\mu$ and $\sigma$
+ \begin{displaymath}
+ \frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}} 
+ \end{displaymath}
+ \item Notice that $\sigma$ scales the constant, but that the real action happens in the exponent. 
+ \item The density's highest point is shifted by $\mu$, then divided by $\sigma$. 
+\end{itemize}
+
+\begin{block}{Useful Properties}
+\begin{enumerate}
+ \item If $X \sim N(\mu, \sigma^2)$, then $Z=(X-\mu)/\sigma \sim N(0,1)$
+ \item If $Z \sim N(0,1)$, then $X=\mu+\sigma Z \sim N(\mu, \sigma^2)$
+ \item Let $X_{i} \sim N(\mu_{i},\sigma_{i}^{2})$ ,$i=1,\dots,n$ \  be independent R.Vs:
+ \begin{displaymath}
+  \sum_{i=1}^{n}X_{i}\sim N( \sum_{i=1}^{n}\mu_{i}, \sum_{i=1}^{n}\sigma_{i}^{2})
+ \end{displaymath}
+
+ 
+\end{enumerate}
+ 
+\end{block}
+}
+\end{frame}
+
+
+\begin{frame}{The Normal Distribution’s CDF}
+
+\scriptsize{
+\begin{itemize}
+ \item As discussed above, when dealing with probability over continuous values we are primarily interested in probability over a range.
+ \item For some purposes, it is convenient to think of a distribution in terms of total probability of an event occurring in the range of $-\infty$ to x.
+ \item  For the standard normal distribution we get the following CDF:
+ \begin{displaymath}
+  \Phi(z)= \mathbb{P}(Z \leq z) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{z} \exp^{\frac{-t^2}{2}}dt 
+ \end{displaymath}
+\item Here is a plot of the standard normal CDF.
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.25]{pics/normalcdf.png}
+\end{figure}
+
+ 
+ \end{itemize}
+
+}
+\end{frame}
 
 
 \begin{frame}[fragile]{Example Normal}
@@ -651,7 +797,7 @@ Or directly:
 	\centering
 	\includegraphics[scale=0.3]{pics/gaussian.png}
 \end{figure} 
-Let $X$ be a R.V $sim N(\mu,\sigma^2)$.
+Let $X$ be a R.V $\sim N(\mu,\sigma^2)$.
 \begin{itemize}
  \item $\mathbb{P}( \mu - \sigma \leq X \leq \mu+ \sigma) \approx 0.6827$  
  \item $\mathbb{P}( \mu - 2 \sigma \leq X \leq \mu+ 2 \sigma) \approx 0.9545$               
