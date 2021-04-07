@@ -288,25 +288,42 @@ which assigns a real value $X(e)$ to any event of $\Omega$.
  \item If $e=HHTHHTHHTT$, then $X(e)=6$ 
 \end{itemize}
 
-
-\item A random variable can in many cases be the identity function. Example, if we roll a 6-sided die once and $X(e)$ is the resulting die value, then $X(e)=e$ for $e \in \{1,2,3,4,5,6\}$.   
-
-\item  It is important to understand that we can easily have different random variables from a same sample space. Example: we roll a die two times, $X(e)$ is the sum of the resulting two rolls and $Y(e)$ is the product of these two numbers.
-
-\item In most cases we work directly with the random variable and the sample space becomes implicit.
-
-
 \end{itemize}
-
-
 }
 
 \end{frame}
 
+
+\begin{frame}{Random Variable}
+\scriptsize{
+
+\begin{itemize}
+\item A random variable can in many cases be the identity function.
+
+\item Example, if we roll a 6-sided die once and $X(e)$ is the resulting die value, then $X(e)=e$, for $e \in \{1,2,3,4,5,6\}$.
+
+\item In these cases, the notion that a random variable is a function can be confusing (it looks more like a set), but we can always reconstruct the mapping function as the identity function.  
+
+\item  It is important to understand that we can easily have different random variables from a same sample space. 
+
+\item Example: we roll a die two times, $X(e)$ is the sum of the resulting two rolls and $Y(e)$ is the product of these two numbers.
+
+\item For the event $e=\{4,5\}$, $X(e)=9$ and $Y(e)=45$.
+
+\end{itemize}
+}
+
+
+
+
+\end{frame}
+
+
+
 \begin{frame}{Example}
 
 \begin{itemize}
- \item We flip a coin 2 times. Let $X$ be the number of tails obtained.
+ \item We flip a fair coin 2 times. Let $X$ be the number of heads obtained.
  \item The random variable and its distribution is summarized as:
 \end{itemize}
 
@@ -315,10 +332,10 @@ which assigns a real value $X(e)$ to any event of $\Omega$.
 \hline
  $e$ & $\mathbb{P}(e)$ & $X(e)$   \\ 
 \hline
-HH & 1/4 & 0 \\
+TT & 1/4 & 0 \\
+TH & 1/4 & 1 \\
 HT & 1/4 & 1 \\
-TC & 1/4 & 1 \\
-TT & 1/4 & 2 \\
+HH & 1/4 & 2 \\
 \hline
 \end{tabular}
 \end{table}
@@ -347,12 +364,57 @@ TT & 1/4 & 2 \\
 \begin{displaymath}
  F_{X}(x)=\mathbb{P}(X\leq x)
 \end{displaymath}
+\item For the previous example of flipping a fair coin twice and counting the number of heads, the CDF is as follows:
+
+\[   
+F_X(x) = 
+     \begin{cases}
+     0 & x<0 \\
+     1/4 & 0 \leq x < 1 \\
+     3/4 & 1 \leq x < 2 \\
+     1 & x \geq 2.
+     \end{cases}
+\]
+
+
+
 \end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}{R.V Definitions}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/cdf_coin.png}
+\end{figure}
+
+
+\begin{itemize}
+ \item CDF's can be very confusing. 
+ \item Notice that the function is right continuous, non-decreasing, and that it is defined for all x, even though the random variable only takes values 0,1, and 2.
+ \item Notation: when $X$ is a random variable; $x$ denotes a particular value of the random variable.
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{R.V Definitions}
+\scriptsize{
 
 \begin{block}{Discrete Random Variables}
 \begin{itemize}
 \item A R.V $X$ is \textbf{discrete} if it maps the outputs to a countable set.
-\item We define the \textbf{probability function} or \textbf{probability mass function} of a discrete R.V $X$ as $f_{X}(x)=\mathbb{P}(X=x)$.
+\item We define the \textbf{probability function} or \textbf{probability mass function} PMF of a discrete R.V $X$ as $f_{X}(x)=\mathbb{P}(X=x)$.
 \item Then $f_{X}(x) \geq 0$  $\forall x \in \mathbb{R}$, and $\sum_{i}f_{X}(x_{i})=1$
 \item The CDF of $X$ is related to $f_{X}$ as follows: 
 \begin{displaymath}
@@ -362,13 +424,25 @@ F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})
 \end{itemize}
  
 \end{block}
+The PMF for the previous example is:
 
+\[   
+f_X(x) = 
+     \begin{cases}
+     1/4 & x=0 \\
+     1/2 & x=1 \\
+     1/4 & x=2 \\
+     0 &  \text{otherwise.}
+     \end{cases}
+\]
 
 
 } 
 \end{frame}
 
-\begin{frame}{R.V Definitions II}
+
+
+\begin{frame}{R.V Definitions}
 \scriptsize{
 \begin{block}{Continuous Random Variable}
 \begin{itemize}
@@ -396,11 +470,72 @@ F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})
 
 \end{itemize}
 
+}
+\end{frame}
+
+\begin{frame}{R.V Definitions}
+\scriptsize{
+\begin{itemize}
+ \item Example: Suppose that $X$ has PDF
+ \[   
+f_X(x) = 
+     \begin{cases}
+     1 & 0\leq x \leq 1 \\
+     0 &  \text{otherwise.}
+     \end{cases}
+\]
+ 
+\item Clearly,$f_X(x) \geq 0$ and $\int f_X(x) = 1$. 
+\item A random variable with this density is said to have a Uniform (0,1) distribution.
+\item This is meant to capture the idea of choosing a point at random between 0 and 1. 
+\item The CDF is given by 
+ \[   
+F_X(x) = 
+     \begin{cases}
+     0 & x<0 \\
+     x &  0\leq x \leq 1 \\
+     1 &  x>1. 
+     \end{cases}
+\] 
+ 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/cdf_uniform.png}
+\end{figure} 
+ 
+\end{itemize}
+
 
 
 
 }
 \end{frame}
+
+
+\begin{frame}{R.V Definitions}
+\scriptsize{
+\begin{itemize}
+ \item Continuous random variables can lead to confusion. 
+ \item First, note that if $X$ is continuous then $\mathbb{P}(X = x) = 0$ for every $x$. 
+\item Don't try to think of $f(x)$ as $\mathbb{P}(X = x)$. 
+\item This only holds for discrete random variables. 
+\item We get probabilities from a PDF by integrating. 
+\item A PDF can be bigger than 1 (unlike a mass function). 
+\item For example, if $f(x) = 5$ for $x \in  [0,1/5]$ and $0$ otherwise.
+\item Then $f(x) \geq 0 $and $\int f(x)dx = 1$, so this is a well-defined PDF even though $f(x) = 5$ in some places.
+\item A PDF can also be interpreted as the rate of change in the CDF. 
+\item So where cumulative probability is increasing rapidly, density can easily exceed 1. 
+\item But if we calculate the area under the density function, it will never exceed 1. 
+ 
+\end{itemize}
+
+
+
+
+}
+\end{frame}
+
+
 
 \begin{frame}{Some Properties}
 
@@ -751,6 +886,29 @@ up one step left or right of zero, and so on, with the number of possible sequen
 	\centering
 	\includegraphics[scale=0.25]{pics/normalcdf.png}
 \end{figure}
+ 
+ \end{itemize}
+
+}
+\end{frame}
+
+
+\begin{frame}{The Normal Distribution’s CDF}
+
+\scriptsize{
+\begin{itemize}
+\item The y axis shows cumulative probability so  the function is always increasing.
+ 
+\item The CDF is simply expressing the area under the curve (i.e. the integral from $-\infty$ to $z$) of the PDF. 
+ 
+\item With $z = 0$, we are at the mean of the standard normal, so values are equally likely to be less than or greater than $z$. 
+
+\item This means that the CDF at $z = 0$ should be $0.5$ as we have accumulated half of the available probability. 
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.25]{pics/cdfpdf.png}
+\end{figure}
 
  
  \end{itemize}
@@ -1023,13 +1181,15 @@ lines(y3~x,type="l",col="blue")
 \scriptsize{
 \begin{block}{Weak Form}
 \begin{itemize}
+\item This theorem says that the mean of a large sample is close to the mean of the distribution.
  \item Let $X_{1},X_{2},\dots X_{n}$ be IID random variables of mean $\mu$ and variance $\sigma^2$.
- \item The mean $\overline{X_{n}} =\frac{\sum_{i=1}^{n}X_{i}}{n}$ onverges in probability to $\mu$, $\overline{X_{n}} \overset{P}{\rightarrow} \mu$   
+ \item The mean $\overline{X_{n}} =\frac{\sum_{i=1}^{n}X_{i}}{n}$ converges in probability to $\mu$, $\overline{X_{n}} \overset{P}{\rightarrow} \mu$   
  \item This is equivalent to saying that for all $\epsilon > 0$
  \begin{displaymath}
   \lim_{n\rightarrow \infty} \mathbb{P}(|\overline{X_{n}} - \mu| < \epsilon)=1
  \end{displaymath}
-\item Then the distribution of  $\overline{X_{n}}$ becomes centered around $\mu$ as $n$ grows.
+\item Then the distribution of  $\overline{X_{n}}$ more
+concentrated around $\mu$ as $n$ grows.
 \end{itemize}
 \end{block}
 \begin{block}{Example}
