@@ -466,8 +466,6 @@ f_X(x) =
  F_{X}(x)=\int_{-\infty}^{x}f_{X}(t)dt 
  \end{displaymath}
 \item Then $f_{X}(x) = F'_X(x)$ at all points $x$ where $F_{X}$ is differentiable.
-\item For continuous distributions the probability that $X$ takes a particular value $x$ is always zero.
-
 \end{itemize}
 
 }
@@ -480,12 +478,12 @@ f_X(x) =
  \[   
 f_X(x) = 
      \begin{cases}
-     1 & 0\leq x \leq 1 \\
+     1 & \text{for }0\leq x \leq 1 \\
      0 &  \text{otherwise.}
      \end{cases}
 \]
  
-\item Clearly,$f_X(x) \geq 0$ and $\int f_X(x) = 1$. 
+\item Clearly, $f_X(x) \geq 0$ and $\int f_X(x) = 1$. 
 \item A random variable with this density is said to have a Uniform (0,1) distribution.
 \item This is meant to capture the idea of choosing a point at random between 0 and 1. 
 \item The CDF is given by 
@@ -522,7 +520,7 @@ F_X(x) =
 \item We get probabilities from a PDF by integrating. 
 \item A PDF can be bigger than 1 (unlike a mass function). 
 \item For example, if $f(x) = 5$ for $x \in  [0,1/5]$ and $0$ otherwise.
-\item Then $f(x) \geq 0 $and $\int f(x)dx = 1$, so this is a well-defined PDF even though $f(x) = 5$ in some places.
+\item Then $f(x) \geq 0$ and $\int f(x)dx = 1$, so this is a well-defined PDF even though $f(x) = 5$ in some places.
 \item A PDF can also be interpreted as the rate of change in the CDF. 
 \item So where cumulative probability is increasing rapidly, density can easily exceed 1. 
 \item But if we calculate the area under the density function, it will never exceed 1. 
@@ -875,7 +873,7 @@ up one step left or right of zero, and so on, with the number of possible sequen
 \scriptsize{
 \begin{itemize}
  \item As discussed above, when dealing with probability over continuous values we are primarily interested in probability over a range.
- \item For some purposes, it is convenient to think of a distribution in terms of total probability of an event occurring in the range of $-\infty$ to x.
+ \item For some purposes, it is convenient to think of a distribution in terms of total probability of an event occurring in the range of $-\infty$ to z.
  \item  For the standard normal distribution we get the following CDF:
  \begin{displaymath}
   \Phi(z)= \mathbb{P}(Z \leq z) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{z} \exp^{\frac{-t^2}{2}}dt 
