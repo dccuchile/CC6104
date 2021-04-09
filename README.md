@@ -70,3 +70,4 @@ The course introduces the fundamentals of statistical thinking, which are descri
 * [Spurious Correlations](https://tylervigen.com/old-version.html)
 * [Research Methods and Statistics Bristol University](http://www.bristol.ac.uk/medical-school/media/rms/red/index.html)
 * [Seeing Theory - Frequentist Inference](https://seeing-theory.brown.edu/frequentist-inference/)
+* [Stats with R by Manny Gimond](https://mgimond.github.io/Stats-in-R/index.html)

@@ -270,6 +270,107 @@ and
 \end{frame}
 
 
+\begin{frame}{Conditional Probabilities}
+\scriptsize{
+\begin{itemize}
+\item The \textbf{conditional probability} for $Y$ given $X$ is defined as:
+ \begin{displaymath}
+  \mathbb{P}(Y|X) = \frac{\mathbb{P}(X,Y)}{\mathbb{P}(X)}
+ \end{displaymath}
+ \item $\mathbb{P}(Y|X)$ can be interpreted as the fraction of times $Y$ occurs when $X$ is known to occur.
+  \item  If $X$ and $Y$ are independent $\mathbb{P}(Y|X)=\mathbb{P}(Y)$
+\end{itemize}
+
+\begin{block}{Warning}
+\begin{itemize}
+ \item In general it is not the case that $\mathbb{P}(Y|X) = \mathbb{P}(X|Y)$. 
+\item People get this confused all the time. 
+\item For example, the probability of spots given you have measles is 1 but the probability that you have measles given that you have spots is not 1. 
+\item In this case, the difference between $\mathbb{P}(Y|X)$ and $\mathbb{P}(X|Y)$ is obvious but there are cases where it is less obvious.
+\end{itemize}
+
+A medical test for a disease D has outcomes positive and negative,  the probabilities are:
+
+ 
+\end{block}
+
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Conditional Probabilities}
+\scriptsize{
+\begin{itemize}
+\item A medical test for a disease D has outcomes ``positive'' and ``negative'',  the probabilities are:
+
+\begin{center}
+\begin{tabular}{c|cc}
+& D & $\neg$ D \\  \hline
+positive & 0.009 & 0.099 \\
+negative & 0.001 & 0.891 \\ 
+\end{tabular}
+\end{center}
+
+\item lala 
+ 
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}{Bayes' Theorem and Total Probabilities}
+\scriptsize{
+\begin{itemize}
+ \item The conditional probability $\mathbb{P}(Y|X)$ and $\mathbb{P}(X|Y)$ can be expressed as a function of each other using Bayes' theorem.
+\begin{displaymath}
+ \mathbb{P}(Y|X)=\frac{\mathbb{P}(X|Y)\mathbb{P}(Y)}{\mathbb{P}(X)}
+\end{displaymath}
+\item Then let $\{ Y_1,Y_2,\dots, Y_k \} $ be a set of mutually exclusive events of the sample space of a R.V $X$, the denominator of Bayes' theorem can be expressed as:
+\begin{displaymath}
+\mathbb{P}(X)= \sum_{i=1}^{k} \mathbb{P}(X,Y_i) = \sum_{i=1}^{k} \mathbb{P}(X|Y_i)\mathbb{P}(Y_i)
+\end{displaymath}
+\end{itemize}
+ 
+}
+\end{frame}
+
+\begin{frame}{Example}
+\scriptsize{
+\begin{itemize}
+ \item I split my emails into three categories: $A_1$=```spam'', $A_2$=```low priority'', $A_3$=```high priority''.'
+ \item We know that $\mathbb{P}(A_1)=0.7$, $\mathbb{P}(A_2)=0.2$ and $\mathbb{P}(A_3)=0.1$, clearly $0.7+0.2+0.1=1$.
+ \item Let $B$ be the event that the mail contains the word ``free''.
+ \item We know that $\mathbb{P}(B|A_1)=0.9$ $\mathbb{P}(B|A_2)=0.01$ y $\mathbb{P}(B|A_3)=0.01$ clearly $0.9+0.01+0.01 \neq 1$
+ \item  What is the probability that an email with the word ``free'' in it is ``spam''?
+ \item Using Bayes and Total Probabilities:
+ \begin{displaymath}
+  \mathbb{P}(A_1|B) = \frac{0.9 \times 0.7}{(0.9 \times 0.7) + (0.01 \times 0.2) + (0.01 \times 0.1)} = 0.995
+ \end{displaymath}
+
+
+
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+
+
+
+
 \begin{frame}{Random Variable}
 \scriptsize{
 
@@ -1016,7 +1117,7 @@ lines(y3~x,type="l",col="blue")
 
 
 
-\begin{frame}{Joint and Conditional Probabilities}
+\begin{frame}{Joint Probabilities}
 \scriptsize{
 \begin{itemize}
  \item The notion of probability function (mass or density) can be \textbf{extended} to more than one R.V.  
@@ -1024,77 +1125,6 @@ lines(y3~x,type="l",col="blue")
  \item $X$ and $Y$ are independent of each other, if
  \begin{displaymath}
 \mathbb{P}(X,Y)=\mathbb{P}(X)\times \mathbb{P}(Y)                                                     \end{displaymath}
-\item The \textbf{conditional probability} for $Y$ given $X$ is defined as:
- \begin{displaymath}
-  \mathbb{P}(Y|X) = \frac{\mathbb{P}(X,Y)}{\mathbb{P}(X)}
- \end{displaymath}
-\item  If $X$ and $Y$ are independent $\mathbb{P}(Y|X)=\mathbb{P}(Y)$
-\end{itemize}
-
-
-
-
-} 
-\end{frame}
-
-
-\begin{frame}{Joint and Conditional Probabilities (2)}
- \begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.3]{pics/condicional.png}
-	\caption{Source: \url{en.wikipedia.org/wiki/Conditional_probability}}
-\end{figure}
-
-
-
-\scriptsize{
-\begin{itemize}
- \item Let $S$ be the sample space, $A$ and $B_n$ events.
- \item The probabilities are proportional to the area.
- \item $\mathbb{P}(A) \sim 0.33$, $\mathbb{P}(A|B_1)=1$
- \item $\mathbb{P}(A|B_2)\sim 0.85$ y $\mathbb{P}(A|B_3)=0$ 
-\end{itemize}
-
-
-
-
-} 
-\end{frame}
-
-
-
-
-\begin{frame}{Bayes' Theorem and Total Probabilities}
-\scriptsize{
-\begin{itemize}
- \item The conditional probability $\mathbb{P}(Y|X)$ and $\mathbb{P}(X|Y)$ can be expressed as a function of each other using Bayes' theorem.
-\begin{displaymath}
- \mathbb{P}(Y|X)=\frac{\mathbb{P}(X|Y)\mathbb{P}(Y)}{\mathbb{P}(X)}
-\end{displaymath}
-\item $P(Y|X)$ can be interpreted as the fraction of times $Y$ occurs when $X$ is known to occur.
-\item Then let $\{ Y_1,Y_2,\dots, Y_k \} $ be a set of mutually exclusive events of the sample space of a R.V $X$, the denominator of Bayes' theorem can be expressed as:
-\begin{displaymath}
-\mathbb{P}(X)= \sum_{i=1}^{k} \mathbb{P}(X,Y_i) = \sum_{i=1}^{k} \mathbb{P}(X|Y_i)\mathbb{P}(Y_i)
-\end{displaymath}
-\end{itemize}
- 
-}
-\end{frame}
-
-\begin{frame}{Example}
-\scriptsize{
-\begin{itemize}
- \item I split my emails into three categories: $A_1$=```spam'', $A_2$=```low priority'', $A_3$=```high priority''.'
- \item We know that $\mathbb{P}(A_1)=0.7$, $\mathbb{P}(A_2)=0.2$ and $\mathbb{P}(A_3)=0.1$, clearly $0.7+0.2+0.1=1$.
- \item Let $B$ be the event that the mail contains the word ``free''.
- \item We know that $\mathbb{P}(B|A_1)=0.9$ $\mathbb{P}(B|A_2)=0.01$ y $\mathbb{P}(B|A_3)=0.01$ clearly $0.9+0.01+0.01 \neq 1$
- \item  What is the probability that an email with the word ``free'' in it is ``spam''?
- \item Using Bayes and Total Probabilities:
- \begin{displaymath}
-  \mathbb{P}(A_1|B) = \frac{0.9 \times 0.7}{(0.9 \times 0.7) + (0.01 \times 0.2) + (0.01 \times 0.1)} = 0.995
- \end{displaymath}
-
-
 
 \end{itemize}
 
