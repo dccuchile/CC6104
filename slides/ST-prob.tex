@@ -81,7 +81,7 @@
 
 \scriptsize{
 \begin{itemize}
-  \item The problem studied in probabilities is: given a data generating process, which are the properties of the outputs?
+  \item The problem studied in probability is: given a data generating process, which are the properties of the outputs?
  \item The problem studied in statistical inference, data mining and machine learning is: given the outputs, what can we say about the process that generates the observed data? 
 \end{itemize}
 
@@ -288,9 +288,6 @@ and
 \item For example, the probability of spots given you have measles is 1 but the probability that you have measles given that you have spots is not 1. 
 \item In this case, the difference between $\mathbb{P}(Y|X)$ and $\mathbb{P}(X|Y)$ is obvious but there are cases where it is less obvious.
 \end{itemize}
-
-A medical test for a disease D has outcomes positive and negative,  the probabilities are:
-
  
 \end{block}
 
@@ -301,7 +298,7 @@ A medical test for a disease D has outcomes positive and negative,  the probabil
 
 
 
-\begin{frame}{Conditional Probabilities}
+\begin{frame}{Conditional Probabilities: Example}
 \scriptsize{
 \begin{itemize}
 \item A medical test for a disease D has outcomes ``positive'' and ``negative'',  the probabilities are:
@@ -314,7 +311,37 @@ negative & 0.001 & 0.891 \\
 \end{tabular}
 \end{center}
 
-\item lala 
+\item From the definition of conditional probability
+
+\begin{displaymath}
+\mathbb{P}(\text{positive}|D) = \frac{\mathbb{P}(\text{positive},D)}{\mathbb{P}(D)}  = \frac{0.009}{0.009+0.001} = 0.9  
+\end{displaymath}
+and 
+\begin{displaymath}
+\mathbb{P}(\text{negative}|\neg D) = \frac{\mathbb{P}(\text{negative},\neg D)}{\mathbb{P}(\neg D)}  = \frac{0.891}{0.891+0.0991} \approx 0.9  
+\end{displaymath}
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Conditional Probabilities: Example}
+\scriptsize{
+\begin{itemize}
+\item Apparently, the test is fairly accurate. 
+\item Sick people yield a positive 90 percent of the time and healthy people yield a negative about 90 percent of the time.
+\item Suppose you go for a test and get a positive. 
+\item What is the probability you have the disease? Most people answer $0.90$. 
+\item The correct answer is
+\begin{displaymath}
+\mathbb{P}(D|\text{positive}) = \frac{\mathbb{P}(D,\text{positive})}{\mathbb{P}(\text{positive})}  = \frac{0.009}{0.009+0.099} \approx 0.08  
+\end{displaymath}
+\item The lesson here is that you need to compute the answer numerically. 
+\item Don't trust your intuition.
  
 \end{itemize}
 
@@ -969,6 +996,28 @@ up one step left or right of zero, and so on, with the number of possible sequen
 \end{frame}
 
 
+
+\begin{frame}{The  Normal Distribution}
+
+\scriptsize{
+\begin{itemize}
+ \item If follows from property 1 that if $X\sim N(\mu,\sigma^2)$, then
+ 
+ \begin{align}
+  \mathbb{P}(a<X<b) & = \mathbb{P}\left(\frac{a-\mu}{\sigma}<X<\frac{b-\mu}{\sigma}\right) \\
+   & = \Phi \left(\frac{b-\mu}{\sigma}\right)-\Phi \left(\frac{a-\mu}{\sigma}\right)
+ \end{align}
+
+ 
+\end{itemize}
+
+
+}
+\end{frame}
+
+
+
+
 \begin{frame}{The Normal Distribution’s CDF}
 
 \scriptsize{
@@ -1121,13 +1170,58 @@ lines(y3~x,type="l",col="blue")
 \scriptsize{
 \begin{itemize}
  \item The notion of probability function (mass or density) can be \textbf{extended} to more than one R.V.  
- \item Let $X$ and $Y$ be two R.Vs, $\mathbb{P}(X,Y)$ represents the joint probability function.
- \item $X$ and $Y$ are independent of each other, if
- \begin{displaymath}
-\mathbb{P}(X,Y)=\mathbb{P}(X)\times \mathbb{P}(Y)                                                     \end{displaymath}
+ \item Given a pair of discrete random variables $X$ and $Y$, define the joint mass function by $f(x,y) = \mathbb{P}(X = x $and$ Y = y)$ or $\mathbb{P}(X = x, Y = y)$.
+ 
+ \item We write $f$ as $f_{X,Y}$ when we want to be more explicit.
+ 
+ \item Example: Here is a bivariate distribution for two random variables $X$ and $Y$ each taking values 0 or 1:
+ \begin{table}
+\centering
+ \begin{tabular}{c|cc|c}
+& $Y=0$ & $Y=1$ & \\ \hline
+$X=0$ & 1/9 & 2/9 & 1/3 \\
+$X=1$ & 2/9 & 4/9 & 2/3 \\ \hline
+& 1/3 & 2/3 & 1 \\
+\end{tabular} 
+\end{table} 
+ 
+\item Thus, $f(1, 1) = \mathbb{P}(X = 1, Y = 1) = 4/9$. 
+ 
+
 
 \end{itemize}
 
+} 
+\end{frame}
+
+\begin{frame}{Joint Probabilities}
+\scriptsize{
+
+\begin{block}{Continuous Case}
+In the continuous case, we call a function $f(x,y)$ a PDF for the random variables $(X, Y)$ if
+\begin{enumerate}
+ \item $f(x, y) \geq 0$ for all $(x, y)$,
+ \item $\int_{-\infty}^{\infty} f(x,y)dxdy=1$ and,
+ \item for any set $A \subset \mathbb{R}\times\mathbb{R}, \mathbb{P}((X,Y) \in A)=\int \int_{A}f(x,y)dxdy$. 
+\end{enumerate}
+
+\end{block}
+
+In the discrete or continuous case we define the joint CDF
+as $F_{X,Y} = \mathbb{P}(X \leq x, Y \leq y)$.
+
+\begin{block}{Independent Random Variables}
+\begin{itemize}
+ \item Two random variables $X$ and $Y$ are independent if, for every $A$ and $B$, 
+ \begin{displaymath}
+\mathbb{P}(X \in A, Y \in B)=\mathbb{P}(X \in A)\times \mathbb{P}(Y \in B)                                                     \end{displaymath}
+\item For the discrete case that means that $\mathbb{P}(X, Y) =\mathbb{P}(X)\times \mathbb{P}(Y)$ and for the continuous case we have that $f_{X,Y}(x, y) = f_{X}(x)\times f_{Y}(y)$ for all values $x$ and $y$.
+
+\end{itemize}
+
+
+
+\end{block}
 
 
 
@@ -1136,12 +1230,10 @@ lines(y3~x,type="l",col="blue")
 
 
 
-
-
 \begin{frame}{Expectation}
 \scriptsize{
 \begin{itemize}
- \item Let $X$ be a R.V, we define its \textbf{expectation} or \textbf{first-order moment} as:
+ \item Let $X$ be a R.V, we define its \textbf{expectation}, or \textbf{mean}, or \textbf{first-order moment} as:
   \begin{displaymath}
   \mathbb{E}(X) = \left\{ \begin{array}{rl}
   \sum_{x}(x\times f(x)) &\mbox{ If $X$ is discrete} \\
@@ -1149,7 +1241,7 @@ lines(y3~x,type="l",col="blue")
        \end{array} \right.
   \end{displaymath}
 \item The expectation is the weighted average of all the possible values that a random variable can take.
-
+\item Think of $\mathbb{E}(X)$ as the average $\sum_{i=1}^{n}X_i/n$ of a large number of IID draws $X_1, \dots,X_n$. \footnote{This is  a theorem called the law of large numbers to be discussed next.}
 \item For the case of tossing a coin twice with $X$ the number of heads:
  \begin{eqnarray*}
   \mathbb{E}(X) & = & (0 \times f(0)) + (1 \times f(1)) + (2 \times f(2)) \nonumber \\
@@ -1203,6 +1295,15 @@ lines(y3~x,type="l",col="blue")
 }
 \end{frame}
 
+\begin{frame}{Expectation and Variance of Well-known Distributions}
+ 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/expectations.png}
+\end{figure} 
+ 
+\end{frame}
+
 
 
 \begin{frame}{Law of the Large Numbers}
@@ -1223,7 +1324,7 @@ concentrated around $\mu$ as $n$ grows.
 \begin{block}{Example}
 \begin{itemize}
  \item Let be the experiment of flipping a coin where the probability of heads is $p$.
- \item For a Bernoulli distributed R.V $E(X)=p$.
+ \item For a Bernoulli distributed R.V $\mathbb{E}(X)=p$.
  \item Let be $\overline{X_{n}}$ the fraction of heads after $n$ tosses.
  \item The law of large numbers tells us that  $\overline{X_{n}}$ converges in probability to $p$.
  \item This does not imply that  $\overline{X_{n}}$ is numerically equal to $p$.
@@ -1238,6 +1339,34 @@ concentrated around $\mu$ as $n$ grows.
 }
  
 \end{frame}
+
+
+
+\begin{frame}{The Law of Large Numbers}
+
+\scriptsize{
+\begin{itemize}
+\item  Let's visualize executing the coin tossing experiment twice with $n=1,000$ and $p=0.5$ in the following plot.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{pics/large_numbers.png}
+\end{figure} 
+
+\item On the x-axis we show the flip number and along the y-axis, we show the cumulative mean, or our average number of heads up to flip x. 
+
+\item  Early on there is a lot of variation in mean scores. 
+\item However, as you move towards 1,000 flips, the runs will converge towards the expected probability of 0.5. 
+\item The more independent random events you have, the less variability there will be around the theoretically expected results.
+ \end{itemize}
+
+}
+\end{frame}
+
+
+
+
+
 
 \begin{frame}{Central Limit Theorem}
 \scriptsize{
@@ -1260,19 +1389,26 @@ where $Z\sim N(0,1)$
 \end{displaymath}
 \end{itemize}
 \end{block}
-
-
-} 
-\end{frame}
-
-\begin{frame}{Central Limit Theorem (2)}
 \begin{itemize}
  \item The theorem allows us to approximate the distribution of $\overline{X_{n}}$ to a Gaussian distribution when $n$ is large. 
  \item Even if we do not know the distribution of $X_{i}$, we can approximate the distribution of its mean.
 \end{itemize}
 
 
+
+} 
+\end{frame}
+
+\begin{frame}{Central Limit Theorem (2)}
 \scriptsize{
+\begin{itemize}
+ \item The previous example about the soccer field was a clear manifestation of the CLT.
+ \item In that case we were summing up various independent random variables coming from a non-normal (Binomial) distribution.
+ \item The CLT also holds for the sum of random variables, because the sum is just $\overline{X_{n}}$ multiplied by a constant.
+\end{itemize}
+
+
+
 \begin{block}{Alternative notations showing that $Z_{n}$ converges to a Normal}
 \begin{eqnarray*}
   Z_n  &\approx &N(0,1)     \nonumber \\
@@ -1290,11 +1426,28 @@ where $Z\sim N(0,1)$
 \end{frame}
 
 
-\begin{frame}{Central Limit Theorem (3)}
+\begin{frame}{ Why is the Central Limit Theorem Important?}
+\scriptsize{
+\begin{itemize}
+ \item For experimentalists, the CLT is an extremely important concept. 
+ \item For many practical questions, we cannot get measurements for an entire population of interest.
+ \item So we have to select a sample from which to draw conclusions. 
+ \item How can we be confident that the conclusions we draw about the sample generalize across the population? 
+ \item The central limit theorem allows us to make claims about the distribution of our \textbf{sample means}. 
+ \item This will be a fundamental idea for statistical inference.
+\end{itemize}
+
+
+ }
+\end{frame}
+
+
+
+\begin{frame}{Example: Central Limit Theorem }
 \scriptsize{
 \begin{itemize}
  \item Suppose that the number of errors of a computer program follows a Poisson distribution with parameter $\lambda=5$
- \item If$X \sim Poisson(\lambda)$, $\mathbb{E}(X)=\lambda$ and $\mathbb{V}(X)=\lambda$.
+ \item If $X \sim Poisson(\lambda)$, $\mathbb{E}(X)=\lambda$ and $\mathbb{V}(X)=\lambda$.
  \item If we have 125 independent programs $X_{1},\dots,X_{125}$ we would like to approximate $\mathbb{P}(\overline{X_{n}} < 5.5)$
  \item Using the CLT we have that
  \begin{eqnarray*}
@@ -1312,7 +1465,17 @@ where $Z\sim N(0,1)$
  
 \end{frame}
 
+\begin{frame}{ Conclusions}
+\scriptsize{
+\begin{itemize}
+ \item We have visited the main concepts of probability, the language uncertainty.
+ \item Random variables, PDFs, PMFs, CDFs, are fundamental building blocks for statistical inference.
+ \item The law of large numbers and the central limit theorem will allow us to make probabilistic statements about the population even if we only work with samples.
+\end{itemize}
 
+
+ }
+\end{frame}
 
 
 
