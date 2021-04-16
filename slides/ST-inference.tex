@@ -34,25 +34,7 @@
 \newcommand{\factorial}{\ensuremath{\mbox{\sc Factorial}}}
 \newcommand{\BIGOP}[1]{\mathop{\mathchoice%
 {\raise-0.22em\hbox{\huge $#1$}}%
-{\raise-0.05em\hbox{\L
-\usepackage{fontenc}
-\usepackage{framed,color}
-\usepackage{palatino, url, multicol}
-\usepackage{listings}
-%\algsetup{indent=2em}
-\newcommand{\factorial}{\ensuremath{\mbox{\sc Factorial}}}
-\newcommand{\BIGOP}[1]{\mathop{\mathchoice%
-{\raise-0.22em\hbox{\huge $#1$}}%
 {\raise-0.05em\hbox{\Large $#1$}}{\hbox{\large $#1$}}{#1}}}
-\newcommand{\bigtimes}{\BIGOP{\times}}
-\vspace{-0.5cm}
-\title{Introduction to Statistical Inference}
-\vspace{-0.5cm}
-\author[Felipe Bravo Márquez]{\footnotesize
-%\author{\footnotesize  
- \textcolor[rgb]{0.00,0.00,1.00}{Felipe José Bravo Márquez}} 
-\date{ \today }
-arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \newcommand{\bigtimes}{\BIGOP{\times}}
 \vspace{-0.5cm}
 \title{Introduction to Statistical Inference}
@@ -101,11 +83,24 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \end{frame}
 
 
-\begin{frame}{Statistical Inference (2)}
+\begin{frame}{Samples and Surveys}
+\scriptsize{
+\begin{itemize}
+ \item Random samples
+ \item Stratified samples
+ \item Biases
+
+\end{itemize}
+
+} 
+\end{frame}
+
+
+\begin{frame}{Statistical Inference }
 \scriptsize{
 \begin{itemize}
  \item The process of drawing conclusions about a population from sample data is known as \textbf{statistical inference}.
-\item In statistical inference we try to \textbf{infer} the distribution that generates the observed data.
+\item From a general point of view, the goal of inference is to \textbf{infer} the distribution that generates the observed data.
 \item Example: Given a sample $X_1, \dots, X_n \sim F$, how do we infer $F$? 
 \item However, in most cases we are only interested in inferring some property of $F$ (e.g., its \textbf{mean} value).
 \item Statistical models that assume that the distribution can be modeled with a finite set of parameters $\theta= (\theta_{1},\theta_{2},\dots,\theta_{k})$ are called \textbf{parametric models}. 
@@ -260,20 +255,20 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 
 
 
-\begin{frame}{Ejemplos de Estimación Puntual (5)}
+\begin{frame}{Point Estimation  (5)}
 \scriptsize{
 \begin{itemize}
- \item Por lo general no sabemos $\sigma$ de la población.
- \item Cuando queremos estimar la varianza de una población a partir de una muestra hablamos de la  \textbf{varianza muestral}:
-\item Existen dos estimadores comunes, una versión sesgada \begin{displaymath}
+ \item  We usually do not know $\sigma$ of the population.
+ \item When we want to estimate the variance of a population from a sample we are talking about the  \textbf{sample variance}:
+\item There are two common estimators, a biased version  \begin{displaymath}
  s_{n}^{2}= \frac{1}{n} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2
 \end{displaymath}
 
-\item Una versión sin sesgo \begin{displaymath}
+\item An unbiased version \begin{displaymath}
  s^{2}= \frac{1}{n-1} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2
 \end{displaymath}
 
-\item Cuando no sabemos la varianza de la población y queremos estimar la media, el error estándar es estimado: \begin{displaymath}                                                                                                                 
+\item When we do not know the variance of the population and want to estimate the mean, the standard error is estimated: \begin{displaymath}                                                                                                                 
 \hat{se}(\overline{X_{n}}) = \frac{s}{\sqrt{n}}                                                                                                                \end{displaymath}
 
 
@@ -284,16 +279,16 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \end{frame}
 
 
-\begin{frame}{Estimación Puntual (6)}
+\begin{frame}{Point Estimation (6)}
 \scriptsize{
 \begin{itemize}
- \item Sean $X_1, \dots, X_n \sim$ Bernoulli$(p)$ y sea $\hat{p}_{n}=\frac 1n \sum_{i}X_{i}$
- \item Luego $\mathbb{E}(\hat{p}_{n})= \frac 1n \sum_i \mathbb{E}(X_i)=p$, entonces $\hat{p}_n$ es insesgado.
- \item El error estándar $se$ sería
+ \item Let $X_1, \dots, X_n \sim$ Bernoulli$(p)$ and let $\hat{p}_{n}=\frac 1n \sum_{i}X_{i}$
+ \item Then $\mathbb{E}(\hat{p}_{n})= \frac 1n \sum_i \mathbb{E}(X_i)=p$, and $\hat{p}_n$ is unbiased.
+ \item The standard error $se$ would be
 \begin{displaymath}
 se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n} 
 \end{displaymath}
-\item El error estándar estimado $\hat{se}$:
+\item The estimated standard error $\hat{se}$:
 \begin{displaymath}
 \hat{se} =\sqrt{\hat{p}(1-\hat p)/n} 
 \end{displaymath}
@@ -307,21 +302,21 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 
 
 
-\begin{frame}{Estimación Puntual (7)}
+\begin{frame}{Point Estimation (7)}
 
 \scriptsize{
 
 \begin{itemize}
-\item Se espera que un buen estimador sea insesgado y de mínima varianza.
+\item A good estimator is expected to be unbiased and of minimum variance.
 
-\item Unbiased ness used to receive much attention but these days is considered less important
+\item Unbiasedness used to receive much attention but these days is considered less important
 
 \item Many of the estimators we will use are biased. 
 
 \item A reasonable requirement for an estimator is that it should converge to the true parameter value as we collect more and more data.
 
-\item Un estimador puntual $\hat{\theta}_n$ de un parámetro $\theta$ es \textbf{consistente} si converge al valor verdadero cuando el número de datos de la muestra tiende a infinito.
-\item La calidad de un estimador se puede medir usando el \textbf{error cuadrático medio} (MSE)
+\item A point estimator $\hat{\theta}_n$ of a parameter $\theta$ is \textbf{consistent}  if it converges to the true value when the number of data in the sample tends to infinity..
+\item The quality of an estimator can be measured using the  \textbf{mean squared error} (MSE)
 \begin{displaymath}
 MSE = \mathbb{E}_{\theta}(\hat{\theta}_n - \theta)^2 
 \end{displaymath}
@@ -333,16 +328,16 @@ MSE = \mathbb{E}_{\theta}(\hat{\theta}_n - \theta)^2
 
 
 
-\begin{frame}{Estimación Puntual (8)}
+\begin{frame}{Point Estimation (8)}
 
 \scriptsize{
 
 \begin{itemize}
-\item Si para un estimador $\hat{\theta}_n$, su $bias \rightarrow 0$ y su $se \rightarrow 0$ cuando $n\rightarrow \infty$, $\hat{\theta}_n$ es un estimador consistente de $\theta$.
+\item If for an estimator $\hat{\theta}_n$, its $bias \rightarrow 0$ and its $se \rightarrow 0$ when $n\rightarrow \infty$, $\hat{\theta}_n$, it is a consistent estimator of $\theta$.
 
-\item Por ejemplo, para la media muestral $\mathbb{E}(\overline{X_{n}})=\mu$ lo que implica que el $bias =0$ y $se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}$ que tiende a cero cuando $n\rightarrow \infty$. Entonces $\overline{X_{n}}$ es un estimador consistente de la media.  
+\item For example, for the sample mean $\mathbb{E}(\overline{X_{n}})=\mu$ hich implies that the $bias =0$ and$se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}$  tends to zero when $n\rightarrow \infty$. Then $\overline{X_{n}}$ is a consistent estimator of the mean.  
 
-\item Para el caso del experimento Bernoulli se tiene que $\mathbb{E}(\hat{p})=p \Rightarrow bias=0$ y $se = \sqrt{p(1-p)/n} \rightarrow 0$ cuando $n\rightarrow \infty$. Entonces $\hat{p}$ es un estimador consistente de $p$.
+\item For the case of the Bernoulli experiment one has that  $\mathbb{E}(\hat{p})=p \Rightarrow bias=0$ y $se = \sqrt{p(1-p)/n} \rightarrow 0$ when $n\rightarrow \infty$. Then  $\hat{p}$ is a consistent estimator of $p$.
 
 
 \end{itemize}
@@ -351,17 +346,22 @@ MSE = \mathbb{E}_{\theta}(\hat{\theta}_n - \theta)^2
 \end{frame}
 
 
+\begin{frame}{Maximum Likelihood Estimation}
+ 
+\end{frame}
 
-\begin{frame}{Intervalo de Confianza}
+
+
+\begin{frame}{Confidence Interval}
 \scriptsize{
 \begin{itemize}
- \item Sabemos que el valor de un estimador puntual \textbf{varía} entre una muestra y otra
- \item Es más razonable encontrar un \textbf{intervalo} donde sepamos que valor \textbf{real del parámetro} se encuentra dentro del intervalo con una cierta \textbf{probabilidad}.
- \item La forma general de un intervalo de confianza en las siguiente:
+ \item We know that the value of a point estimator \textbf{varies} from sample to sample.
+ \item It is more reasonable to find an interval that is likely to trap the real value of the parameter with a certain probability.
+ \item The general form of a confidence interval in the following:
   \begin{displaymath}
-   \text{Intervalo de Confianza} = \text{Estadístico Muestral} \ \pm \ \text{Margen de Error}
+   \text{Confidence Interval} = \text{Sample Statistic} \ \pm \ \text{Margin Error}
   \end{displaymath}
- \item Entre más ancho el intervalo mayor incertidumbre existe sobre el valor del parámetro.
+ \item The wider the interval the more uncertainty there is about the value of the parameter.
 \end{itemize}
 
 
@@ -370,18 +370,18 @@ MSE = \mathbb{E}_{\theta}(\hat{\theta}_n - \theta)^2
 \end{frame}
 
 
-\begin{frame}{Intervalo de Confianza (2)}
+\begin{frame}{Confidence Interval }
 \scriptsize{
 
-\begin{block}{Definición}
+\begin{block}{Definition}
 \begin{itemize}
- \item Un \textbf{intervalo de confianza} para un parámetro poblacional desconocido $\theta$ con un \textbf{nivel de confianza} $1-\alpha$, es un intervalo $C_n = (a,b)$ donde:
-\begin{displaymath}
+ \item A \textbf{confidence interval} for an unknown population parameter $\theta$ with a \textbf{confidence level} $1-\alpha$, is an interval $C_n = (a,b)$ where:
+ \begin{displaymath}
  \mathbb{P}(\theta \in C_n) = 1-\alpha
 \end{displaymath}
- \item Además $a= a(X_1, \dots, X_n)$ y $b=b(X_1,\dots,X_n)$ son funciones de los datos
- \item El valor $\alpha$ se conoce como el nivel de \textbf{significancia}, generalmente se toma como $0.05$ lo que equivale a trabajar con un nivel de confianza de $95\%$
- \item La significancia se puede interpretar como la probabilidad de equivocarnos.
+ \item In addition $a= a(X_1, \dots, X_n)$ and $b=b(X_1,\dots,X_n)$ are functions of the data.
+ \item The $\alpha$ value is known as the \textbf{significance} level, generally taken as $0.05$, which is equivalent to working with a confidence level of $95\%$.
+ \item Significance can be interpreted as the probability of being wrong.
 \end{itemize}
 
 \end{block}
@@ -391,53 +391,75 @@ MSE = \mathbb{E}_{\theta}(\hat{\theta}_n - \theta)^2
 \end{frame}
 
 
-\begin{frame}{Intervalo de Confianza (3)}
+\begin{frame}{Confidence Interval}
 \scriptsize{
 
-\begin{block}{Interpretación}
+
 \begin{itemize}
- \item Existe mucha \textbf{confusión} de como interpretar un intervalo de confianza
- \item Una forma de interpretarlos es decir que si repetimos \textbf{un mismo experimento} muchas veces, el intervalo contendrá el valor del parámetro el $(1-\alpha)\%$ de las veces.
- \item Esta interpretación es correcta, pero rara vez repetimos un mismo experimento varias veces.
- \item Una interpretación mejor: un día recolecto datos creo un intervalo de $95\%$ de confianza para un parámetro $\theta_1$. Luego, en el día 2 hago lo mismo para un parámetro $\theta_2$ y así reiteradamente $n$ veces. El $95\%$ de mis intervalos \textbf{contendrá} los valores reales de los parámetros.
+ \item There is a lot of \textbf{confusion} about how to interpret a confidence interval.
+ \item A confidence interval is not a probability statement about $\theta$ since $\theta$ is a fixed quantity in Frequentist inference setting, not a random variable
+ \item One way to interpret them is to say that if we repeat the \textbf{same experiment} many times, the interval will contain the value of the parameter $(1-\alpha)\%$ of the times.
+ \item This interpretation is correct, but we rarely repeat the same experiment several times.
+ \item A better interpretation: one day I collect data I create a $95\%$ confidence interval for a parameter $\theta_1$. Then on day 2, I do the same for a parameter $\theta_2$ and so repeatedly $n$ times. The $95\%$ of my intervals will contain the actual values of the parameters. 
  
 \end{itemize}
 
-\end{block}
+
 
 }
  
 \end{frame}
 
-\begin{frame}{Intervalo de Confianza (4)}
+
+
+
+\begin{frame}{Confidence Interval}
+\scriptsize{
+
+
+\begin{itemize}
+ \item Later in the course, we will discuss Bayesian methods in which we treat $\theta$ as if it were a random variable and we do make probability statements about $\theta$.
+\item In particular, we will make statements like ``the probability that $\theta$  is in $C_n$, given the data, is 95 percent.''
+\item However, these Bayesian intervals refer to degree-of-belief probabilities. 
+\item These Bayesian intervals will not, in general, trap the parameter 95 percent of the time.
+ 
+\end{itemize}
+
+
+
+}
+ 
+\end{frame}
+
+
+\begin{frame}{Confidence Interval of the Mean }
 \scriptsize{
 \begin{itemize}
- \item Se tienen $n$ observaciones independientes $X_1, \dots, X_n$ IID de distribución  $N(\mu,\sigma^2)$
- \item Supongamos que $\mu$ es \textbf{desconocido} pero $\sigma^2$ es \textbf{conocido}.
- \item Sabemos que $\overline{X_{n}}$ es un estimador insesgado de $\mu$
- \item Por la ley de los grandes números sabemos que la distribución de $\overline{X_{n}}$ se concentra alrededor de $\mu$ cuando $n$ es grande.
- \item Por el CLT sabemos que \begin{displaymath}
+ \item We have $n$ independent observations $X_1, \dots, X_n$ (IID) of distribution $N(\mu,\sigma^2)$.
+\item Suppose $\mu$ is \textbf{unknown} but $\sigma^2$ is \textbf{known}.
+ \item We know that $\overline{X_{n}}$ is an unbiased estimator of $\mu$.
+ \item By the law of large numbers we know that the distribution of $\overline{X_{n}}$ is concentrated around $\mu$ when $n$ is large.
+ \item By the CLT we know that \begin{displaymath}
  Z=\frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}}  \sim N(0,1)
 \end{displaymath}
-cuando $n$ es grande
-\item Despejando, tenemos que $\mu = \overline{X_{n}} - \frac{\sigma}{\sqrt{n}}Z$
+when $n$ is large.
 \end{itemize}
 
 
  }
 \end{frame}
 
-\begin{frame}{Intervalo de Confianza (5)}
+\begin{frame}{Confidence Interval}
 \scriptsize{
 \begin{itemize}
- \item Queremos encontrar un intervalo intervalo $C_n = (\mu_1,\mu_2)$ con un nivel de confianza $1-\alpha$:
+ \item We want to find an interval $C_n = (\mu_1,\mu_2)$ with confidence level $1-\alpha$:
 \begin{displaymath}
  \mathbb{P}(\mu_1 \leq \mu \leq \mu_2 ) = 1-\alpha
 \end{displaymath}
-\item Sea $z_a = \Phi^{-1}(1-a)$, con $a \in [0,1]$ donde $\Phi^{-1}$ es la función cuantía de una normal estandarizada
-\item Esto es equivalente a decir que $z_a$ es el valor tal que $1-\Phi(z_a)=\mathbb{P}(Z \geq z_a)=a$
+\item Let $z_a = \Phi^{-1}(1-a)$, with $a \in [0,1]$ where $\Phi^{-1}$ is the quantile function of a standardized normal.
+\item This is equivalent to saying that $z_a$ is the value such that $1-\Phi(z_a)=\mathbb{P}(Z \geq z_a)=a$.
 
-\item Por simetría de la normal $z_{\alpha/2}=-z_{(1-\alpha/2)}$
+\item By symmetry of the normal distribution: $z_{\alpha/2}=-z_{(1-\alpha/2)}$.
 \end{itemize}
 
 
@@ -446,36 +468,55 @@ cuando $n$ es grande
 
 
 
-\begin{frame}{Intervalo de Confianza (6)}
-\scriptsize{
-\begin{itemize}
- \item Se tiene que \begin{displaymath}
-\mathbb{P}(-z_{\alpha/2}<Z<z_{\alpha/2})=1-\alpha                     
-                    \end{displaymath}
+\begin{frame}{Confidence Interval}
+
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.35]{pics/ConfIntervNormalP.png}
+	\includegraphics[scale=0.8]{pics/conf_int_1.pdf}
 \end{figure}
 
 
-
-
-\end{itemize}
-}
  
 \end{frame}
 
-\begin{frame}{Intervalo de Confianza (7)}
+
+\begin{frame}{Confidence Interval}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.8]{pics/conf_int_2.pdf}
+\end{figure}
+
+
+ 
+\end{frame}
+
+
+\begin{frame}{Confidence Interval}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.8]{pics/conf_int_3.pdf}
+\end{figure}
+
+
+ 
+\end{frame}
+
+
+\begin{frame}{Confidence Interval}
 \scriptsize{
 \begin{itemize}
- \item  El intervalo de confianza para $\mu$ es:
+ \item  The confidence interval for $\mu$ is:
  \begin{displaymath}
  C_n = (\overline{X_{n}}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}} , \overline{X_{n}} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}) 
  \end{displaymath}
-\item Entonces $ z_{\alpha/2}$ nos dice cuantas veces tenemos que multiplicar el \textbf{error estándar} en el intervalo.
-\item Mientras menor sea $\alpha$ mayor será $ z_{\alpha/2}$ y por ende más ancho será el intervalo. 
-\item Demostración:
+\item Then $ z_{\alpha/2}$ tells us how many times we have to multiply the \textbf{standard error} to build the interval.
+\item The smaller the value of $\alpha$ the larger the value of $ z_{\alpha/2}$ and hence the wider the interval.  
+\item Proof:
  \begin{eqnarray*}
  \mathbb{P}(\mu \in C_n) & = & \mathbb{P}(\overline{X_{n}}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}} < \mu < \overline{X_{n}} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}) \nonumber \\ 
                          & = & \mathbb{P}(-z_{\alpha/2} < \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}} <  z_{\alpha/2}) \nonumber \\ 
@@ -491,11 +532,11 @@ cuando $n$ es grande
  
 \end{frame}
 
-\begin{frame}[fragile]{Intervalo de Confianza (8) }
+\begin{frame}[fragile]{Confidence Interval}
 
 \scriptsize{
 \begin{itemize}
- \item Como $z_{\alpha/2} = \Phi^{-1}(1-\alpha/2)$ podemos usar la función cuantía de la normal para calcular intervalos de confianza en R
+ \item Since $z_{\alpha/2} = \Phi^{-1}(1-\alpha/2)$ we can use the quantile function of the normal to calculate confidence intervals in R.
 \end{itemize}
 
 
@@ -520,22 +561,22 @@ cuando $n$ es grande
 
 \end{frame}
 
-\begin{frame}{Distribución T}
+\begin{frame}{T Distribution}
 \scriptsize{
 \begin{itemize}
- \item En la pŕactica, si no conocemos $\mu$ es poco probable que conozcamos $\sigma$
- \item Si estimamos $\sigma$ usando $s$, los intervalos de confianza se construyen usando la distribución \textbf{T-student}
+ \item In practice, if we do not know $\mu$ we are unlikely to know $\sigma$.
+ \item If we estimate $\sigma$ using $s$, confidence intervals are better build using the distribution \textbf{T-student}, especially when the sample size is small.
 \end{itemize}
 
-\begin{block}{Distribución T}
+\begin{block}{T Distribution}
 \begin{itemize}
- \item Una V.A tiene distribución $t$ con $k$ grados de libertad cuando tiene la siguiente PDF:
+ \item An R.V. has distribution $t$ with $k$ degrees of freedom when it has the following PDF:
 \begin{displaymath}
  f(t)=\frac{\Gamma(\frac{k+1}{2})}{\sqrt{k\pi}\Gamma(\frac k2)(1+\frac{t^2}{k})^{(k+1)/2}}
 \end{displaymath}
-\item Cuando $k=1$ se le llama distribución de \textbf{Cauchy}
-\item Cuando $k\rightarrow \infty$ converge a una distribución normal estandarizada
- \item La distribución t tiene colas más anchas que la normal cuando tiene pocos grados de libertad
+\item  When $k=1$ it is called \textbf{Cauchy} distribution.
+\item When $k\rightarrow \infty$ it converges to a standardized normal distribution.
+ \item The t-distribution has wider tails than the normal distribution when it has few degrees of freedom.
 
 
 \end{itemize}
@@ -549,7 +590,7 @@ cuando $n$ es grande
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Distribución T (2)}
+\begin{frame}[fragile]{T Distribution}
  \scriptsize{
 
 
@@ -577,20 +618,20 @@ lines(y4~x,type="l",col="red")
 \end{frame}
 
 
-\begin{frame}{Intervalo de Confianza (9) }
+\begin{frame}{T-Distribution Confidence Interval}
 
 \scriptsize{
 \begin{itemize}
- \item Sea  $s^{2}= \frac{1}{n-1} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2$ tenemos:
+ \item Let  $s^{2}= \frac{1}{n-1} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2$ we have:
  \begin{displaymath}
   T=\frac{\overline{X_{n}}-\mu}{\frac{s}{\sqrt{n}}}\sim t_{n-1}
  \end{displaymath}
-\item Sea $t_{n-1,a}=\mathbb{P}(T>a)$, equivalente a la función cuantía $qt$ evaluada en $(1-a)$
-\item El intervalo de confianza resultante es:
+\item  Let $t_{n-1,a}=\mathbb{P}(T>a)$, equivalent to the quantile function $qt$ evaluated at $(1-a)$.
+\item The resulting confidence interval is:
        \begin{displaymath}
  C_n = (\overline{X_{n}}-t_{n-1,\alpha/2}\frac{s}{\sqrt{n}} , \overline{X_{n}} + t_{n-1,\alpha/2}\frac{s}{\sqrt{n}}) 
  \end{displaymath} 
- \item Como las colas de la distribución $t$ son más anchos cuando $n$ es pequeño, los intervalos de confianza resultantes son más anchos
+ \item Since the tails of the $t$ distribution are wider when $n$ is small, the resulting confidence intervals are wider.
 
 \end{itemize}
 
@@ -600,10 +641,10 @@ lines(y4~x,type="l",col="red")
 \end{frame}
 
 
-\begin{frame}[fragile]{Intervalo de Confianza (10)}
+\begin{frame}[fragile]{T-Distribution Confidence Interval}
 \scriptsize{
 \begin{itemize}
- \item Calculemos un intervalo de confianza para la media de \verb+Petal.Length+ de los datos del \textbf{Iris} con $95\%$ de confianza
+ \item Let's calculate a confidence interval for the mean of \verb+Petal.Length+ of the \textbf{Iris} data with $95\%$ confidence.
 \begin{verbatim}
 >data(iris)
 >alpha<-0.05
@@ -637,11 +678,11 @@ lines(y4~x,type="l",col="red")
  
 \end{frame}
 
-
-
-\begin{frame}{Maximum Likelihood Estimation}
+\begin{frame}{The Boostrap}
  
 \end{frame}
+
+
 
 
 

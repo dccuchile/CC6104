@@ -34,33 +34,19 @@
 \newcommand{\factorial}{\ensuremath{\mbox{\sc Factorial}}}
 \newcommand{\BIGOP}[1]{\mathop{\mathchoice%
 {\raise-0.22em\hbox{\huge $#1$}}%
-{\raise-0.05em\hbox{\L
-\usepackage{fontenc}
-\usepackage{framed,color}
-\usepackage{palatino, url, multicol}
-\usepackage{listings}
-%\algsetup{indent=2em}
-\newcommand{\factorial}{\ensuremath{\mbox{\sc Factorial}}}
-\newcommand{\BIGOP}[1]{\mathop{\mathchoice%
-{\raise-0.22em\hbox{\huge $#1$}}%
 {\raise-0.05em\hbox{\Large $#1$}}{\hbox{\large $#1$}}{#1}}}
 \newcommand{\bigtimes}{\BIGOP{\times}}
 \vspace{-0.5cm}
-\title{Introduction to Statistical Inference}
+\title{Deisgn of Experiments \& Hypothesis Testing}
 \vspace{-0.5cm}
 \author[Felipe Bravo Márquez]{\footnotesize
 %\author{\footnotesize  
  \textcolor[rgb]{0.00,0.00,1.00}{Felipe José Bravo Márquez}} 
 \date{ \today }
-arge $#1$}}{\hbox{\large $#1$}}{#1}}}
-\newcommand{\bigtimes}{\BIGOP{\times}}
-\vspace{-0.5cm}
-\title{Hypothesis Testing}
-\vspace{-0.5cm}
-\author[Felipe Bravo Márquez]{\footnotesize
-%\author{\footnotesize  
- \textcolor[rgb]{0.00,0.00,1.00}{Felipe José Bravo Márquez}} 
-\date{ \today }
+
+
+
+
 
 
 \begin{document}
@@ -77,19 +63,33 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 % http://homepage.divms.uiowa.edu/~rdecook/stat2020/notes/ch7_pt1.pdf
 
 
-\begin{frame}{Test de Hipótesis}
+
+\begin{frame}{Design of Experiments}
 \scriptsize{
 \begin{itemize}
- \item Cuando queremos probar si alguna \textbf{propiedad} asumida sobre una población se contrasta con una muestra estadística usamos un \textbf{Test de Hipótesis}
-\item El test se compone de las siguientes hipótesis:
+ \item sfsdf
+
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Hypothesis Testing}
+\scriptsize{
+\begin{itemize}
+ \item When we want to test whether some assumed \textbf{property} about a population is contrasted with a statistical sample we use a \textbf{hypothesis test}.
+\item The test consists of the following hypotheses:
  \begin{itemize}
 \scriptsize{
-\item \textbf{Hipótesis Nula} $H_{0}$: Simboliza la situación actual. Lo que se ha considerado real hasta el presente.
-\item \textbf{Hipótesis Alternativa} $H_{a}$: es el modelo alternativo que queremos considerar. 
+\item \textbf{Null Hypothesis} $H_{0}$: Symbolizes the current situation. What has been considered real up to the present.
+\item \textbf{Alternative Hypothesis} $H_{a}$: it is the alternative model that we want to consider. 
 }
  \end{itemize}
-\item La idea es encontrar suficiente \textbf{evidencia estadística} para rechazar $H_{0}$ y poder concluir $H_{a}$
-\item Si no tenemos suficiente evidencia estadística \textbf{fallamos en rechazar} $H_{0}$
+\item The idea is to find enough \textbf{statistical evidence} to reject $H_{0}$ and be able to conclude $H_{a}$.
+\item If we do not get enough statistical evidence \textbf{we fail to reject} $H_{0}$
 
 \end{itemize}
 
@@ -100,16 +100,16 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 
 
 
-\begin{frame}{Test de Hipótesis (2)}
+\begin{frame}{Hypothesis Testing (2)}
 \scriptsize{
 
-\begin{block}{Metodología para Realizar un Test de Hipótesis}
+\begin{block}{Methodology to Perform a Hypothesis Test}
 \begin{itemize}
- \item Elegir una hipótesis nula $H_0$ y alternativa $H_a$
- \item Fijar un nivel de significancia $\alpha$ del test
- \item Calcular un estadístico $T$ a partir de los datos
- \item El estadístico $T$ es generalmente un valor estandarizado que podemos chequear en una tabla de distribución
- \item Definir un criterio de rechazo para la hipótesis nula. Generalmente es un valor crítico $c$.
+ \item Choose a null hypothesis $H_0$ and alternative $H_a$.
+ \item Set a test significance level $\alpha$.
+ \item Calculate a statistic $T$ from the data.
+ \item  The statistic $T$ is usually a standardized value that we can check in a distribution table.
+ \item Define a rejection criterion for the null hypothesis. It is usually a critical value $c$.
 \end{itemize}
 \end{block}
 
@@ -120,23 +120,23 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 
 
 
-\begin{frame}[fragile]{Test de Hipótesis (3)}
+\begin{frame}[fragile]{Hypothesis Testing (3)}
 \scriptsize{
 \begin{itemize}
- \item Ejemplo: Se sabe que la cantidad de horas promedio de uso de Internet mensual en Chile país es de 30 horas
- \item Supongamos que queremos demostrar que el promedio es distinto a ese valor.
- \item Tendríamos que $H_0: \mu=30$ y $H_{a}: \mu \neq 30$
- \item Fijamos $\alpha=0.05$ y recolectamos 100 observaciones
- \item Supongamos que obtenemos $\overline{X_{n}}=28$ y $s=10$
- \item Una forma de hacer el test es construir un intervalo de confianza para $\mu$ y ver si $H_{0}$ está en el intervalo.
+ \item Example: It is known that the average number of hours of monthly Internet use in Chile is 30 hours.
+ \item Suppose we want to show that the average is different from that value.
+ \item We would have that $H_0: \mu=30$ and $H_{a}: \mu \neq 30$
+ \item Let's set $\alpha=0.05$ and collect 100 observations.
+ \item Suppose we get $\overline{X_{n}}=28$ and $s=10$
+ \item  One way to test is to construct a confidence interval for $\mu$ and see if $H_{0}$ is in the interval.
 \begin{verbatim}
 > 28-qt(p=0.975,99)*10/sqrt(100)
 [1] 26.01578
 > 28+qt(p=0.975,99)*10/sqrt(100)
 [1] 29.98422 
 \end{verbatim}
-\item El intervalo sería la zona de aceptación de $H_0$ y todo lo que esté fuera de éste será mi región de rechazo.
-\item Como 30 está en la región de rechazo, rechazo mi hipótesis nula con un $5\%$ de confianza.
+\item The interval would be the acceptance zone of $H_0$ and anything outside of this would be my rejection region.
+\item Since 30 is in the rejection region, I reject my null hypothesis with $5\%$ confidence.
 \end{itemize}
 
 
@@ -145,14 +145,14 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \end{frame}
 
 
-\begin{frame}[fragile]{Test de Hipótesis (4)}
+\begin{frame}[fragile]{Hypothesis Testing (4)}
 \scriptsize{
 \begin{itemize}
- \item Otra forma de realizar el test es calcular el estadístico $T=\frac{\overline{X_{n}}-\mu_{o}}{\frac{s}{\sqrt{n}}}$
- \item En este caso sería \begin{displaymath}
+ \item Another way to perform the test is to compute the statistic  $T=\frac{\overline{X_{n}}-\mu_{o}}{\frac{s}{\sqrt{n}}}$
+ \item  In this case it would be \begin{displaymath}
                            T=\frac{28-30}{\frac{10}{\sqrt{100}}}=-2
                           \end{displaymath}
-\item Como $H_{a}: \mu \neq 30$, tenemos un test de dos lados, donde la región de aceptación es
+\item Since $H_{a}: \mu \neq 30$, we have a two-sided test, where the acceptance region is.
 \begin{displaymath}
  t_{n-1,1-\alpha/2}<T<t_{n-1,\alpha/2}
 \end{displaymath}
@@ -162,7 +162,7 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 > qt(0.975,99)
 [1] 1.984217
 \end{verbatim}
-\item Como $T$ está en la región de rechazo, rechazamos la hipótesis nula.
+\item Since $T$ is in the rejection region, we reject the null hypothesis.
 
 \end{itemize}
 
@@ -172,17 +172,17 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \end{frame}
 
 
-\begin{frame}[fragile]{Test de Hipótesis (5)}
+\begin{frame}[fragile]{Hypothesis Testing (5)}
 \scriptsize{
 \begin{itemize}
- \item Generalmente, además de saber si rechazamos o fallamos en rechazar una hipótesis nula queremos saber la evidencia que tenemos en contra de ella.
- \item Se define un \textbf{p-valor} como la probabilidad de obtener un resultado al menos tan extremo como el observado en los datos dado que la hipótesis nula es verdadera.
- \item ``Extremo'' significa lejos de la hipótesis nula.
- \item Si el \textbf{p-valor} es menor que el nivel de significancia $\alpha$, rechazamos $H_{0}$ 
- \item Ejemplo:
+ \item Generally, in addition to knowing whether we reject or fail to reject a null hypothesis we want to quantify the evidence we have against it.
+ \item A \textbf{p-value} is defined as the probability of obtaining an outcome at least as extreme as that observed in the data given that the null hypothesis is true.
+ \item ``Extreme'' means far from the null hypothesis and favorable for the alternative hypothesis.
+ \item If the \textbf{p-value} s less than the significance level $\alpha$, we reject $H_{0}$ 
+ \item Example:
 \begin{verbatim}
 > data(iris)
-> mu<-3 # La hipótesis nula
+> mu<-3 # null hypothesis
 > alpha<-0.05
 > n<-length(iris$Petal.Length)
 > xbar<-mean(iris$Petal.Length)
@@ -191,7 +191,7 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 > t<-(xbar-mu)/(s/sqrt(n))
 > pvalue<-2*pt(-abs(t),df=n-1)
 > pvalue
-[1] 4.94568e-07 # es menor que 0.05 entonces rechazamos H0
+[1] 4.94568e-07 # is less than 0.05 then we reject H0
 \end{verbatim}
 \end{itemize}
 
@@ -201,10 +201,10 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 }
 \end{frame}
 
-\begin{frame}[fragile]{Test de Hipótesis (6)}
+\begin{frame}[fragile]{Hypothesis Testing (6)}
 \scriptsize{
 \begin{itemize}
- \item La forma elegante de hacerlo en R:
+ \item The elegant way to do it in R:
 \end{itemize}
 
 \begin{verbatim}
@@ -227,26 +227,26 @@ mean of x
 
 \end{frame}
 
-\begin{frame}{Test de Hipótesis (7)}
+\begin{frame}{Hypothesis Testing (7)}
  \scriptsize{
 
 \begin{itemize}
- \item Tenemos dos tipos de errores cuando realizamos un test de hipótesis
- \item Error tipo I: es cuando rechazamos la hipótesis nula cuando ésta es cierta.
- \item Este error es equivalente al nivel de significancia $\alpha$
- \item Error tipo II: es cuando la hipótesis nula es falsa pero no tenemos evidencia estadística para rechazarla.
- \item Para mitigar los errores tipo I generalmente usamos valores de $\alpha$ más pequeños.
- \item Para mitigar los errores tipo II generalmente trabajamos con muestras más grandes.
- \item Existe un trade-off entre los errores tipo I y tipo II. 
+ \item We have two types of errors when we perform a hypothesis test
+ \item Type I error: it is when we reject the null hypothesis when it is true.
+ \item This error is equivalent to the significance level $\alpha$. 
+ \item Type II error: is when the null hypothesis is false but we do not have statistical evidence to reject it.
+ \item To mitigate type I errors we generally use smaller values of $\alpha$.
+ \item To mitigate type II errors we generally work with larger samples.
+ \item There is a trade-off between type I and type II errors. 
 \end{itemize}
 
  \begin{table}
 \begin{tabular}{c | c c}
 \hline
-  & Retener $H_0$ &  Rechazar $H_{0}$   \\ 
+  & Retain $H_0$ &  Reject $H_{0}$   \\ 
 \hline
-$H_0$ es verdadera & \checkmark & error tipo I \\
-$H_1$ es verdadera & error tipo II & \checkmark \\
+$H_0$ true & \checkmark & type I \\
+$H_1$ true & type II error & \checkmark \\
 \hline
 \end{tabular}
 \end{table}
