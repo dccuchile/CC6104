@@ -119,7 +119,7 @@ The satistical methods to be presented is this class are known as \textbf{freque
 \item Parameters are fixed, unknown constants. Because they are not fluctuating, no useful probability statements can be made about parameters.
 \item Statistical procedures should be designed to have well-defined long run frequency properties. For example, a 95 percent confidence interval should trap the true value of the parameter with limiting frequency at least 95 percent.
 \end{itemize}
-There is another approach to inference called \textbf{Bayesian inference}, which is based on different posulated, to be discussed later in the course.
+There is another approach to inference called \textbf{Bayesian inference}, which is based on different posulates, to be discussed later in the course.
 
 } 
 \end{frame}
@@ -203,7 +203,7 @@ There is another approach to inference called \textbf{Bayesian inference}, which
 \begin{displaymath}
 se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \end{displaymath}
-\item The standard error tells us about the variability of the estimator between all possible samples of the same size.
+\item The standard error tells us about the variability of the estimator (and the sampling distribution) between all possible samples of the same size.
 \item It is a measure of the uncertainty of the point estimate.
 \end{itemize}
 
@@ -218,15 +218,14 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \scriptsize{
 
 \begin{itemize}
- \item Let $X_1,X_2,\dots,X_n$ be a random sample of a population of mean $\mu$ and variance $\sigma^2$
+ \item Let $X_1,X_2,\dots,X_n$ be a random sample of a population of mean $\mu$ and variance $\sigma^2$.
+ \item Let's suppose that we are interested in estimating $\mu$.
  \item  A sample statistic we can derive from the data is the  \textbf{sample mean} $\overline{X_{n}}$
  \begin{displaymath}
   \overline{X_{n}}=\frac{1}{n}\sum_{i=1}^{n} X_i
  \end{displaymath}
- \item The sample mean is a statitical estimate of the mean $\overline{X_{n}} = \hat{\mu}$.
- \item The sampling distribution of the sample mean: 
- 
- 
+ \item The sample mean is an estimator of the mean $\overline{X_{n}} = \hat{\mu}$.
+
 \item We can show that the sample mean is an unbiased estimator of $\mu$:
 \begin{displaymath}
 \mathbb{E}(\overline{X_{n}}) = \mathbb{E}(\frac 1n \sum_{i=1}^{n} X_i)  =  \frac 1n \times \mathbb{E}(\sum_{i=1}^{n} X_i) = \frac 1n (n \times \mu) = \mu  
@@ -236,7 +235,7 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 } 
 \end{frame}
 
-\begin{frame}{Point Estimation (4)}
+\begin{frame}{The Standard Error of the Sample Mean}
 \scriptsize{
 
 \begin{itemize}
@@ -255,20 +254,30 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 
 
 
-\begin{frame}{Point Estimation  (5)}
+
+\begin{frame}{Sample and Population Variance}
 \scriptsize{
 \begin{itemize}
  \item  We usually do not know $\sigma$ of the population.
  \item When we want to estimate the variance of a population from a sample we are talking about the  \textbf{sample variance}:
-\item There are two common estimators, a biased version  \begin{displaymath}
- s_{n}^{2}= \frac{1}{n} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2
-\end{displaymath}
+\item The sample variance is defined as follows:
 
-\item An unbiased version \begin{displaymath}
+\begin{displaymath}
  s^{2}= \frac{1}{n-1} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2
 \end{displaymath}
 
-\item When we do not know the variance of the population and want to estimate the mean, the standard error is estimated: \begin{displaymath}                                                                                                                 
+\item This is an unbiased estimator of the variance.
+
+\item There is also the population variance (which is biased), defines as follows:
+
+\begin{displaymath}
+ s_{n}^{2}= \frac{1}{n} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2
+\end{displaymath}
+
+\item The population variance should only be calculated from population data (all the individuals), if is used as an estimator it would be biased.
+
+\item The standard error of the sample mean when the population variance is unknown is estimated as follows:
+\begin{displaymath}                                                                                                                 
 \hat{se}(\overline{X_{n}}) = \frac{s}{\sqrt{n}}                                                                                                                \end{displaymath}
 
 
@@ -279,7 +288,44 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \end{frame}
 
 
-\begin{frame}{Point Estimation (6)}
+
+\begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
+\scriptsize{
+
+\begin{itemize}
+\item Let us digress on the sampling distribution, which is a fundamental concept for understanding frequentist inference.
+\item Imagine drawing (with replacement) all possible samples of size $n$ from a population.
+\item Then for each sample, calculating a statistic--e.g., the sample mean. 
+\item The frequency distribution of those sample means would be the sampling distribution of the mean (for samples of size $n$ drawn from that particular population).
+\item Suppose, for example, that our population consisted of the following 5 scores: 2, 3, 4, 5, and 6. 
+\item The population mean = 4, and the population standard deviation (dividing by N) = 1.414.
+
+\end{itemize}
+
+\begin{verbatim}
+
+library(gtools)
+library(tidyverse)
+sd.p=function(x){sd(x)*sqrt((length(x)-1)/length(x))}
+
+pop <-c(2,3,4,5,6)
+samp_size <- 2
+
+mean(pop)
+sd.p(pop)
+
+samples<-as_tibble(permutations(length(pop), samp_size, pop, repeats.allowed=TRUE))
+
+samples <- samples %>% rowwise() %>% mutate(sample_mean=mean(c(V1,V2)))
+ 
+\end{verbatim}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Point Estimation of a Proportion}
 \scriptsize{
 \begin{itemize}
  \item Let $X_1, \dots, X_n \sim$ Bernoulli$(p)$ and let $\hat{p}_{n}=\frac 1n \sum_{i}X_{i}$
@@ -302,7 +348,7 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 
 
 
-\begin{frame}{Point Estimation (7)}
+\begin{frame}{Consistency}
 
 \scriptsize{
 
@@ -328,7 +374,7 @@ MSE = \mathbb{E}_{\theta}(\hat{\theta}_n - \theta)^2
 
 
 
-\begin{frame}{Point Estimation (8)}
+\begin{frame}{Consistency}
 
 \scriptsize{
 
@@ -662,7 +708,7 @@ lines(y4~x,type="l",col="red")
 >right
 [1] 4.042815
 \end{verbatim}
-\item Otra forma:
+\item Another way:
 \begin{verbatim}
 >test<-t.test(iris$Petal.Length,conf.level=0.95)
 >test$conf.int
