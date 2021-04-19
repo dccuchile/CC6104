@@ -546,12 +546,10 @@ which is the same as the standard distribution of the sampling distribution of t
 \scriptsize{
 
 \begin{itemize}
-\item The central limit theorem also provides us with some very helpful information about the shape of the sampling distribution of the mean. 
-\item Specifically, it tells us the conditions under which the
-sampling distribution of the mean is normally distributed or at least approximately normal.
+\item The central limit theorem tell us the conditions under which the sampling distribution of the mean is normally distributed or at least approximately normal.
 \item If the population from which you sample is itself normally distributed, then the sampling distribution of the mean will be normal, regardless of sample size.
 \item If the population from which you sample is non-normal, the sampling distribution of the mean will still be approximately normal given a large enough sample size.
-\item How large is enough? Some authors say 30 or 40. But if the population distirbution is extremly non-normal (i.e., very skewed) you will need much more.
+\item What size is sufficient? Some authors say 30 or 40. But if the population distribution is extremely non-normal (i.e. very skewed) you will need more.
 \end{itemize}
 
 
@@ -562,7 +560,23 @@ sampling distribution of the mean is normally distributed or at least approximat
 \begin{frame}{Point Estimation of a Proportion}
 \scriptsize{
 \begin{itemize}
- \item Let $X_1, \dots, X_n \sim$ Bernoulli$(p)$ and let $\hat{p}_{n}=\frac 1n \sum_{i}X_{i}$
+ \item Suppose we want to estimate the fraction of people who will vote for a certain candidate.
+ \item Our population parameter $p$ corresponds to the true fraction of voters for this candidate.
+ \item We can model a sample of independent voters  $X_1, \dots, X_n$, as Bernoulli distributed random variables with parameter $p$.
+ 
+ \item  We interpret $X_i=0$ as a negative vote and $X_i=1$ as a positive vote.
+ 
+ \item The sample proportion $\hat{p}_{n}=\frac 1n \sum_{i}X_{i}$ is our estimator of $p$.
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Point Estimation of a Proportion}
+\scriptsize{
+\begin{itemize}
  \item Then $\mathbb{E}(\hat{p}_{n})= \frac 1n \sum_i \mathbb{E}(X_i)=p$, and $\hat{p}_n$ is unbiased.
  \item The standard error $se$ would be
 \begin{displaymath}
@@ -572,22 +586,21 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 \begin{displaymath}
 \hat{se} =\sqrt{\hat{p}(1-\hat p)/n} 
 \end{displaymath}
+\item By the Central Limit Theorem the sampling distribution of the sample proportion converges to a Normal distribution: $\hat{p}_{n} \approx N(p, \hat{se}^2)$.
 
+\item This is because the sample proportion is actually the sample mean of a binary population.
 \end{itemize}
 
 
 } 
 \end{frame}
 
-
-
-
 \begin{frame}{Consistency}
 
 \scriptsize{
 
 \begin{itemize}
-\item A good estimator is expected to be unbiased and of minimum variance.
+\item A good estimator is expected to be unbiased and of minimum standard error.
 
 \item Unbiasedness used to receive much attention but these days is considered less important
 
@@ -595,7 +608,7 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 
 \item A reasonable requirement for an estimator is that it should converge to the true parameter value as we collect more and more data.
 
-\item A point estimator $\hat{\theta}_n$ of a parameter $\theta$ is \textbf{consistent}  if it converges to the true value when the number of data in the sample tends to infinity.
+\item A point estimator $\hat{\theta}_n$ of a parameter $\theta$ is \textbf{consistent}  if it converges to the true value when the number of data in the sample tends to infinity and its standard error converges to zero.
 
 \end{itemize}
 
@@ -611,9 +624,13 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 \begin{itemize}
 \item If for an estimator $\hat{\theta}_n$, its $bias \rightarrow 0$ and its $se \rightarrow 0$ when $n\rightarrow \infty$, $\hat{\theta}_n$, it is a consistent estimator of $\theta$.
 
-\item For example, for the sample mean $\mathbb{E}(\overline{X_{n}})=\mu$ hich implies that the $bias =0$ and$se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}$  tends to zero when $n\rightarrow \infty$. Then $\overline{X_{n}}$ is a consistent estimator of the mean.  
+\item For example, for the sample mean $\mathbb{E}(\overline{X_{n}})=\mu$,  which implies that the $bias =0$.
+\item Then $se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}$  converges to zero when $n\rightarrow \infty$. 
+\item  $\overline{X_{n}}$ is a consistent estimator of the mean.  
 
-\item For the case of the Bernoulli experiment one has that  $\mathbb{E}(\hat{p})=p \Rightarrow bias=0$ and $se = \sqrt{p(1-p)/n} \rightarrow 0$ when $n\rightarrow \infty$. Then  $\hat{p}$ is a consistent estimator of $p$.
+\item For the case of the Bernoulli experiment one has that  $\mathbb{E}(\hat{p})=p \Rightarrow bias=0$ and $se = \sqrt{p(1-p)/n} \rightarrow 0$ when $n\rightarrow \infty$. 
+
+\item Then  $\hat{p}$ is a consistent estimator of $p$.
 
 
 \end{itemize}
