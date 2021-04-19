@@ -61,19 +61,40 @@
 \begin{frame}{Populations and Samples}
 \scriptsize{
 \begin{itemize}
- \item The main goal of statistical inference is investigate properties about a target \textbf{population}.
- \item Example: What is the average height of the Chilean people? 
-  \item In order to draw conclusions about a \textbf{population}, it is generally not feasible to gather all the data about it.
- \item We must make reasonable conclusions about a population based on the evidence provided by \textbf{sample data}.
+ \item A \textbf{population} is the entire group of individuals that we are interested in studying.
+ \item  This could be anything from all humans to a specific type of cell.
 
- \item A \textbf{sample staticic} or simply \textbf{statistic} is a quantitative measure calculated from the data. Examples: the mean, the standard deviation, the minimum, the maximum.
+\item The main goal of statistical inference is investigate properties about a target \textbf{population}.
+
+ \item Example: What is the average height of all people in Chile? Here the population is all the inhabitants of Chile. 
+ 
+ 
+ \item In order to draw conclusions about a \textbf{population}, it is generally not feasible to gather all the data about it.
+ 
+ \item The special case where you collect data on the entire population is a \textbf{census}.
+
+\end{itemize}
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Populations and Samples}
+\scriptsize{
+\begin{itemize}
+ \item In statisical inference we try to make reasonable conclusions about a population based on the evidence provided by \textbf{sample data}.
+ 
+  \item We do this primarily to save time and effort.
+ 
+ \item A \textbf{sample staticic} or simply \textbf{statistic} is a quantitative measure calculated from a sample. Examples: the mean, the standard deviation, the minimum, the maximum.
  
  
  \item Our goal in sampling is to determine the value of a statistic for an entire population of interest, using just a small subset of the population.
  
- \item We do this primarily to save time and effort.
+
  
- \item Idea: Why go to the trouble of measuring every individual in the population when just a small sample is sufficient to accurately estimate the statistic of interest? \cite{poldrack2019statistical}
+
  
  
 
@@ -81,6 +102,7 @@
 
 } 
 \end{frame}
+
 
 
 \begin{frame}{Samples and Surveys}
@@ -133,8 +155,8 @@ There is another approach to inference called \textbf{Bayesian inference}, which
  \item In a general sence, this quantity of interest could be a parameter in a parametric model, a CDF $F$, a probability density function $f$, a regression function $r$, or a prediction for a future value $Y$ of some random variable.
  \item In this class we will consider this quantity of interest as a \textbf{population parameter} $\theta$. 
   \item By convention, we denote a point estimate of $\theta$ by $\hat{\theta}$ or $\hat{\theta}_n$.
- \item It is important to remark that while $\theta$ is an unknown fixed value, $\hat{\theta}$  depends on the data and is therefore a random variable. 
- \item We need to bear in mind that the process of sampling is by definition a random experiment. 
+ \item It is important to remark that while $\theta$ is an unknown fixed value, $\hat{\theta}$  depends on the sample data and is therefore a random variable. 
+ \item We need to bear in mind that the process of sampling is by definition a \textbf{random experiment}. 
  
 \end{itemize}
 
@@ -185,8 +207,9 @@ There is another approach to inference called \textbf{Bayesian inference}, which
 
 \item The sampling distribution describes the variability of the point estimate around the true population parameter from sample to sample. 
 
-\item We need to bear in mind this is an imaginary concept, since we can't obtain all possible samples.
+\item We need to bear in mind this is an imaginary concept, since in real sitations we can't obtain all possible samples.
 
+\item Actually, in most cases we will only work with a single sample.
 
 \end{itemize}
 
@@ -203,7 +226,8 @@ There is another approach to inference called \textbf{Bayesian inference}, which
 \begin{displaymath}
 se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \end{displaymath}
-\item The standard error tells us about the variability of the estimator (and the sampling distribution) between all possible samples of the same size.
+\item The standard error tells us about the variability of the estimator between all possible samples of the same size.
+\item It can be think of as the standard deviation of the sampling distribution. 
 \item It is a measure of the uncertainty of the point estimate.
 \end{itemize}
 
@@ -219,12 +243,12 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 
 \begin{itemize}
  \item Let $X_1,X_2,\dots,X_n$ be a random sample of a population of mean $\mu$ and variance $\sigma^2$.
- \item Let's suppose that we are interested in estimating $\mu$.
+ \item Let's suppose that we are interested in estimating the \textbf{population mean} $\mu$ (e.g., the mean height of Chilean people).
  \item  A sample statistic we can derive from the data is the  \textbf{sample mean} $\overline{X_{n}}$
  \begin{displaymath}
   \overline{X_{n}}=\frac{1}{n}\sum_{i=1}^{n} X_i
  \end{displaymath}
- \item The sample mean is an estimator of the mean $\overline{X_{n}} = \hat{\mu}$.
+ \item The sample mean is a \textbf{point estimator} of the mean $\overline{X_{n}} = \hat{\mu}$.
 
 \item We can show that the sample mean is an unbiased estimator of $\mu$:
 \begin{displaymath}
@@ -244,7 +268,34 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
  \mathbb{V}(\overline{X_{n}})=\mathbb{V}(\frac 1n \sum_{i=1}^{n} X_i) = \frac{1}{n^2} \mathbb{V}(\sum_{i=1}^{n} X_i) = \frac{n}{n^2} \mathbb{V}(X_i)=\frac{\sigma^2}{n} 
 \end{displaymath}
 
-\item Then,  $se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}$
+\item Then,
+\begin{displaymath}
+ se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}
+\end{displaymath}
+
+
+
+
+
+\item The formula for the standard error of the mean implies that the quality of our measurement involves two quantities: the population variability $\sigma$, and the size of our sample $n$.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{The Standard Error of the Sample Mean}
+\scriptsize{
+
+\begin{itemize}
+\item We have no control over the population variability, but we do have control over the sample size. 
+\item Thus, if we wish to improve our sample statistics (by reducing their sampling variability) then we should use larger samples.
+\item However, the formula also tells us something very fundamental about statistical sampling.
+\item That the utility of larger samples diminishes with the square root of the sample size. 
+\item This means that doubling the sample size will not double the quality of the statistics; rather, it will improve it by a factor of $\sqrt{2}$. \cite{poldrack2019statistical}
+
 
 \end{itemize}
 
@@ -254,29 +305,18 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 
 
 
-
-\begin{frame}{Sample and Population Variance}
+\begin{frame}{Sample Variance}
 \scriptsize{
 \begin{itemize}
- \item  We usually do not know $\sigma$ of the population.
- \item When we want to estimate the variance of a population from a sample we are talking about the  \textbf{sample variance}:
-\item The sample variance is defined as follows:
-
+ \item A common problem when calculating $ se(\overline{X_{n}})$ is that, in general, we do not know $\sigma$ of the population.
+ \item In those cases we can estimate $\sigma$ using the \textbf{sample variance} $s$:
 \begin{displaymath}
  s^{2}= \frac{1}{n-1} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2
 \end{displaymath}
 
 \item This is an unbiased estimator of the variance.
 
-\item There is also the population variance (which is biased), defines as follows:
-
-\begin{displaymath}
- s_{n}^{2}= \frac{1}{n} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2
-\end{displaymath}
-
-\item The population variance should only be calculated from population data (all the individuals), if is used as an estimator it would be biased.
-
-\item The standard error of the sample mean when the population variance is unknown is estimated as follows:
+\item The standard error of the sample mean when the population variance is unknown can be estimated as follows:
 \begin{displaymath}                                                                                                                 
 \hat{se}(\overline{X_{n}}) = \frac{s}{\sqrt{n}}                                                                                                                \end{displaymath}
 
@@ -289,36 +329,63 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 
 
 
+\begin{frame}{Population Variance}
+\scriptsize{
+\begin{itemize}
+\item There is also the population variance, defined as follows:
+
+\begin{displaymath}
+ \sigma^{2}= \frac{1}{N} \sum_{i}^{n}(X_{i}-\overline{X_{N}})^2
+\end{displaymath}
+
+\item The population variance should only be calculated from population data (all the individuals).
+
+\item Note that we are using $N$ instead of $n$ to denote the entire population rather than a sample.
+
+\item If is calculated from a sample, it would be a \textbf{biased} estimator of the population variance.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
 \begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
 \scriptsize{
 
 \begin{itemize}
-\item Let us digress on the sampling distribution, which is a fundamental concept for understanding frequentist inference.
+\item We discussed earlier that the sampling distribution is an imaginary concept.
+\item Let's imagine the sampling distribution of the sample mean.
 \item Imagine drawing (with replacement) all possible samples of size $n$ from a population.
-\item Then for each sample, calculating a statistic--e.g., the sample mean. 
+\item Then for each sample, calculate the sample statistic, which is this case is the sample mean. 
 \item The frequency distribution of those sample means would be the sampling distribution of the mean (for samples of size $n$ drawn from that particular population).
-\item Suppose, for example, that our population consisted of the following 5 scores: 2, 3, 4, 5, and 6. 
-\item The population mean = 4, and the population standard deviation (dividing by N) = 1.414.
+\item In the next example we will calculate the sampling distribution for a toy example in which the population is known.
+\end{itemize}
 
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
+\scriptsize{
+\begin{itemize}
+\item Suppose our entire population is a family of 5 siblings and our property of interest is age measured in years.
+
+\item Our population consists of the following 5 values: 2, 3, 4, 5, and 6. 
+\item Let's calculate the population mean and the population standard deviation.
 \end{itemize}
 
 \begin{verbatim}
-
-library(gtools)
-library(tidyverse)
-sd.p=function(x){sd(x)*sqrt((length(x)-1)/length(x))}
-
-pop <-c(2,3,4,5,6)
-samp_size <- 2
-
-mean(pop)
-sd.p(pop)
-
-samples<-as_tibble(permutations(length(pop), samp_size, pop, repeats.allowed=TRUE))
-
-samples <- samples %>% rowwise() %>% mutate(sample_mean=mean(c(V1,V2)))
- 
+> pop <-c(2,3,4,5,6)
+> mean(pop)
+[1] 4
+> sd.p=function(x){sd(x)*sqrt((length(x)-1)/length(x))}
+> sd.p(pop)
+[1] 1.414214 
 \end{verbatim}
+
 
 
 } 
