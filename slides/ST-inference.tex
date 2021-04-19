@@ -374,7 +374,7 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \item Suppose our entire population is a family of 5 siblings and our property of interest is age measured in years.
 
 \item Our population consists of the following 5 values: 2, 3, 4, 5, and 6. 
-\item Let's calculate the population mean and the population standard deviation.
+\item Let's calculate the population mean $\mu$ and the population standard deviation $\sigma$.
 \end{itemize}
 
 \begin{verbatim}
@@ -386,6 +386,173 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 [1] 1.414214 
 \end{verbatim}
 
+$\mu$=4 and $\sigma=1.414214$
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
+\scriptsize{
+\begin{itemize}
+\item Now, we will use the R library ``gtools'' to draw all 25 possible samples (with replacement) of size $2$.
+\end{itemize}
+
+\begin{verbatim}
+> library(gtools)
+> library(tidyverse)
+> samp_size <- 2
+> samples<-as_tibble(permutations(length(pop), samp_size,
++                                 pop, repeats.allowed=TRUE))
+> samples
+# A tibble: 25 x 2
+      V1    V2
+   <dbl> <dbl>
+ 1     2     2
+ 2     2     3
+ 3     2     4
+ 4     2     5
+ 5     2     6
+ 6     3     2
+ 7     3     3
+ 8     3     4
+ 9     3     5
+10     3     6
+# … with 15 more rows
+\end{verbatim}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
+\scriptsize{
+\begin{itemize}
+\item We can calculate the sample mean of each sample using the command ``mutate'':
+\end{itemize}
+
+\begin{verbatim}
+> samples <- samples %>% rowwise() %>% 
++   mutate(sample_mean=mean(c(V1,V2)))
+> samples
+# A tibble: 25 x 3
+# Rowwise: 
+      V1    V2 sample_mean
+   <dbl> <dbl>       <dbl>
+ 1     2     2         2  
+ 2     2     3         2.5
+ 3     2     4         3  
+ 4     2     5         3.5
+ 5     2     6         4  
+ 6     3     2         2.5
+ 7     3     3         3  
+ 8     3     4         3.5
+ 9     3     5         4  
+10     3     6         4.5
+# … with 15 more rows
+\end{verbatim}
+
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
+\scriptsize{
+\begin{itemize}
+\item The distribution of these sample means is the \textbf{sampling distributiion}.
+\item We can visualize its shape by plotting an histogram: 
+\begin{verbatim}
+ggplot(samples, aes(x=sample_mean)) + 
+  geom_histogram(bins = 10, color="black", fill="white")
+\end{verbatim}
+
+
+\end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{pics/hist_sampdist.pdf}
+\end{figure}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
+\scriptsize{
+\begin{itemize}
+\item You may noticed that the historgram is peaked in the middle, and symmetrical.
+\item This is a consequence of the Central Limit Theorem!!!
+\item We can see that the population distribution is very different from the sampling distribution:
+\begin{verbatim}
+ggplot(data.frame(pop), aes(x=pop)) +
+  geom_histogram(bins = 5, color="black", fill="white")
+\end{verbatim}
+
+
+\end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/pop_dist.pdf}
+\end{figure}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
+\scriptsize{
+\begin{itemize}
+\item Let's calculate the mean and the standard deviation of the sample means:
+\begin{verbatim}
+> mean(samples$sample_mean)
+[1] 4
+> sd.p(samples$sample_mean)
+[1] 1
+\end{verbatim}
+
+\item We can see that mean of the sampling distribution of the mean $\mu_{\overline{X}}$ equals the population mean $\mu$.
+
+
+\item We can also calculate the theoretical standard error $se=\sigma/\sqrt{n}$
+
+\begin{verbatim}
+> sd.p(pop)/sqrt(samp_size)
+[1] 1
+\end{verbatim}
+
+which is the same as the standard distribution of the sampling distribution of the sample mean.
+
+\item We have validated empirically that the sample mean is a good estimator of the population mean and that its standard error can be calculated from the population standard deviation and the sample size.
+
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
+\scriptsize{
+
+\begin{itemize}
+\item The central limit theorem also provides us with some very helpful information about the shape of the sampling distribution of the mean. 
+\item Specifically, it tells us the conditions under which the
+sampling distribution of the mean is normally distributed or at least approximately normal.
+\item If the population from which you sample is itself normally distributed, then the sampling distribution of the mean will be normal, regardless of sample size.
+\item If the population from which you sample is non-normal, the sampling distribution of the mean will still be approximately normal given a large enough sample size.
+\item How large is enough? Some authors say 30 or 40. But if the population distirbution is extremly non-normal (i.e., very skewed) you will need much more.
+\end{itemize}
 
 
 } 
@@ -428,11 +595,7 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 
 \item A reasonable requirement for an estimator is that it should converge to the true parameter value as we collect more and more data.
 
-\item A point estimator $\hat{\theta}_n$ of a parameter $\theta$ is \textbf{consistent}  if it converges to the true value when the number of data in the sample tends to infinity..
-\item The quality of an estimator can be measured using the  \textbf{mean squared error} (MSE)
-\begin{displaymath}
-MSE = \mathbb{E}_{\theta}(\hat{\theta}_n - \theta)^2 
-\end{displaymath}
+\item A point estimator $\hat{\theta}_n$ of a parameter $\theta$ is \textbf{consistent}  if it converges to the true value when the number of data in the sample tends to infinity.
 
 \end{itemize}
 
@@ -450,7 +613,7 @@ MSE = \mathbb{E}_{\theta}(\hat{\theta}_n - \theta)^2
 
 \item For example, for the sample mean $\mathbb{E}(\overline{X_{n}})=\mu$ hich implies that the $bias =0$ and$se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}$  tends to zero when $n\rightarrow \infty$. Then $\overline{X_{n}}$ is a consistent estimator of the mean.  
 
-\item For the case of the Bernoulli experiment one has that  $\mathbb{E}(\hat{p})=p \Rightarrow bias=0$ y $se = \sqrt{p(1-p)/n} \rightarrow 0$ when $n\rightarrow \infty$. Then  $\hat{p}$ is a consistent estimator of $p$.
+\item For the case of the Bernoulli experiment one has that  $\mathbb{E}(\hat{p})=p \Rightarrow bias=0$ and $se = \sqrt{p(1-p)/n} \rightarrow 0$ when $n\rightarrow \infty$. Then  $\hat{p}$ is a consistent estimator of $p$.
 
 
 \end{itemize}
