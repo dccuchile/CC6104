@@ -22,7 +22,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 
 ### Part III: Bayesian Inference 
 1. [Introduction to Bayesian Inference](slides/ST-bayesian.pdf) | ([tex source file](slides/ST-bayesian.tex))
-1. Bayesian Lineal Models (Chapters 4,5 of Statistical Rethinking)
+1. Bayesian Linear Models (Chapters 4,5 of Statistical Rethinking)
 1. MCMC (Chapter 9 of Statistical Rethinking)
 
 

@@ -36,3 +36,8 @@ sd.p(samples$sample_mean)
 
 
 sd.p(pop)/sqrt(samp_size)
+
+
+
+prop<-prop.test(1219,3532,correct=FALSE)
+prop$conf.int

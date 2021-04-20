@@ -608,7 +608,7 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 
 \item A reasonable requirement for an estimator is that it should converge to the true parameter value as we collect more and more data.
 
-\item A point estimator $\hat{\theta}_n$ of a parameter $\theta$ is \textbf{consistent}  if it converges to the true value when the number of data in the sample tends to infinity and its standard error converges to zero.
+\item A point estimator $\hat{\theta}_n$ of a parameter $\theta$ is \textbf{consistent}  if it converges to the true value when the number of data in the sample tends to infinity.
 
 \end{itemize}
 
@@ -622,7 +622,7 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 \scriptsize{
 
 \begin{itemize}
-\item If for an estimator $\hat{\theta}_n$, its $bias \rightarrow 0$ and its $se \rightarrow 0$ when $n\rightarrow \infty$, $\hat{\theta}_n$, it is a consistent estimator of $\theta$.
+\item Theorem: If for an estimator $\hat{\theta}_n$, its $bias \rightarrow 0$ and its $se \rightarrow 0$ when $n\rightarrow \infty$, $\hat{\theta}_n$, it is a consistent estimator of $\theta$.
 
 \item For example, for the sample mean $\mathbb{E}(\overline{X_{n}})=\mu$,  which implies that the $bias =0$.
 \item Then $se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}$  converges to zero when $n\rightarrow \infty$. 
@@ -649,7 +649,7 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 \scriptsize{
 \begin{itemize}
  \item We know that the value of a point estimator \textbf{varies} from sample to sample.
- \item It is more reasonable to find an interval that is likely to trap the real value of the parameter with a certain probability.
+ \item It is more reasonable to find an interval that is likely to trap the real value of the parameter in the long run.
  \item The general form of a confidence interval in the following:
   \begin{displaymath}
    \text{Confidence Interval} = \text{Sample Statistic} \ \pm \ \text{Margin Error}
@@ -966,10 +966,70 @@ lines(y4~x,type="l",col="red")
 \end{itemize}
 
 
+}
+\end{frame}
+
+\begin{frame}{Confidence Interval for a Population Proportion}
+\scriptsize{
+\begin{itemize}
+ \item Suppose we want to compute the proportion of subjects who will vote for a candiate and we also want a confidence interval for the estimated proportion.
+ 
+ \item As showed earlier, the sampling distribution of a the sample proportion follows a Normal distribution.
+
+ \item The confidence interval $C_n$ for a proportion is:
+\begin{displaymath}
+ C_n = \left(\hat{p}-z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat p)}{n}} , \hat{p} + z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat p)}{n}}\right) 
+ \end{displaymath} 
+
+
+
+\end{itemize}
 
 }
+
  
 \end{frame}
+
+
+\begin{frame}[fragile]{Confidence Interval for a Population Proportion}
+\scriptsize{
+\begin{itemize}
+\item Example: $1,219$ respondents indicated that they would vote for candidate A in a survey of $3,532$ people. 
+
+\item Compute a 95\% confidence interval for the proportion of voters: 
+ 
+\begin{displaymath}
+ \hat{p}=\frac{1219}{3235}=0.345
+\end{displaymath}
+
+\item and $z_{\alpha/2}=1.96$ 
+\begin{verbatim}
+> qnorm(1-0.025)
+[1] 1.959964
+\end{verbatim}
+
+\begin{displaymath}
+ C_n = 0.345 \pm 1.96\sqrt{\frac{0.345(1-0.345)}{3532}} = (0.329,0.361)  
+ \end{displaymath} 
+ 
+\item In R:
+ 
+\begin{verbatim}
+> prop<-prop.test(1219,3532,correct=FALSE)
+> prop$conf.int
+[1] 0.3296275 0.3609695
+\end{verbatim}
+
+
+
+\end{itemize}
+
+}
+
+ 
+\end{frame}
+
+
 
 \begin{frame}{The Boostrap}
  
@@ -987,7 +1047,6 @@ lines(y4~x,type="l",col="red")
 \bibliographystyle{apalike}
 %\bibliographystyle{flexbib}
 \end{frame}  
-
 
 
 
