@@ -61,10 +61,15 @@
 \begin{frame}{Populations and Samples}
 \scriptsize{
 \begin{itemize}
+ 
+ \item The main goal of statistical inference is investigate properties about a target \textbf{population}.
+ 
  \item A \textbf{population} is the entire group of individuals that we are interested in studying.
  \item  This could be anything from all humans to a specific type of cell.
+ 
+ \item The individual elements of the population sometimes are  called \textbf{units}.
 
-\item The main goal of statistical inference is investigate properties about a target \textbf{population}.
+
 
  \item Example: What is the average height of all people in Chile? Here the population is all the inhabitants of Chile. 
  
@@ -84,41 +89,290 @@
 \scriptsize{
 \begin{itemize}
  \item In statisical inference we try to make reasonable conclusions about a population based on the evidence provided by \textbf{sample data}.
- 
-  \item We do this primarily to save time and effort.
+
  
  \item A \textbf{sample staticic} or simply \textbf{statistic} is a quantitative measure calculated from a sample. Examples: the mean, the standard deviation, the minimum, the maximum.
  
  
+
+\end{itemize}
+
+\begin{block}{Example}
+\begin{itemize}
+
+\item  Taking a sample \textbf{survey} can help you determine the percentage of people in a population who have a particular characteristic.
+
+ \item Nielsen Media Research takes a \textbf{survey} so they can get an estimate of the proportion of all U.S. households that are tuned to a particular television program  \cite{watkins2010statistics}.
+ 
+\item The true proportion that Nielsen would get from a survey of \textbf{every} household is called a \textbf{population parameter}.
+
+\item Nielsen uses the proportion in the \textbf{sample} as an
+\textbf{estimate} of this parameter. 
+
+\item Such an estimate from a sample is called a \textbf{statistic}.
+ 
+\end{itemize}
+
+ 
+\end{block}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Sampling Methods}
+\scriptsize{
+
+
+\begin{itemize}
+
+
  \item Our goal in sampling is to determine the value of a statistic for an entire population of interest, using just a small subset of the population.
  
+\item We do this primarily to save time and effort.
 
- 
-
- 
- 
-
-\end{itemize}
-
-} 
-\end{frame}
+\item A good sample is \textbf{representative}: it looks like a small version of the population.
 
 
+\item A sampling method is \textbf{biased} if it produces samples such that the estimate from the sample is larger or smaller, on average, than the population parameter being estimated.
 
-\begin{frame}{Samples and Surveys}
+
+\item In practice, we can't tell if if a sample is representative, since we can't get all the population data.
+
+\item But, we can tell whether a \textbf{sampling method} is good or not.
+
+
+\item The problems or \textbf{biases} of a sampling method can come from two sources: 
+
+\begin{enumerate}
 \scriptsize{
-\begin{itemize}
- \item Random samples
- \item Stratified samples
- \item Biases
+ \item \textbf{Sampling selection bias}: the method of taking the sample.
+ \item \textbf{Response bias}: the method for getting a response.
+ }
+ \end{enumerate}
+
 
 \end{itemize}
+
+
+
 
 } 
 \end{frame}
 
 
-\begin{frame}{Statistical Inference }
+
+
+\begin{frame}{Sample selection bias}
+\scriptsize{
+
+Sample selection bias happens when samples tend to result in estimates of population parameters that systematically are too high or too low \cite{watkins2010statistics}. \\ It can occur in the following ways:
+\begin{itemize}
+
+
+ \item  \textbf{Size bias}: using a method that gives larger units a bigger change of being in the sample. 
+ \begin{itemize}
+ \scriptsize{
+  \item Example: patients who spent more days in a hospital are more likely to be selected for the sample.}
+ \end{itemize}
+
+ 
+ 
+ 
+ \item \textbf{Voluntary response bias}: letting people volunteer to be in the sample. 
+ \begin{itemize}
+ \scriptsize{
+  \item  Example:  When a radio program asks people to call in and take sides on some issue, those who care about the issue will be overrepresented, and those who don't care as much might not be represented at all.}
+ \end{itemize}
+
+
+ 
+ \item \textbf{Convenience sample bias}: units are chosen because of convenience.
+ \begin{itemize}
+ \scriptsize{
+  \item  Example: What percentage of the students in your graduating class plan to go to work immediately after graduation? 
+  \item You can use your friends as a quicker and more convenient sample, but almost certainly biased because your friends are likely to have similar plans to yours.}
+ \end{itemize}
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+
+
+\begin{frame}{Sample selection bias}
+\scriptsize{
+
+
+\begin{itemize}
+ 
+ \item \textbf{Judgment sampling bias}: selecting the sampling units based on ``expert'' judgment. Problem: experts might overlook important features of a population.
+ 
+ \begin{itemize}
+  \scriptsize{
+  \item Example: In the early days of US election polling, local ``experts'' were hired to sample voters in their locale by filling certain quotas (so many men, so many women, so many voters over the age of 40, so many employed workers, and so on). 
+  \item The poll takers used their own judgment as to whom they selected for the poll. 
+  \item It took a very close election (the 1948 presidential election, in which polls were wrong in their prediction) for the polling organizations to realize that quota sampling was a biased method.}
+ \end{itemize}
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}{Sample selection bias}
+\scriptsize{
+
+
+\begin{itemize}
+ 
+ \item \textbf{Sampling frame bias}: a sampling frame is the ``list'' of all population units from which you select the sample. Constructing an inadequate sampling frame is a cause of bias. 
+ 
+ \begin{itemize}
+ \scriptsize{
+  \item The problem is that in many problems is extremely hard to make that ``list''. 
+  \item How would you list all the people using the Internet worldwide or all the ants in a park? 
+  \item For all practical purposes, you can't.
+  \item There will often be a difference between the population and the sampling frame.
+  \item A sample might represent the units in the frame quite well, but how well your sample represents the population depends on how well you've chosen your frame.
+  \item If you start from a bad frame, even the best sampling methods can't save you: bad frame, bad sample \cite{watkins2010statistics}.
+ }
+ \end{itemize}
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Response bias}
+\scriptsize{
+These types of bias derive from the method of obtaining the response.
+
+\begin{itemize}
+ \item \textbf{Nonresponse bias}: people often refuse to respond to a survey. These people may be different from those who agree to participate.
+ 
+ \item \textbf{Incorrent response or measurement bias}: the bias might be the result of intentional lying, or come from inaccurate measuring devices, including inaccurate memories of people being interviewed in self-reported data.
+ \begin{itemize}
+ \begin{scriptsize}
+    \item Example 1: many people don't want to admit that they watch a certain television program.
+  \item Example 2: patients in medical studies are prone to overstate how well they have followed the physician's orders.
+  \item Example 3: many people tend to underestimate the amount of time they actually spend with their cell phones.
+ \end{scriptsize}
+ \end{itemize}
+
+ 
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}{Response bias}
+\scriptsize{
+
+\begin{itemize}
+
+ \item \textbf{Questionnaire bias}: people's opinions may vary depending on the interviewer's tone of voice, the order in which the questions are asked and the wording of the questions, etc..
+ 
+ \begin{itemize}
+ \scriptsize{
+  \item  Example: Reader's Digest asked the same 1031 people to respond to these two statements:
+   \begin{enumerate}
+ \scriptsize{
+
+  \item I would be disappointed if Congress cut its funding for public television.
+  
+  \item Cuts in funding for public television are justified as part of an overall effort to reduce federal spending.
+ }
+ \end{enumerate}
+  \item Note that agreeing with the first statement is pretty much the same as disagreeing with the second. However:
+  
+  \item First statement: 54\% agreed, 40\% disagreed, and 6\% didn't know.
+  \item Second statement: 52\% agreed , 37\% disagreed, and 10\% didn’t know. \cite{barnes1995can}
+  
+  }
+ \end{itemize}
+
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Random Samples}
+\scriptsize{
+
+\begin{itemize}
+
+ \item The key idea for building a good sample is to \textbf{randomize}, that is, let chance choose the sampling units.
+ \item Selecting your sample by chance is the only method guaranteed to be unbiased.
+\end{itemize}
+
+
+\begin{block}{Simple Random Sampling}
+ \begin{itemize}
+ \item All possible samples of a given fixed size are equally likely.
+ \item All individuals in the population are indexed and randomly drawn with equal probability until the sample size is reached.
+\end{itemize}
+\end{block}
+
+
+\begin{block}{Stratified Random Sampling}
+ \begin{itemize}
+ \item We divide the population into subgroups based on shared characteristics (e.g., country, city) that do not overlap and that cover the entire sampling frame.
+ \item These subgroups are called strata.
+ \item Take a simple random sample for each strata proportional to its size.
+ \item It ensures that every strata is properly represented in the sample.
+\end{itemize}
+\end{block}
+
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Random Samples}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/sample_strat.png}
+\end{figure}
+
+\footnotemark{Figure source: \url{https://www.scribbr.com/methodology/sampling-methods/}}
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{A Formal Definition of Statistical Inference }
 \scriptsize{
 \begin{itemize}
  \item The process of drawing conclusions about a population from sample data is known as \textbf{statistical inference}.
@@ -133,7 +387,7 @@
 \end{frame}
 
 
-\begin{frame}{Frequentist Aproaches}
+\begin{frame}{Frequentist Aproach}
 \scriptsize{
 The satistical methods to be presented is this class are known as \textbf{frequentist (or classical)} methods. They are based on the following postulates  \cite{wasserman2013all}:
 \begin{itemize}
@@ -227,7 +481,7 @@ There is another approach to inference called \textbf{Bayesian inference}, which
 se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \end{displaymath}
 \item The standard error tells us about the variability of the estimator between all possible samples of the same size.
-\item It can be think of as the standard deviation of the sampling distribution. 
+\item It can be considered as the standard deviation of the sampling distribution. 
 \item It is a measure of the uncertainty of the point estimate.
 \end{itemize}
 
@@ -244,7 +498,7 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \begin{itemize}
  \item Let $X_1,X_2,\dots,X_n$ be a random sample of a population of mean $\mu$ and variance $\sigma^2$.
  \item Let's suppose that we are interested in estimating the \textbf{population mean} $\mu$ (e.g., the mean height of Chilean people).
- \item  A sample statistic we can derive from the data is the  \textbf{sample mean} $\overline{X_{n}}$
+ \item  A sample statistic we can derive from the data is the  \textbf{sample mean} $\overline{X_{n}}$:
  \begin{displaymath}
   \overline{X_{n}}=\frac{1}{n}\sum_{i=1}^{n} X_i
  \end{displaymath}
@@ -646,7 +900,7 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
  \item Maximum Likelihood Estimation (MLE) is a more general framework  for estimating the \textbf{parameters} of any \textbf{parametric model}.
  \item In MLE, we assume that the sample data is generated by a given probability distribution ( continuous or discrete) parameterized by $\theta$ and try to find the value of $\theta$ that maximizes the joint probability of the data under that distribution. 
  \item Idea: find the parameter values of the assumed statistical model that make the observed data most probable.
- \item For example, we can asssume that each data point is generated by $N(\mu,\sigma^2)$, then we will compute the joint PDF of our data and find the parameter values for $\mu$ and $\sigma$ that maximize that joint density.
+ \item For example, we can asssume that each data point is generated by $N(\mu,\sigma^2)$, then we compute the joint PDF (or PMF) of our data and find the parameter values for $\mu$ and $\sigma$ that maximize that joint density (or mass).
  
 \end{itemize}
 
@@ -658,13 +912,32 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 \begin{frame}{Maximum Likelihood Estimation}
 \scriptsize{
 \begin{itemize}
- \item Let $X_1,\dots,X_n$ be IID with PDF $f(x;\theta)$.
- \item Since we are assuming that our data samples are independent random variables, the joint density (PDF) would be the product of each PDF: 
+ \item Students learning statistics often ask: how would we ever know that the distribution that generated the data is in some parametric model? \cite{wasserman2013all}
+ \item There are  cases where background knowledge suggests that a parametric model provides a reasonable approximation. 
+ \item Example 1: independent binary experiments (e.g., flipping a coin or voting for a candidate) can be adequately represented with Bernoulli or Binomial distributions.
+ \item Example 2: counts of traffic accidents are known from prior experience to follow approximately a Poisson model.  
+ 
+ \item  In many other cases non parametric methods are preferable, but they are beyond the scope of this course.
+ 
+\end{itemize}
+
+
+} 
+ 
+\end{frame}
+
+
+
+\begin{frame}{Maximum Likelihood Estimation}
+\scriptsize{
+\begin{itemize}
+ \item Let $X_1,\dots,X_n$ be IID with PDF (or PMF) $f(x;\theta)$.
+ \item Since we are assuming that our data samples are independent random variables, the joint density (or mass) would be the product of each PDF (or PMF): 
  \begin{displaymath}
 \mathcal{L}_{n}(\theta)=\prod_{i=1}^nf(X_i;\theta)  
  \end{displaymath}
-\item We refer to this joint density as the \textbf{likelihood function}.
-\item The likelihood function is just the joint density of the data, except that we treat it is a function of the parameter $\theta$.
+\item We refer to this joint density (or mass) as the \textbf{likelihood function}.
+\item The likelihood function is just the joint density (or mass) of the data, except that we treat it is a function of the parameter $\theta$.
 
 \item In MLE, we turn the estimation task into an optimization problem:
 
@@ -676,7 +949,7 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 \end{equation}
 \end{center}
 
-\item The maximum likelihood estimator MLE, denoted by $\hat{\theta}_n$, is the value of e that maximizes $\mathcal{L}_{n}(\theta)$.
+\item The maximum likelihood estimator MLE, denoted by $\hat{\theta}_n$, is the value of $\theta$ that maximizes $\mathcal{L}_{n}(\theta)$.
  
 \end{itemize}
 
@@ -692,7 +965,7 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
  \item In many cases the log-likelihood is easier to optimize $l_n(\theta)$:
  
  \begin{displaymath}
-l_n(\theta) = \log(\mathcal{L}_{n}(\theta))=log(\prod_{i=1}^nf(X_i;\theta))= \sum_{i=1}^{n}\log(f(X_i;\theta))  
+l_n(\theta) = \log(\mathcal{L}_{n}(\theta))=\log(\prod_{i=1}^nf(X_i;\theta))= \sum_{i=1}^{n}\log(f(X_i;\theta))  
  \end{displaymath} 
 
 \item Since the logarithm is a monotonic function, the maximum of occurs at the same value of $\theta$.
@@ -705,7 +978,7 @@ l_n(\theta) = \log(\mathcal{L}_{n}(\theta))=log(\prod_{i=1}^nf(X_i;\theta))= \su
 
 \item The MLE has many good mathematical properties that go beyond the scope of this course to discuss.
 
-\item One property that is important to know is that the MLE is \textbf{consistent} .
+\item One property that is important to know is that the MLE is \textbf{consistent}.
 
 \end{itemize}
 
@@ -731,7 +1004,7 @@ where $S=\sum_{i}X_i$. Hence,
 l_n(\theta) = S\log p+ (n-S)\log(1-p). 
  \end{displaymath}  
  
-\item Take the derivative of $l_n(\theta)$, set it equal to 0 to find that the MLE is $\hat{p}_n =S/n$, which is the same value as the sample provision shown earlier.
+\item Take the derivative of $l_n(\theta)$, set it equal to 0 to find that the MLE is $\hat{p}_n =S/n$, which is the sample proportion.
  
 \end{itemize}
 
@@ -842,7 +1115,7 @@ l_n(\mu,\sigma) = -n\log \sigma - \frac{nS^2}{2\sigma^2} - \frac{n(\overline{X}-
 
 \begin{itemize}
  \item There is a lot of \textbf{confusion} about how to interpret a confidence interval.
- \item A confidence interval is not a probability statement about $\theta$ since $\theta$ is a fixed quantity in Frequentist inference setting, not a random variable
+ \item A confidence interval is not a probability statement about $\theta$ since $\theta$ is a fixed quantity in frequentist inference, not a random variable
  \item One way to interpret them is to say that if we repeat the \textbf{same experiment} many times, the interval will contain the value of the parameter $(1-\alpha)\%$ of the times.
  \item This interpretation is correct, but we rarely repeat the same experiment several times.
  \item A better interpretation: one day I collect data I create a $95\%$ confidence interval for a parameter $\theta_1$. Then on day 2, I do the same for a parameter $\theta_2$ and so repeatedly $n$ times. The $95\%$ of my intervals will contain the actual values of the parameters. 
@@ -1010,7 +1283,7 @@ when $n$ is large.
 \scriptsize{
 \begin{itemize}
  \item In practice, if we do not know $\mu$ we are unlikely to know $\sigma$.
- \item If we estimate $\sigma$ using $s$, confidence intervals are better build using the distribution \textbf{T-student}, especially when the sample size is small.
+ \item If we estimate $\sigma$ using $s$, confidence intervals are better build using the \textbf{T-student} distribution, especially when the sample size is small.
 \end{itemize}
 
 \begin{block}{T Distribution}
@@ -1256,6 +1529,27 @@ lines(y4~x,type="l",col="red")
 \item Bootstrap is especially useful when CI doesn't have a closed form, or it has a very complicated one.
 
 \item Tutorials: \url{https://www.datacamp.com/community/tutorials/bootstrap-r}, \url{https://github.com/statsthinking21/statsthinking21-R/blob/master/07-ResamplingAndSimulation.Rmd}.
+
+\end{itemize}
+}
+ 
+\end{frame}
+
+
+
+\begin{frame}{Conclusions}
+\scriptsize{
+
+\begin{itemize}
+\item We have introduced many important concepts in statistical inference, in particular, the frequentist approach.
+
+\item We have studied estimators and their sampling distributions.
+
+\item We introduced a general technique for calculating estimators called maximum likelihood.
+
+\item We studied how to measure the uncertainty of an estimator using a confidence interval.
+
+\item We have introduced a method of approximating confidence intervals by means of simulations called bootstrap.
 
 \end{itemize}
 }
