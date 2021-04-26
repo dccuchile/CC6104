@@ -50,6 +50,8 @@ The course introduces the fundamentals of statistical thinking, which are descri
 ## Courses
 
 * [Richard McElreath - Statistical Rethinking Winter 2020](https://github.com/rmcelreath/stat_rethinking_2020)
+* [Jonathan Marchini - Introduction to Probability Theory and Statistics](https://jmarchini.org/intro-stats/)
+* [Jonathan Marchini - Foundations of Statistical Inference](https://jmarchini.org/statinf/)
 
 ## Videos
 
