@@ -63,11 +63,87 @@
 % http://homepage.divms.uiowa.edu/~rdecook/stat2020/notes/ch7_pt1.pdf
 
 
+\begin{frame}{Motivation}
+\scriptsize{
 
-\begin{frame}{Design of Experiments}
+
+In the first lecture we discussed the three major goals of statistics:
+\begin{enumerate}
+ \item Describe
+ \item Decide
+ \item Predict 
+\end{enumerate}
+
+
+
+ \begin{itemize}
+  \item In this lecture we will introduce the ideas behind the use of statistics to make decisions.
+  \item In particular, decisions about whether a particular \textbf{hypothesis} is supported by the data. \cite{poldrack2019statistical}
+ \end{itemize}
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Null Hypothesis Statistical Testing (NHST)}
 \scriptsize{
 \begin{itemize}
- \item sfsdf
+ \item The specific type of hypothesis testing that we will discuss is known null hypothesis statistical testing (NHST).
+\item  If you pick up almost any scientific research publication, you will see NHST being used to test hypotheses.
+\item Learning how to use and interpret the results from hypothesis testing is essential to understand the results from many fields of research.
+\item NHST is usually applied to \textbf{experimental} data.
+\item Thus, we need to introduce basic concepts on the design of experiments.
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Experiments and Inference About Cause}
+\scriptsize{
+\begin{itemize}
+ \item In the previous lecture we studied how to infer characteristics of a population from sample data using surveys or polls.
+ \item A second type of inference is when we want to infer \textbf{cause-effect relationships} between two or more variables (e.g, does smoking cause cancer) from experimental data. 
+ \item Example \cite{watkins2010statistics}: Children who drink more milk have bigger feet than children who drink less milk. 
+ 
+ 
+\end{itemize}
+
+
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Experiments and Inference About Cause}
+\scriptsize{
+
+\begin{itemize}
+\item There are three possible explanations for this association:
+ \begin{enumerate}
+ \scriptsize{
+ \item Drinking more milk causes children’s feet to be bigger.\\
+	\includegraphics[scale=0.25]{pics/cause1.png}
+
+ 
+ \item Having bigger feet causes children to drink more milk. \\
+ \includegraphics[scale=0.25]{pics/cause2.png}
+ 
+ \item A \textbf{lurking variable} is responsible for both. \\
+ \includegraphics[scale=0.25]{pics/cause3.png}
+ }
+\end{enumerate}
+\item We know that bigger children have bigger feet, and they drink more milk because they eat and drink more of everything than do smaller children.
+
+\item Hence, the right explanation is the third one, and the child’s overall size is the lurking variable.
+
+ \item A lurking variable is a variable that may or may not be apparent at the outset but, once identified, could explain the pattern between the variables
 
 \end{itemize}
 
@@ -76,6 +152,27 @@
 } 
 \end{frame}
 
+
+
+\begin{frame}{Experiments and Inference About Cause}
+\scriptsize{
+
+\begin{itemize}
+
+ \item Suppose you want to prove that explanation 1 is the reason.
+ \item Approach 1: take a bunch of children, give them milk, and wait to see if their feet grow.
+ \item This won't prove anything, because children's feet will grow whether they drink milk or not.
+ \item Approach 2: take a bunch of children, randomly divide them into a \textbf{group} that will drink milk and a group that won't drink milk, wait and compare the size of the feet of both groups. 
+ \item This approach is an \textbf{experiment}, and is the only way to establish cause and effect.
+ 
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+% AB Testing
 
 \begin{frame}{Hypothesis Testing}
 \scriptsize{
@@ -100,7 +197,7 @@
 
 
 
-\begin{frame}{Hypothesis Testing (2)}
+\begin{frame}{Hypothesis Testing}
 \scriptsize{
 
 \begin{block}{Methodology to Perform a Hypothesis Test}
@@ -119,8 +216,26 @@
 \end{frame}
 
 
+\begin{frame}{Types of T-tests}
+ \scriptsize{
+\url{https://en.wikipedia.org/wiki/Student\%27s_t-test}
+\begin{itemize}
+ \item Single-sample t-test
+ \item Unpaired two sample t-test: better using \url{https://en.wikipedia.org/wiki/Welch\%27s_t-test}
+ \item Paired two sample t-test
+\end{itemize}
 
-\begin{frame}[fragile]{Hypothesis Testing (3)}
+\url{https://www.datanovia.com/en/lessons/types-of-t-test/\#one-sample-t-test}
+}
+Tests can be one-sided or two-sided
+
+Nice explanations of degrees of freedom: \url{https://crumplab.github.io/statistics/t-tests.html}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Single-sample T-test}
 \scriptsize{
 \begin{itemize}
  \item Example: It is known that the average number of hours of monthly Internet use in Chile is 30 hours.
@@ -145,7 +260,7 @@
 \end{frame}
 
 
-\begin{frame}[fragile]{Hypothesis Testing (4)}
+\begin{frame}[fragile]{Univariate T-test}
 \scriptsize{
 \begin{itemize}
  \item Another way to perform the test is to compute the statistic  $T=\frac{\overline{X_{n}}-\mu_{o}}{\frac{s}{\sqrt{n}}}$
@@ -172,7 +287,7 @@
 \end{frame}
 
 
-\begin{frame}[fragile]{Hypothesis Testing (5)}
+\begin{frame}[fragile]{P-value}
 \scriptsize{
 \begin{itemize}
  \item Generally, in addition to knowing whether we reject or fail to reject a null hypothesis we want to quantify the evidence we have against it.
@@ -201,7 +316,7 @@
 }
 \end{frame}
 
-\begin{frame}[fragile]{Hypothesis Testing (6)}
+\begin{frame}[fragile]{Univariate T-test}
 \scriptsize{
 \begin{itemize}
  \item The elegant way to do it in R:
@@ -227,7 +342,7 @@ mean of x
 
 \end{frame}
 
-\begin{frame}{Hypothesis Testing (7)}
+\begin{frame}{Errors}
  \scriptsize{
 
 \begin{itemize}
@@ -253,6 +368,9 @@ $H_1$ true & type II error & \checkmark \\
 
 }
 \end{frame}
+
+
+
 
 \begin{frame}{Statistical Power}
  
