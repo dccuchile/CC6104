@@ -179,16 +179,35 @@ In the first lecture we discussed the three major goals of statistics:
 
 \begin{itemize}
  \item \textbf{Experimental units}: the subjects on which we experiment (e.g, patients, users, laboratory animals). When the experiment units are people, we call them  \textbf{subjects}.
- \item \textbf{Treatments}: the conditions on which we compare different unit groups. Examples: drinking milk vs. not drinking milk, smoking vs. not smoking, taking drug A vs. drub B.
+ \item \textbf{Treatments}: the conditions on which we compare different unit groups. Examples: drinking milk vs. not drinking milk, smoking vs. not smoking, taking drug A vs. drug B.
  \item \textbf{Treatment or Experimental group}: a group of units that receives a particular treatment. Example: patients taking a new drug, software users seing a new layout.
- \item \textbf{Control group}: a group of units used for comparison that receives either a standard treatment or no treatment at all. Example: patients taking a placebo, software users seing the standard layout.
- \item \textbf{Response variable}: the variable of interest used to measure the effect of the treatments on the units 
-
- \item \textbf{Randomization}:
+ \item \textbf{Control group}: a group of units used for comparison that receives either a standard treatment or no treatment at all. Example: patients taking a placebo (a fake treatment), software users seing the standard layout.
  
-  \item \textbf{Replication}: random assignment of treatments (including the control group) to units. This is very important since not all units are alike (e.g., people have different ages, weights, preferences). Randomization is only way to mitigate the variability between units.
+  \item \textbf{Response variable}: the variable of interest used to measure the effect of the treatments on the units. Examples: weight, birth rate,  click-rate, revenue, etc.
+ 
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Main Concepts of Experimental Design}
+\scriptsize{
+
+
+\begin{itemize}
+
+ \item \textbf{Randomization}: random assignment of treatments (including the control group) to units. This is very important since not all units are alike (e.g., people have different ages, weights, preferences). Randomization is the most reliable method of creating homogeneous treatment groups, without involving any potential biases or judgments.
+ 
+  \item \textbf{Replication}: the repetition of an experiment on a large group of subjects. Replication reduces variability in experimental results. 
   
-  \item \textbf{Randomized Controlled Experiments}:
+  \item \textbf{Randomized Controlled Trial} (RCT): an experiment in which units are randomly assigned to one of several treatments and one of these groups is a control group.
+  
+  \item \textbf{Blind Experiment}:  when the units (e.g., patients) don't know the treatment they are receiving.
+  
+  \item \textbf{Double-blind Experiment}: when neither the units (e.g., patients) nor the experimenters (e.g., doctors) know who is receiving a particular treatment.
   
 \end{itemize}
 
@@ -197,9 +216,120 @@ In the first lecture we discussed the three major goals of statistics:
 } 
 \end{frame}
 
-\begin{frame}{Example: A/B Testing}
+
+\begin{frame}{Main Concepts of Experimental Design}
 \scriptsize{
-The main components of an experiment are:
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/experiment.pdf}
+\end{figure}
+
+Characteristics of a well-desgined experiment.
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{A/B Testing}
+\scriptsize{
+
+
+\begin{itemize}
+
+\item Data-driven companies like Amazon, Microsoft, eBay, Facebook, Google and Netflix often conduct experiments to make decisions \cite{kohavi2012trustworthy}.
+
+\item In this context, experiments are called \textbf{online  controlled experiments} or \textbf{A/B tests} 
+ 
+
+ \item The idea is the same, experimental units are users which are randomly exposed to one of two variants of a webpage: Control (A), or Treatment (B).
+ 
+ \item When there are variants (treatments) we do an A/B/n test.
+ 
+ \item The response variable is called \textbf{Overall  Evaluation  Criterion} (OEC), which is  a  quantitative measure of the experiment's objective. 
+ 
+ \item OECs can be revenue, click-rate, user session duration, etc...
+ \end{itemize}
+
+} 
+\end{frame}
+
+
+\begin{frame}{A/B Testing}
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.34]{pics/abtest.png}
+\end{figure}
+Image souce: \cite{kohavi2012trustworthy} 
+\end{frame}
+
+
+
+\begin{frame}{Example: MSN Real Estate}
+\scriptsize{
+
+
+\begin{itemize}
+
+\item The team running the MSN Real Estate site wanted to test different designs for the ``Find a home'' widget \cite{kohavi2009online}.
+
+\item Visitors who click on this widget are sent to partner sites, and Microsoft receives a referral fee. 
+
+\item Six different designs of this widget, including the incumbent (control), were proposed.
+
+\item Users were randomly splited between the variants in a persistent manner (a user receives the same experience in multiple visits) during the experiment period.
+
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Example: MSN Real Estate}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.43]{pics/widgets.png}
+\end{figure}
+
+
+
+
+\end{frame}
+
+
+\begin{frame}{Example: MSN Real Estate}
+\scriptsize{
+
+
+\begin{itemize}
+
+
+ 
+ \item Their interactions are instrumented and key metrics computed. 
+ 
+ \item In this experiment, the Overall Evaluation Criterion (OEC) was simple: average revenue per user.
+ \item The winner, Treatment 5, increased revenues by almost 10\% (due to increased clickthrough).
+ 
+ \item The Return-On-Investment (ROI) for MSN Real Estate was phenomenal, as this is their main source of revenue, which increased significantly through a simple change.
+
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}{Confounding in Observational Studies }
+\scriptsize{
 
 \begin{itemize}
 
@@ -212,7 +342,7 @@ The main components of an experiment are:
 } 
 \end{frame}
 
-\begin{frame}{Confounding}
+\begin{frame}{Confounding in Observational Studies}
 \scriptsize{
 
 \begin{itemize}
@@ -226,7 +356,8 @@ The main components of an experiment are:
 } 
 \end{frame}
 
-\begin{frame}{Observational Studies}
+
+\begin{frame}{Factors and Levels}
 \scriptsize{
 
 \begin{itemize}
