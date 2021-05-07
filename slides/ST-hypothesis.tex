@@ -101,6 +101,7 @@ In the first lecture we discussed the three major goals of statistics:
 } 
 \end{frame}
 
+\section{Experiments}
 
 \begin{frame}{Experiments and Inference About Cause}
 \scriptsize{
@@ -240,16 +241,16 @@ Characteristics of a well-desgined experiment.
 
 \item Data-driven companies like Amazon, Microsoft, eBay, Facebook, Google and Netflix often conduct experiments to make decisions \cite{kohavi2012trustworthy}.
 
-\item In this context, experiments are called \textbf{online  controlled experiments} or \textbf{A/B tests} 
+\item In this context, experiments are called \textbf{online  controlled experiments} or \textbf{A/B tests}. 
  
 
- \item The idea is the same, experimental units are users which are randomly exposed to one of two variants of a webpage: Control (A), or Treatment (B).
+ \item The idea is the same, users (experimental units) are randomly exposed to one of two variants of a webpage or APP: Control (A), or Treatment (B).
  
- \item When there are variants (treatments) we do an A/B/n test.
+ \item When the number of variants (treatments) is greater we have an A/B/n test.
  
  \item The response variable is called \textbf{Overall  Evaluation  Criterion} (OEC), which is  a  quantitative measure of the experiment's objective. 
  
- \item OECs can be revenue, click-rate, user session duration, etc...
+ \item OECs can be revenue, clickthrough-rate, user session duration, etc...
  \end{itemize}
 
 } 
@@ -294,7 +295,7 @@ Image souce: \cite{kohavi2012trustworthy}
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.43]{pics/widgets.png}
+	\includegraphics[scale=0.4]{pics/widgets.png}
 \end{figure}
 
 
@@ -328,12 +329,24 @@ Image souce: \cite{kohavi2012trustworthy}
 
 
 
-\begin{frame}{Confounding in Observational Studies }
+\begin{frame}{Observational Studies and Confounding}
 \scriptsize{
 
 \begin{itemize}
 
- \item sds
+ \item Sometimes we can't randomly assign units to the different treatments.
+ 
+ \item For example, it would be unethical to design a randomized controlled trial deliberately exposing people to a potentially harmful situation. 
+ 
+ \item In an \textbf{obervational study} the conditions of interest are aready built into the units being studied.
+ 
+ \item Observational studies are almost always worse than controlled experiments for determining cause-effect relationships.
+ 
+ \item But sometimes is the only thing we can do.
+ 
+ \item A phenomenum called \textbf{confounding} is the major treat to observational studies.
+ 
+ \item Two possible influences on an observed outcome are \textbf{confounded} if they are mixed together in a way that makes it impossible to separate their effects on the responses \cite{watkins2010statistics}.
   
 \end{itemize}
 
@@ -342,12 +355,22 @@ Image souce: \cite{kohavi2012trustworthy}
 } 
 \end{frame}
 
-\begin{frame}{Confounding in Observational Studies}
+\begin{frame}{Example of Confounded Observational Study}
 \scriptsize{
 
 \begin{itemize}
 
- \item sds
+ \item The thymus, a gland in your neck, behaves in a peculiar way. 
+ 
+ \item Unlike other organs of the body, it doesn't get larger as you grow—it actually gets smaller. 
+ \item Ignorance of this fact led early 20th-century surgeons to adopt a worthless and dangerous surgical procedure.
+ 
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/ThymusSizeDiagram.jpg}
+	\caption{source: \url{http://esvc001414.wic005tu.server-web.com/tech_imm_bio_principle.htm}}
+\end{figure}
+ 
   
 \end{itemize}
 
@@ -357,12 +380,57 @@ Image souce: \cite{kohavi2012trustworthy}
 \end{frame}
 
 
-\begin{frame}{Factors and Levels}
+\begin{frame}{Example of Confounded Observational Study}
 \scriptsize{
 
 \begin{itemize}
 
- \item sds
+ \item Many infants were dying of what seemed to be respiratory obstructions.
+ 
+ \item Doctors did autopsies on infants who died with respiratory symptoms and compared againts aotopsies made on adults who died of various causes.
+
+\item Most autopsies to infants show big thymus glands compared to adults.
+
+\item Doctors concluded that the respiratory problems were caused by an enlarged thymus. 
+
+
+\item In 1912, Dr. Charles Mayo published an article recommending removal of the thymus to treat respiratory problems in children. 
+
+\item This recommendation was made even though a third of the
+children who were operated on died. 
+  
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Example of Confounded Observational Study}
+\scriptsize{
+
+\begin{itemize}
+
+\item The doctors couldn't know whether children with a large thymus tended to have more respiratory problems, because they had no evidence about children with a smaller thymus. 
+
+\item Age and size of thymus were confounded.
+
+\item The thymus study is an example of an observational study, not an experiment.
+
+\begin{table}
+\center
+ \begin{tabular}{|c|ccc|}  \hline
+ 
+& & \multicolumn{2}{c|}{Age} \\ \hline
+& & Child & Adult \\
+\multirow{2}{*}{ Thymus size } & Large & Problems & No evidence \\ 
+& Small & No evidence & No problems \\ \hline
+\end{tabular} 
+\end{table}
+
+
   
 \end{itemize}
 
@@ -377,7 +445,8 @@ Image souce: \cite{kohavi2012trustworthy}
 
 \begin{itemize}
 
- \item sds
+ \item Another class of approaches here is to construct comparable Control and Treatment populations, often by segmenting the users by common confounds, in something akin to stratified sampling. The idea is to ensure that the comparison between Control and Treatment population is not due to population mix changes. For example, if we are examining an exogenous change of the impact of users
+changing from Windows to iOS, we want to ensure that we are not measuring a demographic difference in the population.
   
 \end{itemize}
 
@@ -387,7 +456,7 @@ Image souce: \cite{kohavi2012trustworthy}
 \end{frame}
 
 
-% AB Testing
+\section{Hypothesis Testing}
 
 \begin{frame}{Hypothesis Testing}
 \scriptsize{
