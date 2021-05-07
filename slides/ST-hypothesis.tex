@@ -399,6 +399,8 @@ Image souce: \cite{kohavi2012trustworthy}
 \item This recommendation was made even though a third of the
 children who were operated on died. 
   
+\item The doctors could not tell whether children with a large thymus tended to have more respiratory problems because they had no evidence about children with a smaller thymus.  
+  
 \end{itemize}
 
 
@@ -413,7 +415,6 @@ children who were operated on died.
 
 \begin{itemize}
 
-\item The doctors couldn't know whether children with a large thymus tended to have more respiratory problems, because they had no evidence about children with a smaller thymus. 
 
 \item Age and size of thymus were confounded.
 
@@ -430,7 +431,30 @@ children who were operated on died.
 \end{tabular} 
 \end{table}
 
+\item If Dr. Mayo had used a randomized experiment to evaluate surgical removal of the thymus, he would have seen that the treatment was not effective and many lives might have been
+spared. 
+\item However, at the time, randomized experiments were not often used in the medical profession.
+  
+\item These days, any new medical treatment (e.g., a COVID vaccine) must prove its value in an RCT.  
+\end{itemize}
 
+
+
+} 
+\end{frame}
+
+\begin{frame}{Another Example of Confounding}
+\scriptsize{
+
+\begin{itemize}
+
+\item Suppose we want to compare student performance on standardized tests (e.g., SIMCE, PSU) in public and private schools.
+
+\item We know that the socioeconomic distribution of students is different in public and private schools.
+
+\item We also suspect that socioeconomic background may influence student performance on these tests.
+
+\item The type of school (public or private) and the socioeconomic background are confounded.
   
 \end{itemize}
 
@@ -440,13 +464,44 @@ children who were operated on died.
 \end{frame}
 
 
-\begin{frame}{Block Design}
+
+\begin{frame}{Randomized Paired Comparison (Matched Pairs)}
 \scriptsize{
 
 \begin{itemize}
 
- \item Another class of approaches here is to construct comparable Control and Treatment populations, often by segmenting the users by common confounds, in something akin to stratified sampling. The idea is to ensure that the comparison between Control and Treatment population is not due to population mix changes. For example, if we are examining an exogenous change of the impact of users
-changing from Windows to iOS, we want to ensure that we are not measuring a demographic difference in the population.
+\item Randomized Paired Comparison or Matched Pairs is an approach to design experiments \textbf{controlling} for confounding variables. 
+
+\item We sort the experimental units into pairs of similar units (matched pairs), where similarity is measured according to confounding variables.
+
+\item  The two units in each pair should be enough alike that you expect them to have a similar response to any treatment.
+
+\item Randomly decide which unit in each pair is assigned which treatment.
+
+\item We are essentially building comparable Control and Treatment populations by segmenting the users by common confounds, similarly to stratified sampling.
+  
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Matched Pairs Example}
+\scriptsize{
+
+\begin{itemize}
+
+\item Suppose we want to study the relation between hypertension and end-stage renal disease (ESRD) \cite{de2011matching}.
+
+\item Obesity is a potential confounder as obesity is associated with both hypertension and ESRD. 
+
+\item Matching approach: we ensure that the average body mass index (BMI) is the same in the group of patients exposed to hypertension and another group of patients unexposed to hypertension. 
+
+\item This could be achieved by searching an obese patient without hypertension for each obese patient with hypertension.
+  
+\item Other potential confouding variables like age or sex could also be considered in the matching.  
   
 \end{itemize}
 
