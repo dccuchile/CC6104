@@ -327,7 +327,7 @@ Image source: \cite{kohavi2012trustworthy}
  
  \item Their interactions are instrumented and key metrics computed. 
  
- \item In this experiment, the Overall Evaluation Criterion (OEC) was simple: average revenue per user.
+ \item In this experiment, the Overall Evaluation Criterion (OEC) was average revenue per user.
  \item The winner, Treatment 5, increased revenues by almost 10\% (due to increased clickthrough).
  
  \item The Return-On-Investment (ROI) for MSN Real Estate was phenomenal, as this is their main source of revenue, which increased significantly through a simple change.
@@ -351,13 +351,13 @@ Image source: \cite{kohavi2012trustworthy}
  
  \item For example, it would be unethical to design a randomized controlled trial deliberately exposing people to a potentially harmful situation. 
  
- \item In an \textbf{obervational study} the conditions of interest are aready built into the units being studied.
+ \item In an \textbf{observational study} the conditions of interest are already built into the units being studied.
  
  \item Observational studies are almost always worse than controlled experiments for determining cause-effect relationships.
  
  \item But sometimes is the only thing we can do.
  
- \item A phenomenum called \textbf{confounding} is the major treat to observational studies.
+ \item A phenomenon called \textbf{confounding} is the major treat to observational studies.
  
  \item Two possible influences on an observed outcome are \textbf{confounded} if they are mixed together in a way that makes it impossible to separate their effects on the responses \cite{watkins2010statistics}.
   
@@ -400,7 +400,7 @@ Image source: \cite{kohavi2012trustworthy}
 
  \item Many infants were dying of what seemed to be respiratory obstructions.
  
- \item Doctors did autopsies on infants who died with respiratory symptoms and compared againts aotopsies made on adults who died of various causes.
+ \item Doctors did autopsies on infants who died with respiratory symptoms and compared against autopsies made on adults who died of various causes.
 
 \item Most autopsies to infants show big thymus glands compared to adults.
 
@@ -461,7 +461,7 @@ spared.
 
 \begin{itemize}
 
-\item Suppose we want to compare student performance on standardized tests (e.g., SIMCE, PSU) in public and private schools.
+\item Suppose we want to compare student performance on a standardized tests (e.g., SIMCE, PSU) between public and private schools.
 
 \item We know that the socioeconomic distribution of students is different in public and private schools.
 
@@ -529,18 +529,38 @@ spared.
 \begin{frame}{Hypothesis Testing}
 \scriptsize{
 \begin{itemize}
- \item When we want to test whether some assumed \textbf{property} about a population is contrasted with a statistical sample we use a \textbf{hypothesis test}.
-\item The test consists of the following hypotheses:
+ \item Now that we understand what experimental data looks like we are in place to introduce  Null Hypothesis Statistical Testing (NHST).
+  \item A \textbf{hypothesis test} allows us to  to measure whether some assumed \textbf{property} about a population is contrasted with a statistical sample.
+ \item In the context of experiments, NHST helps us to determine weather observed differences between treatment and control groups are unlikely to have occurred by chance. 
+ \begin{block}{The two hypotheses in NHST}
  \begin{itemize}
 \scriptsize{
-\item \textbf{Null Hypothesis} $H_{0}$: Symbolizes the current situation. What has been considered real up to the present.
-\item \textbf{Alternative Hypothesis} $H_{a}$: it is the alternative model that we want to consider. 
+\item \textbf{Null Hypothesis} $H_{0}$: what has been considered real up to the present or what would we expect the data to look like if there is no effect.
+\begin{itemize}
+\scriptsize{
+ \item The null hypothesis always involves some kind of equality ($=$, $\leq$, or $\geq$).}
+\end{itemize}
+
+
+
+\item \textbf{Alternative Hypothesis} $H_{a}$: it is the alternative model that we want to consider or  what we expect if there actually is an effect. 
+\begin{itemize}
+\scriptsize{
+ \item The alternative hypothesis always involves some kind of inequality ($\neq$, $>$, or $<$).}
+\end{itemize}
+
+
 }
  \end{itemize}
-\item The idea is to find enough \textbf{statistical evidence} to reject $H_{0}$ and be able to conclude $H_{a}$.
-\item If we do not get enough statistical evidence \textbf{we fail to reject} $H_{0}$
+ 
+\end{block}
+
+
 
 \end{itemize}
+
+
+
 
 
 
@@ -552,15 +572,34 @@ spared.
 \begin{frame}{Hypothesis Testing}
 \scriptsize{
 
+\begin{itemize}
+\item Importantly, null hypothesis testing operates under the assumption that the null hypothesis is true unless the evidence shows otherwise.
+\item The idea is to find enough \textbf{statistical evidence} to reject $H_{0}$ and be able to conclude $H_{a}$.
+\item If we do not get enough statistical evidence \textbf{we fail to reject} $H_{0}$.
+\end{itemize}
+
+
+
 \begin{block}{Methodology to Perform a Hypothesis Test}
 \begin{itemize}
- \item Choose a null hypothesis $H_0$ and alternative $H_a$.
+ \item Specify a null hypothesis $H_0$ and alternative $H_a$.
  \item Set a test significance level $\alpha$.
- \item Calculate a statistic $T$ from the data.
- \item  The statistic $T$ is usually a standardized value that we can check in a distribution table.
- \item Define a rejection criterion for the null hypothesis. It is usually a critical value $c$.
+ \item Collect some data relevant to the hypothesis.
+ \item Fit a model to the data and compute a test statistic $T$.
+ \begin{itemize}
+ \scriptsize{
+ \item  In parametric tests, $T$ is a standardized value that we can check in a distribution table (e.g., a Z-score).}
+ \end{itemize}
+ \item Assess the ``statistical significance'' of $T$.
 \end{itemize}
 \end{block}
+
+The last part can be done with two approaches
+\begin{itemize}
+ \item Calculate a critical region of values such that if $T$ lies in this region then we will reject $H_0$ 
+ \item Compute the probability of the observed value (or more extreme values) of that statistic assuming that the null hypothesis is true.
+ 
+\end{itemize}
 
 
 
