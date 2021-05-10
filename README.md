@@ -17,7 +17,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 ### PART II: Frequentist Inference
 
 1. [Introduction to Statistical Inference](slides/ST-inference.pdf) | ([tex source file](slides/ST-inference.tex))
-1. [Hypothesis Testing](slides/ST-hypothesis.pdf) | ([tex source file](slides/ST-hypothesis.tex))
+1. [Design of Experiments & Hypothesis Testing](slides/ST-hypothesis.pdf) | ([tex source file](slides/ST-hypothesis.tex))
 1. [Linear Regression](slides/ST-regression.pdf) | ([tex source file](slides/ST-regression.tex))
 
 ### Part III: Bayesian Inference 
