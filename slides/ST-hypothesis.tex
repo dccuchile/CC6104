@@ -532,13 +532,399 @@ spared.
  \item Now that we understand what experimental data looks like we are in place to introduce  Null Hypothesis Statistical Testing (NHST).
   \item A \textbf{hypothesis test} allows us to  to measure whether some assumed \textbf{property} about a population is contrasted with a statistical sample.
  \item In the context of experiments, NHST helps us to determine weather observed differences between treatment and control groups are unlikely to have occurred by chance. 
- \begin{block}{The two hypotheses in NHST}
+ 
+  \item Hypothesis testing can be applied to all kinds of population parameters (e.g., mean, variance, median).
+ \item In the class we will focus on testing the \textbf{population mean} $\mu$.
+
+\end{itemize}
+} 
+\end{frame}
+
+
+\begin{frame}{Hypothesis Testing}
+ \scriptsize{
+
+\begin{itemize}
+
+ \item We will study the following types of parametric tests to the mean:
+ \begin{enumerate}
+ \scriptsize{
+  \item \textbf{One sample tests}: we contrast the sample mean to a pre-specified value.
+  \item \textbf{Unpaired two sample test}: we compare the sample means of two independent groups (control vs. treatment).
+  \item \textbf{Paired two sample test}: here we compare the means of two dependent groups where we have two values for the same samples. For example: in matched pairs experiments.}
+ \end{enumerate}
+
+  \item All these tests can be one-sided or two-sided.
+  
+  \item In the same way as for confidence intervals we will use Normal and T-student distributions for modeling the sampling distribution of sample means.
+  
+   \item Warning: there are many counterintuitive concepts around NHST (e.g., null hypothesis, p-values).
+ \item Thus, we will fist introduce these concepts with two  examples taken from \cite{poldrack2019statistical} and \cite{Marchini}.
+ \item Then we will formalize them in more detail.
+  
+
+\end{itemize}
+
+}
+
+%\item Unpaired two sample t-test: better using \url{https://en.wikipedia.org/wiki/Welch\%27s_t-test}
+% \item Paired two sample t-test
+%\url{https://www.datanovia.com/en/lessons/types-of-t-test/\#one-sample-t-test}
+%\url{https://en.wikipedia.org/wiki/Student\%27s_t-test}
+% Nice explanations of degrees of freedom: \url{https://crumplab.github.io/statistics/t-tests.html}
+%https://stats.stackexchange.com/questions/342074/hypothesis-testing-null-hypothesis-for-one-sided-tests
+\end{frame}
+
+
+\begin{frame}{Example 1: Body-worn Cameras}
+\scriptsize{
+\begin{itemize}
+ \item Body-worn cameras are thought to reduce the use of force and improve behavior of police officers. 
+
+ \item An  RCT of the effectiveness of body-worn cameras was performed by the Washington, DC government and DC Metropolitan Police Department in 2015/2016.
+ \item Officers were randomly assigned to wear a body-worn camera or not.
+ \item Their behavior was then tracked over time to determine whether the cameras resulted in less use of force and fewer civilian complaints about officer behavior.
+ \end{itemize}
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.25]{pics/camera.png}
+	\caption{source: \url{https://www.nytimes.com}}
+\end{figure}
+
+} 
+\end{frame}
+
+
+\begin{frame}{Example 1: Body-worn Cameras}
+\scriptsize{
+\begin{itemize}
+ \item Let's say we want to specifically test the hypothesis of whether the use of force is decreased by the wearing of cameras. 
+ \item The RCT provides us with the data to test the hypothesis – namely, the rates of use of force by officers assigned to either the camera or control groups. 
+ \item The next obvious step is to look at the data and determine whether they provide convincing evidence for or against this hypothesis. 
+ \item That is: What is the likelihood that body-worn cameras reduce the use of force, given the data and everything else we know?
+\item It turns out that this is \textbf{not} how null hypothesis testing works. 
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Example 1: Body-worn Cameras}
+\scriptsize{
+\begin{itemize}
+\item Instead, we first take our hypothesis of interest (i.e. that body-worn cameras reduce use of force), and flip it on its head, creating a \textbf{null hypothesis}.
+\item In this case, the null hypothesis would be that cameras do not reduce use of force. 
+\item Importantly, we then assume that the null hypothesis is true. 
+\item We then look at the data, and determine how likely the data would be if the null hypothesis were true. 
+\item If the data are sufficiently unlikely under the null hypothesis that we can reject the null in favor of the \textbf{alternative hypothesis} which is our hypothesis of interest. 
+\item If there is not sufficient evidence to reject the null, then we say that we retain (or ``fail to reject'') the null.
+
+\item Then we stick with our initial assumption that the null is true.
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Example 2: Babies}
+\scriptsize{
+\begin{itemize}
+  \item From previous experience we know that the birth weights of babies in England have a mean of 3000g and a standard deviation of 500g.
+ \item We think that maybe babies in Australia have a mean birth weight greater than 3000g and we would like to test this hypothesis.
+  \item We take a sample of babies from Australia, measure their birth weights and see if the sample mean is significantly larger than 3000g. 
+    \item The main hypothesis that we are most interested in is the \textbf{research hypothesis}, denoted $H_1$ , that the mean birth weight of Australian babies is greater than 3000g.
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}{Example 2: Babies}
+\scriptsize{
+\begin{itemize}
+
+  \item The other hypothesis is the null hypothesis, denoted $H_0$, that the mean birth weight is equal to 3000g.
+\item We can write this compactly as:
+\begin{table}
+\center
+ \begin{tabular}{c}  
+$H_0$: $\mu=3000g$ \\
+$H_1$: $\mu>3000g$
+\end{tabular} 
+\end{table}
+
+\item The null hypothesis is written first followed by the research hypothesis. 
+\item The research hypothesis is often called the \textbf{alternative hypothesis} even though it is often the first hypothesis we think of.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2: Babies}
+\scriptsize{
+\begin{itemize}
+  \item Normally, we start with the research hypothesis and ``set up'' the null hypothesis to be directly counter to what we hope to show. 
+  \item We then try to show that, in the light of our collected data, that the null hypothesis is false. 
+  \item We do this by calculating the probability of the data if the null hypothesis is true. 
+  \item If this probability is very small it suggests that the null hypothesis is false.
+  \item Once we have set up our null and alternative hypothesis we can collect a sample of data. 
+  \item For example, we can imagine we collected the birth weights of the 44 babies in the Babyboom dataset.
+
+\end{itemize}
+\begin{verbatim}
+>library(UsingR)
+>data(babyboom)
+>hist(babyboom$wt)
+\end{verbatim}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2: Babies}
+\scriptsize{
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/babyhist.pdf}
+\end{figure}
+
+\begin{itemize}
+ \item The sample mean of the dataset is $\overline{x}$ is: 
+ \begin{verbatim}
+> xbar<-mean(babyboom$wt)
+> xbar
+[1] 3275.955
+ \end{verbatim}
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2: Babies}
+\scriptsize{
+
+\begin{itemize}
+ \item We now want to calculate the probability of obtaining a sample with a mean as large as $3275.955$ under the assumption of the null hypothesis $H_0$.
+ \item From the CLT we know that the sampling distribution of $\overline{X}$ follows as Normal distribution when $n$ is sufficiently large: $\overline{X} \sim N(\mu, \sigma^2/n)$
+ \item If we assume $H_0$ is true, then $\mu=3000$.
+ \item The value of $n$ is 44 and the value of $\sigma$ is known is this case and is equal to 500. 
+ \item Let's calculate the standard error $\frac{\sigma}{\sqrt{n}}$:
+\end{itemize}
+
+\begin{verbatim}
+> mu0<-3000
+> sd<-500
+> n<-nrow(babyboom)
+> se<-sd/sqrt(n)
+> se
+[1] 75.37784
+> se^2
+[1] 5681.818
+\end{verbatim}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2: Babies}
+\scriptsize{
+
+\begin{itemize}
+ \item Now we can calculate the probability of obtaining a sample with a mean as large as $3275.955$:
+\end{itemize}
+
+\begin{verbatim}
+> #pvalue 
+> 1-pnorm(xbar, mean =mu0, sd =se)
+[1] 0.0001256405
+> #or
+> Z.score<-(xbar-mu0)/se
+> Z.score
+[1] 3.660951
+> p.value<-1-pnorm(Z.score)
+> p.value
+[1] 0.0001256405
+\end{verbatim}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2: Babies}
+\scriptsize{
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.43]{pics/pvalue1.png}
+	\caption{\cite{Marchini}}
+\end{figure}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Example 2: Babies}
+\scriptsize{
+
+\begin{itemize}
+ \item The probability we calculate is called the \textbf{p-value} of the test. 
+ \item In this case the p-value is very low.
+ \item This says that the probability of the data is very low if we assume the null hypothesis is true.
+ \item But how low does this probability have to be before we can conclude that the null hypothesis is false.
+ \item The convention within statistics is to choose a \textbf{level of significance} $\alpha$ before the experiment that dictates how low the p-value should be before we reject the null hypothesis. 
+ \item In practice, many people use a significance level of 5\% and conclude that there is significant evidence against the null hypothesis if the p-value is less than or equal to 0.05.
+ \item A more conservative approach uses a 1\% significance level and conclude that there is significant evidence against the null hypothesis if the p-value is less than 0.01.
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Example 2: Babies}
+\scriptsize{
+
+\begin{itemize}
+ \item In our current example, the p-value is 0.00013 which is lower than $\alpha=0.05$. 
+ \begin{verbatim}
+> alpha<-0.05
+> p.value<=alpha
+[1] TRUE
+ \end{verbatim}
+
+ 
+ \item In this case, we would conclude that: \\ 
+ ``there is signicant evidence against the null hypothesis at the 5\% level''.
+ \item Another way of saying this is that: \\
+``we reject the null hypothesis at the 5\% level''
+\item If the p-value for the test much larger, say 0.23, then we would conclude that: \\
+``the evidence against the null hypothesis is not significant at the 5\% level''
+\item Another way of saying this is that: \\
+``we cannot reject the null hypothesis at the 5\% level''
+  
+\end{itemize}
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2: Babies}
+\scriptsize{
+
+ \begin{itemize}
+ \item In the previous example, we assumed that $\sigma$ was known.
+ \item In many cases  $\sigma$ is unknown and we must estimate it using the unbiased estimator $s$ that we saw in previous class.
+ \item In these cases we can calculate a $T$ statistic $T=\frac{\overline{X_{n}}-\mu_{o}}{\frac{s}{\sqrt{n}}}$
+ \begin{verbatim}
+> s<-sd(babyboom$wt)
+> s
+[1] 528.0325
+> se<-s/sqrt(n)
+> se
+[1] 79.60389
+> 
+> T.sta<-(xbar-mu0)/se
+> T.sta
+[1] 3.466596
+ \end{verbatim}
+
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2: Babies}
+\scriptsize{
+
+ \begin{itemize}
+ \item From previous class we know that follows a t-student distribution with $n-1$ degrees of freedom  $T \sim t_{n-1}$.
+ \item When we perform the test using t-student distribution we are using a T-test.
+ 
+ \item The p-value can be calculated analougusly to the previous case now using the t-student distribution.
+ 
+ \begin{verbatim}
+> p.value<-1-pt(T.sta,df = n-1)
+> p.value
+[1] 0.0006042622
+ \end{verbatim}
+
+ \item We also reject the null hypothesis in this case with $\alpha=0.05$.
+ \item But the p-value is larger than before.
+ \item This is becasue the t-distribution has wider tails than the Normal distribution.
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2: Babies}
+\scriptsize{
+
+ \begin{itemize}
+ \item We can perform t-tests directly in R as follows:
+ 
+ \begin{verbatim}
+> t.test(x = babyboom$wt,mu = 3000, 
+alternative = "greater",conf.level = 1-alpha)
+
+	One Sample t-test
+
+data:  babyboom$wt
+t = 3.4666, df = 43, p-value = 0.0006043
+alternative hypothesis: true mean is greater than 3000
+95 percent confidence interval:
+ 3142.135      Inf
+sample estimates:
+mean of x 
+ 3275.955 
+ \end{verbatim}
+
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Hypothesis Testing}
+\scriptsize{
+\begin{block}{The two hypotheses in NHST}
  \begin{itemize}
 \scriptsize{
 \item \textbf{Null Hypothesis} $H_{0}$: what has been considered real up to the present or what would we expect the data to look like if there is no effect.
 \begin{itemize}
 \scriptsize{
- \item The null hypothesis always involves some kind of equality ($=$, $\leq$, or $\geq$).}
+ \item The null hypothesis always involves some kind of equality ($=$).}
 \end{itemize}
 
 
@@ -556,11 +942,11 @@ spared.
 \end{block}
 
 
-
+\begin{itemize}
+\item Importantly, null hypothesis testing operates under the assumption that the null hypothesis is true unless the evidence shows otherwise.
+\item The idea is to find enough \textbf{statistical evidence} to reject $H_{0}$ and be able to conclude $H_{a}$.
+\item If we do not get enough statistical evidence \textbf{we fail to reject} $H_{0}$.
 \end{itemize}
-
-
-
 
 
 
@@ -572,11 +958,7 @@ spared.
 \begin{frame}{Hypothesis Testing}
 \scriptsize{
 
-\begin{itemize}
-\item Importantly, null hypothesis testing operates under the assumption that the null hypothesis is true unless the evidence shows otherwise.
-\item The idea is to find enough \textbf{statistical evidence} to reject $H_{0}$ and be able to conclude $H_{a}$.
-\item If we do not get enough statistical evidence \textbf{we fail to reject} $H_{0}$.
-\end{itemize}
+
 
 
 
@@ -596,8 +978,8 @@ spared.
 
 The last part can be done with two approaches
 \begin{itemize}
- \item Calculate a critical region of values such that if $T$ lies in this region then we will reject $H_0$ 
- \item Compute the probability of the observed value (or more extreme values) of that statistic assuming that the null hypothesis is true.
+ \item Critical region: Calculate a region of values such that if $T$ lies in this region then we will reject $H_0$ 
+ \item P-value approach: compute the probability of the observed value (or more extreme values) of that statistic assuming that the null hypothesis is true and compare it with $\alpha$.
  
 \end{itemize}
 
@@ -607,26 +989,10 @@ The last part can be done with two approaches
 \end{frame}
 
 
-\begin{frame}{Types of T-tests}
- \scriptsize{
-\url{https://en.wikipedia.org/wiki/Student\%27s_t-test}
-\begin{itemize}
- \item Single-sample t-test
- \item Unpaired two sample t-test: better using \url{https://en.wikipedia.org/wiki/Welch\%27s_t-test}
- \item Paired two sample t-test
-\end{itemize}
-
-\url{https://www.datanovia.com/en/lessons/types-of-t-test/\#one-sample-t-test}
-}
-Tests can be one-sided or two-sided
-
-Nice explanations of degrees of freedom: \url{https://crumplab.github.io/statistics/t-tests.html}
-
-\end{frame}
 
 
 
-\begin{frame}[fragile]{Single-sample T-test}
+\begin{frame}[fragile]{Single-sample Tests}
 \scriptsize{
 \begin{itemize}
  \item Example: It is known that the average number of hours of monthly Internet use in Chile is 30 hours.
@@ -772,35 +1138,37 @@ $H_1$ true & type II error & \checkmark \\
 \end{frame}
 
 
-\begin{frame}{FOUR CARDINAL RULES OF STATISTICS by Daniela Witten}
-\scriptsize{
-\begin{itemize}
-% source: https://twitter.com/daniela_witten/status/1312180955801505794
- \item ONE:  CORRELATION DOES NOT IMPLY CAUSATION.  Yes, I know you know this, but it’s so easy to forget! Yeah, YOU OVER THERE, you with the p-value of 0.0000001 — yes, YOU!! That’s not causation.
- \item No matter how small the p-value for a regression of IQ onto shoe size is, that doesn’t mean that big feet cause smarts!!  It just means that grown-ups tend to have bigger feet and higher IQs than kids.
- \item So, unless you can design your study to uncover causation (very hard to do in most practical settings — the field of causal inference is devoted to understanding the settings in which it is possible), the best you can do is to discover correlations.  Sad but true.
- \item TWO:  A P-VALUE IS JUST A TEST OF SAMPLE SIZE.  Read that again — I mean what I said!  If your null hypothesis doesn't hold (and null hypotheses never hold IRL) then the larger your sample size, the smaller your p-value will tend to be.
- \item If you’re testing whether mean=0 and actually the truth is that mean=0.000000001, and if you have a large enough sample size, then YOU WILL GET A TINY P-VALUE.
- \item Why does this matter? In many contemporary settings (think: the internet), sample sizes are so huge that we can get TINY p-values even when the deviation from the null hypothesis is negligible. In other words, we can have STATISTICAL significance w/o PRACTICAL significance.
- \end{itemize}
+\begin{frame}{There are many other tests}
+ \scriptsize{
 
-} 
-\end{frame}
-
-\begin{frame}{FOUR CARDINAL RULES OF STATISTICS by Daniela Witten}
-\scriptsize{
 \begin{itemize}
- \item Often, people focus on that tiny p-value, and the fact that the effect is of **literally no practical relevance** is totally lost.
- \item This also means that with a large enough sample size we can reject basically ANY null hypothesis (since the null hypothesis never exactly holds IRL, but it might be “close enough” that the violation of the null hypothesis is not important). 
- \item Want to write a paper saying Lucky Charms consumption is correlated w/blood type? W/a large enough sample size, you can get a small p-value.  (Provided there’s some super convoluted mechanism with some teeny effect size… which there probably is, b/c IRL null never holds)
-\item THREE:  SEEK AND YOU SHALL FIND. If you look at your data for long enough, you will find something interesting, even if only by chance! 
-In principle, we know that we need to perform a correction for multiple testing if we conduct a bunch of tests.
-\item But in practice, what if we decide what test(s) to conduct AFTER we look at data?  Our p-value will be misleadingly small because we peeked at the data.  Pre-specifying our analysis plan in advance keeps us honest… but in reality, it’s hard to do!!!
-\item Everyone is asking me about the mysterious and much-anticipated fourth rule of statistics. The answer is simple: we haven’t figured it out yet.... that’s the reason we need to do research in statistics
+ \item Propotion tests
+ \item Analysis of Variance (ANOVA)
+ \item Chi-square tests of idependence
+ \item Kolmogorov–Smirnov test
+ 
+ 
 \end{itemize}
 
-} 
+
+}
 \end{frame}
+
+
+\begin{frame}{Conclusions}
+ \scriptsize{
+
+\begin{itemize}
+ \item Bla bla bla
+ 
+ 
+\end{itemize}
+
+
+}
+\end{frame}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
