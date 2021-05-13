@@ -818,7 +818,7 @@ $H_1$: $\mu>3000g$
 
  
  \item In this case, we would conclude that: \\ 
- ``there is signicant evidence against the null hypothesis at the 5\% level''.
+ ``there is significant evidence against the null hypothesis at the 5\% level''.
  \item Another way of saying this is that: \\
 ``we reject the null hypothesis at the 5\% level''
 \item If the p-value for the test much larger, say 0.23, then we would conclude that: \\
@@ -832,22 +832,22 @@ $H_1$: $\mu>3000g$
 \end{frame}
 
 
-\begin{frame}[fragile]{Example 2: Babies}
+\begin{frame}[fragile]{T-tests}
 \scriptsize{
 
  \begin{itemize}
  \item In the previous example, we assumed that $\sigma$ was known.
- \item In many cases  $\sigma$ is unknown and we must estimate it using the unbiased estimator $s$ that we saw in previous class.
- \item In these cases we can calculate a $T$ statistic $T=\frac{\overline{X_{n}}-\mu_{o}}{\frac{s}{\sqrt{n}}}$
+ \item In many cases  $\sigma$ is unknown and we must estimate it using the unbiased estimator $s$ that we saw in the previous class.
+ \item In these cases we can calculate a $T$ statistic $\frac{\overline{X_{n}}-\mu_{o}}{\frac{s}{\sqrt{n}}}$
  \begin{verbatim}
 > s<-sd(babyboom$wt)
 > s
 [1] 528.0325
-> se<-s/sqrt(n)
-> se
+> se.t<-s/sqrt(n)
+> se.t
 [1] 79.60389
 > 
-> T.sta<-(xbar-mu0)/se
+> T.sta<-(xbar-mu0)/se.t
 > T.sta
 [1] 3.466596
  \end{verbatim}
@@ -860,15 +860,16 @@ $H_1$: $\mu>3000g$
 \end{frame}
 
 
-\begin{frame}[fragile]{Example 2: Babies}
+\begin{frame}[fragile]{T-tests}
 \scriptsize{
 
  \begin{itemize}
- \item From previous class we know that follows a t-student distribution with $n-1$ degrees of freedom  $T \sim t_{n-1}$.
- \item When we perform the test using t-student distribution we are using a T-test.
+ \item From previous class we know that $T$ follows a t-student distribution with $n-1$ degrees of freedom  $T \sim t_{n-1}$.
+ \item We can now  perform a T-test using the t-student distribution instead of a Gaussian.
  
- \item The p-value can be calculated analougusly to the previous case now using the t-student distribution.
+ \item The p-value can be calculated analogously to the previous case now using the t-student distribution.
  
+  
  \begin{verbatim}
 > p.value<-1-pt(T.sta,df = n-1)
 > p.value
@@ -877,8 +878,8 @@ $H_1$: $\mu>3000g$
 
  \item We also reject the null hypothesis in this case with $\alpha=0.05$.
  \item But the p-value is larger than before.
- \item This is becasue the t-distribution has wider tails than the Normal distribution.
- 
+ \item This is because the t-distribution has wider tails than the Normal distribution.
+ \item The wide tails imply that there is more uncertainty because we had to estimate $\sigma$.
 \end{itemize}
 
 
@@ -886,11 +887,11 @@ $H_1$: $\mu>3000g$
 \end{frame}
 
 
-\begin{frame}[fragile]{Example 2: Babies}
+\begin{frame}[fragile]{T-tests}
 \scriptsize{
 
  \begin{itemize}
- \item We can perform t-tests directly in R as follows:
+ \item We can perform t-tests straightforwardly in R as follows:
  
  \begin{verbatim}
 > t.test(x = babyboom$wt,mu = 3000, 
@@ -916,7 +917,64 @@ mean of x
 \end{frame}
 
 
-\begin{frame}{Hypothesis Testing}
+\begin{frame}[fragile]{Calculating a critical region}
+\scriptsize{
+
+ \begin{itemize}
+ \item Another way of thinking about this test is that there is some critical region of values such that if the test statistic lies in this region then we will reject $H_0$.
+ \item If the test statistic lies outside this region we will not reject $H_0$.
+ \item In the babies example, using a 5\% level of significance this set of values will be the most extreme 5\% of values in the right hand tail of the distribution.
+ \item We can calculate that the boundary of this region, called the critical value: 
+ \begin{verbatim}
+> crit<-qnorm(1-alpha)
+> crit
+[1] 1.644854
+ \end{verbatim}
+
+ 
+ \item The value of our test statistic is 3.66 which lies in the critical region so we reject the null hypothesis at the 5\% level.
+  \begin{verbatim}
+> Z.score>=crit
+[1] TRUE
+ \end{verbatim}
+
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Calculating a critical region}
+\scriptsize{
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.47]{pics/critregion.png}
+\end{figure}
+
+
+ \begin{itemize}
+ \item Alternatively, using a T-distribution:
+ \begin{verbatim}
+ > crit2<-qt(1-alpha, df = n-1)
+> crit2
+[1] 1.681071
+> T.sta>=crit2
+[1] TRUE
+ \end{verbatim}
+
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Overview of NHST}
 \scriptsize{
 \begin{block}{The two hypotheses in NHST}
  \begin{itemize}
@@ -955,11 +1013,8 @@ mean of x
 
 
 
-\begin{frame}{Hypothesis Testing}
+\begin{frame}{Overview of NHST}
 \scriptsize{
-
-
-
 
 
 \begin{block}{Methodology to Perform a Hypothesis Test}
@@ -970,7 +1025,7 @@ mean of x
  \item Fit a model to the data and compute a test statistic $T$.
  \begin{itemize}
  \scriptsize{
- \item  In parametric tests, $T$ is a standardized value that we can check in a distribution table (e.g., a Z-score).}
+ \item  In parametric tests, $T$ is a standardized value that (e.g., a Z-score).}
  \end{itemize}
  \item Assess the ``statistical significance'' of $T$.
 \end{itemize}
@@ -978,9 +1033,35 @@ mean of x
 
 The last part can be done with two approaches
 \begin{itemize}
- \item Critical region: Calculate a region of values such that if $T$ lies in this region then we will reject $H_0$ 
  \item P-value approach: compute the probability of the observed value (or more extreme values) of that statistic assuming that the null hypothesis is true and compare it with $\alpha$.
+
+\item Critical region: Calculate a region of values such that if $T$ lies in this region then we will reject $H_0$ 
+
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{More on P-values}
+\scriptsize{
+
+
+\begin{itemize}
+ \item Generally, in addition to knowing whether we reject or fail to reject a null hypothesis we want to quantify the evidence we have against it.
+ \item P-values allow us to quantity this.
  
+ \item A p-value is defined as the probability of obtaining an outcome \textbf{at least as extreme} as that observed in the data given that the null hypothesis is true.
+ \item ``Extreme'' means far from the null hypothesis and favorable for the alternative hypothesis (larger than the sample mean in previous example).
+ 
+ \item  We must consider all more extreme values because  the probability of any particular value (such as the observed sample mean) is zero for continuous distributions. 
+ \item We must recall that we are trying to determine how weird our result would be if the null hypothesis were true.
+ \item Hence, any result that is more extreme will be even more weird.
+ \item So we want to count all of those weirder possibilities when we compute the probability of our result under the null hypothesis.
+  
 \end{itemize}
 
 
@@ -990,25 +1071,56 @@ The last part can be done with two approaches
 
 
 
-
-
-\begin{frame}[fragile]{Single-sample Tests}
+\begin{frame}[fragile]{Two-sided Tests}
 \scriptsize{
 \begin{itemize}
- \item Example: It is known that the average number of hours of monthly Internet use in Chile is 30 hours.
- \item Suppose we want to show that the average is different from that value.
- \item We would have that $H_0: \mu=30$ and $H_{a}: \mu \neq 30$
- \item Let's set $\alpha=0.05$ and collect 100 observations.
- \item Suppose we get $\overline{X_{n}}=28$ and $s=10$
- \item  One way to test is to construct a confidence interval for $\mu$ and see if $H_{0}$ is in the interval.
+ \item In the previous example we wanted to test the research hypothesis that mean birth weight of Australian babies was greater than 3000g.
+ \item This suggests that we had some prior information that the mean birth weight of Australian babies was definitely not lower than 3000g. 
+ \item If this were not the case then our research hypothesis would be that the mean birth weight of Australian babies was different from 3000g. 
+ \item This allows for the possibility that the mean birth weight could be less than or greater than 3000g.
+ \item This is an example of a \textbf{two-sided} test as opposed to the previous example which was a \textbf{one-sided} test.
+ 
+ \item In this two-sided case we would write our hypotheses as
+ \begin{table}
+\center
+ \begin{tabular}{c}  
+$H_0$: $\mu=3000g$ \\
+$H_1$: $\mu\neq3000g$
+\end{tabular} 
+\end{table}
+\end{itemize}
+} 
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Two-sided Tests}
+\scriptsize{
+\begin{itemize}
+\item As before we would calculate our test statistic as 3.66 for the Normal distribution and 3.47 for the T-student. 
+\item In this case we allow for the possibility that the mean value is less than 3000g by setting our critical region
+to be lowest 2.5\% and highest 2.5\% of the distribution.
+\item In this way the total area of the critical region remains 0.05 and so the level of significance $\alpha$ of our test remains 5\%. 
+\item The critical values for a Z-test are:
 \begin{verbatim}
-> 28-qt(p=0.975,99)*10/sqrt(100)
-[1] 26.01578
-> 28+qt(p=0.975,99)*10/sqrt(100)
-[1] 29.98422 
+> crit.left<-qnorm(alpha/2)
+> crit.left
+[1] -1.959964
+> crit.right<-qnorm(1-alpha/2)
+> crit.right
+[1] 1.959964 
 \end{verbatim}
-\item The interval would be the acceptance zone of $H_0$ and anything outside of this would be my rejection region.
-\item Since 30 is in the rejection region, I reject my null hypothesis with $5\%$ confidence.
+
+
+\item Thus if our test
+statistic is less than -1.96 or greater than 1.96 we would reject the null hypothesis.
+\item In this example, the value of test statistic does lie in the critical region so we reject the null hypothesis at the 5\% level.
+\begin{verbatim}
+> Z.score<=crit.left | Z.score >= crit.right
+[1] TRUE 
+\end{verbatim}
+
+
 \end{itemize}
 
 
@@ -1016,23 +1128,41 @@ The last part can be done with two approaches
 } 
 \end{frame}
 
+\begin{frame}[fragile]{Two-sided Tests}
+\scriptsize{
 
-\begin{frame}[fragile]{Univariate T-test}
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.47]{pics/critregion2sided.png}
+\end{figure}
+
+
+
+} 
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}[fragile]{Two-sided Tests}
 \scriptsize{
 \begin{itemize}
- \item Another way to perform the test is to compute the statistic  $T=\frac{\overline{X_{n}}-\mu_{o}}{\frac{s}{\sqrt{n}}}$
- \item  In this case it would be \begin{displaymath}
-                           T=\frac{28-30}{\frac{10}{\sqrt{100}}}=-2
-                          \end{displaymath}
-\item Since $H_{a}: \mu \neq 30$, we have a two-sided test, where the acceptance region is.
-\begin{displaymath}
- t_{n-1,1-\alpha/2}<T<t_{n-1,\alpha/2}
-\end{displaymath}
+
+\item For the case of the T-distribution our critical region is:
 \begin{verbatim}
- > qt(0.025,99)
-[1] -1.984217
-> qt(0.975,99)
-[1] 1.984217
+> crit2.left<-qt(alpha/2,df = n-1)
+> crit2.left
+[1] -2.016692
+> crit2.right<-qt(1-alpha/2,df = n-1)
+> crit2.right
+[1] 2.016692
+> 
+> T.sta<=crit2.left |T.sta >= crit2.right
+[1] TRUE
 \end{verbatim}
 \item Since $T$ is in the rejection region, we reject the null hypothesis.
 
@@ -1043,61 +1173,90 @@ The last part can be done with two approaches
 } 
 \end{frame}
 
-
-\begin{frame}[fragile]{P-value}
+\begin{frame}[fragile]{Two-sided Tests}
 \scriptsize{
 \begin{itemize}
- \item Generally, in addition to knowing whether we reject or fail to reject a null hypothesis we want to quantify the evidence we have against it.
- \item A \textbf{p-value} is defined as the probability of obtaining an outcome at least as extreme as that observed in the data given that the null hypothesis is true.
- \item ``Extreme'' means far from the null hypothesis and favorable for the alternative hypothesis.
- \item If the \textbf{p-value} s less than the significance level $\alpha$, we reject $H_{0}$ 
- \item Example:
+
+\item Alternatively, we could calculate a confidence interval for the sample mean  with $(1-\alpha)\%$ confidence.
+
+\item The confidence interval becomes the \textbf{acceptance region} and we reject $H_0$ if $\mu_0 =3000$ is not trapped by the interval.
+
 \begin{verbatim}
-> data(iris)
-> mu<-3 # null hypothesis
-> alpha<-0.05
-> n<-length(iris$Petal.Length)
-> xbar<-mean(iris$Petal.Length)
-> s<-sd(iris$Petal.Length)
-> se<-s/sqrt(n)
-> t<-(xbar-mu)/(s/sqrt(n))
-> pvalue<-2*pt(-abs(t),df=n-1)
-> pvalue
-[1] 4.94568e-07 # is less than 0.05 then we reject H0
+> left.conf<-xbar-qt(p=1-alpha/2,n-1)*se.t
+> left.conf
+[1] 3115.418
+> right.conf<-xbar+qt(p=1-alpha/2,n-1)*se.t
+> right.conf
+[1] 3436.491
+> mu0 >= left.conf | mu0 <= right.conf
+[1] TRUE
 \end{verbatim}
+
+\item Since  $\mu_0 =3000$ is not in my acceptance region, we reject the null hypothesis at the 0.05 significance level.
+
 \end{itemize}
 
- 
 
 
-}
+} 
 \end{frame}
 
-\begin{frame}[fragile]{Univariate T-test}
+
+
+\begin{frame}[fragile]{Two-sided Tests}
 \scriptsize{
 \begin{itemize}
- \item The elegant way to do it in R:
+
+\item In order to calculate a p-value in a two-sided test we need to consider both left and right tails:
+
+\begin{verbatim}
+> pvalue<-pt(-T.sta,df=n-1)+(1-pt(T.sta,df=n-1))
+> pvalue
+[1] 0.001208524
+> # or more compactly
+> 2*pt(-abs(T.sta),df=n-1)
+[1] 0.001208524
+\end{verbatim}
+
+\item Notice that this p-value is larger than for the one-sided test.
+
+\item This reflects the fact that an extreme value is less surprising since it could have occurred in either direction.
+\end{itemize}
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Two-sided Tests}
+\scriptsize{
+\begin{itemize}
+
+\item We can run a two-sided t-test in R with one single call:
 \end{itemize}
 
 \begin{verbatim}
-> t.test(x=iris$Petal.Length,mu=3)
+ > t.test(x=babyboom$wt,mu=3000,
+ alternative="two.sided",conf.level = 1-alpha)
 
 	One Sample t-test
 
-data:  iris$Petal.Length 
-t = 5.2589, df = 149, p-value = 4.946e-07
-alternative hypothesis: true mean is not equal to 3 
+data:  babyboom$wt
+t = 3.4666, df = 43, p-value = 0.001209
+alternative hypothesis: true mean is not equal to 3000
 95 percent confidence interval:
- 3.473185 4.042815 
+ 3115.418 3436.491
 sample estimates:
 mean of x 
-    3.758 
+ 3275.955 
 \end{verbatim}
-}
 
 
 
+} 
 \end{frame}
+
+
+
 
 \begin{frame}{Errors}
  \scriptsize{

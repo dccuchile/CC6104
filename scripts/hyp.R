@@ -30,10 +30,10 @@ p.value<=alpha
 # t-test
 s<-sd(babyboom$wt)
 s
-se<-s/sqrt(n)
-se
+se.t<-s/sqrt(n)
+se.t
 
-T.sta<-(xbar-mu0)/se
+T.sta<-(xbar-mu0)/se.t
 T.sta
 p.value<-1-pt(T.sta,df = n-1)
 p.value
@@ -41,43 +41,67 @@ p.value
 t.test(x = babyboom$wt,mu = 3000, alternative = "greater",conf.level = 1-alpha)
 
 
-
 #critical region
-qnorm(1-alpha)
+# with a gaussian
+crit<-qnorm(1-alpha)
+crit
+Z.score>=crit
 
+# with a T
+crit2<-qt(1-alpha, df = n-1)
+crit2
+T.sta>=crit2
 
-# Rejection region
-qt(0.025,99)
-qt(0.975,99)
+# Two sided critical region
 
+crit.left<-qnorm(alpha/2)
+crit.left
+crit.right<-qnorm(1-alpha/2)
+crit.right
 
-# Confidence Interval
-28-qt(p=0.975,99)*10/sqrt(100)
-28+qt(p=0.975,99)*10/sqrt(100)
+Z.score<=crit.left | Z.score >=  crit.right 
 
+# Now using a T-distribution
+crit2.left<-qt(alpha/2,df = n-1)
+crit2.left
+crit2.right<-qt(1-alpha/2,df = n-1)
+crit2.right
 
+T.sta<=crit2.left |T.sta >=  crit2.right
+
+# This is equivalent as calculating a confidence interval
+# for the sample mean and check if the null hypothesis
+# is contained in the interval
+left.conf<-xbar-qt(p=1-alpha/2,n-1)*se.t
+left.conf
+right.conf<-xbar+qt(p=1-alpha/2,n-1)*se.t
+right.conf
+
+mu0 >= left.conf | mu0 <= right.conf
 
 
 # P-value by hand Two-sided
-data(iris)
-mu<-3 # null hypothesis
-alpha<-0.05
-n<-length(iris$Petal.Length)
-xbar<-mean(iris$Petal.Length)
-s<-sd(iris$Petal.Length)
-se<-s/sqrt(n)
-tstat<-(xbar-mu)/(s/sqrt(n))
-pvalue<-2*pt(-abs(tstat),df=n-1)
+pvalue<-pt(-T.sta,df=n-1)+(1-pt(T.sta,df=n-1))
 pvalue
-
-# This is the same as 
-pt(-tstat,df=n-1)+(1-pt(tstat,df=n-1))
+# or more compactly
+2*pt(-abs(T.sta),df=n-1)
 
 
 # Running the test directly
-t.test(x=iris$Petal.Length,mu=3)
+t.test(x=babyboom$wt,mu=3000, alternative="two.sided"
+       ,conf.level = 1-alpha)
 
 
-# One sided, alternative greater
-t.test(x=iris$Petal.Length,mu=3,alternative = "greater")
+
+
+
+
+
+
+# Welsh Test
+t.test(babyboom$wt~babyboom$gender)
+
+t.test(babyboom$wt~babyboom$gender,var.equal=T)
+
+
 
