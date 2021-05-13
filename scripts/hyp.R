@@ -99,6 +99,16 @@ t.test(x=babyboom$wt,mu=3000, alternative="two.sided"
 
 
 # Welsh Test
+summary(babyboom$gender)
+
+library(ggplot2)
+ggplot(babyboom, aes(x = gender, y = wt, fill = gender)) + 
+  geom_boxplot()
+
+tapply(babyboom$wt, babyboom$gender, mean)
+tapply(babyboom$wt, babyboom$gender, sd)
+
+
 t.test(babyboom$wt~babyboom$gender)
 
 t.test(babyboom$wt~babyboom$gender,var.equal=T)

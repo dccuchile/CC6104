@@ -1256,6 +1256,163 @@ mean of x
 \end{frame}
 
 
+\begin{frame}[fragile]{Unpaired Two Sample Tests}
+ \scriptsize{
+
+\begin{itemize}
+ \item The babyboom dataset has a column specifying the gender of each baby.
+ 
+ \begin{verbatim}
+> summary(babyboom$gender)
+girl  boy 
+  18   26  
+ \end{verbatim}
+
+ 
+ \item Suppose our research hypothesis is that the mean birth weight of boys is different (two-sided) than mean birth weight of girls:
+
+ \begin{table}
+\center
+ \begin{tabular}{c}  
+$H_0$: $\mu_{boys}=\mu_{girls}$ or $\mu_{boys}-\mu_{girls}=0$  \\
+$H_1$: $\mu_{boys}\neq\mu_{girls}$ or $\mu_{boys}-\mu_{girls}\neq0$
+\end{tabular} 
+\end{table}
+
+\item We call this test a two sample tests (one sample with the births of boys and the other of girls).
+
+\item The two samples are independent or unpaired (we have different number of observations for boys and girls).
+
+\item This types of tests are very important for experimental data and observational studies (i.e., one sample is the control group and the other is the treatment).
+
+ 
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Unpaired Two Sample Tests}
+ \scriptsize{
+
+\begin{itemize}
+ 
+ \item Asymptotic theory tells us that the difference between two sample means (when the sample sizes are sufficiently large) has a Normal sampling distribution:
+ 
+ \begin{displaymath}
+  \overline{X}_{1}-\overline{X}_{2} \sim N\left(0, \frac{\sigma_1^{2}}{n_1} + \frac{\sigma_2^{2}}{n_2}\right)
+ \end{displaymath}
+
+  
+ \item When the standard deviations of each group are unknown ($\sigma_1$, $\sigma_2$) we can estimate them as usual ($s_1$,$s_2$) and build the following $T$ satistics:
+ 
+  \begin{displaymath}
+  T = \frac{ \overline{X}_{1}-\overline{X}_{2}}{\sqrt{\frac{s_1^{2}}{n_1} + \frac{s_2^{2}}{n_2}}}
+ \end{displaymath}
+
+ \item The $T$ statistic is distributed according to a t-student distribution.
+ 
+ 
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+\begin{frame}{Unpaired Two Sample Tests}
+ \scriptsize{
+
+\begin{itemize}
+ 
+ \item When the groups are the same size and have equal variance, the degrees of freedom for the $T$ test is  $n_1+n_2-2$.
+ 
+  \item In this case the box plot that the ``girl'' group is more variable than then ``boy'' group, and the numbers in each group differ.
+ 
+ 
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.55]{pics/boxplotgender.pdf}
+\end{figure}
+
+ 
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}{Unpaired Two Sample Tests}
+ \scriptsize{
+
+\begin{itemize}
+ 
+ \item We need to use a more complex formula for the degrees of freedom, which is often referred to as a ``Welch t-test'':
+ 
+ \begin{displaymath}
+  d.f. = \frac{\left(\frac{s_1^{2}}{n_1} + \frac{s_2^{2}}{n_2}\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1}+\frac{(s_2^2/n_2)^2}{n_2-1}}
+ \end{displaymath}
+
+ 
+ 
+ \item For this example d.f. = 27.631 which is lower than what we would get by subtracting 2 from the sample size.
+  
+ 
+ \item Recall that the lower the d.f the wider the tails in the t-student distribution.
+ 
+ \item This is essentially, imposing a penalty on the test for differences in sample size or variance.
+ 
+
+ 
+ 
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+\begin{frame}[fragile]{Unpaired Two Sample Tests}
+ \scriptsize{
+
+\begin{itemize}
+ 
+ \item We can run a Welsh T-test in R as follows:
+ 
+ \begin{verbatim}
+> t.test(babyboom$wt~babyboom$gender)
+
+	Welch Two Sample t-test
+
+data:  babyboom$wt by babyboom$gender
+t = -1.4211, df = 27.631, p-value = 0.1665
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -593.1538  107.4273
+sample estimates:
+mean in group girl  mean in group boy 
+          3132.444           3375.308 
+  
+ \end{verbatim}
+
+ 
+\item In this case, we fail to reject $H_0$ at the $5\%$ significance level.
+ 
+ 
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+
 
 
 \begin{frame}{Errors}
