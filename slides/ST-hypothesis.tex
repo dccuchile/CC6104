@@ -259,7 +259,7 @@ Characteristics of a well-designed experiment.
 
  \item The idea is the same, users (experimental units) are randomly exposed to one of two variants of the software: Control (A), or Treatment (B).
  
- \item An when there is more than one treatment we have an A/B/n test.
+ \item When there is more than one treatment we have an A/B/n test.
  
  \item The response variable is called \textbf{Overall  Evaluation  Criterion} (OEC), which is a quantitative measure of the experiment's objective. 
  
@@ -368,7 +368,7 @@ Image source: \cite{kohavi2012trustworthy}
 } 
 \end{frame}
 
-\begin{frame}{Example of Confounded Observational Study}
+\begin{frame}{A Confounded Observational Study}
 \scriptsize{
 
 \begin{itemize}
@@ -393,7 +393,7 @@ Image source: \cite{kohavi2012trustworthy}
 \end{frame}
 
 
-\begin{frame}{Example of Confounded Observational Study}
+\begin{frame}{A Confounded Observational Study}
 \scriptsize{
 
 \begin{itemize}
@@ -423,7 +423,7 @@ children who were operated on died.
 
 
 
-\begin{frame}{Example of Confounded Observational Study}
+\begin{frame}{A Confounded Observational Study}
 \scriptsize{
 
 \begin{itemize}
@@ -485,7 +485,7 @@ spared.
 
 \item Randomized Paired Comparison or Matched Pairs is an approach to design experiments \textbf{controlling} for confounding variables. 
 
-\item We sort the experimental units into pairs of similar units (matched pairs), where similarity is measured according to confounding variables.
+\item We sort the experimental units into pairs of similar units (matched pairs or \textbf{blocks}), where similarity is measured according to confounding variables.
 
 \item  The two units in each pair should be enough alike that you expect them to have a similar response to any treatment.
 
@@ -1193,6 +1193,8 @@ statistic is less than -1.96 or greater than 1.96 we would reject the null hypot
 \end{verbatim}
 
 \item Since  $\mu_0 =3000$ is not in my acceptance region, we reject the null hypothesis at the 0.05 significance level.
+
+\item Confidence intervals and p-values always agree on statistical significance \cite{minitab_conf}. 
 
 \end{itemize}
 
