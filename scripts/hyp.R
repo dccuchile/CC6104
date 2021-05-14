@@ -113,5 +113,21 @@ t.test(babyboom$wt~babyboom$gender)
 
 t.test(babyboom$wt~babyboom$gender,var.equal=T)
 
+# Paired T-test
 
-
+# Data in two numeric vectors
+# ++++++++++++++++++++++++++
+# Weight of the mice before treatment
+before <-c(200.1, 190.9, 192.7, 
+           213, 241.4, 196.9, 172.2,
+           185.5, 205.2, 193.7)
+# Weight of the mice after treatment
+after <-c(392.9, 393.2, 345.1, 
+          393, 434, 427.9, 422, 
+          383.9, 392.3, 352.2)
+# Create a data frame
+t.test(after, before, 
+       paired = TRUE, 
+       alternative = "two.sided")
+#which is the same as
+t.test(after - before)

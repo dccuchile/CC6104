@@ -1413,31 +1413,102 @@ mean in group girl  mean in group boy
 
 
 
-
-
-\begin{frame}{Errors}
+\begin{frame}{Paired Two Sample Tests}
  \scriptsize{
 
 \begin{itemize}
- \item We have two types of errors when we perform a hypothesis test
- \item Type I error: it is when we reject the null hypothesis when it is true.
- \item This error is equivalent to the significance level $\alpha$. 
- \item Type II error: is when the null hypothesis is false but we do not have statistical evidence to reject it.
- \item To mitigate type I errors we generally use smaller values of $\alpha$.
- \item To mitigate type II errors we generally work with larger samples.
- \item There is a trade-off between type I and type II errors. 
+ 
+ \item Another very useful type of two sample test is the Paired T-Test.
+ \item This test is used to compare the means between two \textbf{related groups} of samples.
+ \item Here we have two values (i.e., pair of values) for the same samples \cite{sthda}.
+ \item This type of data arises when we compare a response variable after and before a treatment for each subject.
+ \item It also arises in matched pairs experiments.
+ 
+ \item Paired t-test analysis is performed as follow:
+
+   \begin{enumerate}
+   \scriptsize{
+    \item Calculate the difference $d$ between each pair of value.
+    \item Compute the mean $\overline{d}$ and the standard deviation $s_d$ of these differences.
+    \item Compare the $\overline{d}$ to 0 in the same way as previous tests.}
+   \end{enumerate}
+ 
+
+
 \end{itemize}
 
- \begin{table}
-\begin{tabular}{c | c c}
-\hline
-  & Retain $H_0$ &  Reject $H_{0}$   \\ 
-\hline
-$H_0$ true & \checkmark & type I \\
-$H_1$ true & type II error & \checkmark \\
-\hline
-\end{tabular}
+
+
+}
+\end{frame}
+
+
+
+\begin{frame}{Paired Two Sample Tests}
+ \scriptsize{
+
+\begin{itemize}
+ 
+ \item The test statistics $T$ is calculated as follows for the paired test:
+ \begin{displaymath}
+  T = \frac{\overline{d}}{s_d/\sqrt{n}}
+ \end{displaymath}
+
+ \item The the degrees of freedom (df) are simply $n-1$.
+
+\item As an example of data, 20 mice received a treatment X during 3 months.
+
+\item We want to know whether the treatment X has an impact on the weight of the mice.
+
+\item The weight of the 20 mice has been measured before and after the treatment. 
+
+\item Let's test the following hypotheses:
+ 
+  \begin{table}
+\center
+ \begin{tabular}{c}  
+$H_0$: $\overline{d}=0$  \\
+$H_1$: $\overline{d}\neq0$
+\end{tabular} 
 \end{table}
+ 
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+\begin{frame}[fragile]{Paired Two Sample Tests}
+ \scriptsize{
+
+\begin{itemize}
+ 
+ \item We can run a paired t-test in R as follows:
+ 
+ 
+\end{itemize}
+
+\begin{verbatim}
+> before <-c(200.1, 190.9, 192.7, 213, 241.4, 196.9, 172.2,
++            185.5, 205.2, 193.7)
+> # Weight of the mice after treatment
+> after <-c(392.9, 393.2, 345.1,393, 434, 427.9, 422, 
++           383.9, 392.3, 352.2)
+> t.test(after, before, paired = TRUE, alternative = "two.sided")
+
+	Paired t-test
+
+data:  after and before
+t = 20.883, df = 9, p-value = 6.2e-09
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 173.4219 215.5581
+sample estimates:
+mean of the differences 
+                 194.49 
+\end{verbatim}
+
 
 }
 \end{frame}
@@ -1445,24 +1516,132 @@ $H_1$ true & type II error & \checkmark \\
 
 
 
-\begin{frame}{Statistical Power}
+
+\begin{frame}{Errors}
+ \scriptsize{
+
+\begin{itemize}
+ \item We have two types of errors when we perform a hypothesis test
+ \item Type I error: it is when we reject the null hypothesis when it was true (also called ``false alarm'').
+  \item Type II error: is when the null hypothesis is false but we do not have statistical evidence to reject it (alseo called a ``miss'').
+  
+   \begin{table}
+\begin{tabular}{c | c c}
+\hline
+  & Retain $H_0$ &  Reject $H_{0}$   \\ 
+\hline
+$H_0$ true & \checkmark & type I error \\
+$H_1$ true & type II error & \checkmark \\
+\hline
+\end{tabular}
+\end{table}
+  
+\item Neyman and Pearson coined two terms to describe the probability of these two types of errors in the long run:
+
+\begin{itemize}
+\scriptsize{
+ \item $P$(Type I error) = $\alpha$
+  \item $P$(Type II error) = $\beta$}
+\end{itemize}
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}{Errors}
+ \scriptsize{
+
+\begin{itemize}
+ \item If we set $\alpha$ to .05, then in the long run we should make a Type I error 5\% of the time. 
+ \item The standard value for an acceptable level of $\beta$ is .2.
+ \item That is, we are willing to accept that 20\% of the time we will fail to detect a true effect when it truly exists.
+  \item The concept of \textbf{statistical power} is the complement of Type II error: 
+  \begin{displaymath}                                                                               
+ power = 1 - \beta                                                                                      \end{displaymath}
+
+  
+ \item The power of a test is the likelihood of finding a positive result given that it exists.\cite{poldrack2019statistical}
+ 
+ \item To mitigate type I errors we generally use smaller values of $\alpha$.
+ \item To mitigate type II errors (or increase the power of the test) we generally work with larger samples.
+ \item There is a trade-off between type I and type II errors. 
+ \item There are tools to analyze the power of a test that go beyond the scope of this course.
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{What does a significant result mean?}
+\scriptsize{
+\begin{itemize}
+ \item There is a great deal of confusion about what p-values actually mean.
+ \item Suppose we do an experiment comparing the means between conditions, and we find a difference with a p-value of .01.
+ \item Does it mean that the probability of the null hypothesis being true is .01?
+ \begin{itemize}
+ \scriptsize{
+  \item No. Remember that in NHST, the p-value is the probability of the data given the null hypothesis: $P(data|H_0)$.
+  \item It does not warrant conclusions about the probability of the null hypothesis given the data: $P(H_0|data)$. }
+ \end{itemize}
+\item  Does it mean that the probability that you are making the wrong decision is .01? 
+\begin{itemize}
+\scriptsize{
+ \item No. This would be $P(H_0|data)$, but remember as above that p-values are probabilities of data under $H_0$, not probabilities of hypotheses.}
+\end{itemize}
+
+ 
+ 
+\end{itemize}
+}
  
 \end{frame}
 
-\begin{frame}{Critics to Hypothesis Testing}
+
+
+\begin{frame}{What does a significant result mean?}
+\scriptsize{
+\begin{itemize}
+
+ \item  Does it mean that you have found a practially important effect?
+ \begin{itemize}
+ \scriptsize{
+  \item No. There is an essential distinction between statistical significance and practical significance. 
+  \item Suppose we performed an RCT to examine the effect of a particular diet on body weight, and we find a statistically significant effect at $p<.05$. 
+  \item This doesn't tell us how much weight was actually lost.
+  \item The loss of one ounce (i.e. the weight of a few potato chips) can be statistically signigficant but not practically significant.
+  
+  }
+ \end{itemize}
+\item  Many scientist think that NHST is flawed and that is has been the cause of serious problems in science \cite{poldrack2019statistical}.
+
+ \item For example, The American Statistical Association (ASA) released a released a ``Statement on Statistical Significance and P-Values'' indicating the proper use and interpretation of the p-value \cite{wasserstein2016asa}.
+ 
+\end{itemize}
+}
  
 \end{frame}
 
 
 \begin{frame}{There are many other tests}
  \scriptsize{
-
-\begin{itemize}
- \item Propotion tests
- \item Analysis of Variance (ANOVA)
- \item Chi-square tests of idependence
- \item Kolmogorov–Smirnov test
+There are a plethora of other tests that we will not teach in this course
  
+\begin{itemize}
+ \item Proportion tests.
+ \item The Fisher's exact test.
+ \item Analysis of Variance (ANOVA).
+ \item The Chi-square tests of independence.
+ \item The Wilcoxon signed-rank test.
+ \item The Kolmogorov–Smirnov tests. 
  
 \end{itemize}
 
@@ -1475,9 +1654,11 @@ $H_1$ true & type II error & \checkmark \\
  \scriptsize{
 
 \begin{itemize}
- \item Bla bla bla
- 
- 
+ \item  In this class we have introduced two important statistical concepts: design of experiments and NHST.  
+ \item Experiments are a powerful approach to determining cause-effect relationships.
+ \item It is very important to identify and control confounding variables in the design of experiments.
+ \item Hypothesis testing is a family of techniques for testing hypotheses using data.
+ \item NHST must be used with care and we should always remind that p-values do not measure the probability of a given hypothesis.
 \end{itemize}
 
 
