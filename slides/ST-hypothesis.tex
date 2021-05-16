@@ -37,7 +37,7 @@
 {\raise-0.05em\hbox{\Large $#1$}}{\hbox{\large $#1$}}{#1}}}
 \newcommand{\bigtimes}{\BIGOP{\times}}
 \vspace{-0.5cm}
-\title{Deisgn of Experiments \& Hypothesis Testing}
+\title{Design of Experiments \& Hypothesis Testing}
 \vspace{-0.5cm}
 \author[Felipe Bravo Márquez]{\footnotesize
 %\author{\footnotesize  
@@ -359,7 +359,7 @@ Image source: \cite{kohavi2012trustworthy}
  
  \item A phenomenon called \textbf{confounding} is the major treat to observational studies.
  
- \item Two possible influences on an observed outcome are \textbf{confounded} if they are mixed together in a way that makes it impossible to separate their effects on the responses \cite{watkins2010statistics}.
+ \item Two possible influences on an observed outcome are \textbf{confounded} if they are mixed in a way that makes it impossible to separate their effects on the responses \cite{watkins2010statistics}.
   
 \end{itemize}
 
@@ -549,7 +549,7 @@ spared.
  \item We will study the following types of parametric tests to the mean:
  \begin{enumerate}
  \scriptsize{
-  \item \textbf{One sample tests}: we contrast the sample mean to a pre-specified value.
+  \item \textbf{One sample test}: we contrast the sample mean to a pre-specified value.
   \item \textbf{Unpaired two sample test}: we compare the sample means of two independent groups (control vs. treatment).
   \item \textbf{Paired two sample test}: here we compare the means of two dependent groups where we have two values for the same samples. For example: in matched pairs experiments.}
  \end{enumerate}
@@ -618,7 +618,7 @@ spared.
 \item Instead, we first take our hypothesis of interest (i.e. that body-worn cameras reduce use of force), and flip it on its head, creating a \textbf{null hypothesis}.
 \item In this case, the null hypothesis would be that cameras do not reduce use of force. 
 \item Importantly, we then assume that the null hypothesis is true. 
-\item We then look at the data, and determine how likely the data would be if the null hypothesis were true. 
+\item We then look at the data and determine how likely the data would be if the null hypothesis were true. 
 \item If the data are sufficiently unlikely under the null hypothesis that we can reject the null in favor of the \textbf{alternative hypothesis} which is our hypothesis of interest. 
 \item If there is not sufficient evidence to reject the null, then we say that we retain (or ``fail to reject'') the null.
 
@@ -638,7 +638,7 @@ spared.
   \item From previous experience we know that the birth weights of babies in England have a mean of 3000g and a standard deviation of 500g.
  \item We think that maybe babies in Australia have a mean birth weight greater than 3000g and we would like to test this hypothesis.
   \item We take a sample of babies from Australia, measure their birth weights and see if the sample mean is significantly larger than 3000g. 
-    \item The main hypothesis that we are most interested in is the \textbf{research hypothesis}, denoted $H_1$ , that the mean birth weight of Australian babies is greater than 3000g.
+    \item The main hypothesis that we are most interested in is the \textbf{research hypothesis}, denoted $H_1$, that the mean birth weight of Australian babies is greater than 3000g.
 \end{itemize}
 
 
@@ -675,8 +675,8 @@ $H_1$: $\mu>3000g$
   \item Normally, we start with the research hypothesis and ``set up'' the null hypothesis to be directly counter to what we hope to show. 
   \item We then try to show that, in the light of our collected data, that the null hypothesis is false. 
   \item We do this by calculating the probability of the data if the null hypothesis is true. 
-  \item If this probability is very small it suggests that the null hypothesis is false.
-  \item Once we have set up our null and alternative hypothesis we can collect a sample of data. 
+  \item If this probability is very small, it suggests that the null hypothesis is false.
+  \item Once we have set up our null and alternative hypothesis, we can collect a sample of data. 
   \item For example, we can imagine we collected the birth weights of the 44 babies in the Babyboom dataset.
 
 \end{itemize}
@@ -700,7 +700,7 @@ $H_1$: $\mu>3000g$
 \end{figure}
 
 \begin{itemize}
- \item The sample mean of the dataset is $\overline{x}$ is: 
+ \item The sample mean of the dataset $\overline{x}$ is: 
  \begin{verbatim}
 > xbar<-mean(babyboom$wt)
 > xbar
