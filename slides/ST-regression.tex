@@ -75,23 +75,23 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 
 
 
-\begin{frame}{Introducción}
+\begin{frame}{Introduction}
 \scriptsize{
 \begin{itemize}
 
- \item Un modelo de regresión se usa para modelar la relación de una variable dependiente $\mathbf{y}$ numérica con $n$ variables independientes $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$. 
+ \item  A regression model is used to model the relationship of a numerical dependent variable $\mathbf{y}$ with $n$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$ \cite{wasserman2013all}. 
  
- \item A grandes rasgos queremos conocer el valor esperado de $\mathbf{y}$ a partir los valores de $\mathbf{x}$:
+ \item  Roughly speaking we want to know the expected value of $\mathbf{y}$ from the values of $\mathbf{x}$:
  \begin{displaymath}
  \mathbb{E}(y|x_1,x_2,\dots,x_n)
  \end{displaymath}
 
  
- \item Usamos estos modelos cuando creemos que la variable de respuesta $\mathbf{y}$ puede ser modelada por otras variables independientes también conocidas como covariables o atributos.
+ \item  We use these models when we believe that the response variable $\mathbf{y}$ can be modeled by other independent variables also known as covariates or attributes.
  
- \item Para realizar este tipo de análisis necesitamos un dataset formado por $m$ observaciones que incluyan tanto a la variable de respuesta como a cada uno de los atributos.
+ \item To perform this type of analysis we need a dataset consisting of $m$ observations that include both the response variable and each of the attributes.
  
- \item Nos referimos al proceso de \textbf{ajustar} una función de regresión al proceso en que a partir de los datos inferimos una función de hipótesis $h$ que nos permite predecir valores de $\mathbf{y}$ desconocidos usando los valores de los atributos.
+ \item We refer to the process of \textbf{fitting} a regression function as the process in which from the data we infer a hypothesis function $h$ that allows us to \textbf{predict} unknown $\mathbf{y}$ values using the values of the attributes.
 
  
 \end{itemize}
@@ -103,17 +103,17 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \end{frame}
 
 
-\begin{frame}{Introducción (2)}
+\begin{frame}{Introduction (2)}
 \scriptsize{
 \begin{itemize}
  
- \item A este proceso de ajustar una función a partir de los datos se le llama en las áreas de minería de datos y aprendizaje de máquinas como \textbf{entrenamiento}.
+ \item This process of fitting a function from data is referred to in the areas of data mining and machine learning as \textbf{training}.
 
- \item En esas disciplinas se dice que las funciones \textbf{aprenden} a partir de los datos.
+ \item In those disciplines, functions are said to \textbf{learn} from data.
  
- \item Como necesitamos observaciones donde el valor de $\mathbf{y}$ sea conocido para aprender la función,  se le llama a este tipo de técnicas como técnicas de \textbf{aprendizaje supervisado}.
+ \item Since we need observations where the value of $\mathbf{y}$ is known to learn the function, such techniques are referred to as \textbf{supervised learning} techniques.
  
- \item Cuando $\mathbf{y}$ es una variable categórica hablamos de un problema de \textbf{clasificación}.
+ \item When $\mathbf{y}$ is a categorical variable we have a \textbf{classification} problem.
  
 
  
@@ -122,7 +122,7 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.65]{pics/learning.pdf}
+	\includegraphics[scale=0.6]{pics/learning.pdf}
 \end{figure}
 
 } 
@@ -130,24 +130,24 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \end{frame}
 
 
-\begin{frame}{Regresión Lineal Simple}
+\begin{frame}{Simple Linear Regression}
 \scriptsize{
 \begin{itemize}
- \item En la regresión lineal simple se tiene una única variable independiente $x$ para modelar la variable dependiente $\mathbf{y}$.
+ \item In simple linear regression, we have a single independent variable $x$ to model the dependent variable $\mathbf{y}$.
 
- \item Se asume la siguiente relación lineal entre la variables:
+ \item The following linear relationship between the variables is assumed:
 
 \begin{displaymath}
  y_i=\beta_{0}+\beta_{1}x_i +\epsilon_i \quad \forall i
 \end{displaymath}
 
-\item El parámetro $\beta_{0}$ representa el intercepto de la recta (el valor de $y$ cuando $x$ vale cero). 
+\item The parameter $\beta_{0}$ represents the intercept of the line (the value of $y$ when $x$ is zero).  
 
-\item El parámetro $\beta_{1}$ es la pendiente y representa el cambio de $\mathbf{y}$ cuando variamos el valor de $\mathbf{x}$. Entre mayor sea la magnitud de este parámetro mayor será la relación lineal entre las variables.
+\item The parameter $\beta_{1}$ is the slope and represents the change of $\mathbf{y}$ when we vary the value of $\mathbf{x}$. The greater the magnitude of this parameter the greater the linear relationship between the variables.
 
-\item Los valores $\epsilon_{i}$ corresponden a los errores asociados al modelo.
+\item The $\epsilon_{i}$ values correspond to the errors or \textbf{residuals} associated with the model.
 
-\item Tenemos que encontrar una función lineal o recta $h_\beta$ que nos permita encontrar una estimación de $y$, $\hat{y}$ para cualquier valor de $x$ con el mínimo error esperado.
+\item We have to find a linear function or straight line $h_\beta$ that allows us to find an estimate of $y$, $\hat{y}$ for any value of $x$ with the minimum expected error.
 
 \begin{displaymath}
 h(x)=\beta_{0}+\beta_{1}x 
@@ -163,19 +163,19 @@ h(x)=\beta_{0}+\beta_{1}x
 
 
 
-\begin{frame}{Mínimos de Cuadrados}
+\begin{frame}{Least Squares}
 \scriptsize{
 \begin{itemize}
 
- \item El método de mínimos cuadrados ordinarios  se usa para estimar $\hat{\beta}_{0}$ y $\hat{\beta}_{1}$ minimizando la suma de los errores cuadráticos (SSE) de los datos observados.
+ \item The ordinary least squares method is used to estimate  $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ by minimizing the sum of squared errors (SSE) of the observed data.
 
- \item Supongamos que tenemos $m$ observaciones de $\mathbf{y}$ y de $\mathbf{x}$,  calculamos la suma de los errores cuadráticos (SSE) o $E$ de error de la siguiente forma:
+ \item Suppose we have $m$ observations of $\mathbf{y}$ and $\mathbf{x}$, we compute the sum of squared errors (SSE) or $E$ error as follows:
 
 \begin{equation}
 E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)^2
 \end{equation}
 
- \item Para encontrar los parámetros que minimizan el error calculamos las derivadas parciales de SSE respecto a $\beta_{0}$ y $\beta_{1}$. Luego igualamos las derivadas a cero y resolvemos la ecuación para despejar los parámetros.
+ \item To find the parameters that minimize the error we calculate the partial derivatives of SSE with respect to $\beta_{0}$ and $\beta_{1}$. Then we equal the derivatives to zero and solve the equation to find the parameter values.
  
  \begin{equation}
  \frac{\partial E}{ \partial \beta_0} = -2\sum_{i=1}^{m}(y_i-\beta_{0}-\beta_{1}x_i)=0
@@ -194,10 +194,10 @@ E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)
 } 
 \end{frame}
 
-\begin{frame}{Mínimos Cuadrados (2)}
+\begin{frame}{Least Squares (2)}
 \scriptsize{
 \begin{itemize}
- \item Del sistema de ecuaciones anterior se obtienen las soluciones normales:
+ \item From the above system of equations the normal solutions are obtained:
   \begin{equation}
  \hat{\beta}_{1} = \frac{\sum_{i}^{m} (x_i-\overline{x})(y_i-\overline{y}) }{ \sum_{i}^{m} (x_i-\overline{x})^2}    
  \end{equation}
@@ -208,7 +208,7 @@ E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)
 
 
 
-\item El modelo ajustado representa la recta de mínimo error cuadrático.
+\item The fitted model represents the line of least squared error.
 
 \begin{figure}[h!]
 	\centering
@@ -222,17 +222,17 @@ E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)
 \end{frame}
 
 
-\begin{frame}{Coeficiente de Determinación $R^2$}
+\begin{frame}{Coefficient of Determination $R^2$}
 \scriptsize{
 \begin{itemize}
- \item Una vez ajustado nuestro modelo lineal debemos evaluar la calidad del modelo.
- \item Una medida muy común es el coeficiente de determinación $R^2$. 
- \item Para calcularlo debo calcular otros errores distintos a los errores cuadráticos SSE.
- \item Se define a la suma cuadrática total (SST) como el error predictivo cuando usamos la media $\overline{y}$ para predecir la variable de respuesta $y$ (es muy similar a la varianza de la variable):
+ \item  Once we have fitted our linear model we must evaluate the quality of the model.
+ \item A very common metric is the coefficient of determination $R^2$. 
+ \item  It is calculated from errors that are different than the SSE squared errors.
+ \item The total sum squared error (SST)  is defined as the predictive error when we use the mean $\overline{y}$  to predict the response variable $y$ (it is very similar to the variance of the variable):
  \begin{displaymath}
   \text{SST} = \sum_{i}^{m}(y_i-\overline{y})^2  
  \end{displaymath}
- \item Luego tenemos a la suma de los cuadrados explicada por el modelo (SSM) que nos indica la variabilidad de los valores predichos por el modelo respecto a la media:
+ \item  Then we have the sum of squares explained by the model (SSM) which indicates the variability of the values predicted by the model with respect to the mean:
  \begin{displaymath}
   \text{SSM} = \sum_{i}^{m}(\hat{y}_i-\overline{y})^2 
  \end{displaymath}
@@ -242,17 +242,17 @@ E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)
 }
 \end{frame}
 
-\begin{frame}{Coeficiente de Determinación $R^2$ (2)}
+\begin{frame}{Coefficient of Determination $R^2$ (2)}
 \scriptsize{
 \begin{itemize}
- \item Se define el coeficiente de determinación para un modelo lineal $R^2$ como:
+ \item The coefficient of determination for a linear model $R^2$ is defined as:
  \begin{equation}
   R^2= \frac{\text{SSM}}{\text{SST}} = \frac{\sum_{i}^{m}(\hat{y}_i-\overline{y})^2 }{\sum_{i}^{m}(y_i-\overline{y})^2  }
  \end{equation}
 
- \item El coeficiente adquiere valores entre $0$ a $1$ y mientras más cercano a 1 sea su valor mayor sera la calidad del modelo.
+ \item The coefficient takes values between $0$ to $1$ and the closer its value is to 1 the higher the quality of the model.
  
- \item El valor de $R^2$ es equivalente a la correlación lineal (Pearsons) entre $y$ e $\hat{y}$ al cuadrado.
+ \item The value of $R^2$ is equivalent to the linear correlation (Pearsons) between $y$ and $\hat{y}$ squared.
 \begin{displaymath}
  R^2=\text{cor}(y,\hat{y})^2
 \end{displaymath}
@@ -263,23 +263,23 @@ E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)
 }
 \end{frame}
 
-\begin{frame}{Regresión Lineal Múltiple}
+\begin{frame}{Multivariate Linear Regression}
 \scriptsize{
 \begin{itemize}
- \item Supongamos que tenemos $n$ variables independientes: $x_1,x_2,\dots,x_n$.
- \item Intuitivamente, estas variables en conjunto podrían explicar de mejor manera la variabilidad de la variable de respuesta $\mathbf{y}$ que un modelo simple.
- \item Se define un modelo lineal multi-variado de la siguiente manera:
+ \item Suppose we have $n$ independent variables:  $x_1,x_2,\dots,x_n$.
+ \item Intuitively, these variables together could better explain the variability of the response variable $\mathbf{y}$ than a simple model.
+ \item A multivariate linear model is defined as follows:
  \begin{displaymath}
  y_i=\beta_{0}+\beta_{1}x_{i,1}+ +\beta_{2}x_{i,2} + \cdots + \beta_{n}x_{i,n} +  \epsilon_i \quad \forall i \in \{1,m\}
 \end{displaymath}
-\item En el modelo multi-variado se extienden todas las propiedades del modelo lineal simple.
+\item  In the multivariate model all the properties of the simple linear model are extended.
 
-\item Se puede representar el problema de manera matricial:
+\item The problem can be represented in a matrix form:
 \begin{displaymath}
  Y=X\beta+\epsilon
 \end{displaymath}
 
-\item Donde $Y$ es un vector de $m\times 1$ de variables de respuesta:
+\item Where $Y$ is a vector $m\times 1$ response variables:
 
 \begin{displaymath}
  Y =
@@ -302,10 +302,10 @@ E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)
 }
 \end{frame}
 
-\begin{frame}{Regresión Lineal Múltiple (2)}
+\begin{frame}{Multivariate Linear Regression (2)}
 \scriptsize{
 \begin{itemize} 
-\item $X$ es una matriz de $m \times (n+1)$ con las variables explicativas. Tenemos $m$ observaciones de las $n$ variables. La primera columna es constante igual a $1$ ($x_{i,0}=1 \quad \forall i$) para modelar la variable de intercepto $\beta_0$.
+\item $X$ is a $m \times (n+1)$  matrix with the explanatory variables. We have $m$ observations of the $n$ variables.  The first column is constant equal to $1$ ($x_{i,0}=1 \quad \forall i$) to model the intercept variables $\beta_0$.
 
 \begin{displaymath}
  X =
@@ -317,7 +317,7 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
  \end{pmatrix}
 \end{displaymath}
 
- \item Luego, $\beta$ es un vector de parámetros de $(n+1) \times 1$
+ \item Then, $\beta$ is a $(n+1) \times 1$ vector of parameters.
 
 \begin{displaymath}
  \beta =
@@ -339,10 +339,10 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
 }
 \end{frame}
 
-\begin{frame}{Regresión Lineal Múltiple (2)}
+\begin{frame}{Multivariate Linear Regression (2)}
 \scriptsize{
 \begin{itemize}
-\item Finalmente, $\epsilon$ es un vector con los errores del modelo de $m \times 1$. 
+\item Finally, $\epsilon$  is a $m \times 1$ vector with the model errors. 
 
 \begin{displaymath}
  \epsilon =
@@ -354,12 +354,12 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
  \end{pmatrix}
 \end{displaymath}
 
-\item Usando la notación matricial, podemos ver que la suma de los errores cuadráticos (SSE) se puede expresar como:
+\item  Using matrix notation, we can see that the sum of squared errors (SSE) can be expressed as:
 \begin{displaymath}
  \text{SSE} = (Y - X\beta)^{T}(Y-X\beta)
 \end{displaymath}
 
-\item Minimizando esta expresión derivando el error en función de $\beta$ e igualando a cero se llega a las ecuaciones normales:
+\item Minimizing this expression by deriving the error as a function of $\beta$ and setting it equal to zero leads to the normal equations:
 
 \begin{displaymath}
    \hat{\beta} = (X^{T}X)^{-1} X^{T}Y
@@ -373,22 +373,22 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
 
 \end{frame}
 
-\begin{frame}{Supuestos del Modelo Lineal}
+\begin{frame}{Assumptions of the Linear Model}
 \scriptsize{
 
 
 
 
 
-Cada vez que ajustamos un modelo lineal estamos asumiendo implícitamente ciertos supuestos sobre los datos. 
+Whenever we fit a linear model we are implicitly making certain assumptions about the data.  
 
 
 \begin{block}{Supuestos}
 \begin{enumerate}
-\item Linealidad: la variable de respuesta se relaciona linealmente con los atributos. 
-\item Normalidad: los errores tienen distribución normal de media cero: $\epsilon_{i} \sim N(0,\sigma^2)$ 
-\item Homocedasticidad: los errores tienen  varianza constante (mismo valor $\sigma^2$).
-\item Independencia: los errores son independientes entre sí.
+\item Linearity: the response variable is linearly related to the attributes. 
+\item  Normality: errors have zero mean normal distribution: $\epsilon_{i} \sim N(0,\sigma^2)$.
+\item Homoscedasticity: errors have constant variance (same value $\sigma^2$).
+\item Independence: errors are independent of each other.
  
 \end{enumerate}
  
@@ -398,21 +398,20 @@ Cada vez que ajustamos un modelo lineal estamos asumiendo implícitamente cierto
 \end{frame}
 
 
-\begin{frame}{Interpretación Probabilística}
+\begin{frame}{Probabilistic Interpretation}
 \scriptsize{
 \begin{itemize}
- \item Considerando los supuestos anteriores podemos ver que la densidad de probabilidad (PDF) de los errores $\epsilon$ esta definida por una normal de media cero y varianza constante:
+ \item Considering the above assumptions, we can see that the probability density (PDF) of the errors $\epsilon$ is defined by a normal of zero mean and constant variance:
  \begin{displaymath}
   \text{PDF}(\epsilon_{i})=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{\epsilon_{i}^{2}}{2\sigma^2}\right)
  \end{displaymath}
- \item Esto implica que:
+ \item This implies that:
   \begin{displaymath}
   \text{PDF}(y_i|x_{i};\beta)=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right)
  \end{displaymath}
- \item Lo que implica que la distribución de $\mathbf{y}$ dada los valores de $\mathbf{x}$ y parametrizada por $\beta$ sigue una distribución normal.
- \item Luego si uno estima los parámetros de $\beta$ usando una técnica de estimación llamada máxima verosimilitud llega a los mismos resultados que haciendo estimación por mínimos cuadrados.
- \item Esto nos dice que cuando estimamos los parámetros del modelo usando mínimos cuadrados estamos realizando las mismas hipótesis probabilísticas mencionados anteriormente.
- 
+\item Which implies that the distribution of $\mathbf{y}$ given the values of $\mathbf{x}$ and parameterized by $\beta$ follows a normal distribution.
+ \item Then if one estimates the parameters of $\beta$ using maximum likelihood estimation one arrives at the same results as doing least squares estimation.
+ \item This tells us that when we estimate the model parameters using least squares we are making the same probabilistic assumptions mentioned above.
 
 \end{itemize}
 
@@ -421,23 +420,23 @@ Cada vez que ajustamos un modelo lineal estamos asumiendo implícitamente cierto
  
 \end{frame}
 
-\begin{frame}[fragile]{Regresiones en R}
+\begin{frame}[fragile]{Linear Regression in R}
 \scriptsize{
 \begin{itemize}
- \item En R lo modelos lineales se crean con el comando \verb+lm+ que recibe como parámetro una fórmula de la forma \verb+y~x+ ($y=f(x)$).
- \item Vamos a trabajar con el dataset \verb+USArrests+ que tiene información sobre los arrestos ocurridos en Estados Unidos el año 1973. 
- \item Cada observación corresponde a un estado.
- \item Tiene las siguientes variables:
+ \item n R the linear models are created with the command \verb+lm+ that receives as parameter a formula of the form \verb+y~x+ ($y=f(x)$).
+ \item  We are going to work with the dataset \verb+USArrests+ that has information about the arrests that occurred in the United States in 1973. 
+ \item Each observation corresponds to a state.
+ \item The variables of the dataset are:
  \begin{enumerate}
  \scriptsize{
-  \item \textbf{Murder}:  arrestos por homicidio (por 100.000 habitantes).
-  \item \textbf{Assault} : arrestos por asalto (por 100.000 habitantes).
-  \item \textbf{UrbanPop}: porcentaje de la población total del estado.
-  \item \textbf{Rape}: arrestos por violación (por 100.000 habitantes).
+  \item \textbf{Murder}:  homicide arrests (per 100,000 inhabitants).
+  \item \textbf{Assault} : arrests for assault (per 100,000 inhabitants).
+  \item \textbf{UrbanPop}: percentage of total state population.
+  \item \textbf{Rape}: arrests for rape (per 100,000 population).
   }
  \end{enumerate}
  
-\item Para ver si vale la pena hacer un análisis de regresión lineal vemos las correlaciones lineales entre las variables: 
+\item To see if it is worth doing a linear regression analysis, we look at the linear correlations between the variables
 
  \begin{verbatim}
 > data(USArrests)
@@ -461,11 +460,11 @@ Rape     0.56357883 0.6652412 0.41134124 1.0000000
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Regresiones en R (2)}
+\begin{frame}[fragile]{Linear Regression in R (2)}
 \scriptsize{
 \begin{itemize}
- \item Podemos ver que hay una correlación positiva importante entre \verb+Murder+ y \verb+Assault+.
- \item Vamos a modelar los asesinatos en función de los asaltos usando una regresión lineal simple:
+ \item We can see that there is a significant positive correlation between \verb+Murder+ and \verb+Assault+.
+ \item Let's model murders as a function of assaults using simple linear regression:
  \begin{displaymath}
   \text{Murder}(\text{Assault})=\beta_0+\beta_1*\text{Assault}
  \end{displaymath}
@@ -481,7 +480,7 @@ Coefficients:
     0.63168      0.04191    
  \end{verbatim}
  
- \item Podemos ver que los coeficientes del modelo son $\beta_{0}=0.632$ y $\beta_{1}=0.042$. 
+ \item We can see that the coefficients of the model are $\beta_{0}=0.632$ and $\beta_{1}=0.042$. 
  
  
 
@@ -493,10 +492,10 @@ Coefficients:
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Regresiones en R (3)}
+\begin{frame}[fragile]{Linear Regression in R (3)}
 \scriptsize{
 \begin{itemize}
- \item Podemos acceder directamente a los coeficientes y guardarlos en una variable:
+ \item We can directly access the coefficients and store them in a variable:
  \begin{verbatim}
 > reg1.coef<-reg1$coefficients
 > reg1.coef
@@ -504,7 +503,7 @@ Coefficients:
  0.63168266  0.04190863 
  \end{verbatim}
  
-\item Podemos ver diversos indicadores sobre el modelo lineal con el comando \textbf{summary}:
+\item We can view various indicators about the linear model with the command \textbf{summary}:
  
 \begin{verbatim}
 > summary(reg1)
@@ -534,22 +533,22 @@ F-statistic: 86.45 on 1 and 48 DF,  p-value: 2.596e-12
 \end{frame}
 
 
-\begin{frame}[fragile]{Regresiones en R (4)}
+\begin{frame}[fragile]{Linear Regression in R (4)}
 \scriptsize{
 \begin{itemize}
- \item Vemos que el coeficiente de determinación $R^2$ tiene un valor de $0.643$ lo cual no es tan bueno pero aceptable.
+ \item We see that the coefficient of determination $R^2$ has a value of $0.643$ which is not so good but acceptable.
  
  
-  \item Podemos concluir que el nivel de asaltos si bien provee información útil para modelar una parte de la variabilidad del nivel de homicidios no es suficiente para construir un modelo altamente confiable. 
+  \item We can conclude that the level of assaults while providing useful information to model a part of the variability of the homicide level is not enough to build a highly reliable model. 
   
-  \item Puedo guardar los resultados del comando \verb+summary+ en una variable y así acceder directamente al coeficiente de determinación:
+  \item We can store the results of the command \verb+summary+ in a variable then access the coefficient of determination:
 \begin{verbatim}
 > sum.reg1<-summary(reg1)
 > sum.reg1$r.squared
 [1] 0.6430008   
 \end{verbatim}
 
-\item También puedo acceder a los valores ajustados que son los valores predichos por mi modelo para los datos usados:
+\item  We can also access the fitted values which are the values predicted by my model for the data used:
 \begin{verbatim}
 > reg1$fitted.values
        Alabama         Alaska        Arizona       Arkansas        
@@ -564,28 +563,28 @@ F-statistic: 86.45 on 1 and 48 DF,  p-value: 2.596e-12
 
 
 
-\begin{frame}[fragile]{Regresiones en R (5)}
+\begin{frame}[fragile]{Linear Regression in R (5)}
 \scriptsize{
 \begin{itemize}
- \item Podemos ver que la correlación lineal al cuadrado entre mis valores ajustados y los observados para la variable de respuesta es equivalente al coeficiente de determinación:
+ \item We can check that the squared linear correlation between my fitted and observed values for the response variable is equivalent to the coefficient of determination:
  
  \begin{verbatim}
 > cor(Murder,reg1$fitted.values)^2
 [1] 0.6430008
  \end{verbatim}
 
-\item Supongamos ahora que conozco el nivel de asalto de dos estados en otro período para dos lugares pero no conozco el nivel de homicidios.
+\item  Suppose now that we know the level of assault for two states in another period for two locations but I don't know the level of murders.
 
-\item Podría usar mi modelo lineal para predecir el nivel de de homicidios.
+\item  We could use my linear model to predict the level of homicides.
 
-\item Para hacerlo en R debo usar el comando \verb+predict.lm+ que recibe el modelo lineal y un data.frame con los datos nuevos:
+\item To do this in R we must use the command \verb+predict.lm+ which receives the linear model and a data.frame with the new data:
 \begin{verbatim}
-> nuevos.arrestos<-data.frame(Assault=c(500,12))
-> predict.lm(object=reg1,newdata=nuevos.arrestos)
+> new.arrests<-data.frame(Assault=c(500,12))
+> predict.lm(object=reg1,newdata=new.arrests)
         1         2 
 21.585997  1.134586 
-> # Esto es equivalente a:
-> reg1.coef[1]+reg1.coef[2]*nuevos.arrestos
+> # this is equivalent to:
+> reg1.coef[1]+reg1.coef[2]*new.arrests
     Assault
 1 21.585997
 2  1.134586 
@@ -599,16 +598,16 @@ F-statistic: 86.45 on 1 and 48 DF,  p-value: 2.596e-12
 \end{frame}
 
 
-\begin{frame}[fragile]{Regresiones en R (6)}
+\begin{frame}[fragile]{Linear Regression in R (6)}
 \scriptsize{
 \begin{itemize}
- \item Ahora estudiaremos una regresión lineal múltiple.
- \item Podemos ver que la variable \textbf{Rape} que representa el nivel de violaciones tiene una correlación menor con el número de asaltos y con el número de homicidios que la correlación que presentan estas dos variables entre sí.
- \item Vamos a ajustar el siguiente modelo lineal multi-variado:
+ \item  Now we will study a multiple linear regression.
+ \item We can see that the variable \textbf{Rape} representing the level of rapes has a lower correlation with the number of assaults and with the number of homicides than the correlation that these two variables have with each other.
+ \item  Let's fit the following linear multi-variate model:
  \begin{displaymath}
  \text{Rape}=\beta_{0}+\beta_{1}*\text{Assault}+\beta_{2}*\text{Murder}
  \end{displaymath}
- \item En R para agregar más variables al modelo lineal las agregamos con el signo \textbf{+} :
+ \item In R to add more variables to the linear model we add them with the operator \textbf{+} :
 \begin{verbatim}
 reg2<-lm(Rape~Assault+Murder,USArrests)
 \end{verbatim}
@@ -623,7 +622,7 @@ reg2<-lm(Rape~Assault+Murder,USArrests)
 \end{frame}
 
 
-\begin{frame}[fragile]{Regresiones en R (7)}
+\begin{frame}[fragile]{Linear Regression in R (7)}
 \scriptsize{
 
 \begin{verbatim}
@@ -648,20 +647,20 @@ F-statistic: 18.85 on 2 and 47 DF,  p-value: 9.755e-07
 \end{verbatim}
 
 \begin{itemize}
-\item En este caso el coeficiente de determinación es bajo. Por lo que tendremos baja confianza en la calidad del modelo.
+\item In this case the coefficient of determination is low. So we will have low confidence in the quality of the model.
  \end{itemize}
  
 
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Regresiones en R (8)}
+\begin{frame}[fragile]{Linear Regression in R (8)}
 \scriptsize{
 \begin{itemize}
- \item Cuando teníamos una regresión simple podíamos ver el modelo ajustado como una recta.
- \item Ahora que tenemos dos variables independientes podemos ver el modelo ajustado como un plano.
- \item Si tuviésemos más variables independientes nuestro modelo sería un hiper-plano.
- \item Podemos graficar en R el plano de nuestro modelo lineal de dos variables independientes y una dependiente de la siguiente manera:
+ \item When we had a simple regression we could see the fitted model as a line.
+ \item Now that we have two independent variables we can see the fitted model as a plane.
+ \item If we had more independent variables our model would be a hyper-plane.
+ \item We can plot the plane of our linear model of two independent variables and one dependent variable in R as follows:
  \end{itemize}
 
 \begin{verbatim}
@@ -680,7 +679,7 @@ s3d$plane3d(reg2, lty.box = "solid")
 } 
 \end{frame}
 
-\begin{frame}{Regresiones Lineales en R (9)}
+\begin{frame}{Linear Regression in R (9)}
  
 \begin{figure}[h!]
 	\centering
@@ -691,48 +690,87 @@ s3d$plane3d(reg2, lty.box = "solid")
 
 
 
-\begin{frame}{FOUR CARDINAL RULES OF STATISTICS by Daniela Witten}
+\begin{frame}{Bonus: Four Cardinal Rules of Statistics by Daniela Witten}
 \scriptsize{
+
+Now that we have concluded the chapter on Frequentist inference, it is good to discuss the points discussed by Daniela Witten on a tweet.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/witten.png}
+\end{figure}
+
+
+\begin{block}{One: Correlation does not imply causation}
 \begin{itemize}
-% source: https://twitter.com/daniela_witten/status/1312180955801505794
- \item ONE:  CORRELATION DOES NOT IMPLY CAUSATION.  Yes, I know you know this, but it’s so easy to forget! Yeah, YOU OVER THERE, you with the p-value of 0.0000001 — yes, YOU!! That’s not causation.
+ \item Yes, I know you know this, but it’s so easy to forget! Yeah, YOU OVER THERE, you with the p-value of 0.0000001 — yes, YOU!! That’s not causation.
  \item No matter how small the p-value for a regression of IQ onto shoe size is, that doesn’t mean that big feet cause smarts!!  It just means that grown-ups tend to have bigger feet and higher IQs than kids.
  \item So, unless you can design your study to uncover causation (very hard to do in most practical settings — the field of causal inference is devoted to understanding the settings in which it is possible), the best you can do is to discover correlations.  Sad but true.
- \item TWO:  A P-VALUE IS JUST A TEST OF SAMPLE SIZE.  Read that again — I mean what I said!  If your null hypothesis doesn't hold (and null hypotheses never hold IRL) then the larger your sample size, the smaller your p-value will tend to be.
- \item If you’re testing whether mean=0 and actually the truth is that mean=0.000000001, and if you have a large enough sample size, then YOU WILL GET A TINY P-VALUE.
- \item Why does this matter? In many contemporary settings (think: the internet), sample sizes are so huge that we can get TINY p-values even when the deviation from the null hypothesis is negligible. In other words, we can have STATISTICAL significance w/o PRACTICAL significance.
- \end{itemize}
+\end{itemize}
+
+ 
+\end{block}
+
+
+
 
 } 
 \end{frame}
 
-\begin{frame}{FOUR CARDINAL RULES OF STATISTICS by Daniela Witten}
+\begin{frame}{Bonus: Four Cardinal Rules of Statistics by Daniela Witten}
 \scriptsize{
+
+
+\begin{block}{Two:  a p-value is just a test of sample size}
 \begin{itemize}
+ \item  Read that again — I mean what I said!  If your null hypothesis doesn't hold (and null hypotheses never hold IRL) then the larger your sample size, the smaller your p-value will tend to be.
+ \item If you’re testing whether mean=0 and actually the truth is that mean=0.000000001, and if you have a large enough sample size, then YOU WILL GET A TINY P-VALUE.
+ \item Why does this matter? In many contemporary settings (think: the internet), sample sizes are so huge that we can get TINY p-values even when the deviation from the null hypothesis is negligible. In other words, we can have STATISTICAL significance w/o PRACTICAL significance.
  \item Often, people focus on that tiny p-value, and the fact that the effect is of **literally no practical relevance** is totally lost.
  \item This also means that with a large enough sample size we can reject basically ANY null hypothesis (since the null hypothesis never exactly holds IRL, but it might be “close enough” that the violation of the null hypothesis is not important). 
  \item Want to write a paper saying Lucky Charms consumption is correlated w/blood type? W/a large enough sample size, you can get a small p-value.  (Provided there’s some super convoluted mechanism with some teeny effect size… which there probably is, b/c IRL null never holds)
-\item THREE:  SEEK AND YOU SHALL FIND. If you look at your data for long enough, you will find something interesting, even if only by chance! 
-In principle, we know that we need to perform a correction for multiple testing if we conduct a bunch of tests.
+\end{itemize}
+
+ 
+\end{block}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Bonus: Four Cardinal Rules of Statistics by Daniela Witten}
+\scriptsize{
+
+
+\begin{block}{Three: seek and you shall find}
+\begin{itemize}
+ \item If you look at your data for long enough, you will find something interesting, even if only by chance! 
+ \item  In principle, we know that we need to perform a correction for multiple testing if we conduct a bunch of tests.
 \item But in practice, what if we decide what test(s) to conduct AFTER we look at data?  Our p-value will be misleadingly small because we peeked at the data.  Pre-specifying our analysis plan in advance keeps us honest… but in reality, it’s hard to do!!!
+\end{itemize}
+
+ 
+\end{block}
+
+
+\begin{itemize}
 \item Everyone is asking me about the mysterious and much-anticipated fourth rule of statistics. The answer is simple: we haven’t figured it out yet.... that’s the reason we need to do research in statistics
 \end{itemize}
 
 } 
 \end{frame}
 
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
-\frametitle{Bilbiografía}
-\begin{thebibliography}{8}
+\frametitle{References}
+\bibliography{bio}
+\bibliographystyle{apalike}
+%\bibliographystyle{flexbib}
+\end{frame}  
 
-\bibitem{Assaad2008}
-L. Wasserman \emph{All of Statistics: A Concise Course in Statistical Inference}, Springer Texts in Statistics, 2005.
-\end{thebibliography}
-
-
-\end{frame}
 
 
 
