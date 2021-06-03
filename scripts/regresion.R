@@ -1,13 +1,18 @@
 # Análisis de Regresión
 # Felipe Bravo Márquez
 
-data(USArrests)
-attach(USArrests)
-# Primero analizamos las correlaciones
-cor(USArrests)
+library(rethinking)
+data(Howell1)
+d <- Howell1
+cor(d)
+
+
+# discard non-adults
+d2 <- d[ d$age >= 18 , ]
+cor(d2)
 
 #Para ajustar el modelo lineal
-reg1<-lm(Murder~Assault,USArrests)
+reg1<-lm(height~weight,d2)
 reg1
 
 # Para ver los coeficientes
@@ -30,31 +35,38 @@ reg1$fitted.values
 
 # Puedo ver que la correlación al cuadrado de mis valores ajustados y los reales son los mismo que
 # el coeficiente de determinacion
-cor(Murder,reg1$fitted.values)^2
-
-cor(Murder, Assault)^2
+cor(d2$height,reg1$fitted.values)^2
 
 
 
 
 
-plot(USArrests$Murder,reg1$fitted.values)
 
-nuevos.arrestos<-data.frame(Assault=c(500,12))
-predict.lm(object=reg1,newdata=nuevos.arrestos)
+plot(d2$height,reg1$fitted.values)
+
+new.weights<-data.frame(weight=c(80,12))
+predict.lm(object=reg1,newdata=new.weights)
 # Esto es equivalente a:
-reg1.coef[1]+reg1.coef[2]*nuevos.arrestos
+reg1.coef[1]+reg1.coef[2]*new.weights
 
 # Regresión Mutilple
-reg2<-lm(Rape~Assault+Murder,USArrests)
+
+
+
+reg2<-lm(height~weight+age,d)
 summary(reg2)
 
 # Grafico el plano de la regresión
 library("scatterplot3d")
-s3d <- scatterplot3d(USArrests[,c("Assault","Murder","Rape")],
+s3d <- scatterplot3d(d[,c("weight","age","height")],
                      type="h", highlight.3d=TRUE,
                      angle=55, scale.y=0.7, pch=16, 
-                     main="Rape~Assault+Murder")
+                     main="height~weight+age")
 s3d$plane3d(reg2, lty.box = "solid")
+
+
+data(WaffleDivorce)
+# Predit divorce rate from marriage rate and median age at marriage
+reg3<-lm(Divorce~Marriage+MedianAgeMarriage,WaffleDivorce)
 
 

@@ -81,13 +81,18 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 
  \item  A regression model is used to model the relationship of a numerical dependent variable $\mathbf{y}$ with $n$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$ \cite{wasserman2013all}. 
  
+ \item The dependent variable $\mathbf{y}$ is also called \textbf{target}, \textbf{outcome}, or \textbf{response} variable.
+ 
+ \item The independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$ are also called \textbf{covariates}, \textbf{attributes}, \textbf{features}, por \textbf{predictor variables}.
+ 
+ 
  \item  Roughly speaking we want to know the expected value of $\mathbf{y}$ from the values of $\mathbf{x}$:
  \begin{displaymath}
  \mathbb{E}(y|x_1,x_2,\dots,x_n)
  \end{displaymath}
 
  
- \item  We use these models when we believe that the response variable $\mathbf{y}$ can be modeled by other independent variables also known as covariates or attributes.
+ \item  We use these models when we believe that the response variable $\mathbf{y}$ can be modeled by other independent variables.
  
  \item To perform this type of analysis we need a dataset consisting of $m$ observations that include both the response variable and each of the attributes.
  
@@ -263,6 +268,291 @@ E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)
 }
 \end{frame}
 
+
+
+\begin{frame}{Assumptions of the Linear Model}
+\scriptsize{
+
+
+
+
+
+Whenever we fit a linear model we are implicitly making certain assumptions about the data.  
+
+
+\begin{block}{Assumptions}
+\begin{enumerate}
+\item Linearity: the response variable is linearly related to the attributes. 
+\item  Normality: errors have zero mean normal distribution: $\epsilon_{i} \sim N(0,\sigma^2)$.
+\item Homoscedasticity: errors have constant variance (same value $\sigma^2$).
+\item Independence: errors are independent of each other.
+ 
+\end{enumerate}
+ 
+\end{block}
+
+} 
+\end{frame}
+
+
+\begin{frame}{Probabilistic Interpretation}
+\scriptsize{
+\begin{itemize}
+ \item Considering the above assumptions, we can see that the probability density (PDF) of the errors $\epsilon$ is defined by a normal of zero mean and constant variance:
+ \begin{displaymath}
+  \text{PDF}(\epsilon_{i})=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{\epsilon_{i}^{2}}{2\sigma^2}\right)
+ \end{displaymath}
+ \item This implies that:
+  \begin{displaymath}
+  \text{PDF}(y_i|x_{i};\beta)=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right)
+ \end{displaymath}
+\item Which implies that the distribution of $\mathbf{y}$ given the values of $\mathbf{x}$ and parameterized by $\beta$ follows a normal distribution.
+ \item Then if one estimates the parameters of $\beta$ using maximum likelihood estimation one arrives at the same results as doing least squares estimation.
+ \item This tells us that when we estimate the model parameters using least squares we are making the same probabilistic assumptions mentioned above.
+
+\end{itemize}
+
+
+}
+ 
+\end{frame}
+
+
+\begin{frame}{A signgicante test for $\beta$}
+\scriptsize{
+\begin{itemize}
+ \item We can test if the value of $\beta$ is different from zero.
+
+\end{itemize}
+
+
+}
+ 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example: a model of height}
+\scriptsize{
+\begin{itemize}
+ \item  We are going to work with the dataset \verb+Howell1+ that has  partial census data for the Dobe area !Kung San, compiled from interviews conducted by Nancy Howell in the late 1960s. 
+ \item The !Kung San are the most famous foraging population of the twentieth century, largely because of detailed quantitative studies by people like Howell.
+ \end{itemize} 
+
+ 
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/San_Schmuck.jpg}
+	\caption{By Staehler - Own work, CC BY-SA 4.0, \url{https://commons.wikimedia.org/w/index.php?curid=45076017}}
+\end{figure}
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Example: a model of height}
+\scriptsize{
+\begin{itemize}
+ \item Each observation corresponds to an individual.
+ \item The variables of the dataset are:
+ \begin{enumerate}
+ \scriptsize{
+\item height: Height in cm
+\item weight: Weight in kg
+\item age: Age in years
+\item male: Gender indicator
+\item age.at.death: If deceased, age at death
+\item alive: Indicator if still alive
+  }
+ \end{enumerate}
+ 
+\item To see if it is worth doing a linear regression analysis, we look at the linear correlations between the variables
+
+ \begin{verbatim}
+> library(rethinking)
+> data(Howell1)
+> d <- Howell1
+> cor(d)
+          height    weight         age        male
+height 1.0000000 0.9408222 0.683688567 0.139229021
+weight 0.9408222 1.0000000 0.678335313 0.155442866
+age    0.6836886 0.6783353 1.000000000 0.005887126
+male   0.1392290 0.1554429 0.005887126 1.000000000
+ \end{verbatim}
+
+ 
+ 
+ 
+\end{itemize}
+ 
+ 
+ 
+ 
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example: a model of height}
+\scriptsize{
+\begin{itemize}
+ \item We can see that there is a significant positive correlation between \verb+Height+ and \verb+Age+.
+ 
+ \item All we want for now are heights of adults in the sample. The reason to filter out nonadults for now is that height is strongly correlated with age, before adulthood. 
+ 
+  \begin{verbatim}
+   d2 <- d[ d$age >= 18 , ]
+  \end{verbatim}
+
+ \item Now age doesn't correlate with height:
+ 
+
+  \begin{verbatim}
+> cor(d2)
+           height     weight         age       male
+height  1.0000000  0.7547479 -0.10183776 0.69999340
+weight  0.7547479  1.0000000 -0.17290430 0.52445271
+age    -0.1018378 -0.1729043  1.00000000 0.02845498
+male    0.6999934  0.5244527  0.02845498 1.00000000
+  \end{verbatim} 
+ 
+ 
+ \item Let's model height as a function of weight using a simple linear regression:
+ \begin{displaymath}
+  \text{height}(\text{weight})=\beta_0+\beta_1*\text{weight}
+ \end{displaymath}
+ 
+  \item In R the linear models are created with the command \verb+lm+ that receives as parameter a formula of the form \verb+y~x+ ($y=f(x)$).
+ 
+ \begin{verbatim}
+> reg1<-lm(Murder~Assault,USArrests)
+> reg1
+
+Call:
+lm(formula = Murder ~ Assault, data = USArrests)
+
+Coefficients:
+(Intercept)      Assault  
+    0.63168      0.04191    
+ \end{verbatim}
+ 
+ \item We can see that the coefficients of the model are $\beta_{0}=0.632$ and $\beta_{1}=0.042$. 
+ 
+ 
+
+
+\end{itemize}
+ 
+ 
+ 
+} 
+\end{frame}
+
+\begin{frame}[fragile]{Example: a model of height}
+\scriptsize{
+\begin{itemize}
+ \item We can directly access the coefficients and store them in a variable:
+ \begin{verbatim}
+> reg1.coef<-reg1$coefficients
+> reg1.coef
+(Intercept)     Assault 
+ 0.63168266  0.04190863 
+ \end{verbatim}
+ 
+\item We can view various indicators about the linear model with the command \textbf{summary}:
+ 
+\begin{verbatim}
+> summary(reg1)
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.8528 -1.7456 -0.3979  1.3044  7.9256 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.631683   0.854776   0.739    0.464    
+Assault     0.041909   0.004507   9.298  2.6e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.629 on 48 degrees of freedom
+Multiple R-squared:  0.643,	Adjusted R-squared:  0.6356 
+F-statistic: 86.45 on 1 and 48 DF,  p-value: 2.596e-12
+
+\end{verbatim}
+ 
+ \end{itemize}
+ 
+ 
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example: a model of height}
+\scriptsize{
+\begin{itemize}
+ \item We see that the coefficient of determination $R^2$ has a value of $0.643$ which is not so good but acceptable.
+ 
+ 
+  \item We can conclude that the level of assaults while providing useful information to model a part of the variability of the homicide level is not enough to build a highly reliable model. 
+  
+  \item We can store the results of the command \verb+summary+ in a variable then access the coefficient of determination:
+\begin{verbatim}
+> sum.reg1<-summary(reg1)
+> sum.reg1$r.squared
+[1] 0.6430008   
+\end{verbatim}
+
+\item  We can also access the fitted values which are the values predicted by my model for the data used:
+\begin{verbatim}
+> reg1$fitted.values
+       Alabama         Alaska        Arizona       Arkansas        
+     10.522119      11.653652      12.952819       8.594322      
+\end{verbatim}
+ 
+ \end{itemize}
+ 
+
+} 
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Example: a model of height}
+\scriptsize{
+\begin{itemize}
+ \item We can check that the squared linear correlation between my fitted and observed values for the response variable is equivalent to the coefficient of determination:
+ 
+ \begin{verbatim}
+> cor(Murder,reg1$fitted.values)^2
+[1] 0.6430008
+ \end{verbatim}
+
+\item  Suppose now that we know the level of assault for two states in another period for two locations but I don't know the level of murders.
+
+\item  We could use my linear model to predict the level of homicides.
+
+\item To do this in R we must use the command \verb+predict.lm+ which receives the linear model and a data.frame with the new data:
+\begin{verbatim}
+> new.arrests<-data.frame(Assault=c(500,12))
+> predict.lm(object=reg1,newdata=new.arrests)
+        1         2 
+21.585997  1.134586 
+> # this is equivalent to:
+> reg1.coef[1]+reg1.coef[2]*new.arrests
+    Assault
+1 21.585997
+2  1.134586 
+\end{verbatim}
+
+ 
+ \end{itemize}
+ 
+
+} 
+\end{frame}
+
+
 \begin{frame}{Multivariate Linear Regression}
 \scriptsize{
 \begin{itemize}
@@ -373,232 +663,11 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
 
 \end{frame}
 
-\begin{frame}{Assumptions of the Linear Model}
-\scriptsize{
 
 
 
-
-
-Whenever we fit a linear model we are implicitly making certain assumptions about the data.  
-
-
-\begin{block}{Supuestos}
-\begin{enumerate}
-\item Linearity: the response variable is linearly related to the attributes. 
-\item  Normality: errors have zero mean normal distribution: $\epsilon_{i} \sim N(0,\sigma^2)$.
-\item Homoscedasticity: errors have constant variance (same value $\sigma^2$).
-\item Independence: errors are independent of each other.
- 
-\end{enumerate}
- 
-\end{block}
-
-} 
-\end{frame}
-
-
-\begin{frame}{Probabilistic Interpretation}
-\scriptsize{
-\begin{itemize}
- \item Considering the above assumptions, we can see that the probability density (PDF) of the errors $\epsilon$ is defined by a normal of zero mean and constant variance:
- \begin{displaymath}
-  \text{PDF}(\epsilon_{i})=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{\epsilon_{i}^{2}}{2\sigma^2}\right)
- \end{displaymath}
- \item This implies that:
-  \begin{displaymath}
-  \text{PDF}(y_i|x_{i};\beta)=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right)
- \end{displaymath}
-\item Which implies that the distribution of $\mathbf{y}$ given the values of $\mathbf{x}$ and parameterized by $\beta$ follows a normal distribution.
- \item Then if one estimates the parameters of $\beta$ using maximum likelihood estimation one arrives at the same results as doing least squares estimation.
- \item This tells us that when we estimate the model parameters using least squares we are making the same probabilistic assumptions mentioned above.
-
-\end{itemize}
-
-
-}
- 
-\end{frame}
 
 \begin{frame}[fragile]{Linear Regression in R}
-\scriptsize{
-\begin{itemize}
- \item n R the linear models are created with the command \verb+lm+ that receives as parameter a formula of the form \verb+y~x+ ($y=f(x)$).
- \item  We are going to work with the dataset \verb+USArrests+ that has information about the arrests that occurred in the United States in 1973. 
- \item Each observation corresponds to a state.
- \item The variables of the dataset are:
- \begin{enumerate}
- \scriptsize{
-  \item \textbf{Murder}:  homicide arrests (per 100,000 inhabitants).
-  \item \textbf{Assault} : arrests for assault (per 100,000 inhabitants).
-  \item \textbf{UrbanPop}: percentage of total state population.
-  \item \textbf{Rape}: arrests for rape (per 100,000 population).
-  }
- \end{enumerate}
- 
-\item To see if it is worth doing a linear regression analysis, we look at the linear correlations between the variables
-
- \begin{verbatim}
-> data(USArrests)
-> attach(USArrests)
-> cor(USArrests)
-             Murder   Assault   UrbanPop      Rape
-Murder   1.00000000 0.8018733 0.06957262 0.5635788
-Assault  0.80187331 1.0000000 0.25887170 0.6652412
-UrbanPop 0.06957262 0.2588717 1.00000000 0.4113412
-Rape     0.56357883 0.6652412 0.41134124 1.0000000  
- \end{verbatim}
-
- 
- 
- 
-\end{itemize}
- 
- 
- 
- 
-} 
-\end{frame}
-
-\begin{frame}[fragile]{Linear Regression in R (2)}
-\scriptsize{
-\begin{itemize}
- \item We can see that there is a significant positive correlation between \verb+Murder+ and \verb+Assault+.
- \item Let's model murders as a function of assaults using simple linear regression:
- \begin{displaymath}
-  \text{Murder}(\text{Assault})=\beta_0+\beta_1*\text{Assault}
- \end{displaymath}
- \begin{verbatim}
-> reg1<-lm(Murder~Assault,USArrests)
-> reg1
-
-Call:
-lm(formula = Murder ~ Assault, data = USArrests)
-
-Coefficients:
-(Intercept)      Assault  
-    0.63168      0.04191    
- \end{verbatim}
- 
- \item We can see that the coefficients of the model are $\beta_{0}=0.632$ and $\beta_{1}=0.042$. 
- 
- 
-
-
-\end{itemize}
- 
- 
- 
-} 
-\end{frame}
-
-\begin{frame}[fragile]{Linear Regression in R (3)}
-\scriptsize{
-\begin{itemize}
- \item We can directly access the coefficients and store them in a variable:
- \begin{verbatim}
-> reg1.coef<-reg1$coefficients
-> reg1.coef
-(Intercept)     Assault 
- 0.63168266  0.04190863 
- \end{verbatim}
- 
-\item We can view various indicators about the linear model with the command \textbf{summary}:
- 
-\begin{verbatim}
-> summary(reg1)
-Residuals:
-    Min      1Q  Median      3Q     Max 
--4.8528 -1.7456 -0.3979  1.3044  7.9256 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept) 0.631683   0.854776   0.739    0.464    
-Assault     0.041909   0.004507   9.298  2.6e-12 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 2.629 on 48 degrees of freedom
-Multiple R-squared:  0.643,	Adjusted R-squared:  0.6356 
-F-statistic: 86.45 on 1 and 48 DF,  p-value: 2.596e-12
-
-\end{verbatim}
- 
- \end{itemize}
- 
- 
-
-
-} 
-\end{frame}
-
-
-\begin{frame}[fragile]{Linear Regression in R (4)}
-\scriptsize{
-\begin{itemize}
- \item We see that the coefficient of determination $R^2$ has a value of $0.643$ which is not so good but acceptable.
- 
- 
-  \item We can conclude that the level of assaults while providing useful information to model a part of the variability of the homicide level is not enough to build a highly reliable model. 
-  
-  \item We can store the results of the command \verb+summary+ in a variable then access the coefficient of determination:
-\begin{verbatim}
-> sum.reg1<-summary(reg1)
-> sum.reg1$r.squared
-[1] 0.6430008   
-\end{verbatim}
-
-\item  We can also access the fitted values which are the values predicted by my model for the data used:
-\begin{verbatim}
-> reg1$fitted.values
-       Alabama         Alaska        Arizona       Arkansas        
-     10.522119      11.653652      12.952819       8.594322      
-\end{verbatim}
- 
- \end{itemize}
- 
-
-} 
-\end{frame}
-
-
-
-\begin{frame}[fragile]{Linear Regression in R (5)}
-\scriptsize{
-\begin{itemize}
- \item We can check that the squared linear correlation between my fitted and observed values for the response variable is equivalent to the coefficient of determination:
- 
- \begin{verbatim}
-> cor(Murder,reg1$fitted.values)^2
-[1] 0.6430008
- \end{verbatim}
-
-\item  Suppose now that we know the level of assault for two states in another period for two locations but I don't know the level of murders.
-
-\item  We could use my linear model to predict the level of homicides.
-
-\item To do this in R we must use the command \verb+predict.lm+ which receives the linear model and a data.frame with the new data:
-\begin{verbatim}
-> new.arrests<-data.frame(Assault=c(500,12))
-> predict.lm(object=reg1,newdata=new.arrests)
-        1         2 
-21.585997  1.134586 
-> # this is equivalent to:
-> reg1.coef[1]+reg1.coef[2]*new.arrests
-    Assault
-1 21.585997
-2  1.134586 
-\end{verbatim}
-
- 
- \end{itemize}
- 
-
-} 
-\end{frame}
-
-
-\begin{frame}[fragile]{Linear Regression in R (6)}
 \scriptsize{
 \begin{itemize}
  \item  Now we will study a multiple linear regression.
