@@ -619,6 +619,7 @@ Multiple R-squared:  0.5696,	Adjusted R-squared:  0.5684
 F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
 
 \end{verbatim}
+\item We can see that $\beta_0$ and $\beta_1$ are both statistically significantly different from zero.  
  
  \end{itemize}
  
@@ -682,7 +683,7 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
        1        2 
 159.1308 169.9912 
 > # this is equivalent to:
-> (reg1.coef[1]+reg1.coef[2]*new.weights)[1:2,]
+> reg1.coef[1]+reg1.coef[2]*new.weights[1:2,]
 [1] 159.1308 169.99122
 \end{verbatim}
 
@@ -698,11 +699,16 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
 \scriptsize{
 \begin{itemize}
  \item Suppose we have $n$ independent variables:  $x_1,x_2,\dots,x_n$.
- \item Intuitively, these variables together could better explain the variability of the response variable $\mathbf{y}$ than a simple model.
+ \item In many cases more variables can better explain the variability of the response variable $\mathbf{y}$ than a single one.
  \item A multivariate linear model is defined as follows:
  \begin{displaymath}
  y_i=\beta_{0}+\beta_{1}x_{i,1}+ +\beta_{2}x_{i,2} + \cdots + \beta_{n}x_{i,n} +  \epsilon_i \quad \forall i \in \{1,m\}
 \end{displaymath}
+
+\item In essence we are adding a parameter for each independent variable.
+
+\item Then, we multiply the parameter by the variable and add that term to the linear model.
+
 \item  In the multivariate model all the properties of the simple linear model are extended.
 
 \item The problem can be represented in a matrix form:
@@ -710,17 +716,7 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
  Y=X\beta+\epsilon
 \end{displaymath}
 
-\item Where $Y$ is a vector $m\times 1$ response variables:
 
-\begin{displaymath}
- Y =
- \begin{pmatrix}
-  y_{1} \\
-  y_{2}  \\
-  \vdots  \\
-  y_{m}
- \end{pmatrix}
-\end{displaymath}
 
 
 
@@ -736,6 +732,18 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
 \begin{frame}{Multivariate Linear Regression (2)}
 \scriptsize{
 \begin{itemize} 
+\item Where $Y$ is a vector $m\times 1$ response variables:
+
+\begin{displaymath}
+ Y =
+ \begin{pmatrix}
+  y_{1} \\
+  y_{2}  \\
+  \vdots  \\
+  y_{m}
+ \end{pmatrix}
+\end{displaymath}
+
 \item $X$ is a $m \times (n+1)$  matrix with the explanatory variables. We have $m$ observations of the $n$ variables.  The first column is constant equal to $1$ ($x_{i,0}=1 \quad \forall i$) to model the intercept variables $\beta_0$.
 
 \begin{displaymath}
@@ -748,17 +756,6 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
  \end{pmatrix}
 \end{displaymath}
 
- \item Then, $\beta$ is a $(n+1) \times 1$ vector of parameters.
-
-\begin{displaymath}
- \beta =
- \begin{pmatrix}
-  \beta_{0}  \\
-  \beta_{1}  \\
-  \vdots    \\
-  \beta_{n} 
- \end{pmatrix}
-\end{displaymath}
 
 
 
@@ -773,6 +770,19 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
 \begin{frame}{Multivariate Linear Regression (2)}
 \scriptsize{
 \begin{itemize}
+ \item Then, $\beta$ is a $(n+1) \times 1$ vector of parameters.
+
+\begin{displaymath}
+ \beta =
+ \begin{pmatrix}
+  \beta_{0}  \\
+  \beta_{1}  \\
+  \vdots    \\
+  \beta_{n} 
+ \end{pmatrix}
+\end{displaymath}
+
+
 \item Finally, $\epsilon$  is a $m \times 1$ vector with the model errors. 
 
 \begin{displaymath}
@@ -808,7 +818,7 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
 
 
 
-\begin{frame}[fragile]{Linear Regression in R}
+\begin{frame}[fragile]{Multivariate Linear Regression in R}
 \scriptsize{
 \begin{itemize}
  \item  Now we will study a multiple linear regression.
@@ -832,7 +842,7 @@ reg2<-lm(Rape~Assault+Murder,USArrests)
 \end{frame}
 
 
-\begin{frame}[fragile]{Linear Regression in R (7)}
+\begin{frame}[fragile]{Multivariate Linear Regression in R (7)}
 \scriptsize{
 
 \begin{verbatim}
@@ -864,7 +874,7 @@ F-statistic: 18.85 on 2 and 47 DF,  p-value: 9.755e-07
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Linear Regression in R (8)}
+\begin{frame}[fragile]{Multivariate Linear Regression in R (8)}
 \scriptsize{
 \begin{itemize}
  \item When we had a simple regression we could see the fitted model as a line.
@@ -889,7 +899,7 @@ s3d$plane3d(reg2, lty.box = "solid")
 } 
 \end{frame}
 
-\begin{frame}{Linear Regression in R (9)}
+\begin{frame}{Multivariate Linear Regression in R (9)}
  
 \begin{figure}[h!]
 	\centering
@@ -899,11 +909,29 @@ s3d$plane3d(reg2, lty.box = "solid")
 \end{frame}
 
 
+\begin{frame}{$R^2$ adjusted}
+ 
+
+ 
+\end{frame}
+
+\begin{frame}{Polynomial Regression}
+ 
+
+ 
+\end{frame}
+
+\begin{frame}{Conclusion}
+ 
+
+ 
+\end{frame}
+
 
 \begin{frame}{Bonus: Four Cardinal Rules of Statistics by Daniela Witten}
 \scriptsize{
 
-Now that we have concluded the chapter on Frequentist inference, it is good to discuss the points discussed by Daniela Witten on a tweet.
+Now that we have concluded the chapter on Frequentist inference, it is good to discuss the points raised by Daniela Witten in a tweet.
 
 \begin{figure}[h!]
 	\centering
