@@ -821,15 +821,16 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
 \begin{frame}[fragile]{Multivariate Linear Regression in R}
 \scriptsize{
 \begin{itemize}
- \item  Now we will study a multiple linear regression.
- \item We can see that the variable \textbf{Rape} representing the level of rapes has a lower correlation with the number of assaults and with the number of homicides than the correlation that these two variables have with each other.
+ \item  Now we will study a multiple linear regression for the \verb+Howell1+ data.
+ \item Let's add the variable \textbf{age} as an additional predictor for \textbf{height}.
+ \item We know that age is good at predicting height for non-adults so we will work with original dataset.
  \item  Let's fit the following linear multi-variate model:
  \begin{displaymath}
- \text{Rape}=\beta_{0}+\beta_{1}*\text{Assault}+\beta_{2}*\text{Murder}
+ \text{height}=\beta_{0}+\beta_{1}*\text{weight}+\beta_{2}*\text{age}
  \end{displaymath}
  \item In R to add more variables to the linear model we add them with the operator \textbf{+} :
 \begin{verbatim}
-reg2<-lm(Rape~Assault+Murder,USArrests)
+reg2<-lm(height~weight+age,d)
 \end{verbatim}
 
 
@@ -848,27 +849,28 @@ reg2<-lm(Rape~Assault+Murder,USArrests)
 \begin{verbatim}
 > summary(reg2)
 
+Call:
+lm(formula = height ~ weight + age, data = d)
+
 Residuals:
-    Min      1Q  Median      3Q     Max 
--17.243  -3.171  -1.171   3.281  18.511 
+     Min       1Q   Median       3Q      Max 
+-29.0350  -5.4228   0.7333   6.4919  19.6964 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  8.35011    2.32912   3.585 0.000799 ***
-Assault      0.06716    0.02044   3.286 0.001927 ** 
-Murder       0.18155    0.39108   0.464 0.644619    
+(Intercept) 75.96329    1.04216  72.890  < 2e-16 ***
+weight       1.65710    0.03656  45.324  < 2e-16 ***
+age          0.11212    0.02594   4.322 1.84e-05 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 7.124 on 47 degrees of freedom
-Multiple R-squared:  0.4451,	Adjusted R-squared:  0.4215 
-F-statistic: 18.85 on 2 and 47 DF,  p-value: 9.755e-07
+Residual standard error: 9.214 on 541 degrees of freedom
+Multiple R-squared:  0.889,	Adjusted R-squared:  0.8886 
+F-statistic:  2166 on 2 and 541 DF,  p-value: < 2.2e-16
 
 \end{verbatim}
 
-\begin{itemize}
-\item In this case the coefficient of determination is low. So we will have low confidence in the quality of the model.
- \end{itemize}
+
  
 
 } 
@@ -885,12 +887,11 @@ F-statistic: 18.85 on 2 and 47 DF,  p-value: 9.755e-07
 
 \begin{verbatim}
 library("scatterplot3d")
-s3d <- scatterplot3d(USArrests[,c("Assault","Murder","Rape")],
+s3d <- scatterplot3d(d[,c("weight","age","height")],
                      type="h", highlight.3d=TRUE,
                      angle=55, scale.y=0.7, pch=16, 
-                     main="Rape~Murder+Rape")
+                     main="height~weight+age")
 s3d$plane3d(reg2, lty.box = "solid")
-
 \end{verbatim}
 
 
@@ -903,22 +904,68 @@ s3d$plane3d(reg2, lty.box = "solid")
  
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.6]{pics/reg3d.pdf}
+	\includegraphics[scale=0.55]{pics/reg3d.png}
 \end{figure}
  
 \end{frame}
 
 
 \begin{frame}{$R^2$ adjusted}
- 
+ \scriptsize{
+ \begin{itemize}
+  \item The coefficient of determination $R^2$ tends increases when extra explanatory variables are added to the model.
 
+\item $R^2$ adjusted or $\overline{R}^2$ penalizes for the number of variables $p$.
  
+\begin{displaymath}
+ \overline{R}^2= 1-(1-R^2)\frac{m-1}{m-p-1}
+\end{displaymath}
+
+where $m$ is the number of examples.
+
+ \end{itemize}
+ }
 \end{frame}
 
-\begin{frame}{Polynomial Regression}
+\begin{frame}[fragile]{Polynomial Regression}
+\scriptsize{ 
+\begin{itemize}
+ \item Polynomial regression uses powers of a variable—squares and cubes—as extra attributes.
  
+ \item The most common polynomial regression is a parabolic model of the mean:
+ 
+ \begin{displaymath}
+ y_i=\beta_{0}+\beta_{1}x_i + \beta_{2}x_i^2 + \epsilon_i \quad \forall i
+\end{displaymath}
+ 
+ \item Let's fit a polynomial regression for the height variable using a parabolic model for the weight.
+ 
+ 
+ \item Because the square or cube of a large number can be truly massive we are going to standardize the weight by substracting the mean and dividing by the standard deviation.
+ 
+ \begin{verbatim}
+  d$weight_s <-( d$weight - mean(d$weight) )/sd(d$weight)
+ \end{verbatim}
+
+\item Then we fit the model as follows:
+\begin{verbatim}
+> reg4 <- lm(height~weight_s+I(weight_s^2),d) 
+> reg4
+
+Call:
+lm(formula = height ~ weight_s + I(weight_s^2), data = d)
+
+Coefficients:
+  (Intercept)       weight_s  I(weight_s^2)  
+      146.660         21.415         -8.412
+\end{verbatim}
 
  
+ 
+\end{itemize}
+
+
+}
 \end{frame}
 
 \begin{frame}{Conclusion}

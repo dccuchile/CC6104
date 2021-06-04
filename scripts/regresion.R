@@ -65,8 +65,13 @@ s3d <- scatterplot3d(d[,c("weight","age","height")],
 s3d$plane3d(reg2, lty.box = "solid")
 
 
+d$weight_s <-( d$weight - mean(d$weight) )/sd(d$weight)
+reg4 <- lm(height~weight_s+I(weight_s^2),d) 
+reg4
+
 data(WaffleDivorce)
 # Predit divorce rate from marriage rate and median age at marriage
 reg3<-lm(Divorce~Marriage+MedianAgeMarriage,WaffleDivorce)
+
 
 
