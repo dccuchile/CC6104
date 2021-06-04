@@ -174,20 +174,20 @@ h(x)=\beta_{0}+\beta_{1}x
 
  \item The ordinary least squares method is used to estimate  $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ by minimizing the sum of squared errors (SSE) of the observed data.
 
- \item Suppose we have $m$ observations of $\mathbf{y}$ and $\mathbf{x}$, we compute the sum of squared errors (SSE) or $E$ error as follows:
+ \item Suppose we have $m$ observations of $\mathbf{y}$ and $\mathbf{x}$, we compute the sum of squared errors (SSE) as follows:
 
 \begin{equation}
-E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)^2
+SSE = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)^2
 \end{equation}
 
  \item To find the parameters that minimize the error we calculate the partial derivatives of SSE with respect to $\beta_{0}$ and $\beta_{1}$. Then we equal the derivatives to zero and solve the equation to find the parameter values.
  
  \begin{equation}
- \frac{\partial E}{ \partial \beta_0} = -2\sum_{i=1}^{m}(y_i-\beta_{0}-\beta_{1}x_i)=0
+ \frac{\partial SSE}{ \partial \beta_0} = -2\sum_{i=1}^{m}(y_i-\beta_{0}-\beta_{1}x_i)=0
  \end{equation}
 
   \begin{equation}
- \frac{\partial E}{ \partial \beta_1} = -2\sum_{i=1}^{m}(y_i-\beta_{0}-\beta_{1}x)x_i=0
+ \frac{\partial SSE}{ \partial \beta_1} = -2\sum_{i=1}^{m}(y_i-\beta_{0}-\beta_{1}x)x_i=0
  \end{equation}
 
 
@@ -233,14 +233,18 @@ E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)
  \item  Once we have fitted our linear model we must evaluate the quality of the model.
  \item A very common metric is the coefficient of determination $R^2$. 
  \item  It is calculated from errors that are different than the SSE squared errors.
- \item The total sum squared error (SST)  is defined as the predictive error when we use the mean $\overline{y}$  to predict the response variable $y$ (it is very similar to the variance of the variable):
+ \item The total sum of squares (SST)  is defined as the predictive error when we use the mean $\overline{y}$  to predict the response variable $y$ (it is very similar to the variance of the variable):
  \begin{displaymath}
   \text{SST} = \sum_{i}^{m}(y_i-\overline{y})^2  
  \end{displaymath}
- \item  Then we have the sum of squares explained by the model (SSM) which indicates the variability of the values predicted by the model with respect to the mean:
+ \item  The regression sum of squares (SSM), on the other hand, represents the amount of error in the regression model: 
+
  \begin{displaymath}
   \text{SSM} = \sum_{i}^{m}(\hat{y}_i-\overline{y})^2 
  \end{displaymath}
+  
+ \item  SSM indicates the variability of the values predicted by the model with respect to the mean. 
+ 
   
 \end{itemize}
 
@@ -250,10 +254,18 @@ E = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)
 \begin{frame}{Coefficient of Determination $R^2$ (2)}
 \scriptsize{
 \begin{itemize}
+ \item It can be proved that all the above errors are related as follows: $SST = SSE + SSM$
+
  \item The coefficient of determination for a linear model $R^2$ is defined as:
  \begin{equation}
   R^2= \frac{\text{SSM}}{\text{SST}} = \frac{\sum_{i}^{m}(\hat{y}_i-\overline{y})^2 }{\sum_{i}^{m}(y_i-\overline{y})^2  }
  \end{equation}
+ 
+ \item An alternative but equivalent definition:
+  \begin{equation}
+  R^2= 1-\frac{\text{SSE}}{\text{SST}} = 1- \frac{\sum_{i}^{m}(y_i-\hat{y}_i)^2 }{\sum_{i}^{m}(y_i-\overline{y})^2  }
+ \end{equation}
+ 
 
  \item The coefficient takes values between $0$ to $1$ and the closer its value is to 1 the higher the quality of the model.
  
@@ -298,16 +310,71 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
 \begin{frame}{Probabilistic Interpretation}
 \scriptsize{
 \begin{itemize}
- \item Considering the above assumptions, we can see that the probability density (PDF) of the errors $\epsilon$ is defined by a normal of zero mean and constant variance:
+ \item Considering the above assumptions, we are saying that the probability density (PDF) of the errors $\epsilon$ is defined by a normal of zero mean and constant variance:
  \begin{displaymath}
   \text{PDF}(\epsilon_{i})=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{\epsilon_{i}^{2}}{2\sigma^2}\right)
  \end{displaymath}
+ \item Moreover all $\epsilon_{i}$ are IID (independent and identically distributed).
  \item This implies that:
   \begin{displaymath}
   \text{PDF}(y_i|x_{i};\beta)=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right)
  \end{displaymath}
 \item Which implies that the distribution of $\mathbf{y}$ given the values of $\mathbf{x}$ and parameterized by $\beta$ follows a normal distribution.
- \item Then if one estimates the parameters of $\beta$ using maximum likelihood estimation one arrives at the same results as doing least squares estimation.
+
+\item Let's estimate the $\beta$ using maximum likelihood estimation.
+
+\end{itemize}
+
+}
+ 
+\end{frame}
+
+
+\begin{frame}{Probabilistic Interpretation}
+\scriptsize{
+\begin{itemize}
+
+
+
+ \item The likelihood function of $\beta$ can be written as:
+ 
+ \begin{displaymath}
+  \mathcal{L}(\beta) = \prod_{i=i}^{m}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right)
+ \end{displaymath}
+
+ \item and the the log likelihood $l_n(\beta)$:
+ 
+   \begin{align}
+l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
+ & = \log \prod_{i=i}^{m}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right) \\
+  & = \sum_{i=1}^m  \log \prod_{i=i}^{m}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right) \\
+    & = m \log\left(\frac{1}{\sqrt{2\pi} \sigma}\right) - \frac{1}{\sigma^2}\times \frac{1}{2}\sum_{i=1}^m(y_i - h_{\beta}(x_{i}) )^{2}  
+ \end{align}
+ 
+
+\end{itemize}
+
+
+}
+ 
+\end{frame}
+
+
+\begin{frame}{Probabilistic Interpretation}
+\scriptsize{
+\begin{itemize}
+
+
+
+ \item Hence, maximizing $l_n(\beta)$ gives the same answer as minimizing
+ 
+ \begin{displaymath}
+\frac{1}{2}\sum_{i=1}^m(y_i - h_{\beta}(x_{i})^{2}
+ \end{displaymath}
+
+ \item which is equivalent as minimizing SSE.
+ 
+ \item  Then, if one estimates the parameters of $\beta$ using maximum likelihood estimation one arrives at the same results as doing least squares estimation.
  \item This tells us that when we estimate the model parameters using least squares we are making the same probabilistic assumptions mentioned above.
 
 \end{itemize}
@@ -318,11 +385,58 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
 \end{frame}
 
 
-\begin{frame}{A signgicante test for $\beta$}
+
+\begin{frame}{Standard errors for regression models}
 \scriptsize{
 \begin{itemize}
- \item We can test if the value of $\beta$ is different from zero.
+ \item If we want to make inferences about the regression parameter estimates, then we also need an estimate of their variability. 
+ \item To compute this, we first need to compute the residual variance or error variance for the model.
+ \item That is, how much variability in the dependent variable is not explained by the model. 
+ \item We need to compute the man squared error:
+ 
+ \begin{displaymath}
+  MS_{error} = \frac{SSE}{df} = \frac{\sum_{i=1}^{m} (y_i-h(x_i))^2}{m-p}
+ \end{displaymath}
 
+ \item The degrees of freedom ($df$) are determined by subtracting the number of estimated parameters (2 in this case: $\beta_0$ and $\beta_1$) from the number of observations ($m$)
+
+ \item  We can compute the standard error for the model as: $SE_{model} = \sqrt{MS_{error}}$
+ 
+
+
+ 
+\end{itemize}
+
+
+}
+ 
+\end{frame}
+
+
+
+\begin{frame}{A significance test for $\beta$}
+\scriptsize{
+\begin{itemize}
+
+ \item In order to get the standard error for a specific regression parameter estimate, $SE_{\beta_x}$, we need to rescale the standard error of the model by the square root of the sum of squares of the X variable:
+ 
+ \begin{displaymath}
+  SE_{\hat{\beta}_x} = \frac{SE_{model}}{\sqrt{\sum_{i=1}^m(x_i-\overline{x})^2}}
+   \end{displaymath}
+
+
+  \item Now we can compute a $t$ statistic to tell us the likelihood of the observed parameter estimates compared to some expected value under the null hypothesis. 
+   
+ \item In this case we will test against the null hypothesis of no effect (i.e. $\beta_{H_0}=0$):
+ 
+ \begin{displaymath}
+  t_{m-p} = \frac{\hat{\beta}-\beta_{H_0}}{ SE_{\hat{\beta}_x}} = \frac{\hat{\beta}}{ SE_{\hat{\beta}_x}}
+ \end{displaymath}
+
+ \item Later we will see that R automatically reports the t-statistics and p-values of all coefficients of a linear model.
+ 
+ \item This allows us to determine whether the linear relationship between the two variables ($y$ and $x$) is significant.
+ 
 \end{itemize}
 
 
@@ -334,8 +448,8 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
 \begin{frame}[fragile]{Example: a model of height}
 \scriptsize{
 \begin{itemize}
- \item  We are going to work with the dataset \verb+Howell1+ that has  partial census data for the Dobe area !Kung San, compiled from interviews conducted by Nancy Howell in the late 1960s. 
- \item The !Kung San are the most famous foraging population of the twentieth century, largely because of detailed quantitative studies by people like Howell.
+ \item  We are going to work with the dataset \verb+Howell1+ that has demographic data from Kalahari !Kung San people collected by Nancy Howell in the late 1960s. 
+ \item The !Kung San are the most famous foraging population of the twentieth century, largely because of detailed quantitative studies by people like Howell. \cite{mcelreath2020statistical}
  \end{itemize} 
 
  
@@ -364,7 +478,7 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
   }
  \end{enumerate}
  
-\item To see if it is worth doing a linear regression analysis, we look at the linear correlations between the variables
+\item Let's explore the linear correlations between the variables
 
  \begin{verbatim}
 > library(rethinking)
@@ -393,9 +507,9 @@ male   0.1392290 0.1554429 0.005887126 1.000000000
 \begin{frame}[fragile]{Example: a model of height}
 \scriptsize{
 \begin{itemize}
- \item We can see that there is a significant positive correlation between \verb+Height+ and \verb+Age+.
+ \item We can see that there is a positive correlation between \verb+height+ and \verb+age+.
  
- \item All we want for now are heights of adults in the sample. The reason to filter out nonadults for now is that height is strongly correlated with age, before adulthood. 
+ \item Let's filter out the non-adult examples because we know that height is strongly correlated with age before adulthood. 
  
   \begin{verbatim}
    d2 <- d[ d$age >= 18 , ]
@@ -421,19 +535,8 @@ male    0.6999934  0.5244527  0.02845498 1.00000000
  
   \item In R the linear models are created with the command \verb+lm+ that receives as parameter a formula of the form \verb+y~x+ ($y=f(x)$).
  
- \begin{verbatim}
-> reg1<-lm(Murder~Assault,USArrests)
-> reg1
-
-Call:
-lm(formula = Murder ~ Assault, data = USArrests)
-
-Coefficients:
-(Intercept)      Assault  
-    0.63168      0.04191    
- \end{verbatim}
  
- \item We can see that the coefficients of the model are $\beta_{0}=0.632$ and $\beta_{1}=0.042$. 
+
  
  
 
@@ -447,35 +550,34 @@ Coefficients:
 
 \begin{frame}[fragile]{Example: a model of height}
 \scriptsize{
+\begin{verbatim}
+> reg1<-lm(height~weight,d2)
+> reg1
+
+Call:
+lm(formula = height ~ weight, data = d2)
+
+Coefficients:
+(Intercept)       weight  
+    113.879        0.905  
+\end{verbatim}
+
 \begin{itemize}
+
+
+
+
+ \item We can see that the coefficients of the model are $\beta_{0}=113.879$ and $\beta_{1}=0.905$. 
+
+
  \item We can directly access the coefficients and store them in a variable:
  \begin{verbatim}
 > reg1.coef<-reg1$coefficients
 > reg1.coef
-(Intercept)     Assault 
- 0.63168266  0.04190863 
+(Intercept)      weight 
+113.8793936   0.9050291 
  \end{verbatim}
- 
-\item We can view various indicators about the linear model with the command \textbf{summary}:
- 
-\begin{verbatim}
-> summary(reg1)
-Residuals:
-    Min      1Q  Median      3Q     Max 
--4.8528 -1.7456 -0.3979  1.3044  7.9256 
 
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept) 0.631683   0.854776   0.739    0.464    
-Assault     0.041909   0.004507   9.298  2.6e-12 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 2.629 on 48 degrees of freedom
-Multiple R-squared:  0.643,	Adjusted R-squared:  0.6356 
-F-statistic: 86.45 on 1 and 48 DF,  p-value: 2.596e-12
-
-\end{verbatim}
  
  \end{itemize}
  
@@ -488,24 +590,67 @@ F-statistic: 86.45 on 1 and 48 DF,  p-value: 2.596e-12
 
 \begin{frame}[fragile]{Example: a model of height}
 \scriptsize{
+
+
 \begin{itemize}
- \item We see that the coefficient of determination $R^2$ has a value of $0.643$ which is not so good but acceptable.
+
+
+\item We can view various indicators about the linear model with the command \textbf{summary}:
+ 
+\begin{verbatim}
+> summary(reg1)
+
+Call:
+lm(formula = height ~ weight, data = d2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-19.7464  -2.8835   0.0222   3.1424  14.7744 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 113.87939    1.91107   59.59   <2e-16 ***
+weight        0.90503    0.04205   21.52   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.086 on 350 degrees of freedom
+Multiple R-squared:  0.5696,	Adjusted R-squared:  0.5684 
+F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
+
+\end{verbatim}
+ 
+ \end{itemize}
  
  
-  \item We can conclude that the level of assaults while providing useful information to model a part of the variability of the homicide level is not enough to build a highly reliable model. 
+
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Example: a model of height}
+\scriptsize{
+\begin{itemize}
+ \item We see that the coefficient of determination $R^2$ has a value of $0.57$ which is not so good but acceptable.
+ 
+ 
+  \item We can conclude that the weight while providing useful information to model a part of the variability of the height of the !Kung people, is not enough to build a highly reliable model. 
   
   \item We can store the results of the command \verb+summary+ in a variable then access the coefficient of determination:
 \begin{verbatim}
 > sum.reg1<-summary(reg1)
 > sum.reg1$r.squared
-[1] 0.6430008   
+[1] 0.5696444  
 \end{verbatim}
 
 \item  We can also access the fitted values which are the values predicted by my model for the data used:
 \begin{verbatim}
 > reg1$fitted.values
-       Alabama         Alaska        Arizona       Arkansas        
-     10.522119      11.653652      12.952819       8.594322      
+       1        2        3        4        5        6      
+157.1630 146.9001 142.7180 161.8839 151.2362 170.8895 
 \end{verbatim}
  
  \end{itemize}
@@ -522,25 +667,23 @@ F-statistic: 86.45 on 1 and 48 DF,  p-value: 2.596e-12
  \item We can check that the squared linear correlation between my fitted and observed values for the response variable is equivalent to the coefficient of determination:
  
  \begin{verbatim}
-> cor(Murder,reg1$fitted.values)^2
-[1] 0.6430008
+> cor(d2$height,reg1$fitted.values)^2
+[1] 0.5696444
  \end{verbatim}
 
-\item  Suppose now that we know the level of assault for two states in another period for two locations but I don't know the level of murders.
+\item  Suppose now that we know the weight for two !Kung people but I don't know the height.
 
-\item  We could use my linear model to predict the level of homicides.
+\item  We could use my linear model to predict the height of these two people.
 
 \item To do this in R we must use the command \verb+predict.lm+ which receives the linear model and a data.frame with the new data:
 \begin{verbatim}
-> new.arrests<-data.frame(Assault=c(500,12))
-> predict.lm(object=reg1,newdata=new.arrests)
-        1         2 
-21.585997  1.134586 
+> new.weights<-data.frame(weight=c(50,62))
+> predict.lm(object=reg1,newdata=new.weights)
+       1        2 
+159.1308 169.9912 
 > # this is equivalent to:
-> reg1.coef[1]+reg1.coef[2]*new.arrests
-    Assault
-1 21.585997
-2  1.134586 
+> (reg1.coef[1]+reg1.coef[2]*new.weights)[1:2,]
+[1] 159.1308 169.99122
 \end{verbatim}
 
  

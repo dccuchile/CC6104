@@ -44,10 +44,10 @@ cor(d2$height,reg1$fitted.values)^2
 
 plot(d2$height,reg1$fitted.values)
 
-new.weights<-data.frame(weight=c(80,12))
+new.weights<-data.frame(weight=c(50,62))
 predict.lm(object=reg1,newdata=new.weights)
-# Esto es equivalente a:
-reg1.coef[1]+reg1.coef[2]*new.weights
+# this is equivalent to:
+(reg1.coef[1]+reg1.coef[2]*new.weights)[1:2,]
 
 # Regresión Mutilple
 
