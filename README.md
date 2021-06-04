@@ -45,7 +45,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 * [Probabilistic Machine Learning: An Introduction by Kevin Patrick Murphy](https://probml.github.io/pml-book/book1.html)
 * [Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing by Ron Kohavi, Diane Tang, and Ya Xu](https://www.cambridge.org/core/books/trustworthy-online-controlled-experiments/D97B26382EB0EB2DC2019A7A7B518F59)
 * [Applied Biostats by Yaniv Brandvain](https://bookdown.org/ybrandvain/Applied-Biostats/)
-
+* [Probability and Statistics: a simulation-based introduction by Bob Carpenter](https://github.com/bob-carpenter/prob-stats)
 
 
 ## Courses
