@@ -65,9 +65,17 @@ s3d <- scatterplot3d(d[,c("weight","age","height")],
 s3d$plane3d(reg2, lty.box = "solid")
 
 
+# Polynomial Regression
 d$weight_s <-( d$weight - mean(d$weight) )/sd(d$weight)
 reg4 <- lm(height~weight_s+I(weight_s^2),d) 
 reg4
+
+# Binary attributes
+d$male<-as.factor(d$male)
+reg5<-lm(height~weight+male,d)
+
+# interaction (different slopes for each group)
+reg6<-lm(height~weight+male+weight*male,d)
 
 data(WaffleDivorce)
 # Predit divorce rate from marriage rate and median age at marriage

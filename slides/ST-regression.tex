@@ -168,6 +168,20 @@ h(x)=\beta_{0}+\beta_{1}x
 
 
 
+\begin{frame}{Simple Linear Regression}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.21]{pics/linear_model.png}
+	\caption{Source: \url{https://www.jmp.com}}
+\end{figure}
+
+} 
+ 
+\end{frame}
+
+
 \begin{frame}{Least Squares}
 \scriptsize{
 \begin{itemize}
@@ -295,8 +309,8 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
 \begin{block}{Assumptions}
 \begin{enumerate}
 \item Linearity: the response variable is linearly related to the attributes. 
-\item  Normality: errors have zero mean normal distribution: $\epsilon_{i} \sim N(0,\sigma^2)$.
-\item Homoscedasticity: errors have constant variance (same value $\sigma^2$).
+\item  Normality: errors have a zero mean normal distribution: $\epsilon_{i} \sim N(0,\sigma^2)$.
+\item Homoscedasticity: errors have constant variance (same value of $\sigma^2$).
 \item Independence: errors are independent of each other.
  
 \end{enumerate}
@@ -321,7 +335,7 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
  \end{displaymath}
 \item Which implies that the distribution of $\mathbf{y}$ given the values of $\mathbf{x}$ and parameterized by $\beta$ follows a normal distribution.
 
-\item Let's estimate the $\beta$ using maximum likelihood estimation.
+\item Let's estimate the parameters of the model  ($\beta$) using maximum likelihood estimation.
 
 \end{itemize}
 
@@ -369,7 +383,7 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
  \item Hence, maximizing $l_n(\beta)$ gives the same answer as minimizing
  
  \begin{displaymath}
-\frac{1}{2}\sum_{i=1}^m(y_i - h_{\beta}(x_{i})^{2}
+\sum_{i=1}^m(y_i - h_{\beta}(x_{i})^{2}
  \end{displaymath}
 
  \item which is equivalent as minimizing SSE.
@@ -389,10 +403,10 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
 \begin{frame}{Standard errors for regression models}
 \scriptsize{
 \begin{itemize}
- \item If we want to make inferences about the regression parameter estimates, then we also need an estimate of their variability. 
+ \item If we want to make inferences about the regression parameter estimates, then we also need an estimate of their variability. \cite{poldrack2019statistical}
  \item To compute this, we first need to compute the residual variance or error variance for the model.
  \item That is, how much variability in the dependent variable is not explained by the model. 
- \item We need to compute the man squared error:
+ \item We need to compute the mean squared error:
  
  \begin{displaymath}
   MS_{error} = \frac{SSE}{df} = \frac{\sum_{i=1}^{m} (y_i-h(x_i))^2}{m-p}
@@ -471,10 +485,10 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
  \item The variables of the dataset are:
  \begin{enumerate}
  \scriptsize{
-\item height: Height in cm
-\item weight: Weight in kg
-\item age: Age in years
-\item male: Gender indicator
+\item height: height in cm
+\item weight: weight in kg
+\item age: age in years
+\item male: gender indicator (1 for male 0 for woman)
   }
  \end{enumerate}
  
@@ -672,9 +686,9 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
 [1] 0.5696444
  \end{verbatim}
 
-\item  Suppose now that we know the weight for two !Kung people but I don't know the height.
+\item  Suppose now that we know the weight for two !Kung people but we don't know their height.
 
-\item  We could use my linear model to predict the height of these two people.
+\item  We could use our linear model to predict the height of these two people.
 
 \item To do this in R we must use the command \verb+predict.lm+ which receives the linear model and a data.frame with the new data:
 \begin{verbatim}
@@ -823,12 +837,12 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
 \begin{itemize}
  \item  Now we will study a multiple linear regression for the \verb+Howell1+ data.
  \item Let's add the variable \textbf{age} as an additional predictor for \textbf{height}.
- \item We know that age is good at predicting height for non-adults so we will work with original dataset.
+ \item We know that age is good at predicting height for non-adults so we will work with the original dataset.
  \item  Let's fit the following linear multi-variate model:
  \begin{displaymath}
  \text{height}=\beta_{0}+\beta_{1}*\text{weight}+\beta_{2}*\text{age}
  \end{displaymath}
- \item In R to add more variables to the linear model we add them with the operator \textbf{+} :
+ \item In R, we add more variables to the linear model with the operator \textbf{+} :
 \begin{verbatim}
 reg2<-lm(height~weight+age,d)
 \end{verbatim}
@@ -914,6 +928,10 @@ s3d$plane3d(reg2, lty.box = "solid")
  \scriptsize{
  \begin{itemize}
   \item The coefficient of determination $R^2$ tends increases when extra explanatory variables are added to the model.
+  
+  \item This happens even when the additional variables are useless.
+  
+  \item This is not desirable a property  when we want to compare different models.
 
 \item $R^2$ adjusted or $\overline{R}^2$ penalizes for the number of variables $p$.
  
@@ -930,7 +948,7 @@ where $m$ is the number of examples.
 \begin{frame}[fragile]{Polynomial Regression}
 \scriptsize{ 
 \begin{itemize}
- \item Polynomial regression uses powers of a variable—squares and cubes—as extra attributes.
+ \item Polynomial regression uses powers of a variable (e.g., squares, cubes) as extra attributes.
  
  \item The most common polynomial regression is a parabolic model of the mean:
  
@@ -938,13 +956,13 @@ where $m$ is the number of examples.
  y_i=\beta_{0}+\beta_{1}x_i + \beta_{2}x_i^2 + \epsilon_i \quad \forall i
 \end{displaymath}
  
- \item Let's fit a polynomial regression for the height variable using a parabolic model for the weight.
+ \item Let's fit a polynomial regression for the height variable using a parabolic model for weight
  
  
- \item Because the square or cube of a large number can be truly massive we are going to standardize the weight by substracting the mean and dividing by the standard deviation.
+ \item Because the square of a large number can be truly massive we are going to standardize the weight by substracting the mean and dividing by the standard deviation.
  
  \begin{verbatim}
-  d$weight_s <-( d$weight - mean(d$weight) )/sd(d$weight)
+  d$weight_s <-(d$weight-mean(d$weight))/sd(d$weight)
  \end{verbatim}
 
 \item Then we fit the model as follows:
@@ -970,7 +988,18 @@ Coefficients:
 
 \begin{frame}{Conclusion}
  
+ \scriptsize{
+ \begin{itemize}
+  \item We can use a simple linear model to describe the relation between two variables and to decide whether that relationship is statistically significant.
+  
+  \item In addition, the model allows us to predict the value of the dependent variable given some new value(s) of the independent variable(s).
+  
+  \item Most importantly, a mutivariate linear model allow us to build models that incorporate multiple independent variables.
+ 
 
+
+ \end{itemize}
+ }
  
 \end{frame}
 
