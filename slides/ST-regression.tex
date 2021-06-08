@@ -986,6 +986,256 @@ Coefficients:
 }
 \end{frame}
 
+
+\begin{frame}[fragile]{Categorical Predictors}
+\scriptsize{ 
+\begin{itemize}
+ \item We can also add categorical predictors to our model. 
+ 
+ \item For example let's try using the sex of the Kalahari people to predict height: 
+
+
+  \begin{displaymath}
+  \text{height}(\text{male})=\beta_0+\beta_1*\text{male}
+ \end{displaymath} 
+
+ \item Here ``male'' is a binary or dummy variable (takes the value 1 when the person is male and 0 otherwise).
+ 
+ \item We make sure first that the ``male'' is represented as a factor:
+ 
+ \begin{verbatim}
+> d$male<-as.factor(d$male)
+> reg5<-lm(height~male,d)
+\end{verbatim}
+
+\item The coefficients of the model are:
+
+\begin{verbatim}
+> reg5$coefficients
+(Intercept)       male1 
+ 134.630278    7.690759  
+\end{verbatim}
+
+
+ 
+\end{itemize}
+
+
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Categorical Predictors}
+\scriptsize{ 
+\begin{itemize}
+\item Here $\beta_0$ is the average height of females and $\beta_0$ is the average height difference of between men and women:
+ 
+\end{itemize}
+
+\begin{verbatim}
+> reg5$coefficients
+(Intercept)       male1 
+ 134.630278    7.690759 
+> sum(reg5$coefficients)
+[1] 142.321
+> means<-tapply(d$height,d$male,mean)
+> means
+       0        1 
+134.6303 142.3210
+> means[2]-means[1]
+       1 
+7.690759 
+\end{verbatim}
+
+
+
+}
+\end{frame}
+
+\begin{frame}[fragile]{Categorical Predictors}
+\scriptsize{ 
+
+\begin{verbatim}
+> summary(reg5)
+
+Call:
+lm(formula = height ~ male, data = d)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-81.87 -12.73  12.65  18.33  36.75 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  134.630      1.615  83.366  < 2e-16 ***
+male1          7.691      2.350   3.273  0.00113 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 27.36 on 542 degrees of freedom
+Multiple R-squared:  0.01938,	Adjusted R-squared:  0.01758 
+F-statistic: 10.71 on 1 and 542 DF,  p-value: 0.001131
+\end{verbatim}
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Categorical Predictors}
+\scriptsize{ 
+\begin{itemize}
+\item The p-value of the statistical test for $\beta_1$ in the regression is the same as what we get from an unpaired two Sample t-tests with equal variance:
+ 
+\end{itemize}
+
+\begin{verbatim}
+> t.test(d$height~d$male, var.equal=T)
+
+	Two Sample t-test
+
+data:  d$height by d$male
+t = -3.2733, df = 542, p-value = 0.001131
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -12.306146  -3.075372
+sample estimates:
+mean in group 0 mean in group 1 
+       134.6303        142.3210 
+ 
+\end{verbatim}
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Categorical Predictors}
+\scriptsize{ 
+\begin{itemize}
+\item We can also fit a multivariate linear model with both numeric and categorical variables:
+\begin{verbatim}
+> reg6<-lm(height~weight+male,d)
+> reg6
+
+Call:
+lm(formula = height ~ weight + male, data = d)
+
+Coefficients:
+(Intercept)       weight        male1  
+    75.5489       1.7664      -0.3971  
+\end{verbatim} 
+ 
+\item In this model we use the same slope relating height to weight for both groups.
+ 
+\end{itemize}
+
+
+
+
+
+}
+\end{frame}
+
+\begin{frame}[fragile]{Interactions}
+\scriptsize{ 
+\begin{itemize}
+\item If we want to fit a model using lines with separate slopes for each category,  we need to include an interaction.
+\item This is equivalent to fitting different lines for each of the two groups but with one single call.
+\item In R, interactions are denoted by using the * or : symbol in the model.
+\begin{verbatim}
+> reg7<-lm(height~weight+male+weight:male,d)
+> reg7
+
+Call:
+lm(formula = height ~ weight + male + weight:male, data = d)
+
+Coefficients:
+ (Intercept)        weight         male1  weight:male1  
+     74.2536        1.8051        2.0683       -0.0695  
+
+\end{verbatim} 
+ 
+
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Interactions}
+\scriptsize{ 
+\begin{itemize}
+\item Let's compare the coefficients of the model with interactions vs the coefficients of models independently fitted for each category:
+\begin{verbatim}
+> d.male<-d[d$male==1,]
+> d.female<-d[d$male==0,]
+> reg8<-lm(height~weight,d.male)
+Call:
+lm(formula = height ~ weight, data = d.male)
+
+Coefficients:
+(Intercept)       weight  
+     76.322        1.736  
+
+> reg9<-lm(height~weight,d.female)
+Call:
+lm(formula = height ~ weight, data = d.female)
+
+Coefficients:
+(Intercept)       weight  
+     74.254        1.805  
+
+\end{verbatim} 
+
+ 
+\end{itemize}
+
+
+
+
+}
+\end{frame}
+
+\begin{frame}[fragile]{Interactions}
+\scriptsize{ 
+\begin{itemize}
+\item We can \verb+weight:male1+ from reg6 encodes the difference in slopes between both groups.
+ 
+ 
+ \begin{verbatim}
+> reg7$coefficients["weight:male1"]
+weight:male1 
+ -0.06949648 
+> reg8$coefficient["weight"]-reg9$coefficient["weight"]
+     weight 
+-0.06949648 
+ \end{verbatim}
+
+\item and the intercept for 
+
+
+
+ 
+ 
+\end{itemize}
+
+
+
+
+
+}
+\end{frame}
+
+
+
 \begin{frame}{Conclusion}
  
  \scriptsize{

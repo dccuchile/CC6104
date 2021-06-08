@@ -72,14 +72,47 @@ reg4
 
 # Binary attributes
 d$male<-as.factor(d$male)
-reg5<-lm(height~weight+male,d)
+reg5<-lm(height~male,d)
+# Intercept is the mean height of females and coefficient is the difference
+reg5$coefficients
+# male1 is the average difference of height between male and female
+sum(reg5$coefficients)
+means<-tapply(d$height,d$male,mean)
+means[2]-means[1]
+
+summary(reg5)
+# Compare with p-value of t-test (without Welsh correction)
+t.test(d$height~d$male, var.equal=T)
+
+
+# We consider the weight too,
+# the model has one single slope for both cases
+reg6<-lm(height~weight+male,d)
+
+# The problem is that this model is trying to use the same
+# slope relating height to weight for both groups.
+#If we want to fit them using lines with separate slopes, 
+# we need to include an interaction in the model, 
+# which is equivalent to fitting different lines for each of the two groups; 
+# this is often denoted by using the ∗ or : symbol in the model.
+
 
 # interaction (different slopes for each group)
-reg6<-lm(height~weight+male+weight*male,d)
+reg7<-lm(height~weight+male+weight:male,d)
+reg7
+# weight:male1 encodes the difference in slopes between both groups
 
-data(WaffleDivorce)
-# Predit divorce rate from marriage rate and median age at marriage
-reg3<-lm(Divorce~Marriage+MedianAgeMarriage,WaffleDivorce)
+d.male<-d[d$male==1,]
+d.female<-d[d$male==0,]
+
+reg8<-lm(height~weight,d.male)
+reg8
+reg9<-lm(height~weight,d.female)
+reg9
+
+reg7$coefficients["weight:male1"]
+reg8$coefficient["weight"]-reg9$coefficient["weight"]
 
 
-
+reg7$coefficients["weight:male1"]
+reg8$coefficients["weight"]-reg9$coefficients["weight"]
