@@ -99,7 +99,11 @@ reg6<-lm(height~weight+male,d)
 
 # interaction (different slopes for each group)
 reg7<-lm(height~weight+male+weight:male,d)
+# or lm(height~weight*male,d)
 reg7
+
+
+
 # weight:male1 encodes the difference in slopes between both groups
 
 d.male<-d[d$male==1,]
@@ -110,9 +114,19 @@ reg8
 reg9<-lm(height~weight,d.female)
 reg9
 
-reg7$coefficients["weight:male1"]
-reg8$coefficient["weight"]-reg9$coefficient["weight"]
+reg7$coefficients["(Intercept)"]
+reg9$coefficient["(Intercept)"]
 
+reg7$coefficients["weight"]
+reg9$coefficient["weight"]
+
+
+reg7$coefficients["(Intercept)"]
+reg9$coefficient["(Intercept)"]
 
 reg7$coefficients["weight:male1"]
 reg8$coefficients["weight"]-reg9$coefficients["weight"]
+
+
+reg7$coefficients["male1"]
+reg8$coefficients["(Intercept)"]-reg9$coefficient["(Intercept)"]

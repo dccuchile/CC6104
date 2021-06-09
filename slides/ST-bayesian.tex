@@ -266,7 +266,7 @@ happen, corresponding to one of four marbles in the bag.
  \item There are zero ways for this conjecture to produce the observed data, because even one \includegraphics[scale=0.3]{pics/marbles6.png} is logically incompatible with it. 
 \item The conjecture \includegraphics[scale=0.3]{pics/marbles11.png} is likewise logically incompatible with the data. 
 \item So we can eliminate these two conjectures, because neither provides even a single path that is consistent with the data.
-\item The next slide's figure displays all the paths for the reamaining three conjectures: \includegraphics[scale=0.3]{pics/marbles3.png}, \includegraphics[scale=0.3]{pics/marbles13.png}, and \includegraphics[scale=0.3]{pics/marbles14.png}.
+\item The next slide's figure displays all the paths for the remaining three conjectures: \includegraphics[scale=0.3]{pics/marbles3.png}, \includegraphics[scale=0.3]{pics/marbles13.png}, and \includegraphics[scale=0.3]{pics/marbles14.png}.
 
 \end{itemize}
  } 
@@ -330,7 +330,7 @@ happen, corresponding to one of four marbles in the bag.
 \begin{itemize}
  \item Option 1: draw a forking path with four layers and do the counting again.
 \item Option 2: Update previous counts (0, 3, 8, 9, 0) with the new information by multiplying the new count by the old count.
-\item Both approach are matematically identical as long
+\item Both approach are mathematically identical as long
 as the new observation is logically independent of the previous observations. 
 
 \begin{figure}[h!]
@@ -496,7 +496,7 @@ Now we will introduce the names of the components of our Bayesian model. \\
 
 
 \begin{block}{Density and Mass functions}
-Because the Bayesian framework applies to both discrete and continuos random variables, we will use function $f$ (instead of $\mathbb{P}$) to refer to both probability mass and density functions.
+Because the Bayesian framework applies to both discrete and continuous random variables, we will use function $f$ (instead of $\mathbb{P}$) to refer to both probability mass and density functions.
 \end{block}
 
 \begin{itemize}
@@ -522,7 +522,7 @@ Because the Bayesian framework applies to both discrete and continuos random var
 \scriptsize{
 \begin{itemize}
 
-\item It is important to remark that in the Bayesian setting a parameter $\theta$ is random a variable, so we can make probability staments about it.
+\item It is important to remark that in the Bayesian setting a parameter $\theta$ is random a variable, so we can make probability statements about it.
 
 \item Whereas in the frequentist approach parameters are considered unknown quantities. 
 
@@ -530,7 +530,7 @@ Because the Bayesian framework applies to both discrete and continuos random var
 
 \item The likelihood function  $f(d|\theta)$ is very similar to the likelihood function in the frequentist approach $f(d;\theta)$ but now we can condition on $\theta$ instead of just using it as function parameter.
 
-\item All the probability functions of a Bayesian model can correspond to either 1) a probability mass or 2) a density functions depending if the variable (observed or unobserved) is discrete or continous.
+\item All the probability functions of a Bayesian model can correspond to either 1) a probability mass or 2) a density functions depending if the variable (observed or unobserved) is discrete or continuous.
 
 \end{itemize}
  } 
@@ -548,7 +548,7 @@ Because the Bayesian framework applies to both discrete and continuos random var
  f(\theta|d) = \frac{f(d|\theta) \times f(\theta)}{f(d)}
 \end{equation}
 
-\item This equation is esentially the Bayes theorem (for both density and mass functions).
+\item This equation is essentially the Bayes theorem (for both density and mass functions).
 
 \item It says that the probability of any particular value of $\theta$ considering the data $d$, is proportional to the product of the relative plausibility of the data, conditional on $\theta$, and the prior plausibility of $\theta$.
 
@@ -690,7 +690,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \item Next, we need to assign initial probability values (our beliefs before observing data) for each possible value of $p$ using a \textbf{prior} distribution.
 \item Recall that $p$ (the proportion of water) can take any real value between 0 and 1.
-\item We will assume that all possible values of $p$ are equally likely, which implies that $p$ follows a \textbf{continous Uniform distribution} between 0 and 1, $p\sim$Uniform$(0,1)$:
+\item We will assume that all possible values of $p$ are equally likely, which implies that $p$ follows a \textbf{continuous Uniform distribution} between 0 and 1, $p\sim$Uniform$(0,1)$:
 \begin{displaymath}
  f(p) = \text{Uniform}(0,1) = 1/(b-a) \text{ where b=1, and a=0} = 1
 \end{displaymath}
@@ -716,7 +716,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \item This process can be repeated iteratively: the posterior becomes a new prior, we collect more data and update our posterior.
 \item In practice we feed the data only once to our statistical model, but it important to think that Bayesian updating is an iterated learning process.
 \item The next slide shows the Bayesian updating process for the Globe tossing example.
-\item The dashed line shows the prior (or the previous posterior) and the solid line shows the curren posterior after seeing each example.
+\item The dashed line shows the prior (or the previous posterior) and the solid line shows the current posterior after seeing each example.
 \end{itemize}
 
 } 
@@ -743,7 +743,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \begin{itemize}
 
-\item The posterior distribution encodes updated plausabilities (or beliefs) for all parameter values condioned on the data.
+\item The posterior distribution encodes updated plausabilities (or beliefs) for all parameter values conditioned on the data.
 \item As we have already seen, it can be obtained using the Bayes formula:
 
 \begin{displaymath}
@@ -777,7 +777,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \item This distribution is defined on the interval $[0, 1]$ and is parameterized by two positive shape parameters, denoted by $\alpha$ and $\beta$.
 
-\item The Beta distribution is a continous distribution on probabilities.
+\item The Beta distribution is a continuous distribution on probabilities.
 
 \begin{displaymath}
 \text{Beta}(\alpha,\beta)=\frac{p^{\alpha-1}(1-p)^{\beta-1}}{\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}}
@@ -809,7 +809,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \item This surprisingly looks identical to the binomial distribution.
 
-\item This is because both distributions are very similar. The binomial distribution models the number of successes (W) and the beta distribution models the probaility $p$ of sucess. 
+\item This is because both distributions are very similar. The binomial distribution models the number of successes (W) and the beta distribution models the probability $p$ of success. 
 
 
 \item Let's build our posterior from the likelihood and the prior:
@@ -978,7 +978,7 @@ proportional to the likelihood. Middle: A step prior, assigning zero probability
 \scriptsize{
 
 \begin{itemize}
-\item In many interesting models in contemporary science the posterior cannot be calculated anlytically, no matter your
+\item In many interesting models in contemporary science the posterior cannot be calculated analytically, no matter your
 skill in mathematics.
 
 \item Below are some numerical techniques for approximating the mathematics that follows from the definition of the posterior.

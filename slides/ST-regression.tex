@@ -840,7 +840,7 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
  \item We know that age is good at predicting height for non-adults so we will work with the original dataset.
  \item  Let's fit the following linear multi-variate model:
  \begin{displaymath}
- \text{height}=\beta_{0}+\beta_{1}*\text{weight}+\beta_{2}*\text{age}
+ \text{height}(\text{weight,age})=\beta_{0}+\beta_{1}*\text{weight}+\beta_{2}*\text{age}
  \end{displaymath}
  \item In R, we add more variables to the linear model with the operator \textbf{+} :
 \begin{verbatim}
@@ -999,9 +999,9 @@ Coefficients:
   \text{height}(\text{male})=\beta_0+\beta_1*\text{male}
  \end{displaymath} 
 
- \item Here ``male'' is a binary or dummy variable (takes the value 1 when the person is male and 0 otherwise).
+ \item Here ``male'' is a binary or dummy variable (it takes the value 1 when the person is male and 0 otherwise).
  
- \item We make sure first that the ``male'' is represented as a factor:
+ \item In R, it is important to make sure that our categorical variables are represented as factors:
  
  \begin{verbatim}
 > d$male<-as.factor(d$male)
@@ -1031,14 +1031,11 @@ Coefficients:
 \begin{frame}[fragile]{Categorical Predictors}
 \scriptsize{ 
 \begin{itemize}
-\item Here $\beta_0$ is the average height of females and $\beta_0$ is the average height difference of between men and women:
+\item Here $\beta_0$ is the average height of females and $\beta_1$ is the average height difference  between males and females:
  
 \end{itemize}
 
 \begin{verbatim}
-> reg5$coefficients
-(Intercept)       male1 
- 134.630278    7.690759 
 > sum(reg5$coefficients)
 [1] 142.321
 > means<-tapply(d$height,d$male,mean)
@@ -1089,10 +1086,7 @@ F-statistic: 10.71 on 1 and 542 DF,  p-value: 0.001131
 \begin{frame}[fragile]{Categorical Predictors}
 \scriptsize{ 
 \begin{itemize}
-\item The p-value of the statistical test for $\beta_1$ in the regression is the same as what we get from an unpaired two Sample t-tests with equal variance:
- 
-\end{itemize}
-
+\item The p-value of the statistical sinfificance test for $\beta_1$ in reg5  is the same as that obtained from an unpaired two-sample t-tests with equal variance:
 \begin{verbatim}
 > t.test(d$height~d$male, var.equal=T)
 
@@ -1109,6 +1103,13 @@ mean in group 0 mean in group 1
  
 \end{verbatim}
 
+\item Notice that we must set \verb+var.equal=T+ to get the same results, since the linear model assumes that the variance is constant.
+
+
+\end{itemize}
+
+
+
 
 
 }
@@ -1119,6 +1120,10 @@ mean in group 0 mean in group 1
 \scriptsize{ 
 \begin{itemize}
 \item We can also fit a multivariate linear model with both numeric and categorical variables:
+  \begin{displaymath}
+  \text{height}(\text{weight,male})=\beta_0+\beta_1*\text{weight}+\beta_2*\text{male}
+ \end{displaymath} 
+
 \begin{verbatim}
 > reg6<-lm(height~weight+male,d)
 > reg6
@@ -1131,7 +1136,9 @@ Coefficients:
     75.5489       1.7664      -0.3971  
 \end{verbatim} 
  
-\item In this model we use the same slope relating height to weight for both groups.
+\item In this model we use the same slope $\beta_1$ relating height to weight for both groups.
+
+\item The coefficient $\beta_2$ indicates an expected weight difference between males and females once the ``weight'' is known.
  
 \end{itemize}
 
@@ -1145,11 +1152,18 @@ Coefficients:
 \begin{frame}[fragile]{Interactions}
 \scriptsize{ 
 \begin{itemize}
-\item If we want to fit a model using lines with separate slopes for each category,  we need to include an interaction.
-\item This is equivalent to fitting different lines for each of the two groups but with one single call.
-\item In R, interactions are denoted by using the * or : symbol in the model.
+\item In many cases we want to fit a model using lines with separate slopes for each category.
+
+\item This is done using an \textbf{interaction}, which in our case is just an additional parameter associated with the the product between the category and the predictor.
+
+  \begin{displaymath}
+  \text{height}_{int}(\text{weight,male})=\beta_0^{(i)}+\beta_1^{(i)}*\text{weight}+\beta_2^{(i)}*\text{male}+\beta_3^{(i)}*\text{weight}*\text{male}
+ \end{displaymath}
+
+\item In R, interactions are denoted by using the * or : symbol in the formula.
 \begin{verbatim}
 > reg7<-lm(height~weight+male+weight:male,d)
+> # or lm(height~weight*male,d)
 > reg7
 
 Call:
@@ -1158,7 +1172,6 @@ lm(formula = height ~ weight + male + weight:male, data = d)
 Coefficients:
  (Intercept)        weight         male1  weight:male1  
      74.2536        1.8051        2.0683       -0.0695  
-
 \end{verbatim} 
  
 
@@ -1173,26 +1186,40 @@ Coefficients:
 \begin{frame}[fragile]{Interactions}
 \scriptsize{ 
 \begin{itemize}
-\item Let's compare the coefficients of the model with interactions vs the coefficients of models independently fitted for each category:
-\begin{verbatim}
+\item The above model can be interpreted as a compact version of fitting two models, one for each group.
+
+\item A model for the male group would be as follows:
+
+
+  \begin{displaymath}
+  \text{height}_{male}(\text{weight}_{male})=\beta_0^{(m)}+\beta_1^{(m)}*\text{weight}_{male}
+ \end{displaymath}
+ 
+ \begin{verbatim}
 > d.male<-d[d$male==1,]
-> d.female<-d[d$male==0,]
 > reg8<-lm(height~weight,d.male)
 Call:
 lm(formula = height ~ weight, data = d.male)
-
 Coefficients:
 (Intercept)       weight  
      76.322        1.736  
+\end{verbatim} 
 
+and for the female group:
+ 
+   \begin{displaymath}
+  \text{height}_{female}(\text{weight}_{male})=\beta_0^{(f)}+\beta_1^{(f)}*\text{weight}_{male}
+ \end{displaymath}
+
+
+\begin{verbatim}
+> d.female<-d[d$male==0,]     
 > reg9<-lm(height~weight,d.female)
 Call:
 lm(formula = height ~ weight, data = d.female)
-
 Coefficients:
 (Intercept)       weight  
      74.254        1.805  
-
 \end{verbatim} 
 
  
@@ -1207,8 +1234,47 @@ Coefficients:
 \begin{frame}[fragile]{Interactions}
 \scriptsize{ 
 \begin{itemize}
-\item We can \verb+weight:male1+ from reg6 encodes the difference in slopes between both groups.
+\item We can find many relationships between the coefficients of the model with interaction  and the two independent models.
+
+\item All of them can be deduced by cancelling out terms in the formula of $\text{height}_{int}$ for the female cases ($male=0$).
+
+
+\item First, the intercept of the model with the interaction $\text{height}_{int}$ is the same as the intercept of the model for females  $\beta_0^{(i)}=\beta_0^{(f)}$:
+\begin{verbatim}
+> reg7$coefficients["(Intercept)"]
+(Intercept) 
+   74.25359 
+> reg9$coefficient["(Intercept)"]
+(Intercept) 
+   74.25359  
+\end{verbatim}
+
+\item The same applies for the slope of weight for $\text{height}_{int}$  and  $\text{height}_{female}$    $\beta_1^{(i)}=\beta_1^{(f)}$:
+\begin{verbatim}
+> reg7$coefficients["weight"]
+  weight 
+1.805118 
+> reg9$coefficient["weight"]
+  weight 
+1.805118 
+\end{verbatim}
+
  
+\end{itemize}
+
+
+
+
+
+}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Interactions}
+\scriptsize{ 
+\begin{itemize}
+\item  The interaction slope from $\text{height}_{int}$  encodes the difference in weight slopes between both groups $\beta_3^{(i)}=\beta_1^{(m)}-\beta_1^{(f)}$:
  
  \begin{verbatim}
 > reg7$coefficients["weight:male1"]
@@ -1219,10 +1285,22 @@ weight:male1
 -0.06949648 
  \end{verbatim}
 
-\item and the intercept for 
+
+\item Finally, the category coefficient $\beta_2^{(i)}$  from  $\text{height}_{int}$ corresponds to the difference of intercepts between  $\text{height}_{male}$ and  $\text{height}_{female}$
+$\beta_2^{(i)}=\beta_0^{(m)}-\beta_0^{(f)}$: 
 
 
 
+\begin{verbatim}
+> reg7$coefficients["male1"]
+   male1 
+2.068278 
+> reg8$coefficients["(Intercept)"]
+-reg9$coefficient["(Intercept)"]
+(Intercept) 
+   2.068278  
+\end{verbatim}
+ 
  
  
 \end{itemize}
@@ -1233,7 +1311,6 @@ weight:male1
 
 }
 \end{frame}
-
 
 
 \begin{frame}{Conclusion}
