@@ -33,6 +33,13 @@ The course introduces the fundamentals of statistical thinking, which are descri
 1. Multi-level Models (Chapter 13 of Statistical Rethinking)
 
 
+## Software
+
+* [Rethinking R package](https://github.com/rmcelreath/rethinking)
+* [STAN: a state-of-the-art platform for statistical modeling and high-performance statistical computation](https://mc-stan.org/)
+* [Pyro:  a universal probabilistic programming language (PPL) written in Python and supported by PyTorch on the backend](https://pyro.ai/)
+
+
 ## Books
 
 * [Statistical Thinking for the 21st Century](https://statsthinking21.org/)
