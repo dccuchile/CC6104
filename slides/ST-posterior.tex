@@ -58,7 +58,16 @@
 \begin{frame}{Drawing Estimates from the Posterior}
 \scriptsize{
 \begin{itemize}
-\item ghghg \cite{mcelreath2020statistical}
+\item In this class we will learn how to draw estimates from a posterior distribution.
+
+\item In the theoretical world (when the posterior has a closed mathematical expressions), this implies calculating complicated integrals to cancel out (or average) different variables.
+
+\item In the practical world, same results can be obtained  using \textbf{samples} from the posterior.
+
+\item Another reason to learn to work with posterior samples is that methods like MCMC produce nothing but samples from the posterior.
+
+
+\item This class is based on Chapter 3 of \cite{mcelreath2020statistical}.
  
 \end{itemize}
 
@@ -69,6 +78,84 @@
 \end{frame}
 
 
+
+\begin{frame}{Sampling to summarize}
+\scriptsize{
+\begin{itemize}
+
+\item Once your model produces a posterior distribution, the model's work is done.
+
+\item But your work has just begun. 
+
+\item It is necessary to summarize and interpret the posterior distribution.
+
+\item Exactly how it is summarized depends upon your purpose.
+
+\item Common questions include:
+\begin{itemize}
+\begin{scriptsize}
+ \item How much posterior probability lies below some parameter value?
+ \item How much posterior probability lies between two parameter values?
+ \item Which parameter value marks the lower 5\% of the posterior probability?
+ \item Which range of parameter values contains 90\% of the posterior probability?
+ \item Which parameter value has highest posterior probability?
+ \end{scriptsize}
+\end{itemize}
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Sampling to summarize}
+
+\begin{itemize}
+
+\item These simple questions can be usefully divided into questions about: 
+\begin{itemize}
+
+ \item intervals of defined boundaries
+ \item intervals of defined probability mass
+ \item point estimates
+
+\end{itemize}
+ 
+\item We’ll see how to approach these questions using samples from the posterior. 
+\end{itemize}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Sampling from a grid-approximate posterior}
+\scriptsize{
+\begin{itemize}
+
+\item Before beginning to work with samples, we need to generate them.
+
+\item Here’s a reminder for how to compute the posterior for the globe tossing model, using grid approximation:
+\begin{itemize}
+\begin{scriptsize}
+ \item How much posterior probability lies below some parameter value?
+ \item How much posterior probability lies between two parameter values?
+ \item Which parameter value marks the lower 5\% of the posterior probability?
+ \item Which range of parameter values contains 90\% of the posterior probability?
+ \item Which parameter value has highest posterior probability?
+ \end{scriptsize}
+\end{itemize}
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
 
 
 \begin{frame}{Conclusions}
