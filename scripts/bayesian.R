@@ -40,4 +40,30 @@ globe.qa <- quap(
 
 # display summary of quadratic approximation
 precis( globe.qa )
+sample.quap <- extract.samples(  globe.qa )
+dens(sample.quap)
 
+
+# globe tossing model posterior using grid approximation
+p_grid <- seq( from=0 , to=1 , length.out=1000 )
+prior <- rep( 1 , 1000 )
+likelihood <- dbinom( 6 , size=9 , prob=p_grid )
+posterior <- likelihood * prior
+posterior <- posterior / sum(posterior)
+
+samples <- sample( p_grid , prob=posterior , size=1e4 , replace=TRUE )
+
+library(rethinking)
+dens(samples)
+
+# theoretical samples
+teo.samples<-rbeta(1e4,7,4)
+dens(teo.samples)
+
+# Intervals of defined boundaries
+pbeta(0.5,7,4)
+
+sum( posterior[ p_grid < 0.5 ] )
+
+
+sum( samples < 0.5 ) / 1e4

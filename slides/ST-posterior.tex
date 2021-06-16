@@ -93,7 +93,7 @@
 \scriptsize{
 \begin{itemize}
 
-\item These simple questions can be usefully divided into questions about: 
+\item These questions can be usefully divided into questions about: 
 \begin{itemize}
 \scriptsize{
  \item intervals of defined boundaries
@@ -127,13 +127,55 @@
 
 
 
-\begin{frame}{Sampling from a grid-approximate posterior}
+\begin{frame}[fragile]{Sampling from a grid-approximate posterior}
 \scriptsize{
 \begin{itemize}
 
 \item Before beginning to work with samples, we need to generate them.
 
 \item Here’s a reminder for how to compute the posterior for the globe tossing model, using grid approximation:
+
+\begin{verbatim}
+p_grid <- seq( from=0 , to=1 , length.out=1000 )
+prior <- rep( 1 , 1000 )
+likelihood <- dbinom( 6 , size=9 , prob=p_grid )
+posterior <- likelihood * prior
+posterior <- posterior / sum(posterior)
+\end{verbatim}
+
+\item Now we wish to draw 10,000 samples from this posterior. 
+
+\item Imagine the posterior is a bucket full of parameter values, numbers such as 0.1, 0.7, 0.5, 1, etc.
+
+\item Within the bucket, each value exists in proportion to its posterior probability, such that values near the peak are much more common than those in the tails. 
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Sampling from a grid-approximate posterior}
+\scriptsize{
+\begin{itemize}
+
+\item We’re going to scoop out 10,000 values from the bucket.
+
+\item Provided the bucket is well mixed, the resulting samples will have the same proportions as the exact posterior density. 
+
+\item Therefore the individual values of $p$ will appear in our samples in proportion to the posterior plausibility of each value.
+
+\item Here’s how you can do this in R, with one line of code:
+
+\begin{verbatim}
+samples <- sample( p_grid , prob=posterior , size=1e4 , 
+replace=TRUE )
+\end{verbatim}
+\item We are randomly pulling values from the grid of parameter values where the probability of each value is given by the posterior.
 
  
 \end{itemize}
@@ -144,6 +186,147 @@
 
 \end{frame}
 
+
+\begin{frame}[fragile]{Sampling from a grid-approximate posterior}
+\scriptsize{
+\begin{itemize}
+
+\item We can visualize a density plot of our posterior sample as follows:
+
+\begin{verbatim}
+library(rethinking)
+dens(samples) 
+\end{verbatim}
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.7]{pics/posteriorTossGrid.pdf}
+	\end{figure} 
+ 
+
+
+
+
+\item We can see that the estimated density is very similar to to ideal posterior we computed via
+grid approximation in previous class.
+
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Sampling from the theoretical posterior}
+\scriptsize{
+\begin{itemize}
+
+\item We could get the same results by sampling from the theoretical posterior using the beta distribution: 
+
+\begin{verbatim}
+teo.samples<-rbeta(1e4,7,4)
+dens(teo.samples)
+\end{verbatim}
+
+
+
+\item We can see that the estimated density is very similar to the theoretical posterior obtained from the beta distribution:
+
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/posteriorTossBeta.pdf}
+	\end{figure} 
+
+
+	\item However, we should keep in mind that for complex models we will not have access to the posterior closed form, so it is better to get used to working with samples.
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}[fragile]{Intervals of defined boundaries}
+\scriptsize{
+\begin{itemize}
+
+\item Suppose I ask you for the posterior probability that the proportion of water is less than 0.5. 
+
+\item We could calculate this from the theoretical posterior:
+
+\begin{verbatim}
+> pbeta(0.5,7,4)
+[1] 0.171875
+\end{verbatim}
+
+
+
+\item Or alternatively we could calculate it from the grid-approximate posterior by adding up all of the probabilities where the corresponding parameter value is less than 0.5.
+
+\begin{verbatim}
+> sum( posterior[ p_grid < 0.5 ] )
+[1] 0.1718746
+\end{verbatim}
+
+
+\item So about 17\% of the posterior probability is below 0.5.
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{Intervals of defined boundaries}
+\scriptsize{
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.45]{pics/interval1.png}
+	\end{figure} 
+
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Intervals of defined boundaries}
+\scriptsize{
+\begin{itemize}
+
+\item Now, let's perform the same calculation, using samples from the posterior.
+
+\item Recall than in more complex models neither a grid-approximation nor a closed-form posterior will be available.
+
+\item All we have to do is add up all samples less than 0.5 and divide the resulting count by the total number of samples.
+
+\begin{verbatim}
+> sum( samples < 0.5 ) / 1e4
+[1] 0.1752 
+\end{verbatim}
+
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
 
 \begin{frame}{Conclusions}
 \scriptsize{
