@@ -35,12 +35,20 @@ reg1$fitted.values
 
 # Puedo ver que la correlación al cuadrado de mis valores ajustados y los reales son los mismo que
 # el coeficiente de determinacion
+SSE<-sum(reg1$residuals^2)
+SST<-sum((d2$height-mean(d2$height))^2)
+SSM<-sum((reg1$fitted.values-mean(d2$height))^2)
+SSM/SST
+1-SSE/SST
+1-var(reg1$residuals)/var(d2$height)
 cor(d2$height,reg1$fitted.values)^2
 
 
 
 
 
+
+mean(reg1$residuals)
 
 plot(d2$height,reg1$fitted.values)
 

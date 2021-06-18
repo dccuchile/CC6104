@@ -268,7 +268,10 @@ SSE = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_
 \begin{frame}{Coefficient of Determination $R^2$ (2)}
 \scriptsize{
 \begin{itemize}
- \item It can be proved that all the above errors are related as follows: $SST = SSE + SSM$
+ \item It can be proved that all the above errors are related as follows: \begin{equation}
+ SST = SSE + SSM                                                 
+    \end{equation}
+
 
  \item The coefficient of determination for a linear model $R^2$ is defined as:
  \begin{equation}
@@ -278,9 +281,32 @@ SSE = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_
  \item An alternative but equivalent definition:
   \begin{equation}
   R^2= 1-\frac{\text{SSE}}{\text{SST}} = 1- \frac{\sum_{i}^{m}(y_i-\hat{y}_i)^2 }{\sum_{i}^{m}(y_i-\overline{y})^2  }
+  \label{eq:r2}
  \end{equation}
  
 
+  
+\end{itemize}
+
+
+}
+\end{frame}
+
+
+
+
+\begin{frame}{Coefficient of Determination $R^2$ (2)}
+\scriptsize{
+\begin{itemize}
+ 
+ \item Another alternative but equivalent definition:
+ 
+   \begin{equation}
+  R^2= 1-\frac{\text{var}(\epsilon)}{\text{var}(y)} 
+ \end{equation}
+
+ \item It is often interpreted as the ``variance explained'' by the model.
+ 
  \item The coefficient takes values between $0$ to $1$ and the closer its value is to 1 the higher the quality of the model.
  
  \item The value of $R^2$ is equivalent to the linear correlation (Pearsons) between $y$ and $\hat{y}$ squared.
@@ -679,13 +705,33 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
 \begin{frame}[fragile]{Example: a model of height}
 \scriptsize{
 \begin{itemize}
- \item We can check that the squared linear correlation between my fitted and observed values for the response variable is equivalent to the coefficient of determination:
+ \item We can check now that all definitions given for $R^2$ are equivalent.
  
  \begin{verbatim}
+> SSE<-sum(reg1$residuals^2)
+> SST<-sum((d2$height-mean(d2$height))^2)
+> SSM<-sum((reg1$fitted.values-mean(d2$height))^2)
+> SSM/SST
+[1] 0.5696444
+> 1-SSE/SST
+[1] 0.5696444
+> 1-var(reg1$residuals)/var(d2$height)
+[1] 0.5696444
 > cor(d2$height,reg1$fitted.values)^2
 [1] 0.5696444
  \end{verbatim}
 
+ 
+ \end{itemize}
+ 
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example: a model of height}
+\scriptsize{
+\begin{itemize}
 \item  Suppose now that we know the weight for two !Kung people but we don't know their height.
 
 \item  We could use our linear model to predict the height of these two people.
