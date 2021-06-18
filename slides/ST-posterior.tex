@@ -374,13 +374,50 @@ dens(teo.samples)
 \end{frame}
 
 
-\begin{frame}[fragile]{Intervals of defined boundaries}
+
+
+\begin{frame}[fragile]{Intervals of defined probability}
+\scriptsize{
+\begin{itemize}
+
+\item Suppose we want to know the boundaries of the lower 80\% posterior probability.
+
+\item We can answer this by obtaining the 80-th percentile of the posterior sample:
+
+\begin{verbatim}
+> quantile( samples , 0.8 )
+      80% 
+0.7577578 
+\end{verbatim}
+
+\item Or alternatively, using the quantile function of the beta distribution (the distribution of the exact posterior):
+
+
+\begin{verbatim}
+> qbeta(0.8,7,4 )
+[1] 0.7605588 
+\end{verbatim}
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Credible Intervals}
 \scriptsize{
 \begin{itemize}
 
 \item The intervals of posterior probability we are working with are called \textbf{credible interval}.
 
-\item They resemble very much the confidence intervals seen in previous lectures on frequentist inference.
+\item These posterior intervals report two parameter values that contain between them a specified amount of posterior probability.
+
+\item What the interval indicates is a range of parameter values compatible with the model and data.
+
+\item Credible intervals resemble very much the confidence intervals seen in previous lectures on frequentist inference.
 
 \item The interpretations are very different though.
 
@@ -395,6 +432,7 @@ dens(teo.samples)
 } 
 
 \end{frame}
+
 
 
 \begin{frame}{Conclusions}
