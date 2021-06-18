@@ -67,3 +67,13 @@ sum( posterior[ p_grid < 0.5 ] )
 
 
 sum( samples < 0.5 ) / 1e4
+
+
+sum( samples > 0.5 & samples < 0.75 ) / 1e4
+
+pbeta(0.75,7,4)-pbeta(0.5,7,4)
+
+
+quantile( samples , 0.8 )
+
+qbeta(0.8,7,4 )

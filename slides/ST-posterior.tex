@@ -319,6 +319,7 @@ dens(teo.samples)
 \end{verbatim}
 
 
+\item In R, the condition \verb+samples < 0.5+ returns a logical vector, so since R treats TRUE values as 1, \verb+sum+ will count all the samples satisfying the condition.
 
 \end{itemize}
 
@@ -328,11 +329,79 @@ dens(teo.samples)
 
 \end{frame}
 
+
+\begin{frame}[fragile]{Intervals of defined boundaries}
+\scriptsize{
+\begin{itemize}
+
+\item Now, we can ask our sample how much posterior probability lies between 0.5 and 0.75.
+
+\begin{verbatim}
+> sum( samples > 0.5 & samples < 0.75 ) / 1e4
+[1] 0.6043
+\end{verbatim}
+
+\item So about 61\% of the posterior probability lies between 0.5 and 0.75.
+
+\item Let's validate this result using the exact posterior:
+
+\begin{verbatim}
+> pbeta(0.75,7,4)-pbeta(0.5,7,4)
+[1] 0.6040001
+\end{verbatim}
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}{Intervals of defined boundaries}
+\scriptsize{
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.45]{pics/interval2.png}
+	\end{figure} 
+
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Intervals of defined boundaries}
+\scriptsize{
+\begin{itemize}
+
+\item The intervals of posterior probability we are working with are called \textbf{credible interval}.
+
+\item They resemble very much the confidence intervals seen in previous lectures on frequentist inference.
+
+\item The interpretations are very different though.
+
+\item A confidence interval is a range that contains the true parameter with a certain chance after infinitely repeating the data sampling experiment.
+
+\item In contrast, a credible interval is a range of values that we believe our parameter can take with a certain probability according to both our prior beliefs and the evidence given by the data.
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
 \begin{frame}{Conclusions}
 \scriptsize{
 
 \begin{itemize}
-\item Blabla
+\item Blablaag
 \end{itemize}
 
 
