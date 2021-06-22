@@ -401,6 +401,82 @@ dens(teo.samples)
 \end{itemize}
 
 
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{Intervals of defined boundaries}
+\scriptsize{
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.45]{pics/interval3.png}
+	\end{figure} 
+
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Intervals of defined probability}
+\scriptsize{
+\begin{itemize}
+
+\item Similarly, we can calculate the middle 80\% interval that lies between the 10th percentile and the 90th percentile. 
+
+
+\begin{verbatim}
+> quantile( samples , c( 0.1 , 0.9 ) )
+      10%       90% 
+0.4504505 0.8148148 
+\end{verbatim}
+
+
+
+\item The ``rethinking'' package provides the function \verb+PI+ (from percentile interval) to calculate this type of interval:
+
+\begin{verbatim}
+> PI( samples , prob=0.8 )
+      10%       90% 
+0.4504505 0.8148148 
+\end{verbatim}
+
+\item Notice that we are assigning $(1-0.8)/2=0.1$ of probability above and below the interval.
+
+\item We can also obtain the exact interval from the exact posterior:
+
+
+\begin{verbatim}
+> c("10%"=qbeta(0.1,7,4 ),"90%"=qbeta(0.9,7,4 ))
+      10%       90% 
+0.4482692 0.8124377 
+\end{verbatim}
+
+\end{itemize}
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{Intervals of defined boundaries}
+\scriptsize{
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.45]{pics/interval4.png}
+	\end{figure} 
+
+
+
 
 } 
 
@@ -411,7 +487,7 @@ dens(teo.samples)
 \scriptsize{
 \begin{itemize}
 
-\item The intervals of posterior probability we are working with are called \textbf{credible interval}.
+\item The intervals of posterior probability that assign equal probability to each tail are called \textbf{credible interval}.
 
 \item These posterior intervals report two parameter values that contain between them a specified amount of posterior probability.
 
@@ -421,7 +497,8 @@ dens(teo.samples)
 
 \item The interpretations are very different though.
 
-\item A confidence interval is a range that contains the true parameter with a certain chance after infinitely repeating the data sampling experiment.
+\item A confidence interval is a region\footnote{Notice that the region will vary from one experiment to another.} that after infinitely repeating the data sampling experiment will contain the true parameter with a certain chance.
+
 
 \item In contrast, a credible interval is a range of values that we believe our parameter can take with a certain probability according to both our prior beliefs and the evidence given by the data.
 
@@ -433,6 +510,178 @@ dens(teo.samples)
 
 \end{frame}
 
+
+\begin{frame}[fragile]{Credible Intervals}
+\scriptsize{
+\begin{itemize}
+
+\item Equal-tailed credible intervals do a good job of communicating the shape of a distribution, as long as the distribution isn't too
+asymmetrical.
+
+\item But in terms of supporting inferences about which parameters are consistent with the data, they are not perfect
+
+\item Suppose that in our globe tossing experiment we had observed 3 W and 0 L.
+
+\item If we again consider a flat prior, we will get a highly skewed posterior distribution with its maximum value at the boundary, $p = 1$.
+
+\begin{verbatim}
+  p_grid <- seq( from=0 , to=1 , length.out=1000 )
+  prior <- rep(1,1000)
+  likelihood <- dbinom( 3 , size=3 , prob=p_grid )
+  posterior <- likelihood * prior
+  posterior <- posterior / sum(posterior)
+  samples.a <- sample( p_grid , size=1e4 , 
+  replace=TRUE , prob=posterior )
+  dens(samples.a,xlim=c(0,0.935))
+\end{verbatim}
+
+\item Alternatively we could sample from the exact posterior $Beta(\alpha + W , \beta + L)$ = $Beta(1 + 3 , 1 + 0)$ = $Beta(4,1)$:
+
+\begin{verbatim}
+  teo.samples.a<-rbeta(1e4,4,1)
+  dens(teo.samples.a,xlim=c(0,0.935))
+\end{verbatim}
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}{Credible Intervals}
+\scriptsize{
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.91]{pics/post_asy.pdf}
+	\end{figure} 
+
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}[fragile]{Credible Intervals}
+\scriptsize{
+\begin{itemize}
+
+\item Let's compute a 50\%  equal-tailed credible interval for this posterior;
+
+\begin{verbatim}
+> PI( samples.a , prob=0.5 )  
+      25%       75% 
+0.7037037 0.9309309 
+\end{verbatim}
+
+\item This interval assigns 25\% of the probability area above and below the interval. 
+
+\item So it provides the central 50\% probability. 
+
+\item But in this example, it ends up excluding the most probable parameter values, near $p = 1$.
+
+\item So in terms of describing the shape of the posterior distribution the percentile interval can be misleading.
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Credible Intervals}
+\scriptsize{
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.45]{pics/interval5.png}
+	\end{figure} 
+
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Highest Posterior Density Intervals}
+\scriptsize{
+\begin{itemize}
+
+\item An alternative type of credible interval is the Highest Posterior Density Interval (HPDI).
+
+\item If we relax the restriction of assigning equal probability to each tail we get an infinite number of the intervals containing the specified probability area.
+
+\item The HPDI is the narrowest of those possible interval.
+
+\item It can be calculated from posterior samples using the HPDI function from the rethinking package.
+
+\begin{verbatim}
+> HPDI( samples.a , prob=0.5 )
+     |0.5      0.5| 
+0.8368368 1.0000000  
+\end{verbatim}
+
+\item This interval captures the parameters with highest posterior probability, as well as being noticeably narrower: 0.16 in width rather than 0.23 for the equal-tailed credible interval.
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Highest Posterior Density Intervals}
+\scriptsize{
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/interval6.png}
+	\end{figure} 
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Highest Posterior Density Intervals}
+\scriptsize{
+\begin{itemize}
+
+\item A disadvantage of the HPDI, is that it is more computationally intensive than the equal-tailed credible interval.
+
+\item Apart from the cases when the posterior distribution is highly skewed, these two types of intervals are similar.
+
+\item For example, let's calcylate a 80\% HPDI for the the original posterior with 6 W and 3 L:
+
+\begin{verbatim}
+> HPDI( samples , prob=0.8 )
+     |0.8      0.8| 
+0.4694695 0.8298298  
+\end{verbatim}
+
+\item This interval is very similar to the equal-tailed credible interval calculated before.
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
 
 
 \begin{frame}{Conclusions}

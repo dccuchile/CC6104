@@ -77,3 +77,28 @@ pbeta(0.75,7,4)-pbeta(0.5,7,4)
 quantile( samples , 0.8 )
 
 qbeta(0.8,7,4 )
+
+quantile( samples , c( 0.1 , 0.9 ) )
+PI( samples , prob=0.8 )
+
+c("10%"=qbeta(0.1,7,4 ),"90%"=qbeta(0.9,7,4 ))
+
+# Asymetrical Posterior
+  p_grid <- seq( from=0 , to=1 , length.out=1000 )
+  prior <- rep(1,1000)
+  likelihood <- dbinom( 3 , size=3 , prob=p_grid )
+  posterior <- likelihood * prior
+  posterior <- posterior / sum(posterior)
+  samples.a <- sample( p_grid , size=1e4 , replace=TRUE , prob=posterior )
+  dens(samples.a,xlim=c(0,0.935))
+#alternatively we could sample 
+#from the exact posterior
+  teo.samples.a<-rbeta(1e4,4,1)
+  dens(teo.samples.a,xlim=c(0,0.935))  
+
+PI( samples.a , prob=0.5 )  
+
+HPDI( samples.a , prob=0.5 )
+
+HPDI( samples , prob=0.8 )
+  
