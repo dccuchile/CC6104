@@ -518,8 +518,6 @@ dens(teo.samples)
 \item Equal-tailed credible intervals do a good job of communicating the shape of a distribution, as long as the distribution isn't too
 asymmetrical.
 
-\item But in terms of supporting inferences about which parameters are consistent with the data, they are not perfect
-
 \item Suppose that in our globe tossing experiment we had observed 3 W and 0 L.
 
 \item If we again consider a flat prior, we will get a highly skewed posterior distribution with its maximum value at the boundary, $p = 1$.
@@ -570,7 +568,7 @@ asymmetrical.
 \scriptsize{
 \begin{itemize}
 
-\item Let's compute a 50\%  equal-tailed credible interval for this posterior;
+\item Let's compute a 50\%  equal-tailed credible interval for this posterior:
 
 \begin{verbatim}
 > PI( samples.a , prob=0.5 )  
@@ -584,7 +582,7 @@ asymmetrical.
 
 \item But in this example, it ends up excluding the most probable parameter values, near $p = 1$.
 
-\item So in terms of describing the shape of the posterior distribution the percentile interval can be misleading.
+\item So, in terms of describing the shape of the posterior distribution it can be misleading.
 
 
 \end{itemize}
@@ -618,7 +616,7 @@ asymmetrical.
 
 \item An alternative type of credible interval is the Highest Posterior Density Interval (HPDI).
 
-\item If we relax the restriction of assigning equal probability to each tail we get an infinite number of the intervals containing the specified probability area.
+\item If we relax the restriction of assigning equal probability to each tail, we obtain an infinite number of intervals containing the specified probability area.
 
 \item The HPDI is the narrowest of those possible interval.
 
@@ -664,7 +662,7 @@ asymmetrical.
 
 \item Apart from the cases when the posterior distribution is highly skewed, these two types of intervals are similar.
 
-\item For example, let's calcylate a 80\% HPDI for the the original posterior with 6 W and 3 L:
+\item For example, let's calculate an 80\% HPDI for the the original posterior with 6 W and 3 L:
 
 \begin{verbatim}
 > HPDI( samples , prob=0.8 )
