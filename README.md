@@ -24,7 +24,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 1. [Introduction to Bayesian Inference](slides/ST-bayesian.pdf) | ([tex source file](slides/ST-bayesian.tex))
 1. [Summarizing the Posterior](slides/ST-posterior.pdf) | ([tex source file](slides/ST-posterior.tex))  
 1. [Bayesian Linear Models](slides/ST-bayes_lin.pdf) | ([tex source file](slides/ST-bayes_lin.tex)) (Chapters 4,5 of Statistical Rethinking)
-1. [MCMC](slides/ST-MCMC.pdf) | ([tex source file](slides/ST-MCMC.tex)) (Chapter 9 of Statistical Rethinking)
+1. [MCMC](slides/ST-MCMC.pdf) | ([tex source file](slides/ST-MCMC.tex)) (Chapter 9 of Statistical Rethinkingig and Chapter 7 of Doing Bayesian Data Analysis)
 
 
 ### Part IV: Other Topics
@@ -45,6 +45,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 * [Statistical Thinking for the 21st Century](https://statsthinking21.org/)
 * [All of Statistics -  A Concise Course in Statistical Inference by Larry Wasserman](http://www.stat.cmu.edu/~larry/all-of-statistics/)
 * [Statistical Rethinking by Richard McElreath](https://xcelab.net/rm/statistical-rethinking/)
+* [Doing Bayesian Data Analysis: A Tutorial with R, JAGS, and Stan by John K. Kruschke](https://jkkweb.sitehost.iu.edu/DoingBayesianDataAnalysis/)
 * [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
 * [Answering questions with data](https://crumplab.github.io/statistics/)
 * [Introduction to Modern Statistics by Mine Çetinkaya-Rundel and Johanna Hardin](https://openintro-ims.netlify.app)
