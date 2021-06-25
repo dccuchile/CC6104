@@ -45,7 +45,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 * [Statistical Thinking for the 21st Century](https://statsthinking21.org/)
 * [All of Statistics -  A Concise Course in Statistical Inference by Larry Wasserman](http://www.stat.cmu.edu/~larry/all-of-statistics/)
 * [Statistical Rethinking by Richard McElreath](https://xcelab.net/rm/statistical-rethinking/)
-* [Doing Bayesian Data Analysis: A Tutorial with R, JAGS, and Stan by John K. Kruschke](https://jkkweb.sitehost.iu.edu/DoingBayesianDataAnalysis/)
+* [Doing Bayesian Data Analysis: A Tutorial with R, JAGS, and Stan by John K. Kruschke](https://sites.google.com/site/doingbayesiandataanalysis/)
 * [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
 * [Answering questions with data](https://crumplab.github.io/statistics/)
 * [Introduction to Modern Statistics by Mine Çetinkaya-Rundel and Johanna Hardin](https://openintro-ims.netlify.app)
