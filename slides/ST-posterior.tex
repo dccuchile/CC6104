@@ -523,13 +523,13 @@ asymmetrical.
 \item If we again consider a flat prior, we will get a highly skewed posterior distribution with its maximum value at the boundary, $p = 1$.
 
 \begin{verbatim}
-  p_grid <- seq( from=0 , to=1 , length.out=1000 )
-  prior <- rep(1,1000)
-  likelihood <- dbinom( 3 , size=3 , prob=p_grid )
-  posterior <- likelihood * prior
-  posterior <- posterior / sum(posterior)
-  samples.a <- sample( p_grid , size=1e4 , 
-  replace=TRUE , prob=posterior )
+  p_grid.a <- seq( from=0 , to=1 , length.out=1000 )
+  prior.a <- rep(1,1000)
+  likelihood.a <- dbinom( 3 , size=3 , prob=p_grid.a )
+  posterior.a <- likelihood.a * prior.a
+  posterior.a <- posterior.a / sum(posterior.a)
+  samples.a <- sample( p_grid.a , size=1e4 , 
+  replace=TRUE , prob=posterior.a )
   dens(samples.a,xlim=c(0,0.935))
 \end{verbatim}
 
@@ -678,6 +678,180 @@ asymmetrical.
 
 
 } 
+
+\end{frame}
+
+
+
+\begin{frame}{Point estimates}
+\scriptsize{
+\begin{itemize}
+
+\item The idea of point estimation in a Bayesian setting is to summarize the posterior with a single value. 
+
+\item The three most common options here:
+
+\begin{itemize}
+\scriptsize{
+ \item The mode, which is the value with highest posterior probability, also known as the maximum a posteriori (MAP) estimate.
+ \item The mean
+ \item The median
+} 
+\end{itemize}
+
+\item Let's calculate them for the globe tossing experiment in which we observe 3 waters out of 3 tosses.
+
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Point estimates}
+\scriptsize{
+\begin{itemize}
+
+\item We can compute the MAP from the grid approximation of the posterior as follows:
+
+\begin{verbatim}
+ > p_grid[ which.max(posterior.a) ]
+[1] 1
+\end{verbatim}
+
+
+\item Or we can approximate it using posterior samples:
+
+\begin{verbatim}
+> dd <- density(samples.a,adj=0.01)
+> dd$x[which.max(dd$y)]
+[1] 0.9971593 
+\end{verbatim}
+
+\item The same procedure can be done more easily using the chainmode function from the rethinking package:
+
+\begin{verbatim}
+> chainmode( samples.a , adj=0.01 )
+[1] 0.9971593 
+\end{verbatim}
+
+
+
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Point estimates}
+\scriptsize{
+\begin{itemize}
+
+\item Now the posterior mean:
+
+\begin{verbatim}
+> mean(samples.a)
+[1] 0.7988011
+\end{verbatim}
+
+
+\item and the median:
+
+\begin{verbatim}
+> median(samples.a)
+[1] 0.8408408
+\end{verbatim}
+
+\item The same procedure can be done more easily using the chainmode function from the rethinking package:
+
+
+\item Which of these values should we report?
+
+\item Recall that our ultimate goal is to report the shape of the posterior
+
+\item Hence, it is better to communicate as much as we can about it.  
+
+\item For example: density plots, HPDI, MAP estimates, mean, mode, etc..
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}{Point Estimates}
+\scriptsize{
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.45]{pics/posterior_points.png}
+	\end{figure} 
+
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Sampling to Simulate Prediction}
+\scriptsize{
+
+\begin{itemize}
+\item We expect to do better when we use the entire posterior distribution, not just some point estimate derived from it. 
+
+\item Why? Because there is a lot of information about uncertainty in the entire posterior
+distribution. 
+
+\item We lose this information when we pluck out a single parameter value and then
+perform calculations with it. 
+\item This loss of information leads to overconfidence.
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Sampling to Simulate Prediction}
+\scriptsize{
+
+ \begin{eqnarray*}
+ f(\tilde{d}|d) & = \int_{\theta}f(\tilde{d},\theta|d)d\theta \\ 
+                & =  x
+ \end{eqnarray*}
+
+
+
+
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Posterior Predictive Distribution}
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.31]{pics/posterior_predictive.png}
+	\end{figure} 
 
 \end{frame}
 

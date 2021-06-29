@@ -969,7 +969,7 @@ skill in mathematics.
  \item Grid approximation
  \item Quadratic approximation
  \item Markov chain Monte Carlo (MCMC)
- \item Variational Inference
+ \item Variational Inference\footnote{Beyond the scope of this course.}
 \end{enumerate}
 
 \end{itemize}
@@ -1048,17 +1048,17 @@ mtext("20 points")
 
 
 
-\begin{frame}{Quadratic Approximation}
+\begin{frame}{Laplace Approximation}
 \scriptsize{
 
 \begin{itemize}
 \item Under quite general conditions, the region near the peak of the posterior distribution will be nearly Gaussian in shape.
 \item Idea: approximate the posterior distribution by a Gaussian distribution.
 \item Gaussians are convenient because can be completely described by two parameters: $\mu$ and $\sigma$. 
-\item A Gaussian approximation is called ``quadratic approximation'' because the logarithm of
+\item The Laplace approximation is also called ``quadratic approximation'' because the logarithm of
 a Gaussian distribution forms a parabola. 
 \item A a parabola is a quadratic function.
-\item Quadratic approximation essentially represents any log-posterior with a parabola.
+\item Laplace approximation essentially represents any log-posterior with a parabola.
 \end{itemize}
 
 
@@ -1077,14 +1077,14 @@ peak.
 
 
 
-\begin{frame}[fragile]{Quadratic Approximation}
+\begin{frame}[fragile]{Laplace Approximation}
 
 
 
 \begin{scriptsize}
 
 \begin{itemize}
- \item Quadratic approximation is implemented in function \textbf{quap} from the \textbf{rethinking} R package.
+ \item Laplace approximation is implemented in function \textbf{quap} from the \textbf{rethinking} R package.
  
  \item This package  will be used extensively in the remainder of this course.
  
@@ -1114,7 +1114,7 @@ Assuming the posterior is Gaussian, it is maximized at 0.67, and its standard de
 
 
 
-\begin{frame}{Quadratic Approximation}
+\begin{frame}{Laplace Approximation}
 \scriptsize{
 
 \begin{figure}[h!]
@@ -1124,7 +1124,7 @@ Assuming the posterior is Gaussian, it is maximized at 0.67, and its standard de
  
 \begin{itemize}
  \item Blue Curve: the exact posterior distribution. 
- \item Black Curve: the quadratic approximation.
+ \item Black Curve: the Laplace approximation.
  \item Left: The globe tossing data with n = 9 tosses and w = 6 waters.
  \item Middle: Double the amount of data, with the same fraction of water, n = 18 and w = 12.
  \item Right: Four times as much data, n = 36 and w = 24.
@@ -1140,8 +1140,9 @@ Assuming the posterior is Gaussian, it is maximized at 0.67, and its standard de
 \scriptsize{
 
 \begin{itemize}
-\item The quadratic approximation, either with a uniform prior or with a lot of data, is often equivalent to a maximum likelihood estimate (MLE) and its standard error.
-\item In other words: maximum a posteriori with a uniform prior is equivalent to maximum likelihood estimation.
+\item The Laplace approximation, either with a uniform prior or with a lot of data, is often equivalent to a maximum likelihood estimate (MLE) and its standard error.
+\item This is because maximum a posteriori with a uniform prior is equivalent to maximum likelihood estimation.
+\item By using a uniform prior, our posterior is essentially the likelihood multiplied by a constant, so it makes sense that the maximum value of the posterior and the likelihood are the same.
 \item More info: \url{https://wiseodd.github.io/techblog/2017/01/01/mle-vs-map/}.
 \item This helps re-interpret many non-Bayesian models in Bayesian terms.
 \end{itemize}
@@ -1156,7 +1157,7 @@ Assuming the posterior is Gaussian, it is maximized at 0.67, and its standard de
 \scriptsize{
 
 \begin{itemize}
-\item There are lots of important model types, like multilevel (mixed-effects) models, where quadratic approximation doesn't work.
+\item There are lots of important model types, like multilevel (mixed-effects) models, where Laplace approximation doesn't work.
 \item Such models may have hundreds or thousands or tens-of-thousands of parameters so we can't use Grid approximation either.
 \item Multilevel models do not always allow us to write down a single, unified function for the posterior distribution.
 \item This means that the function to maximize (when finding the MAP) is not known, but must be computed in pieces. 

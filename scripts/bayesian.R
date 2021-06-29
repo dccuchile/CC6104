@@ -84,12 +84,12 @@ PI( samples , prob=0.8 )
 c("10%"=qbeta(0.1,7,4 ),"90%"=qbeta(0.9,7,4 ))
 
 # Asymetrical Posterior
-  p_grid <- seq( from=0 , to=1 , length.out=1000 )
-  prior <- rep(1,1000)
-  likelihood <- dbinom( 3 , size=3 , prob=p_grid )
-  posterior <- likelihood * prior
-  posterior <- posterior / sum(posterior)
-  samples.a <- sample( p_grid , size=1e4 , replace=TRUE , prob=posterior )
+  p_grid.a <- seq( from=0 , to=1 , length.out=1000 )
+  prior.a <- rep(1,1000)
+  likelihood.a <- dbinom( 3 , size=3 , prob=p_grid.a )
+  posterior.a <- likelihood.a * prior.a
+  posterior.a <- posterior.a / sum(posterior.a)
+  samples.a <- sample( p_grid.a , size=1e4 , replace=TRUE , prob=posterior.a )
   dens(samples.a,xlim=c(0,0.935))
 #alternatively we could sample 
 #from the exact posterior
@@ -101,4 +101,18 @@ PI( samples.a , prob=0.5 )
 HPDI( samples.a , prob=0.5 )
 
 HPDI( samples , prob=0.8 )
+
+
+# Point estimates
+
+p_grid[ which.max(posterior.a) ]
+
+dd <- density(samples.a,adj=0.01)
+dd$x[which.max(dd$y)]
+
+chainmode( samples.a , adj=0.01 )
+
+mean(samples.a)
+
+median(samples.a)
   
