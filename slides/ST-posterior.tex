@@ -813,14 +813,20 @@ asymmetrical.
 \scriptsize{
 
 \begin{itemize}
-\item We expect to do better when we use the entire posterior distribution, not just some point estimate derived from it. 
+\item Another useful thing we can do with the posterior, is to use it to simulate new data predictions.
 
-\item Why? Because there is a lot of information about uncertainty in the entire posterior
-distribution. 
+\item This can be particularly useful for evaluating our model in an empirical way.
 
-\item We lose this information when we pluck out a single parameter value and then
-perform calculations with it. 
-\item This loss of information leads to overconfidence.
+\item The idea is to contrast the simulated data with the expected behavior.
+
+\item These simulated predictions can also be used to forecast future observations.
+
+\item But, we must recall that the posterior is a distribution of the parameter given the data $f(\theta|d)$, so how can we use it to generate new unseen observations $\tilde{d}$?
+
+\item To understand this, we need to learn about the \textbf{posterior predictive distribution}.
+
+\item But before introducing this complex new concept, we will learn how to generate simulated predictions using  the likelihood function of the model.
+
 \end{itemize}
 
 
@@ -828,22 +834,104 @@ perform calculations with it.
 \end{frame}
 
 
-\begin{frame}{Sampling to Simulate Prediction}
+\begin{frame}[fragile]{Sampling to Simulate Prediction}
 \scriptsize{
 
- \begin{eqnarray*}
- f(\tilde{d}|d) & = \int_{\theta}f(\tilde{d},\theta|d)d\theta \\ 
-                & =  x
- \end{eqnarray*}
+\begin{itemize}
+\item In our original globe tossing experiment, the MAP estimate (the value of $p$ that maximizes the posterior) was $0.67$.
+
+\item We can use the likelihood function (a Binomial in this case) with $p=0.67$ to generate new observations of waters  $\tilde{d}$ with 9 new tosses.
+
+\begin{verbatim}
+> rbinom( 1, size=9 , prob=0.67)
+[1] 6 
+\end{verbatim}
+
+\item In this new data, we obtained 6 W out of 9 tosses, which is an expected behavior considering that the original data also had 6 W (out of 9).
+
+\item Now, we can repeat this process 100,000 times and observe a sampling distribution for the number of waters obtained:
+
+\begin{verbatim}
+> new_w <- rbinom( 1e5 , size=9 , prob=0.67 )
+> simplehist( new_w , xlab="new water predictions") 
+\end{verbatim}
 
 
 
 
+\end{itemize}
 
 
 } 
 \end{frame}
 
+
+
+
+
+\begin{frame}{Sampling to Simulate Prediction}
+\scriptsize{
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics{pics/w_predictions.pdf}
+	\end{figure} 
+
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Sampling to Simulate Prediction}
+\scriptsize{
+
+\begin{itemize}
+
+\item We can see that even 6 W is the most frequent case, 7 and 5 are also very likely in our sampling distribution.
+
+\item These predictions embody the observation uncertainty: for a given value of $p$ the number of W may vary according to our likelihood function.
+
+\item But there is an additional source of uncertainty that our current predictions are not taking into account: the uncertainty about $p$.
+
+\item The posterior distribution over $p$ embodies this uncertainty.
+
+\item And since there is uncertainty about $p$, there is uncertainty about everything that depends upon $p$.
+
+\item We lose this information when we pluck out a single parameter value (e.g., the MAP estimate) and then perform calculations with it. 
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Posterior Predictive Distribution}
+\scriptsize{
+
+\begin{itemize}
+
+\item This loss of information leads to overconfidence.
+
+\item  We'd like to propagate the parameter uncertainty as we evaluate the
+implied predictions.
+
+\item All that is required is averaging over the posterior density for $p$, while computing the predictions.
+
+\item For each possible value of the parameter $p$, there is an implied
+distribution of outcomes.
+
+\item So if you were to compute the sampling distribution of outcomes at each value of $p$, then you could average all of these prediction distributions together, using the posterior probabilities of each value of $p$, to get a \textbf{posterior predictive distribution}.
+\end{itemize}
+
+
+} 
+\end{frame}
 
 
 \begin{frame}{Posterior Predictive Distribution}
@@ -854,6 +942,143 @@ perform calculations with it.
 	\end{figure} 
 
 \end{frame}
+
+
+\begin{frame}{Posterior Predictive Distribution}
+\scriptsize{
+
+\begin{itemize}
+
+\item  The figure above illustrates this averaging. 
+
+\item At the top, the posterior distribution is shown, with 10 unique parameter values highlighted by the vertical lines. 
+
+\item The implied distribution of observations specific to each of these parameter values is shown in the middle row of plots. 
+
+\item Observations are never certain for any value of $p$, but they do shift around in response to it. 
+
+\item Finally, at the bottom, the sampling distributions for all values of p are combined, using the posterior probabilities to compute the weighted average frequency of each possible observation, zero to nine water samples.
+
+\item The resulting distribution is for predictions, but it incorporates all of the uncertainty embodied in the posterior distribution for the parameter $p$. 
+
+\item As a result, it is more honest than the distribution of predictions computed with the MAP estimate.
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Posterior Predictive Distribution}
+\scriptsize{
+
+\begin{itemize}
+
+\item Generating predictions with the MAP estimate can lead us to believe that the model is more consistent with the data than it really is.
+
+\item This illusion arises from tossing away uncertainty about the parameters. 
+
+\item Consequently, MAP predictions tend to cluster around the observations more tightly (i.e., produce narrower distributions). 
+
+\item  To generate predictions using the Posterior Predictive Distribution in R, we must replace the MAP parameter value with samples from the posterior:
+
+\begin{verbatim}
+> post_pred_w <- rbinom( 1e4 , size=9 , prob=samples )
+> simplehist( post_pred_w , xlab="posterior predictions")
+\end{verbatim}
+
+
+\item For each sampled value, a random binomial observation is generated.
+
+\item Since the sampled values appear in proportion to their posterior probabilities, the resulting simulated observations are averaged over the posterior.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Posterior Predictive Distribution}
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics{pics/w_post_predictions.pdf}
+	\end{figure} 
+
+\end{frame}
+
+
+\begin{frame}{Posterior Predictive Distribution}
+\scriptsize{
+
+\begin{itemize}
+
+\item Let's discuss the posterior predictive distribution more formally as presented in \cite{gelman2013bayesian}.
+
+ \item After the data $d$ have been observed, we can predict an unknown observable $\tilde{d}$ from the same process.
+ 
+ \item In the globe tossing experiment $\tilde{d}$ may be the yet to be recorded number of waters W in a new tossing experiment.
+ 
+ \item The distribution of  $\tilde{d}$ given $d$ is called the \textbf{posterior predictive distribution}.
+ 
+ \item Posterior because it is conditional on the observed $d$ and predictive because it is a prediction for an observable $\tilde{d}$. 
+ 
+ 
+ 
+\end{itemize}
+
+
+
+} 
+\end{frame}
+
+
+
+
+
+\begin{frame}{Posterior Predictive Distribution}
+\scriptsize{
+
+
+\begin{itemize}
+ 
+\item Mathematical, the posterior predictive distribution is defined as follows:
+
+  \begin{eqnarray*}
+ f(\tilde{d}|d) & = & \int_{\theta}f(\tilde{d},\theta|d)d\theta \\ 
+                & = &  \int_{\theta}f(\tilde{d}|\theta,d)f(\theta|d)d\theta \\
+                & = &  \int_{\theta}f(\tilde{d}|\theta)f(\theta|d)d\theta \\
+ \end{eqnarray*}
+ 
+ \item The second and third lines display the posterior predictive distribution as an average of conditional predictions over the posterior distribution of $\theta$.
+ 
+ \item The last step follows from the assumed conditional independence of $d$ and $\tilde{d}$ given $\theta$.
+ 
+ 
+ 
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+} 
+\end{frame}
+
+
+
+
+
 
 
 \begin{frame}{Conclusions}

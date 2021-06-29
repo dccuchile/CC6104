@@ -115,4 +115,14 @@ chainmode( samples.a , adj=0.01 )
 mean(samples.a)
 
 median(samples.a)
+
+
+# Posterior Predictive
+rbinom( 1, size=9 , prob=0.67)
+
+new_w <- rbinom( 1e5 , size=9 , prob=0.67 )
+simplehist( new_w , xlab="new water predictions")
+
+post_pred_w <- rbinom( 1e4 , size=9 , prob=samples )
+simplehist( post_pred_w , xlab="posterior predictions")
   
