@@ -63,7 +63,7 @@
 
 \item However, a posterior distribution is (usually) a high dimensional object that is hard to visualize and work with \cite{pml1Book}.
 
-\item In this class we will learn how to draw estimates (e.g., point estimates, intervals) to summarize and interpret a posterior distribution.
+\item In this class we will learn how to draw estimates (e.g., point estimates, intervals, predictions) to summarize and interpret a posterior distribution.
 
 
 
@@ -97,7 +97,7 @@
 \begin{itemize}
 \scriptsize{
  \item intervals of defined boundaries
- \item intervals of defined probability mass
+ \item intervals of defined probability area
  \item point estimates
 }
 \end{itemize}
@@ -207,8 +207,7 @@ dens(samples)
 
 
 
-\item We can see that the estimated density is very similar to to ideal posterior we computed via
-grid approximation in previous class.
+\item We can see that the estimated density is very similar to to ideal posterior we computed via grid approximation in previous class.
 
 
  
@@ -225,7 +224,7 @@ grid approximation in previous class.
 \scriptsize{
 \begin{itemize}
 
-\item We could get the same results by sampling from the theoretical posterior using the beta distribution: 
+\item We could get very similar results by sampling from the theoretical posterior using the beta distribution: 
 
 \begin{verbatim}
 teo.samples<-rbeta(1e4,7,4)
@@ -234,16 +233,16 @@ dens(teo.samples)
 
 
 
-\item We can see that the estimated density is very similar to the theoretical posterior obtained from the beta distribution:
-
-
    \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.6]{pics/posteriorTossBeta.pdf}
 	\end{figure} 
 
+	
+\item We can see that the samples of the grid-approximated posterior and the theoretical posterior are indistinguishable.
+	
 
-	\item However, we should keep in mind that for complex models we will not have access to the posterior closed form, so it is better to get used to working with samples.
+\item However, we should keep in mind that for complex models we will not have access to the posterior closed form.
 \end{itemize}
 
 
@@ -256,7 +255,7 @@ dens(teo.samples)
 \scriptsize{
 \begin{itemize}
 
-\item Suppose I ask you for the posterior probability that the proportion of water is less than 0.5. 
+\item Suppose we are asked for the posterior probability that the proportion of water is less than 0.5. 
 
 \item We could calculate this from the theoretical posterior:
 
@@ -407,7 +406,7 @@ dens(teo.samples)
 
 
 
-\begin{frame}{Intervals of defined boundaries}
+\begin{frame}{Intervals of defined probability}
 \scriptsize{
 
    \begin{figure}[h!]
@@ -428,7 +427,7 @@ dens(teo.samples)
 \scriptsize{
 \begin{itemize}
 
-\item Similarly, we can calculate the middle 80\% interval that lies between the 10th percentile and the 90th percentile. 
+\item Similarly, we can calculate the middle 80\% interval that lies between the 10th percentile and the 90th percentile: 
 
 
 \begin{verbatim}
@@ -467,7 +466,7 @@ dens(teo.samples)
 
 
 
-\begin{frame}{Intervals of defined boundaries}
+\begin{frame}{Intervals of defined probability}
 \scriptsize{
 
    \begin{figure}[h!]
@@ -487,7 +486,7 @@ dens(teo.samples)
 \scriptsize{
 \begin{itemize}
 
-\item The intervals of posterior probability that assign equal probability to each tail are called \textbf{credible interval}.
+\item The intervals of posterior probability that assign equal probability to each tail are called \textbf{credible intervals}.
 
 \item These posterior intervals report two parameter values that contain between them a specified amount of posterior probability.
 
@@ -497,7 +496,7 @@ dens(teo.samples)
 
 \item The interpretations are very different though.
 
-\item A confidence interval is a region\footnote{Notice that the region will vary from one experiment to another.} that after infinitely repeating the data sampling experiment will contain the true parameter with a certain chance.
+\item A confidence interval is a region\footnote{Notice that the region will vary from one experiment to another.} that after infinitely repeating the data sampling experiment will contain the true parameter with a certain frequency.
 
 
 \item In contrast, a credible interval is a range of values that we believe our parameter can take with a certain probability according to both our prior beliefs and the evidence given by the data.
@@ -515,8 +514,7 @@ dens(teo.samples)
 \scriptsize{
 \begin{itemize}
 
-\item Equal-tailed credible intervals do a good job of communicating the shape of a distribution, as long as the distribution isn't too
-asymmetrical.
+\item Equal-tailed credible intervals do a good job of communicating the shape of a distribution, as long as the distribution isn't too asymmetrical.
 
 \item Suppose that in our globe tossing experiment we had observed 3 W and 0 L.
 
@@ -773,16 +771,14 @@ asymmetrical.
 [1] 0.8408408
 \end{verbatim}
 
-\item The same procedure can be done more easily using the chainmode function from the rethinking package:
-
 
 \item Which of these values should we report?
 
-\item Recall that our ultimate goal is to report the shape of the posterior
+\item Recall that our ultimate goal is to report the shape of the posterior.
 
 \item Hence, it is better to communicate as much as we can about it.  
 
-\item For example: density plots, HPDI, MAP estimates, mean, mode, etc..
+\item This can include: density plots, HPDI, MAP estimates, mean, mode, etc..
 
 
 \end{itemize}
@@ -890,9 +886,9 @@ asymmetrical.
 
 \begin{itemize}
 
-\item We can see that even 6 W is the most frequent case, 7 and 5 are also very likely in our sampling distribution.
+\item We can see that even 6 W is the most frequent case, 7 and 5 are also very likely to occur in our sampling distribution.
 
-\item These predictions embody the observation uncertainty: for a given value of $p$ the number of W may vary according to our likelihood function.
+\item These predictions embody the observation uncertainty: for a given value of $p$ the number of W may vary according to our likelihood function (unless $p=0$ or $p=1$) .
 
 \item But there is an additional source of uncertainty that our current predictions are not taking into account: the uncertainty about $p$.
 
@@ -1085,7 +1081,12 @@ distribution of outcomes.
 \scriptsize{
 
 \begin{itemize}
-\item Blablaag
+\item In this class we introduced the basic procedures for manipulating posterior distributions.
+\item Our fundamental tool is samples of parameter values drawn from the posterior distribution.
+\item Working with samples transforms a problem of integral calculus into a problem of data summary. 
+\item These samples can be used to produce intervals, point estimates, posterior predictive checks, as well as other kinds of simulations.
+\item Posterior predictive checks combine uncertainty about parameters, as described by the posterior distribution, with uncertainty about outcomes, as described by the assumed likelihood function. 
+\item These checks are useful for analyzing the behavior of the model.
 \end{itemize}
 
 
