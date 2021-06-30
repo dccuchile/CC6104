@@ -142,12 +142,55 @@ inference.
 \end{frame}
 
 
+\begin{frame}{A politician stumbles upon the Metropolis algorithm}
+\scriptsize{
+
+\begin{itemize}
+\item The politician has a simple heuristic for travelling accross the islands.
+
+\item First, he flips a (fair) coin to decide whether to propose the adjacent island to the left or the adjacent island to the right.
+
+\item If the proposed island has a larger population than
+the current island ($P_{proposed}>P_{current}$), then he  goes to the proposed island.
+
+\item If the proposed island has a smaller population than the current island ($P_{proposed}<P_{current}$), then he goes to the proposed island only probabilistically
+
+\item The probabiltiy of moving in that case is $p_{move}=P_{current}/P_{proposed}$.
+
+\item This is done by generating a uniform random number between 0 and 1, and moving when the number is lower than $p_{move}$.
+
+\item In the long run, the probability that the politician is on any one of the islands exactly matches the relative population of the island!
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{A politician stumbles upon the Metropolis algorithm}
+\scriptsize{
+
+\begin{itemize}
+\item Let's analyze this heuristic in more detail.
+\item Suppose there are 10 islands in total.
+\item Each island is neighbored by two others, and the
+entire archipelago forms a ring.
+\item The islands are of different sizes, and so had different sized populations living on them.
+\item The second island is twice as populous as the first,
+the third three times as populous as the first.
+\item And so on, up to the largest island, which is 10 times as populous as the smallest.
+
+\end{itemize}
+
+
+} 
+\end{frame}
 
 
 
-
-
-
+King Markov was a benevolent autocrat of an island kingdom, a
+circular archipelago, with 10 islands. 
 
 
 \begin{frame}{Conclusions}
