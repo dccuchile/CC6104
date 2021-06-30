@@ -142,22 +142,19 @@ inference.
 \end{frame}
 
 
-\begin{frame}{A politician stumbles upon the Metropolis algorithm}
+\begin{frame}{The Metropolis algorithm}
 \scriptsize{
 
 \begin{itemize}
-\item The politician has a simple heuristic for travelling accross the islands.
+\item The politician has a simple heuristic for travelling accross the islands called the \textbf{Metropolis} algorithm.
 
 \item First, he flips a (fair) coin to decide whether to propose the adjacent island to the left or the adjacent island to the right.
 
 \item If the proposed island has a larger population than
 the current island ($P_{proposed}>P_{current}$), then he  goes to the proposed island.
 
-\item If the proposed island has a smaller population than the current island ($P_{proposed}<P_{current}$), then he goes to the proposed island only probabilistically
+\item If the proposed island has a smaller population than the current island ($P_{proposed}<P_{current}$), then he goes to the proposed island with probability $p_{move}=P_{proposed}/P_{current}$.
 
-\item The probabiltiy of moving in that case is $p_{move}=P_{current}/P_{proposed}$.
-
-\item This is done by generating a uniform random number between 0 and 1, and moving when the number is lower than $p_{move}$.
 
 \item In the long run, the probability that the politician is on any one of the islands exactly matches the relative population of the island!
 
@@ -168,11 +165,11 @@ the current island ($P_{proposed}>P_{current}$), then he  goes to the proposed i
 \end{frame}
 
 
-\begin{frame}{A politician stumbles upon the Metropolis algorithm}
+\begin{frame}{The Metropolis algorithm}
 \scriptsize{
 
 \begin{itemize}
-\item Let's analyze this heuristic in more detail.
+\item Let's analyze the Metropolis algorithm in more detail.
 \item Suppose there are 10 islands in total.
 \item Each island is neighbored by two others, and the
 entire archipelago forms a ring.
@@ -188,9 +185,162 @@ the third three times as populous as the first.
 \end{frame}
 
 
+\begin{frame}{The Metropolis algorithm}
 
-King Markov was a benevolent autocrat of an island kingdom, a
-circular archipelago, with 10 islands. 
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{pics/islands.png}
+	\end{figure} 
+
+\end{frame}
+
+
+
+
+\begin{frame}{The Metropolis algorithm}
+\scriptsize{
+
+\begin{itemize}
+\item We are going to show an implementation of this algorithm in R.
+
+\item But before that, we will combine combine the two possibilities: the proposed island having a 1) higher or 2) lower population than the current island, into a single expression:
+
+\begin{equation}
+p_{move}=\min(1,P_{proposed}/P_{current}). 
+\end{equation}
+
+\item So, if $P_{proposed}>P_{current}$, $P_{proposed}/P_{current}>1$ and $p_{move}=1$.
+
+\item For example, $current=4$ and $proposed=5$, $5/4>1$ so we move to the proposed island. 
+
+\item On the other hand, if $P_{proposed}<P_{current}$, $P_{proposed}/P_{current}<1$, and $p_{move}=P_{proposed}/P_{current}$.
+
+\item For example, $current=4$ and $proposed=3$, $3/4<1$ so we move to the proposed island with probability $3/4$.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}[fragile]{The Metropolis algorithm}
+\scriptsize{
+
+
+\begin{verbatim}
+num_days <- 1e5
+positions <- rep(0,num_days)
+current <- 10
+for ( i in 1:num_days ) {
+  # record current position
+  positions[i] <- current
+  # flip coin to generate proposal
+  proposal <- current + sample( c(-1,1) , size=1 )
+  # now make sure he loops around the archipelago
+  if ( proposal < 1 ) proposal <- 10
+  if ( proposal > 10 ) proposal <- 1
+  # move?
+  prob_move <- min(proposal/current,1)
+  decision <- rbinom(1,1,prob_move)
+  current <- ifelse( decision == 1 , proposal , current )
+}
+
+library(rethinking)
+simplehist(positions,xlab="island",ylab="number of days")
+\end{verbatim}
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{The Metropolis algorithm}
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.92]{pics/mcmc_islands.pdf}
+	\end{figure} 
+
+\scriptsize{
+	The time spent on each island is proportional to its population size.}
+	
+\end{frame}
+
+
+
+\begin{frame}{The Metropolis algorithm}
+\scriptsize{
+
+\begin{itemize}
+\item The first three lines of the method just define
+the number of days to simulate, an empty history vector, and a starting island position (the biggest island, number 10).
+\item Then the for loop steps through the days. 
+\item Each day, it records the politician's current position.
+\item Then it simulates a coin flip to nominate a proposal island. 
+\item The only trick here lies in making sure that a proposal of ``11'' loops around to island 1 and a proposal of “0” loops around to island 10.
+\item Finally, a random binary number is generated with a binomial distribution with probability of success (or moving)$=\min(1,P_{proposed}/P_{current})$
+\item If this random number is 1 we move, otherwise we stay.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}{The Metropolis algorithm}
+\scriptsize{
+
+\begin{itemize}
+\item In real applications, the goal is of course not to help a politian, but instead to draw samples from an unknown and usually complex posterior probability distribution.
+\item The ``islands'' in our objective are parameter values $\theta$, and they need not be discrete, but can instead take on a continuous range of values as usual.
+\item The ``population sizes'' in our objective are the posterior probabilities (or densities) at each parameter value: $f(\theta|d)$
+\item The ``days'' in our objective are samples taken from the posterior distribution.
+
+\item The Metropolis algorithm will eventually give us a collection of samples from the posterior. 
+
+\item We can then use these samples just like all the samples we have already used in this course.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Why it works}
+\scriptsize{
+
+\begin{itemize}
+\item Now, let's try to understand the mathematics behind why the algorithm works.
+
+\item Consider two adjacent positions and the probabilities of moving from one to the other. 
+\item We'll see that the relative transition probabilities, between adjacent positions, exactly match the relative values of the target distribution.
+
+\item Extrapolate that result across all the positions, and you can see that, in the long run, each position will be visited proportionally to its target value.
+
+\item Suppose we are at position $\theta$. 
+
+\item The probability of moving to $\theta+ 1$, denoted
+$P(\theta \rightarrow \theta + 1)$, is the probability of proposing that move times the probability of
+accepting it if proposed, which is:
+\begin{displaymath}
+P(\theta \rightarrow \theta + 1) = 0.5 \times \min(P(\theta+ 1)/P(\theta),1) 
+\end{displaymath}
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
 
 
 \begin{frame}{Conclusions}
