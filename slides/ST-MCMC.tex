@@ -58,7 +58,24 @@
 \begin{frame}{Markov Chain Monte Carlo}
 \scriptsize{
 \begin{itemize}
-\item ghghg \cite{mcelreath2020statistical}
+\item This class  introduces estimation of posterior probability distributions using a stochastic process known
+as \textbf{Markov chain Monte Carlo} (MCMC). 
+
+\item Here we'll produce samples from the joint posterior without maximizing anything. 
+
+\item We will be able to sample directly from the posterior without assuming a Gaussian, or any other, shape. 
+
+\item The cost of this power is that it may take much longer for our estimation to complete.
+
+\item But the benefit is escaping multivariate normality assumption of the Laplace approximation.
+
+\item More advanced models such as the generalized linear and multilevel models tend produce non-Gaussian posterior distributions.
+
+\item In most cases  they cannot
+be estimated at all with the techniques of earlier classes. 
+
+
+\item This class is based on Chapter 9 of \cite{mcelreath2020statistical} and Chapter 7 of \cite{kruschke2014doing}.
  
 \end{itemize}
 
@@ -67,6 +84,68 @@
 } 
 
 \end{frame}
+
+
+
+
+\begin{frame}{Markov Chain Monte Carlo}
+\scriptsize{
+\begin{itemize}
+\item The essence of MCMC is to produce samples from the posterior $f(\theta|d)$ by only accessing a function that is proportial to it.
+\item This proportial function is the product of the likelihood and the prior $f(d|\theta)*f(\theta)$, which is always available in a Bayesian model.
+\item So, merely by evaluating $f(d|\theta)*f(\theta)$, without normalizing it by $f(d)$, MCMC allows us to generate random representative values from the posterior distribution.
+
+\item This property is wonderful because the method obviates direct computation of the evidence $f(d)$, which, as you'll recall, is one of the most difficult aspects of Bayesian
+inference. 
+
+\item It has only been with the development of MCMC algorithms an software that Bayesian inference is applicable to complex data analysis.
+\item And it has only been with the production of fast and cheap computer hardware that Bayesian inference is accessible to a wide audience.
+
+\item The question then becomes this: How does MCMC work? For an answer, let's ask a politician. 
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+
+\begin{frame}{A politician stumbles upon the Metropolis algorithm}
+\scriptsize{
+
+\begin{itemize}
+\item Suppose an elected politician lives on a long chain of islands.
+\item He is constantly traveling from island to island, wanting to stay in the public eye. 
+\item At the end of a day he has to decide whether to:
+
+\begin{enumerate}
+\scriptsize{
+ \item stay on the current island
+ \item move to the adjacent island to the west
+ \item move to the adjacent island to east }
+\end{enumerate}
+
+\item His goal is to visit all the islands \textbf{proportionally} to their \textbf{relative population}.
+
+\item But, he doesn't know the total population of all the islands.
+\item He only knows the population of the current island where he is located.
+\item He can also ask about the population of an adjacent island to which he plans to move.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+
+
+
 
 
 
