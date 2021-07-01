@@ -146,7 +146,7 @@ inference.
 \scriptsize{
 
 \begin{itemize}
-\item The politician has a simple heuristic for travelling accross the islands called the \textbf{Metropolis} algorithm.
+\item The politician has a simple heuristic for travelling accross the islands called the \textbf{Metropolis} algorithm \cite{metropolis1953equation}.
 
 \item First, he flips a (fair) coin to decide whether to propose the adjacent island to the left or the adjacent island to the right.
 
@@ -203,7 +203,7 @@ the third three times as populous as the first.
 \begin{itemize}
 \item We are going to show an implementation of this algorithm in R.
 
-\item But before that, we will combine combine the two possibilities: the proposed island having a 1) higher or 2) lower population than the current island, into a single expression:
+\item But before that, we will combine combine the two possibilities for the probability of moving into a single expression: the proposed island having a 1) higher or 2) lower population than the current island.
 
 \begin{equation}
 p_{move}=\min(1,P_{proposed}/P_{current}). 
@@ -211,7 +211,7 @@ p_{move}=\min(1,P_{proposed}/P_{current}).
 
 \item So, if $P_{proposed}>P_{current}$, $P_{proposed}/P_{current}>1$ and $p_{move}=1$.
 
-\item For example, $current=4$ and $proposed=5$, $5/4>1$ so we move to the proposed island. 
+\item For example, $current=4$ and $proposed=5$, $5/4>1$ so we move to the proposed island (with probability 1). 
 
 \item On the other hand, if $P_{proposed}<P_{current}$, $P_{proposed}/P_{current}<1$, and $p_{move}=P_{proposed}/P_{current}$.
 
@@ -281,7 +281,7 @@ the number of days to simulate, an empty history vector, and a starting island p
 \item Each day, it records the politician's current position.
 \item Then it simulates a coin flip to nominate a proposal island. 
 \item The only trick here lies in making sure that a proposal of ``11'' loops around to island 1 and a proposal of “0” loops around to island 10.
-\item Finally, a random binary number is generated with a binomial distribution with probability of success (or moving)$=\min(1,P_{proposed}/P_{current})$
+\item Finally, a random binary number is generated with a binomial distribution with probability of success (or moving)$=\min(1,P_{proposed}/P_{current})$.
 \item If this random number is 1 we move, otherwise we stay.
 
 \end{itemize}
@@ -297,7 +297,7 @@ the number of days to simulate, an empty history vector, and a starting island p
 \scriptsize{
 
 \begin{itemize}
-\item In real applications, the goal is of course not to help a politian, but instead to draw samples from an unknown and usually complex posterior probability distribution.
+\item In real applications, the goal is not to help a politician, but instead to draw samples from an unknown and usually complex posterior probability distribution.
 \item The ``islands'' in our objective are parameter values $\theta$, and they need not be discrete, but can instead take on a continuous range of values as usual.
 \item The ``population sizes'' in our objective are the posterior probabilities (or densities) at each parameter value: $f(\theta|d)$
 \item The ``days'' in our objective are samples taken from the posterior distribution.
@@ -318,7 +318,7 @@ the number of days to simulate, an empty history vector, and a starting island p
 \scriptsize{
 
 \begin{itemize}
-\item Now, let's try to understand the mathematics behind why the algorithm works.
+\item Now, let's try to understand why the algorithm works.
 
 \item Consider two adjacent positions and the probabilities of moving from one to the other. 
 \item We'll see that the relative transition probabilities, between adjacent positions, exactly match the relative values of the target distribution.
@@ -334,6 +334,266 @@ accepting it if proposed, which is:
 P(\theta \rightarrow \theta + 1) = 0.5 \times \min(P(\theta+ 1)/P(\theta),1) 
 \end{displaymath}
 
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Why it works}
+\scriptsize{
+
+\begin{itemize}
+\item On the other hand, if we are presently at position $\theta+ 1$, the probability of moving to $\theta$ is:
+\begin{displaymath}
+P(\theta+1 \rightarrow \theta) = 0.5 \times \min(P(\theta)/P(\theta+1),1) 
+\end{displaymath}
+
+\item The ratio of the transition probabilities is:
+
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/trans_ratio.png}
+	\end{figure} 
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Why it works}
+\scriptsize{
+
+\begin{itemize}
+\item The last equation tells us that during transitions back and forth between adjacent positions, the relative probability of the transitions exactly matches the relative values of the target distribution. 
+\item That might be enough to get the intuition that, in the
+long run, adjacent positions will be visited proportionally to their relative values in the target distribution. 
+\item If that's true for adjacent positions, then, by extrapolating from one position to the next, it must be true for the whole range of positions.
+
+\item In more mathematical terms, this means that the transition probabilities form a Markov chain that has the target distribution as its equilibrium or stationary distribution. \cite{wiki:Markov_chain_Monte_Carlo}
+
+\item Hence, one can obtain a sample of the desired distribution by recording states from the chain.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{The Metropolis Algorithm more Generally}
+\scriptsize{
+
+\begin{itemize}
+\item So far, we have only considered the case with a single discrete parameter $\theta$ that can only move to the left or right.
+
+\item The general Metropolis algorithm allows working with multiple continuous parameters $\theta_1,\theta_2,\dots,\theta_n$ and more general proposal distributions.  
+
+
+\item The essentials of the general method are the same as for the simple case. 
+
+\item First, we have some target distribution $P(\theta)$ ($\theta$ can be a vector of parameters) from which we would like to generate representative sample values. 
+
+\item We must be able to compute the value of $P(\theta)$ for any candidate value of $\theta$. 
+\item The distribution, $P(\theta)$, does not have to be normalized, however. 
+
+\item Just needs needs to be nonnegative. 
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{The Metropolis Algorithm more Generally}
+\scriptsize{
+
+\begin{itemize}
+
+\item In our Bayesian inference application $P(\theta)$ is the unnormalized posterior distribution on  $\theta$, which is the product of the likelihood and the prior: $f(d|\theta)*f(\theta)$.
+
+\item This is a very important property of MCMC, as it allows us to draw samples from the posterior without having to calculate the evidence $f(d)$.
+
+\item Sample values from the target distribution are generated by taking a random walk through the parameter space.
+
+\item Proposal distributions can take many different forms,  the goal being to use a proposal distribution
+that efficiently explores the regions of the parameter space where $P(\theta)$ has most of its probability area. 
+
+\item The generic case is using a Gaussian distribution  centered at the current position. 
+
+\item So the proposed move will typically be near the current position, with the probability of proposing a more distant position dropping off according to the normal curve.
+
+\item For multivariate target distributions, we can use a Multi-variate Gaussian to propose multi-dimensional points in each step. 
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Gibbs Sampling}
+\scriptsize{
+
+\begin{itemize}
+
+\item The Metropolis algorithm works whenever the probability of proposing a jump to B from A is equal to the probability of proposing A from B, when the proposal distribution is symmetric (such as a Gaussian distribution). 
+
+\item There is a more general method, known as Metropolis-Hastings, that allows asymmetric proposals.
+
+\item This would mean, that the politician's coin were biased to lead him clockwise on average.
+
+\item Asymmetric proposal distributions allows us to explore the posterior distribution more efficiently (i.e., acquire
+a good image of the posterior distribution in fewer steps).
+
+\item Gibbs sampling is a variant of the Metropolis-Hastings algorithm that uses clever proposals and is therefore more efficient.
+
+\item The improvement arises from adaptive proposals in which the distribution of proposed parameter values adjusts itself intelligently, depending upon the parameter values at the moment.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Gibbs Sampling}
+\scriptsize{
+
+\begin{itemize}
+
+\item How Gibbs sampling computes these adaptive proposals depends upon using particular combinations of prior distributions and likelihoods known as conjugate pairs (such as Binomial and the Beta). 
+
+\item Conjugate pairs have analytical solutions for the posterior distribution of an individual parameter. 
+
+\item And these solutions are what allow Gibbs sampling to make smart jumps around the joint posterior distribution of all parameters.
+
+\item The algorithm works as follows:
+
+\item At each point in the walk, the parameters are selected in an iterative cycle: $\theta_1, \theta_2, \theta_3 , \dots \theta_1, \theta_2, \theta_3, \dots.$ 
+
+\item Suppose that parameter $\theta_i$ has been selected.
+
+\item Gibbs sampling then chooses a new value for that parameter by generating a random value directly from
+the conditional probability distribution of that parameter given all the others and $d$: 
+
+\begin{displaymath}
+f(\theta_i | \theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_n,d)  
+\end{displaymath}
+
+
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Gibbs Sampling}
+\scriptsize{
+
+\begin{itemize}
+
+\item As we are using conjugate pairs, this conditional probabilities distribution has a closed form and is easy to sample random numbers from it.
+
+\item The new value for $\theta_i$ , combined with the unchanged values of $\theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_n$, constitutes the new position in the random walk.
+
+\item The process then repeats: select the next parameter $\theta_{i+1}$ and select a new value for that parameter from its conditional posterior distribution.
+
+\item Let's illustrate this process for a two-parameter example: $\theta_1,\theta_2$.
+
+\item In the first step, we want to select a new value for $\theta_1$ . 
+
+\item We conditionalize on the values of all the other
+parameters from the previous step in the chain. 
+
+\item In this example, there is only one other parameter, namely $\theta_2$.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Gibbs Sampling}
+\scriptsize{
+
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/gibbs1.png}
+	\end{figure} 
+
+\begin{itemize}
+
+\item The figure shows a slice through the joint distribution at the current value of $\theta_2$. 
+
+\item The heavy curve is the posterior distribution conditional on this value of $\theta_2$, which is $f(\theta_1|\theta_2 , d)$ in this case because there is only one other parameter.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Gibbs Sampling}
+\scriptsize{
+
+
+\begin{itemize}
+
+\item Because we are using conjugate pairs a computer can directly generate a random  value of $\theta_1$ from $f(\theta_1|\theta_2 , d)$. 
+
+\item Having generated a new value for $\theta_1$, we then conditionalize on it and determine the conditional distribution of the next parameter, $\theta_2$ using $f(\theta_2|\theta_1 , d)$  as shown below:
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/gibbs2.png}
+	\end{figure} 
+
+\item We generate a new value of $\theta_2$ , and the cycle repeats.
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Gibbs Sampling}
+\scriptsize{
+
+\begin{itemize}
+
+\item Because the proposal distribution exactly mirrors the posterior probability for that parameter, the proposed move is always accepted.
+
+\item Hence, the algorithm is more efficient than the standard Metropolis algorithm in which proposals are rejected in many cases.
+
+\item But there are some limitations to Gibbs sampling.
+
+\item First, there are cases when we don't want to use conjugate priors. 
+
+\item Second, it can become inefficient with complex models containing hundreds, thousands or tens of thousands of parameters.
 
 
 \end{itemize}
