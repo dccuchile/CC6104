@@ -69,7 +69,7 @@ as \textbf{Markov chain Monte Carlo} (MCMC).
 
 \item But the benefit is escaping multivariate normality assumption of the Laplace approximation.
 
-\item More advanced models such as the generalized linear and multilevel models tend produce non-Gaussian posterior distributions.
+\item More advanced models such as the generalized linear and multilevel models tend to produce non-Gaussian posterior distributions.
 
 \item In most cases  they cannot
 be estimated at all with the techniques of earlier classes. 
@@ -125,8 +125,8 @@ inference.
 \begin{enumerate}
 \scriptsize{
  \item stay on the current island
- \item move to the adjacent island to the west
- \item move to the adjacent island to east }
+ \item move to the adjacent island to the left
+ \item move to the adjacent island to right }
 \end{enumerate}
 
 \item His goal is to visit all the islands \textbf{proportionally} to their \textbf{relative population}.
@@ -281,7 +281,7 @@ the number of days to simulate, an empty history vector, and a starting island p
 \item Each day, it records the politician's current position.
 \item Then it simulates a coin flip to nominate a proposal island. 
 \item The only trick here lies in making sure that a proposal of ``11'' loops around to island 1 and a proposal of “0” loops around to island 10.
-\item Finally, a random binary number is generated with a binomial distribution with probability of success (or moving)$=\min(1,P_{proposed}/P_{current})$.
+\item Finally, a random binary number is generated with a Bernoulli distribution (Binomial with 1 trial) with probability of success (or moving)$=\min(1,P_{proposed}/P_{current})$.
 \item If this random number is 1 we move, otherwise we stay.
 
 \end{itemize}
@@ -453,8 +453,7 @@ that efficiently explores the regions of the parameter space where $P(\theta)$ h
 
 \item This would mean, that the politician's coin were biased to lead him clockwise on average.
 
-\item Asymmetric proposal distributions allows us to explore the posterior distribution more efficiently (i.e., acquire
-a good image of the posterior distribution in fewer steps).
+\item Asymmetric proposal distributions allows us to explore the posterior distribution more efficiently (i.e., acquire a good image of the posterior distribution in fewer steps).
 
 \item Gibbs sampling is a variant of the Metropolis-Hastings algorithm that uses clever proposals and is therefore more efficient.
 
@@ -473,9 +472,9 @@ a good image of the posterior distribution in fewer steps).
 
 \begin{itemize}
 
-\item How Gibbs sampling computes these adaptive proposals depends upon using particular combinations of prior distributions and likelihoods known as conjugate pairs (such as Binomial and the Beta). 
+\item How Gibbs sampling computes these adaptive proposals depends upon using conjugate combinations of priors and likelihoods (such as the Beta and the Binomial). 
 
-\item Conjugate pairs have analytical solutions for the posterior distribution of an individual parameter. 
+\item As previously presented, conjugate combinations have analytical solutions for the posterior distribution of an individual parameter. 
 
 \item And these solutions are what allow Gibbs sampling to make smart jumps around the joint posterior distribution of all parameters.
 
@@ -508,7 +507,7 @@ f(\theta_i | \theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_n,d)
 
 \begin{itemize}
 
-\item As we are using conjugate pairs, this conditional probabilities distribution has a closed form and is easy to sample random numbers from it.
+\item Since we are using conjugate combinations, this conditional distribution has a closed form that facilitates the sampling of random numbers from it.
 
 \item The new value for $\theta_i$ , combined with the unchanged values of $\theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_n$, constitutes the new position in the random walk.
 
@@ -560,7 +559,7 @@ parameters from the previous step in the chain.
 
 \begin{itemize}
 
-\item Because we are using conjugate pairs a computer can directly generate a random  value of $\theta_1$ from $f(\theta_1|\theta_2 , d)$. 
+\item Because we are using conjugate distributions a computer can directly generate a random  value of $\theta_1$ from $f(\theta_1|\theta_2 , d)$. 
 
 \item Having generated a new value for $\theta_1$, we then conditionalize on it and determine the conditional distribution of the next parameter, $\theta_2$ using $f(\theta_2|\theta_1 , d)$  as shown below:
 
@@ -602,6 +601,145 @@ parameters from the previous step in the chain.
 } 
 \end{frame}
 
+
+
+\begin{frame}{Hamiltonian Monte Carlo}
+\scriptsize{
+
+\begin{itemize}
+\item The Metropolis algorithm and Gibbs sampling are both highly random procedures.
+\item They try out new parameter values and see how good they are, compared to the current values.
+\item But Gibbs sampling gains efficiency by reducing this randomness and exploiting knowledge of the target distribution. 
+
+\item Hamiltonian Monte Carlo (or Hybrid Monte Carlo, HMC) is another sampling method that is much more computationally costly than the others but its proposals are much more efficient.
+
+\item As a result, it doesn't need as many samples to describe the posterior distribution. 
+\item And as models become more complex (thousands or tens of thousands of parameters) HMC can really outshine other algorithms.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Hamiltonian Monte Carlo}
+\scriptsize{
+
+\begin{itemize}
+\item HMC is a very complex algorithm and we won't get into the details of its inner workings
+
+\item Let's try to understand it in a very superficial way by using again the politician's tale.
+
+\item Suppose the politician has moved to the mainland now.
+
+\item Now, instead of moving over a set of discrete islands, it has to move through a continuous territory stretched out from south to north along a narrow valley.
+
+\item The obligations are the same: to visit his citizens in proportion to their local density.
+
+\item And again, the politician doesn't know the population of each area in advance.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Hamiltonian Monte Carlo}
+\scriptsize{
+
+\begin{itemize}
+\item The strategy of the politician is the following:
+
+\item He drives his car across the narrow valley back and forth along its length.
+
+\item In order to spend more time in densely settled areas, he slows down his  vehicle when houses grow
+more dense. 
+\item Likewise, he speeds up when houses grow more sparse. 
+\item This strategy requires knowing how quickly population density is changing, at their current location. 
+
+\item But it doesn't require remembering where they've been or knowing the population distribution anyplace else.
+
+\item This story is analogous to how Hamiltonian Monte Carlo works.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Hamiltonian Monte Carlo}
+
+
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/HMC.png}
+	\end{figure} 
+
+
+
+\end{frame}
+
+
+\begin{frame}{Hamiltonian Monte Carlo}
+\scriptsize{
+
+\begin{itemize}
+\item In statistical applications, the politician's vehicle is the current vector of parameter values. 
+
+
+\item HMC really does run a physics simulation, pretending the vector of parameters gives the position of a little frictionless particle. 
+
+\item The log-posterior provides a surface for this particle to glide across. 
+
+
+\item Then the job is to sweep across this surface, adjusting speed in proportion to how high up we are.
+
+
+
+\item When the log-posterior is very flat, then the particle can glide for a long time before the slope (gradient) makes it turn around.
+
+\item When instead the log-posterior is very steep, then the particle doesn’t get far before turning around.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Hamiltonian Monte Carlo}
+\scriptsize{
+
+\begin{itemize}
+\item A big limitation of HMC is that it needs to be tuned to a particular model and its data.
+
+
+\item Stan\footnote{\url{https://mc-stan.org/}} is a very popular platform for statistical modeling and high-performance statistical computation.
+
+
+\item Stan automates much of that tuning.
+
+
+
+\item Next, we will see how to use Stan to fit the models from earlier classes. 
+
+\item Make sure that the \textbf{rstan} package is installed to access Stan from within R.
+
+\end{itemize}
+
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{pics/stan.png}
+	\end{figure} 
+
+
+} 
+\end{frame}
 
 \begin{frame}{Conclusions}
 \scriptsize{

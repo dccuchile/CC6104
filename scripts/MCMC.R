@@ -19,3 +19,39 @@ for ( i in 1:num_days ) {
 
 library(rethinking)
 simplehist(positions,xlab="island",ylab="number of days")
+
+
+
+
+library(rethinking)
+data(rugged)
+d <- rugged
+d$log_gdp <- log(d$rgdppc_2000)
+dd <- d[ complete.cases(d$rgdppc_2000) , ]
+
+dd.trim <- dd[ , c("log_gdp","rugged","cont_africa") ]
+str(dd.trim)
+
+
+m8.1 <- ulam(
+  alist(
+    log_gdp ~ dnorm( mu , sigma ) ,
+    mu <- a + bR*rugged + bA*cont_africa + bAR*rugged*cont_africa ,
+    a ~ dnorm(0,100),
+    bR ~ dnorm(0,10),
+    bA ~ dnorm(0,10),
+    bAR ~ dnorm(0,10),
+    sigma ~ dcauchy(0,2)
+  ) ,
+  data=dd.trim )
+
+precis(m8.1)
+
+show( m8.1 )
+
+traceplot( m8.1 )
+
+pairs( m8.1 )
+
+trankplot( m8.1 )
+
