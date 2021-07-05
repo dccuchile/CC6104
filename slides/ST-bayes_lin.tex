@@ -58,7 +58,32 @@
 \begin{frame}{Bayesian Linear Models}
 \scriptsize{
 \begin{itemize}
-\item ghghg \cite{mcelreath2020statistical}
+\item In this class we are going to revisit the linear regression model from a Bayesian point of view.
+
+\item The idea is the same as in the frequentist approach, to model the relationship of a numerical dependent variable $\mathbf{y}$ with $n$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$
+
+\item We again use  a Gaussian distribution to describe our  uncertainty about the response variable: $y_i \sim N(\mu_i, \sigma^2)$.
+
+\item And we also assume that each attribute has a linear relationship to the mean of the outcome.
+
+\begin{displaymath}
+\mu_i = \beta_0 + \beta_1 x_i + \dots \beta_n x_n
+\end{displaymath}
+
+\item Instead of using least squares or maximum likelihood estimation we are going to estimate the joint posterior distribution of all the parameters of the model:
+
+\begin{displaymath}
+f(\theta|D)= f(\beta_0,\beta_1,\dots,\beta_b,\sigma|D)
+\end{displaymath}
+
+
+\item This approach is more flexible as it allows incorporating prior information.
+
+\item It also allows to interpret the uncertainty of the model in a clearer way.
+
+
+
+
  
 \end{itemize}
 
@@ -69,6 +94,48 @@
 \end{frame}
 
 
+
+\begin{frame}{Bayesian Linear Models}
+\scriptsize{
+\begin{itemize}
+
+
+\item Notice the the parameters of the model are $\beta_0,\beta_1,\dots,\beta_b$ and $\sigma$.
+
+\item The mean of the outcome $\mu_i$ is not treated as parameter because it is determined deterministically from the linear model's coefficients.
+
+\item To complete the model, we need a joint prior density:
+
+\begin{displaymath}
+f(\theta)= f(\beta_0,\beta_1,\dots,\beta_b,\sigma)
+\end{displaymath}
+
+
+
+
+
+
+\item In most cases, priors are specified independently for each parameter, which amounts to assuming:
+
+
+\begin{displaymath}
+f(\beta_0,\beta_1,\cdots,\beta_b,\sigma)=f(\beta_0)f(\beta_1),\dots, 
+\end{displaymath}
+
+
+
+\cite{mcelreath2020statistical}
+
+
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
 
 
 \begin{frame}{Conclusions}
