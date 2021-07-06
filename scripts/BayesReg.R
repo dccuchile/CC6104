@@ -21,7 +21,12 @@ m4.3 <- quap(
 precis( m4.3 )
 
 
+
 round( vcov( m4.3 ) , 3 )
+
+coef(m4.3)
+plot( height ~ weight , data=d2 )
+abline( a=coef(m4.3)["a"] , b=coef(m4.3)["b"] )
 
 
 plot( height ~ weight , data=d2 , col=rangi2 )
