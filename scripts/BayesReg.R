@@ -12,8 +12,8 @@ m4.3 <- quap(
   alist(
     height ~ dnorm( mu , sigma ) ,
     mu <- a + b*weight ,
-    a ~ dnorm( 178 , 20 ) ,
-    b ~ dlnorm( 0 , 1 ) ,
+    a ~ dnorm( 100 , 100 ) ,
+    b ~ dnorm( 0 , 10 ) ,
     sigma ~ dunif( 0 , 50 )
   ) , data=d2 )
 

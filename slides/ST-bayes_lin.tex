@@ -58,28 +58,27 @@
 \begin{frame}{Bayesian Linear Models}
 \scriptsize{
 \begin{itemize}
-\item In this class we are going to revisit the linear regression model from a Bayesian point of view.
+\item In this class, which  is mostly based on chapter 4 of \cite{mcelreath2020statistical}, we are going to revisit the linear regression model from a Bayesian point of view.
 
-\item The idea is the same as in the frequentist approach, to model the relationship of a numerical dependent variable $\mathbf{y}$ with $n$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$.
 
-\item We again use  a Gaussian distribution to describe our  uncertainty about the response variable: $y_i \sim N(\mu_i, \sigma^2)$.
+\item The idea is the same: to model the relationship of a numerical dependent variable $\mathbf{y}$ with $n$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$ from a dataset $d$.
 
-\item And we also assume that each attribute has a linear relationship to the mean of the outcome.
+\item We also mantain the assumption that each attribute has a linear relationship to the mean of the outcome.
 
 \begin{displaymath}
 \mu_i = \beta_0 + \beta_1 x_i + \dots \beta_n x_n
 \end{displaymath}
 
-\item Instead of using least squares or maximum likelihood estimation we are going to estimate the joint posterior distribution of all the parameters of the model:
+\item However, we are not going to use least squares or maximum likelihood to obtain point estimates of the parameters.
+
+\item Instead, we are going to estimate the joint posterior distribution of all the parameters of the model:
 
 \begin{displaymath}
 f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma|d)
 \end{displaymath}
 
 
-\item This approach is more flexible as it allows incorporating prior information.
 
-\item It also allows to interpret the uncertainty of the model in a clearer way.
 
 
 
@@ -100,45 +99,59 @@ f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma|d)
 \begin{itemize}
 
 
-\item Notice the the parameters of the model are $\beta_0,\beta_1,\dots,\beta_b$ and $\sigma$.
+\item Bayesian linear regresions more flexible than least squares as it allows incorporating prior information.
 
-\item The mean of the outcome $\mu_i$ is not treated as parameter because it is determined deterministically from the linear model's coefficients.
+\item It also allows to interpret the uncertainty of the model in a clearer way.
 
-\item To complete the model, we need a joint prior density:
+\item Notice that the the parameters of the model are $\beta_0,\beta_1,\dots,\beta_b$ and $\sigma$ but not $\mu_i$.
+
+\item This is because $\mu_i$ it is determined deterministically from the linear model's coefficients.
+
+\item In order to build our posterior we need to define a likelihood function:
+
+\begin{displaymath}
+ f(d|\beta_0,\beta_1,\cdots,\beta_n,\sigma) =\prod_{i=1}^m f(d_i|\beta_0,\beta_1,\cdots,\beta_n,\sigma) 
+\end{displaymath}
+
+
+\item Where $d_i$ corresponds to each data point in the dataset containing values for $y$ and $x_1,\dots,x_n$.
+
+\item The likelihood of each point is modeled with a Gaussian distribution:
+
+\begin{displaymath}
+ f(d_i|\beta_0,\beta_1,\cdots,\beta_n,\sigma)= N(\mu_i, \sigma^2)
+\end{displaymath}
+
+
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{Bayesian Linear Models}
+\scriptsize{
+\begin{itemize}
+
+
+\item Now we need a joint prior density:
 
 \begin{displaymath}
 f(\theta)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma)
 \end{displaymath}
+
 
 \item And the posterior gets specified as follows:
 
 \begin{displaymath}
 f(\theta|d)= \frac{ \prod_{i=1}^m f(d_i|\beta_0,\beta_1,\cdots,\beta_n,\sigma)*f(\beta_0,\beta_1,\dots,\beta_n,\sigma)}{f(d)}
 \end{displaymath}
-
-
-here $d_i$ corresponds to each data point containing values for $y$ and $x_1,\dots,x_n$.
-
-
-
-
-
-
-
- 
-\end{itemize}
-
-
-
-} 
-
-\end{frame}
-
-
-
-\begin{frame}{Bayesian Linear Models}
-\scriptsize{
-\begin{itemize}
 
 
 \item The evidence is expressed by a multiple integral:
@@ -149,7 +162,7 @@ here $d_i$ corresponds to each data point containing values for $y$ and $x_1,\do
 
 
 
-\item In most cases, priors are specified independently for each parameter, which amounts to assuming:
+\item In most cases, the priors are specified independently for each parameter, which is equivalent to assuming:
 
 
 \begin{displaymath}
@@ -158,7 +171,6 @@ f(\beta_0,\beta_1,\cdots,\beta_b,\sigma)=f(\beta_0)*f(\beta_1)*\dots*f(\beta_n)*
 
 
 
-\item This class is based on chapters 4 and 5 of \cite{mcelreath2020statistical}
 
 
 
@@ -176,16 +188,34 @@ f(\beta_0,\beta_1,\cdots,\beta_b,\sigma)=f(\beta_0)*f(\beta_1)*\dots*f(\beta_n)*
 \begin{frame}[fragile]{A model of height revisited}
 \scriptsize{
 \begin{itemize}
- \item  Let's fit again a linear model relating height and weight for the !Kung San people.
+ \item   To understand this more concretely, we will rebuild the linear model relating the height and weight of the !Kung San people using a Bayesian approach.
  
- \item But his time we will use a Bayesian approach.
+ \item We will refer to each person's height and weight as $y_i$ and $x_i$ respectively.
  
- \item We need to define a probabilistic model specifying all the components of the Bayesian model:
+ \item Our probabilistic model specifying all components of a Bayesian model is defined as follows:
  
- \begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.4]{pics/height_model.png}
-\end{figure}
+ \vspace{0.3cm}
+ \begin{table}
+ \centering
+ \begin{tabular}{lr}  
+$y_i \sim N(\mu_i,\sigma)$ & [likelihood] \\
+$\mu_i = \beta_0 + \beta_1 x_i$ & [linear model] \\
+$\beta_0 \sim N(100,100)$ & [$\beta_0$ prior] \\
+$\beta_1 \sim N(0,10)$ & [$\beta_1$ prior] \\
+$\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
+\end{tabular}
+\end{table}
+
+ \vspace{0.3cm}
+
+ \item   Parameters $\beta_0$ and $\beta_1$ are the intercept and the slope of our linear model.
+ 
+ \item The parameter $\sigma$ is the standard deviation of all the heights.
+ 
+ \item Note that we are setting the same $\sigma$ for all observations, which is equivalent to the Homoscedasticity property of the standard linear regression. 
+ 
+
+
  
 \end{itemize}
  
@@ -193,6 +223,37 @@ f(\beta_0,\beta_1,\cdots,\beta_b,\sigma)=f(\beta_0)*f(\beta_1)*\dots*f(\beta_n)*
  
 }
 \end{frame}
+
+
+\begin{frame}[fragile]{A model of height revisited}
+\scriptsize{
+\begin{itemize}
+ 
+  \item  Our priors were set independently for each parameter which implies that the joint posterior $f(\beta_0,\beta_1,\sigma)$ can be expressed as $f(\beta_0)*f(\beta_1)*f(\sigma)$.
+ 
+ \item It should be kept in mind that the choice of priors is subjective and should be evaluated accordingly.
+ 
+ \item Let's try to justify our choice a bit:
+ 
+ \begin{enumerate}
+ \scriptsize{
+  \item The Gaussian prior for $\beta_0$ (intercept), centered on 100cm with a standard variation of 100, covers a huge range of plausible mean heights for human populations while giving very little chance for negative heights. \vspace{0.2cm}
+  \item The Gaussian prior for $\beta_1$, centered on 0 with a standard variation of 10, acts as a \textbf{regularizer} to prevent the model from \textbf{overfitting} the data.\footnote{These concepts will be discussed later in the course.}  \vspace{0.2cm} 
+    \item The uniform prior for the standard deviation $\sigma$ between 0 and 50 forbids obtaining negative standard deviations. The upper bound (50 cm) would imply that 95\% of individual heights lie within 100cm of the average height. That's a very large range.  \vspace{0.2cm}
+}
+ \end{enumerate}
+
+ 
+ 
+
+ 
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
 
 \begin{frame}{Conclusions}
 \scriptsize{
