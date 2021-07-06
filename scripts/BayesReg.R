@@ -13,7 +13,7 @@ m4.3 <- quap(
     height ~ dnorm( mu , sigma ) ,
     mu <- a + b*weight ,
     a ~ dnorm( 100 , 100 ) ,
-    b ~ dnorm( 0 , 10 ) ,
+    b ~ dnorm( 0 , 1) ,
     sigma ~ dunif( 0 , 50 )
   ) , data=d2 )
 
