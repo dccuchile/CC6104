@@ -34,7 +34,7 @@
 
 
 \vspace{-0.5cm}
-\title{Bayesian Linear Models}
+\title{Bayesian Linear Regression}
 \vspace{-0.5cm}
 \author[Felipe Bravo Márquez]{\footnotesize
 %\author{\footnotesize  
@@ -55,13 +55,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Bayesian Linear Models}
+\begin{frame}{Bayesian Linear Regression}
 \scriptsize{
 \begin{itemize}
 \item In this class, which  is mostly based on chapter 4 of \cite{mcelreath2020statistical}, we are going to revisit the linear regression model from a Bayesian point of view.
 
 
 \item The idea is the same: to model the relationship of a numerical dependent variable $\mathbf{y}$ with $n$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$ from a dataset $d$.
+
+\item The response vaiable $\mathbf{y}$ is again modeled with a Gaussian distribution: $y_i \sim N(\mu_i,\sigma^2)$.
+
 
 \item We also mantain the assumption that each attribute has a linear relationship to the mean of the outcome.
 
@@ -99,7 +102,7 @@ f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma|d)
 \begin{itemize}
 
 
-\item Bayesian linear regresions more flexible than least squares as it allows incorporating prior information.
+\item The Bayesian linear regresion is  more flexible than least squares as it allows incorporating prior information.
 
 \item It also allows to interpret the uncertainty of the model in a clearer way.
 
@@ -114,7 +117,7 @@ f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma|d)
 \end{displaymath}
 
 
-\item Where $d_i$ corresponds to each data point in the dataset containing values for $y$ and $x_1,\dots,x_n$.
+\item Where $d_i$ corresponds to each data point in the dataset containing values for $y$ and $x_1,\dots,x_n$ (IID assumption).
 
 \item The likelihood of each point is modeled with a Gaussian distribution:
 
@@ -185,7 +188,7 @@ f(\beta_0,\beta_1,\cdots,\beta_b,\sigma)=f(\beta_0)*f(\beta_1)*\dots*f(\beta_n)*
 
 
 
-\begin{frame}[fragile]{A model of height revisited}
+\begin{frame}{A model of height revisited}
 \scriptsize{
 \begin{itemize}
  \item   To understand this more concretely, we will rebuild the linear model relating the height and weight of the !Kung San people using a Bayesian approach.
@@ -225,11 +228,11 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 \end{frame}
 
 
-\begin{frame}[fragile]{A model of height revisited}
+\begin{frame}{A model of height revisited}
 \scriptsize{
 \begin{itemize}
  
-  \item  Our priors were set independently for each parameter which implies that the joint posterior $f(\beta_0,\beta_1,\sigma)$ can be expressed as $f(\beta_0)*f(\beta_1)*f(\sigma)$.
+  \item  Our priors were set independently for each parameter which implies that the joint prior density $f(\beta_0,\beta_1,\sigma)$ can be expressed as $f(\beta_0)*f(\beta_1)*f(\sigma)$.
  
  \item It should be kept in mind that the choice of priors is subjective and should be evaluated accordingly.
  
@@ -238,13 +241,166 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
  \begin{enumerate}
  \scriptsize{
   \item The Gaussian prior for $\beta_0$ (intercept), centered on 100cm with a standard variation of 100, covers a huge range of plausible mean heights for human populations while giving very little chance for negative heights. \vspace{0.2cm}
-  \item The Gaussian prior for $\beta_1$ (slope), centered on 0 with a standard variation of 1, acts as a \textbf{regularizer} to prevent the model from assigning extreme values to $\beta_1$.\footnote{Regularization will be discussed later in the course.}  \vspace{0.2cm} 
+  \item The Gaussian prior for $\beta_1$ (slope), centered on 0 with a standard variation of 1, acts as a \textbf{regularizer} to prevent the model from \textbf{overfitting} the data by assigning extreme values to $\beta_1$.\footnote{Regularization and overfitting will be discussed later in the course.}  \vspace{0.2cm} 
     \item The uniform prior for the standard deviation $\sigma$ between 0 and 50 prohibits obtaining negative standard deviations. The upper bound (50 cm) would imply that 95\% of individual heights lie within 100cm of the average height. That's a very large range.  \vspace{0.2cm}
 }
  \end{enumerate}
 
   
 
+ 
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Fitting the Model}
+\scriptsize{
+\begin{itemize}
+ 
+  \item Now we need to fit the model to the data to build the posterior distribution.
+  
+  \item Grid approximation is not a valid option, as setting up a grid for 3 parameters would be too computationally expensive.
+  
+  \item We will use Laplace approximation instead.
+  
+  \item In this approach we obtain the MAP estimates for each parameter using a hill-climbing \textbf{optimization} method.
+  
+  \item Then we fit a \textbf{multivariate Gaussian distribution} centered on these values.
+  
+  
+  \item This distribution is the multidimensional extension to the standard Gaussian.
+  
+
+ 
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+\begin{frame}[fragile]{The multivariate Gaussian distribution}
+\scriptsize{
+\begin{itemize}
+ 
+  \item The multivariate Gaussian distribution in $d$-dimensions defined by the following density function (PDF):
+  
+  \begin{displaymath}
+   f_x = \frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}}\exp \left( -\frac{1}{2}(\vec{x}-\vec{\mu})^T  \Sigma^{-1}(\vec{x}-\mu)\right)
+  \end{displaymath}
+
+  
+\item This density function allows working with a $d$-dimensional vector of random variables $\vec{X}$.
+
+
+\item The parameters are a mean vector $\vec{\mu} \in \mathcal{R}^d$ containing to the mean of each dimension.
+
+\item Aand a covariance matrix $\Sigma \in R^{d\times d}$, where $\Sigma \geq 0$ is symmetric and positive semi-definite.
+
+\item This matrix contains the variance of each variable in the diagonal and the covariance of variables $X_i$ and $X_j$ in the other cells $\Sigma_{i,j}$  \cite{ng2008generative}:
+
+\begin{displaymath}
+ Cov(X) = \Sigma
+\end{displaymath}
+
+  
+  \item It is a very convenient distribution for modeling multidimensional random variables.
+  
+  
+ 
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{The multivariate Gaussian distribution}
+\scriptsize{
+\begin{itemize}
+ 
+  \item Here are some examples of what the density of a multivariate Gaussian distribution looks like:
+  
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/mgaussian1.png}
+\end{figure}
+
+
+\item The left-most figure shows a Gaussian with mean zero (that is, the 2x1 zero-vector) and covariance matrix $\Sigma = I$ (the $2\times2$ identity matrix). 
+\item A Gaussian with zero mean and identity covariance is also called the standard normal distribution.
+
+\item The middle figure shows the density of a Gaussian with zero mean and $\Sigma = 0.6I$.
+
+\item The rightmost figure shows one with , $\Sigma = 2I$.
+
+\item We see that as $\Sigma$ becomes larger, the Gaussian becomes more ``spread-out,'' and as it becomes smaller, the distribution becomes more ``compressed''.
+ 
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{The multivariate Gaussian distribution}
+\scriptsize{
+
+
+  
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/mgaussian2.png}
+\end{figure}
+ 
+\begin{itemize}
+ 
+
+ \item The figures above show Gaussians with mean 0, and with covariance matrices respectively
+ 
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{pics/mgaussian4.png}
+\end{figure}
+
+\item The leftmost figure shows the familiar standard normal distribution, and we see that as we increase the off-diagonal entry in $\Sigma$, the density becomes more ``compressed'' towards the $45\cdot$ line (given by $x_1 = x_2$).
+ 
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]{The multivariate Gaussian distribution}
+\scriptsize{
+\begin{itemize}
+ 
+  \item   As our last set of examples, fixing $\Sigma = I$, by varying $\vec{\mu}$ we can also move the mean of the density around.
+  
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.25]{pics/mgaussian3.png}
+\end{figure}
+ 
+
+ \item The figures above were generated using $\Sigma = I$, and respectively
+ 
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/mgaussian5.png}
+\end{figure}
  
 \end{itemize}
  
