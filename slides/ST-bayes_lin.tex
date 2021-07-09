@@ -203,7 +203,7 @@ f(\beta_0,\beta_1,\cdots,\beta_b,\sigma)=f(\beta_0)*f(\beta_1)*\dots*f(\beta_n)*
  \begin{tabular}{lr}  
 $y_i \sim N(\mu_i,\sigma)$ & [likelihood] \\
 $\mu_i = \beta_0 + \beta_1 x_i$ & [linear model] \\
-$\beta_0 \sim N(100,100)$ & [$\beta_0$ prior] \\
+$\beta_0 \sim N(150,50)$ & [$\beta_0$ prior] \\
 $\beta_1 \sim N(0,1)$ & [$\beta_1$ prior] \\
 $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 \end{tabular}
@@ -240,7 +240,7 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
  
  \begin{enumerate}
  \scriptsize{
-  \item The Gaussian prior for $\beta_0$ (intercept), centered on 100cm with a standard variation of 100, covers a huge range of plausible mean heights for human populations while giving very little chance for negative heights. \vspace{0.2cm}
+  \item The Gaussian prior for $\beta_0$ (intercept), centered on 150cm with a standard variation of 50, covers a huge range of plausible mean heights for human populations while giving very little chance for negative heights. \vspace{0.2cm}
   \item The Gaussian prior for $\beta_1$ (slope), centered on 0 with a standard variation of 1, acts as a \textbf{regularizer} to prevent the model from \textbf{overfitting} the data by assigning extreme values to $\beta_1$.\footnote{Regularization and overfitting will be discussed later in the course.}  \vspace{0.2cm} 
     \item The uniform prior for the standard deviation $\sigma$ between 0 and 50 prohibits obtaining negative standard deviations. The upper bound (50 cm) would imply that 95\% of individual heights lie within 100cm of the average height. That's a very large range.  \vspace{0.2cm}
 }
@@ -485,7 +485,7 @@ d2 <- d[ d$age >= 18 , ]
 b.reg1 <- quap(
   alist(
     height ~ dnorm( b0 + b1*weight, sigma ),
-    b0 ~ dnorm( 100 , 100 ) ,
+    b0 ~ dnorm( 150 , 50 ) ,
     b1 ~ dnorm( 0 , 1) ,
     sigma ~ dunif( 0 , 50 )
   ) , data=d2 )
@@ -510,8 +510,8 @@ b.reg1 <- quap(
   \begin{verbatim}
 > precis( b.reg1, prob=0.95 )
         mean   sd   2.5%  97.5%
-b0    113.95 1.90 110.21 117.68
-b1      0.90 0.04   0.82   0.99
+b0    113.99 1.90 110.26 117.71
+b1      0.90 0.04   0.82   0.98
 sigma   5.07 0.19   4.70   5.45
   \end{verbatim}
 

@@ -7,7 +7,7 @@ d2 <- d[ d$age >= 18 , ]
 b.reg1 <- quap(
   alist(
     height ~ dnorm( b0 + b1*weight, sigma ),
-    b0 ~ dnorm( 100 , 100 ) ,
+    b0 ~ dnorm( 150 , 50 ) ,
     b1 ~ dnorm( 0 , 1) ,
     sigma ~ dunif( 0 , 50 )
   ) , data=d2 )
@@ -15,6 +15,10 @@ b.reg1 <- quap(
 
 precis( b.reg1, prob=0.95 )
 
+# samples from the posterior
+post <- extract.samples( b.reg1 )
+precis(post,prob=0.95)
+post[1:5,]
 
 
 
@@ -33,9 +37,7 @@ b1_map <- mean(post$b1)
 curve( b0_map + b1_map*x, add=TRUE )
 
 
-# samples from the posterior
-post <- extract.samples( b.reg1 )
-post[1:5,]
+
 
 mu_at_50 <- post$b0 + post$b1 * 50
 dens( mu_at_50 , col=rangi2 , lwd=2 , xlab="mu|weight=50" )
