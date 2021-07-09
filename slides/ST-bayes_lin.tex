@@ -297,18 +297,19 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 \item This density function allows working with a $d$-dimensional vector of random variables $\vec{X}$.
 
 
-\item The parameters are a mean vector $\vec{\mu} \in \mathcal{R}^d$ containing to the mean of each dimension.
+\item The first parameter of this distributions is a mean vector $\vec{\mu} \in \mathcal{R}^d$ with the mean value of each dimension.
 
-\item Aand a covariance matrix $\Sigma \in R^{d\times d}$, where $\Sigma \geq 0$ is symmetric and positive semi-definite.
+\item The second parameter is a covariance matrix $\Sigma \in R^{d\times d}$,
 
-\item This matrix contains the variance of each variable in the diagonal and the covariance of variables $X_i$ and $X_j$ in the other cells $\Sigma_{i,j}$  \cite{ng2008generative}:
+\item This matrix contains the variance of each variable in the diagonal and the covariance of variables $X_i$ and $X_j$ in the other cells $\Sigma_{i,j}$:
 
 \begin{displaymath}
  Cov(X) = \Sigma
 \end{displaymath}
 
+\item The matrix $\Sigma$ is symmetric and positive semi-definite.
   
-  \item It is a very convenient distribution for modeling multidimensional random variables.
+\item The multivariate Gaussian $N(\vec{\mu},\Sigma)$ is a very convenient distribution for modeling multidimensional random variables.
   
   
  
@@ -325,7 +326,7 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 \scriptsize{
 \begin{itemize}
  
-  \item Here are some examples of what the density of a multivariate Gaussian distribution looks like:
+  \item Here are some examples taken from \cite{ng2008generative} of what the density of a multivariate Gaussian distribution looks like:
   
   \begin{figure}[h!]
 	\centering
@@ -340,7 +341,7 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 
 \item The rightmost figure shows one with , $\Sigma = 2I$.
 
-\item We see that as $\Sigma$ becomes larger, the Gaussian becomes more ``spread-out,'' and as it becomes smaller, the distribution becomes more ``compressed''.
+\item We see that as $\Sigma$ becomes larger, the Gaussian becomes more ``spread-out'', and as it becomes smaller, the distribution becomes more ``compressed''.
  
 \end{itemize}
  
@@ -348,6 +349,9 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
  
 }
 \end{frame}
+
+
+
 
 
 \begin{frame}[fragile]{The multivariate Gaussian distribution}
@@ -408,6 +412,45 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
  
 }
 \end{frame}
+
+
+\begin{frame}{Laplace approximation}
+\scriptsize{
+
+\begin{itemize}
+\item In Laplace approximation we assume that the joint posterior follows a multivariate Gaussian distribution $f(\theta_1,\dots,\theta_n) = N(\vec{\mu},\Sigma)$.
+\item This approximation is convenient for unimodal and roughly symmetric posterior distributions \cite{gelman2013bayesian}.
+
+\item Moreover, there is Bayesian asymptotic theory that says that if the dataset is large enough, a posterior distribution can be approximated by a Gaussian \cite{gelman2013bayesian}.
+
+\item The values of $\vec{\mu}$ are obtained from the posterior mode of each parameters (MAP):
+\begin{displaymath}
+ \vec{\mu} = \vec{\theta}_{MAP}
+\end{displaymath}
+
+
+
+\item The values of $\Sigma$ are obtained from the curvature near these values, which are obtained from the second derivatives of the posterior:
+
+\begin{displaymath}
+ \Sigma = [I({\theta}_{MAP})]^{-1}
+\end{displaymath}
+
+where  \begin{displaymath}
+        I(\theta) = - \frac{d^2}{d\theta^2} \log f(\theta|d)
+       \end{displaymath}
+
+
+
+\item Notice that both  $\vec{\mu}$ and $\Sigma$ can be calculated from the unnormalized posterior: 
+$f(d|\theta)*f(\theta)$ because the evidence $f(d)$ is a constant that doesn't affect the maximum nor the curvature.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
 
 
 \begin{frame}{Conclusions}
