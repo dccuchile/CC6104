@@ -4,45 +4,40 @@ data(Howell1)
 d <- Howell1
 d2 <- d[ d$age >= 18 , ]
 
-# define the average weight, x-bar
-xbar <- mean(d2$weight)
-
-
-m4.3 <- quap(
+b.reg1 <- quap(
   alist(
-    height ~ dnorm( mu , sigma ) ,
-    mu <- a + b*weight ,
-    a ~ dnorm( 100 , 100 ) ,
-    b ~ dnorm( 0 , 1) ,
+    height ~ dnorm( b0 + b1*weight, sigma ),
+    b0 ~ dnorm( 100 , 100 ) ,
+    b1 ~ dnorm( 0 , 1) ,
     sigma ~ dunif( 0 , 50 )
   ) , data=d2 )
 
 
-precis( m4.3 )
+precis( b.reg1, prob=0.95 )
 
 
 
 
 
-round( vcov( m4.3 ) , 3 )
+round( vcov( b.reg1 ) , 3 )
 
-coef(m4.3)
+coef(b.reg1)
 plot( height ~ weight , data=d2 )
-  abline( a=coef(m4.3)["a"] , b=coef(m4.3)["b"] )
+  abline( a=coef(b.reg1)["b0"] , b=coef(b.reg1)["b1"] )
 
 
 plot( height ~ weight , data=d2 , col=rangi2 )
-post <- extract.samples( m4.3 )
-a_map <- mean(post$a)
-b_map <- mean(post$b)
-curve( a_map + b_map*x, add=TRUE )
+post <- extract.samples( b.reg1 )
+b0_map <- mean(post$b0)
+b1_map <- mean(post$b1)
+curve( b0_map + b1_map*x, add=TRUE )
 
 
 # samples from the posterior
-post <- extract.samples( m4.3 )
+post <- extract.samples( b.reg1 )
 post[1:5,]
 
-mu_at_50 <- post$a + post$b * 50
+mu_at_50 <- post$b0 + post$b1 * 50
 dens( mu_at_50 , col=rangi2 , lwd=2 , xlab="mu|weight=50" )
 PI( mu_at_50 , prob=0.89 )
 
@@ -58,7 +53,7 @@ weight.seq <- seq( from=25 , to=70 , by=1 )
 # a posterior distribution of mu for each weight in weight.seq
 
 
-mu <- link( m4.3 , data=data.frame(weight=weight.seq) )
+mu <- link( b.reg1 , data=data.frame(weight=weight.seq) )
 
 mu.mean <- apply( mu , 2 , mean )
 mu.PI <- apply( mu , 2 , PI , prob=0.89 )
@@ -71,7 +66,7 @@ lines( weight.seq , mu.mean )
 shade( mu.PI , weight.seq )
 
 # Let's implement link ourselves
-mu.link <- function(weight) post$a + post$b*weight
+mu.link <- function(weight) post$b0 + post$b1*weight
 mu2 <- sapply( weight.seq , mu.link )
 mu2.mean <- apply( mu2 , 2 , mean )
 mu2.PI <- apply( mu2 , 2 , PI , prob=0.95 )
@@ -90,12 +85,12 @@ shade( mu2.PI , weight.seq )
 weight.sim <- function(weight) 
   rnorm(
     n=nrow(post) ,
-    mean=post$a + post$b*weight ,
+    mean=post$b0 + post$b1*weight ,
     sd=post$sigma )
 sim.height <- sapply( weight.seq , weight.sim)
 
 #or alternatively
-#sim.height <- sim( m4.3 , data=list(weight=weight.seq) )
+#sim.height <- sim( b.reg1 , data=list(weight=weight.seq) )
 
 height.PI <- apply( sim.height , 2 , PI , prob=0.89 )
 

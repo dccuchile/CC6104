@@ -421,14 +421,28 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 \item In Laplace approximation we assume that the joint posterior follows a multivariate Gaussian distribution $f(\theta_1,\dots,\theta_n) = N(\vec{\mu},\Sigma)$.
 \item This approximation is convenient for unimodal and roughly symmetric posterior distributions \cite{gelman2013bayesian}.
 
-\item Moreover, there is Bayesian asymptotic theory that says that if the dataset is large enough, a posterior distribution can be approximated by a Gaussian \cite{gelman2013bayesian}.
+\item The Bayesian asymptotic theory says that if the dataset is large enough, a posterior distribution can be approximated by a Gaussian \cite{gelman2013bayesian}.
 
 \item The values of $\vec{\mu}$ are obtained from the posterior mode of each parameters (MAP):
 \begin{displaymath}
  \vec{\mu} = \vec{\theta}_{MAP}
 \end{displaymath}
 
+\item These is done using numeric optimization techniques.
 
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Laplace approximation}
+\scriptsize{
+
+\begin{itemize}
 
 \item The values of $\Sigma$ are obtained from the curvature near these values, which are obtained from the second derivatives of the posterior:
 
@@ -442,8 +456,10 @@ where  \begin{displaymath}
 
 
 
-\item Notice that both  $\vec{\mu}$ and $\Sigma$ can be calculated from the unnormalized posterior: 
-$f(d|\theta)*f(\theta)$ because the evidence $f(d)$ is a constant that doesn't affect the maximum nor the curvature.
+\item Notice that both  $\vec{\mu}$ and $\Sigma$ can be calculated from the unnormalized posterior 
+$f(d|\theta)*f(\theta)$
+
+\item We don't need to calculate the evidence $f(d)$ to perform Laplace approximation \cite{laplaceApp}.
 
 \end{itemize}
 
@@ -452,6 +468,76 @@ $f(d|\theta)*f(\theta)$ because the evidence $f(d)$ is a constant that doesn't a
 \end{frame}
 
 
+\begin{frame}[fragile]{Fitting the Model}
+\scriptsize{
+\begin{itemize}
+ 
+  \item Laplace approximation is implemented in the \textbf{quap} function from the \textbf{rethinking} package.
+  
+  \item The model for height defined above can be implemented as follows:
+  
+  \begin{verbatim}
+library(rethinking)
+data(Howell1)
+d <- Howell1
+d2 <- d[ d$age >= 18 , ]
+
+b.reg1 <- quap(
+  alist(
+    height ~ dnorm( b0 + b1*weight, sigma ),
+    b0 ~ dnorm( 100 , 100 ) ,
+    b1 ~ dnorm( 0 , 1) ,
+    sigma ~ dunif( 0 , 50 )
+  ) , data=d2 )
+  \end{verbatim}
+
+  
+
+ 
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+\begin{frame}[fragile]{Fitting the Model}
+\scriptsize{
+\begin{itemize}
+ 
+  \item We can summarize this posterior with the command \textbf{precis}:
+  
+  \begin{verbatim}
+> precis( b.reg1, prob=0.95 )
+        mean   sd   2.5%  97.5%
+b0    113.95 1.90 110.21 117.68
+b1      0.90 0.04   0.82   0.99
+sigma   5.07 0.19   4.70   5.45
+  \end{verbatim}
+
+\item These numbers provide Gaussian approximations for each parameter's marginal posterior distribution.
+
+\item This is the distribution of any parameter $\theta_i$ regardless of the values of the others.
+
+
+\item In mathematical terms this is obtained, after integrating (averaging) over  $\theta_j \ \forall j \neq i$:
+
+\begin{displaymath}
+f(\theta_i |d) = \int \dots \int f(\theta_1,\dots,\theta_n|d)d\theta_1,\dots,d\theta_{i-1},d\theta_{i+1},\dots,d\theta_{n} 
+\end{displaymath}
+
+
+\item We can compare the mean and standard deviation of $\beta_0$ and $\beta_1$ with what we obtained using least squares in previous lecture.
+
+\item The values are almost the same!
+
+ 
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
 
 \begin{frame}{Conclusions}
 \scriptsize{
