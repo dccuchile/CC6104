@@ -15,7 +15,18 @@ b.reg1 <- quap(
 
 precis( b.reg1, prob=0.95 )
 
+vcov( b.reg1 )
+
+cov2cor( vcov( b.reg1 ) )
+
+
+
+
 # samples from the posterior
+library(MASS)
+post <- mvrnorm( n=1e4 , mu=coef(b.reg1 ) , Sigma=vcov(b.reg1 ) )
+
+
 post <- extract.samples( b.reg1 )
 precis(post,prob=0.95)
 post[1:5,]

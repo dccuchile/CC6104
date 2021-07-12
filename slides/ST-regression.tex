@@ -573,7 +573,7 @@ male    0.6999934  0.5244527  0.02845498 1.00000000
   \text{height}(\text{weight})=\beta_0+\beta_1*\text{weight}
  \end{displaymath}
  
-  \item In R the linear models are created with the command \verb+lm+ that receives as parameter a formula of the form \verb+y~x+ ($y=f(x)$).
+
  
  
 
@@ -590,6 +590,13 @@ male    0.6999934  0.5244527  0.02845498 1.00000000
 
 \begin{frame}[fragile]{Example: a model of height}
 \scriptsize{
+
+
+
+\begin{itemize}
+
+  \item In R the linear models are created with the command \verb+lm+ that receives as parameter a formula of the form \verb+y~x+ ($y=f(x)$).
+
 \begin{verbatim}
 > reg1<-lm(height~weight,d2)
 > reg1
@@ -602,14 +609,31 @@ Coefficients:
     113.879        0.905  
 \end{verbatim}
 
-\begin{itemize}
 
 
+ 
+ \end{itemize}
+ 
+ 
 
 
- \item We can see that the coefficients of the model are $\beta_{0}=113.879$ and $\beta_{1}=0.905$. 
+} 
+\end{frame}
 
 
+\begin{frame}[fragile]{Example: a model of height}
+\scriptsize{
+
+ \begin{itemize}
+ 
+  \item We can see that the coefficients of the model are $\beta_{0}=113.879$ and $\beta_{1}=0.905$. 
+
+
+\item The estimate of $\beta_{0}=113.879$, indicates that a person of weight 0 should be around $114$cm tall, which we know is nonsense but it what our linear model believes.  
+ 
+ \item Since $\beta_1$ is a slope, the value $0.905$ can be read as a person 1 kg heavier is expected to be 0.90 cm taller.
+ 
+ 
  \item We can directly access the coefficients and store them in a variable:
  \begin{verbatim}
 > reg1.coef<-reg1$coefficients
