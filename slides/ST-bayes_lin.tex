@@ -518,10 +518,7 @@ sigma   5.07 0.19   4.70   5.45
 
 \item These numbers provide Gaussian approximations for each parameter's \textbf{marginal} posterior distribution.
 
-\item A marginal is the distribution of a parameter $\theta_i$ regardless of the values of the others.
-
-
-\item In mathematical terms this is obtained, after integrating (averaging) over  $\theta_j \ \forall j \neq i$:
+\item The marginal of multivariate distribution is the univariate distribution of a single parameter $\theta_i$ after integrating (averaging) over all the other parameters  $\theta_j \ \forall j \neq i$:
 
 \begin{displaymath}
 f(\theta_i |d) = \int \dots \int f(\theta_1,\dots,\theta_n|d)d\theta_1,\dots,d\theta_{i-1},d\theta_{i+1},\dots,d\theta_{n} 
@@ -539,8 +536,30 @@ f(\theta_i |d) = \int \dots \int f(\theta_1,\dots,\theta_n|d)d\theta_1,\dots,d\t
 \begin{frame}[fragile]{Fitting the Model}
 \scriptsize{
 \begin{itemize}
+ 
+  \item In a multivariate Gaussian $N(\vec{\mu},\Sigma)$, the marginal distribution of $\theta_i$ is a univariate Gaussian $N(\vec{\mu}_i,\Sigma_{ii})$. 
 
-\item We can compare the mean and standard deviation of $\beta_0$ and $\beta_1$ with what we obtained using least squares in previous lecture.
+  \item So, the marginal distribution of $\beta_1$ is a Gaussian distribution with $\mu=0.9$ and $\sigma=1.9$. 
+  
+  \item The last two columns of the summary table show the lower and upper limits of a 95\% equal-tailed credible interval for each parameter.
+  
+  \item For the case of $\beta_1$, 95\% of the posterior probability lies between 0.82 and 0.98. 
+  
+  \item That suggests that $\beta_1$ values close to zero or greatly above one are highly incompatible with these data and this model.
+ 
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Fitting the Model}
+\scriptsize{
+\begin{itemize}
+
+\item Let's compare the mean and standard deviation of $\beta_0$ and $\beta_1$ with what we obtained using least squares in previous lecture:
 
 \begin{verbatim}
 > summary(reg1)
@@ -558,11 +577,14 @@ Residual standard error: 5.086 on 350 degrees of freedom
 \end{verbatim}
 
 
-\item The values are almost the same!
+\item These values are almost the same!
 
 \item Recall that maximum likelihood or least squares estimators are identical to MAP estimators with uniform priors.
 
-\item This indicates that our priors did not have a significant impact.
+\item This indicates that our priors did not have a significant impact in the resulting posterior.
+
+
+
  
 \end{itemize}
  
@@ -575,7 +597,7 @@ Residual standard error: 5.086 on 350 degrees of freedom
 \scriptsize{
 \begin{itemize}
 
-\item Because in Laplace Approximation we are using a multivariate Gaussiand we can also get the covariance matrix $\Sigma$.
+\item We can also get the covariance matrix $\Sigma$ of our multivariate Gaussian obtained with Laplace approximation:
 
 \begin{verbatim}
 > vcov( b.reg1 )
@@ -586,9 +608,9 @@ sigma  0.001765417 -3.830179e-05  3.654305e-02
 \end{verbatim}
 
 
-\item The matrix tell us it tells how each parameter relates to every other parameter in the posterior distribution.
+\item The matrix tell us  how each parameter relates to every other parameter in the posterior distribution.
 
-\item We can converte these covariances into correlation coefficients to facilitate its interpretability:
+\item It is better to turn them into correlations for easier interpretation:
 
 \begin{verbatim}
 > cov2cor( vcov( b.reg1 ) )
@@ -597,6 +619,86 @@ b0     1.000000000 -0.989855066  0.004853802
 b1    -0.989855066  1.000000000 -0.004786196
 sigma  0.004853802 -0.004786196  1.000000000
 \end{verbatim}
+
+\item Notice that $\beta_0$ and $\beta_1$ are al-
+most perfectly negatively correlated.
+
+\item This means that these two parameters carry the same information: as we change the slope of the line, the best intercept changes to match it.
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Centering}
+\scriptsize{
+\begin{itemize}
+\item In more complex models, strong correlations like this can make it difficult to fit the model to the data. 
+
+\item A useful trick to avoid this problem is  centering: subtract the mean of a variable from each value. 
+
+\begin{verbatim}
+d2$weight.c <- d2$weight - mean(d2$weight)
+b.reg2 <- quap(
+  alist(
+    height ~ dnorm( b0 + b1*weight.c, sigma ),
+    b0 ~ dnorm( 150 , 50 ) ,
+    b1 ~ dnorm( 0 , 1) ,
+    sigma ~ dunif( 0 , 50 )
+  ) , data=d2 )
+
+> cov2cor( vcov( b.reg2 ) )
+                 b0            b1         sigma
+b0     1.000000e+00  6.901851e-08 -2.435168e-05
+b1     6.901851e-08  1.000000e+00 -2.860675e-03
+sigma -2.435168e-05 -2.860675e-03  1.000000e+00  
+\end{verbatim}
+
+\item The correlations among parameters are now all very close to zero.
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Sampling from the Posterior}
+\scriptsize{
+\begin{itemize}
+\item In the remainder of this class we will work with samples from our multi-dimensional posterior.
+\item The rethinking package provides the \textbf{extract.samples} function to obtain them:
+\begin{verbatim}
+> post <- extract.samples( b.reg1, n= 1e4 )
+> head(post)
+        b0        b1    sigma
+1 112.6949 0.9241772 5.379502
+2 114.0312 0.9049003 5.213418
+3 114.5932 0.8867978 5.057051
+4 111.9088 0.9522044 5.021026
+5 111.7631 0.9496914 4.886909
+6 116.6987 0.8367835 5.256882
+\end{verbatim}
+
+\item Each sample is a different line relating height and weight.
+
+\item Bear in mind that each line is sampled in proportion to the posterior probabilities, which represent our model's beliefs.
+
+
+\item Since our posterior was approximated with Laplace approximation we could get equivalent samples from a multi-variate Gaussian:
+
+
+\begin{verbatim}
+> library(MASS)
+> post2 <- mvrnorm(n=1e4 , mu=coef(b.reg1),
+Sigma=vcov(b.reg1))
+\end{verbatim}
+
 
 
 

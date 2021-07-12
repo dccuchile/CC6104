@@ -19,16 +19,33 @@ vcov( b.reg1 )
 
 cov2cor( vcov( b.reg1 ) )
 
-
+# centering
+d2$weight.c <- d2$weight - mean(d2$weight)
+b.reg2 <- quap(
+  alist(
+    height ~ dnorm( b0 + b1*weight.c, sigma ),
+    b0 ~ dnorm( 150 , 50 ) ,
+    b1 ~ dnorm( 0 , 1) ,
+    sigma ~ dunif( 0 , 50 )
+  ) , data=d2 )
+cov2cor( vcov( b.reg2 ) )
 
 
 # samples from the posterior
-library(MASS)
-post <- mvrnorm( n=1e4 , mu=coef(b.reg1 ) , Sigma=vcov(b.reg1 ) )
-
-
-post <- extract.samples( b.reg1 )
+post <- extract.samples( b.reg1, n= 1e4 )
+head(post)
 precis(post,prob=0.95)
+
+library(MASS)
+post2 <- mvrnorm( n=1e4 , mu=coef(b.reg1 ) , Sigma=vcov(b.reg1 ) )
+head(post2)
+
+precis(as.data.frame(post2))
+
+
+dens(post$b0)
+dens(post$b1)
+
 post[1:5,]
 
 
