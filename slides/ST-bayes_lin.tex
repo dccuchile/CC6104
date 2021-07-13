@@ -63,10 +63,10 @@
 
 \item The idea is the same: to model the relationship of a numerical dependent variable $\mathbf{y}$ with $n$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$ from a dataset $d$.
 
-\item The response vaiable $\mathbf{y}$ is again modeled with a Gaussian distribution: $y_i \sim N(\mu_i,\sigma^2)$.
+\item The response variable $\mathbf{y}$ is again modeled with a Gaussian distribution: $y_i \sim N(\mu_i,\sigma^2)$.
 
 
-\item We also mantain the assumption that each attribute has a linear relationship to the mean of the outcome.
+\item We also maintain the assumption that each attribute has a linear relationship to the mean of the outcome.
 
 \begin{displaymath}
 \mu_i = \beta_0 + \beta_1 x_i + \dots \beta_n x_n
@@ -104,9 +104,9 @@ f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma|d)
 
 \item The Bayesian linear regression is  more flexible than least squares as it allows incorporating prior information.
 
-\item It also allows to interpret the uncertainty of the model in a clearer way.
+\item It also allows to interpret the uncertainty of the model in a much richer way.
 
-\item Notice that the the parameters of the model are $\beta_0,\beta_1,\dots,\beta_b$ and $\sigma$ but not $\mu_i$.
+\item Notice that the the parameters of the model are $\beta_0,\beta_1,\dots,\beta_n$ and $\sigma$ but not $\mu_i$.
 
 \item This is because $\mu_i$ it is determined deterministically from the linear model's coefficients.
 
@@ -299,7 +299,7 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 
 \item The first parameter of this distributions is a mean vector $\vec{\mu} \in \mathcal{R}^d$ with the mean value of each dimension.
 
-\item The second parameter is a covariance matrix $\Sigma \in R^{d\times d}$,
+\item The second parameter is a covariance matrix $\Sigma \in R^{d\times d}$.
 
 \item This matrix contains the variance of each variable in the diagonal and the covariance of variables $X_i$ and $X_j$ in the other cells $\Sigma_{i,j}$:
 
@@ -339,7 +339,7 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 
 \item The middle figure shows the density of a Gaussian with zero mean and $\Sigma = 0.6I$.
 
-\item The rightmost figure shows one with , $\Sigma = 2I$.
+\item The rightmost figure shows one with $\Sigma = 2I$.
 
 \item We see that as $\Sigma$ becomes larger, the Gaussian becomes more ``spread-out'', and as it becomes smaller, the distribution becomes more ``compressed''.
  
@@ -621,8 +621,7 @@ b1    -0.989855066  1.000000000 -0.004786196
 sigma  0.004853802 -0.004786196  1.000000000
 \end{verbatim}
 
-\item Notice that $\beta_0$ and $\beta_1$ are al-
-most perfectly negatively correlated.
+\item Notice that $\beta_0$ and $\beta_1$ are almost perfectly negatively correlated.
 
 \item This means that these two parameters carry the same information: as we change the slope of the line, the best intercept changes to match it.
 
@@ -948,8 +947,7 @@ n=1000 )
 
 \item The default behavior of link is to use the original data.
 
-\item So we have to pass it a list of new horizontal
-axis values we want to plot posterior predictions across.
+\item So we have to pass it a list of new horizontal axis values we want to plot posterior predictions across.
 
 \end{itemize}
  
@@ -966,7 +964,7 @@ axis values we want to plot posterior predictions across.
 
 \item Now let’s walk through generating prediction intervals for simulated heights $\tilde{y}$ using the posterior predictive distribution.
 
-\item What we did before was to use samples from the posterior to visualize the uncertainty in $\mu_i$ , the linear model of the mean: $\mu_i=\beta_0+\beta_1*x_i$. 
+\item What we did before was to use samples from the posterior to visualize the uncertainty in $\mu_i$ using the linear model of the mean: $\mu_i=\beta_0+\beta_1*x_i$. 
 
 \item But actual predictions of heights $\tilde{y}$ depend also upon the stochastic definition of $y$ given in the likelihood function: $y_i\sim N(\mu_i,\sigma)$.
 
@@ -992,7 +990,7 @@ axis values we want to plot posterior predictions across.
 \begin{itemize}
 
 
-\item The posterior predictive distribution introduces in previous class can exactly do that.
+\item The posterior predictive distribution introduced in previous class can exactly do that:
 
   \begin{displaymath}
  f(\tilde{y}|y)  =  \int_{\theta}f(\tilde{y}|\theta)f(\theta|y)d\theta 
@@ -1027,9 +1025,9 @@ where $f(\tilde{y}|\beta_0,\beta_1,\sigma)$ is the likelihood function $N(\beta_
 
 \item We end up with a collection of simulated heights that embody the uncertainty in the posterior as well as the uncertainty in the Gaussian likelihood.
 
-\item The first think we need is a function that can generate a sample of heights for given weight $w$.
+\item We first need to implement a function that can generate a sample of heights for a given weight $w$.
 
-\item The sampling should use the likelihood function $N(\beta_0+\beta_1*w,\sigma^2)$, using different values of  $\beta_0, \beta_1$ and$\sigma^2$ given by our posterior sample.
+\item The sampling should use the likelihood function $N(\beta_0+\beta_1*w,\sigma^2)$, using different values of  $\beta_0, \beta_1$ and $\sigma^2$ given by our posterior samples.
 
 \begin{verbatim}
 height.weight <- function(weight) 
@@ -1054,7 +1052,7 @@ height.weight <- function(weight)
 \begin{itemize}
 
 
-\item Notice that we are passing  vectors of parameters $\vec{\mu}$ and $\vec{\sigma}$ to rnorm instead of scalars.
+\item Notice that we are passing  vectors of parameters $\vec{\mu}$ and $\vec{\sigma}$ to \textbf{rnorm} instead of scalars.
 
 \item This will result in different samples generated with different parameter values:
 
@@ -1071,7 +1069,7 @@ height.weight <- function(weight)
 [1] 10000    46 
 \end{verbatim}
 
-\item This matrix is much like the earlier one, mu , but it contains simulated heights, not distributions of plausible average height, $\mu$
+\item This matrix is much like the earlier one, mu , but it contains simulated heights, not distributions of plausible average height, $\mu$.
 
 
 \end{itemize}
@@ -1141,9 +1139,9 @@ distribution of $\mu$.
 
 \item In the procedure above, we encountered both uncertainty in parameter values: $\beta_0,\beta_1,\sigma$, and uncertainty in a sampling process: $N(\mu_i,\sigma)$. 
 
-\item These are distinct concepts, even though they are processed much the same way and end up blended together in the posterior predictive simulation
+\item These are distinct concepts, even though they are processed much the same way and end up blended together in the posterior predictive simulation.
 
-\item Finally, the \textbf{sim} function of the rethinking package allows to easily generate samples of the posterior predictive distribution of any linear model declared with \textbf{quap}.
+\item Finally, the \textbf{sim} function of the rethinking package allows to easily generate samples of the posterior predictive distribution of any linear model declared with \textbf{quap}:
 
 \begin{verbatim}
 sim.height <- sim( b.reg1 , data=list(weight=weight.seq) )
