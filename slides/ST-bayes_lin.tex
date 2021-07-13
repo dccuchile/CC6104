@@ -102,7 +102,7 @@ f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma|d)
 \begin{itemize}
 
 
-\item The Bayesian linear regresion is  more flexible than least squares as it allows incorporating prior information.
+\item The Bayesian linear regression is  more flexible than least squares as it allows incorporating prior information.
 
 \item It also allows to interpret the uncertainty of the model in a clearer way.
 
@@ -485,7 +485,8 @@ d2 <- d[ d$age >= 18 , ]
 
 b.reg1 <- quap(
   alist(
-    height ~ dnorm( b0 + b1*weight, sigma ),
+    height ~ dnorm( mu, sigma ),
+    mu <- b0 + b1*weight,
     b0 ~ dnorm( 150 , 50 ) ,
     b1 ~ dnorm( 0 , 1) ,
     sigma ~ dunif( 0 , 50 )
@@ -690,13 +691,40 @@ sigma -2.435168e-05 -2.860675e-03  1.000000e+00
 \item Bear in mind that each line is sampled in proportion to the posterior probabilities, which represent our model's beliefs.
 
 
-\item Since our posterior was approximated with Laplace approximation we could get equivalent samples from a multi-variate Gaussian:
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Sampling from the Posterior}
+\scriptsize{
+\begin{itemize}
+\item We can see that the mean of each variable in the sample is almost identical to the corresponding MAP estimate:
+
+\begin{verbatim}
+> sapply(post,mean)
+         b0          b1       sigma 
+114.0026648   0.9023462   5.0693261  
+\end{verbatim}
+
+
+
+\item Since our posterior was approximated with Laplace approximation, we can obtain equivalent samples directly from a multi-variate Gaussian using the \textbf{mvrnorm} function:
 
 
 \begin{verbatim}
 > library(MASS)
-> post2 <- mvrnorm(n=1e4 , mu=coef(b.reg1),
-Sigma=vcov(b.reg1))
+> post2 <- mvrnorm( n=1e4,mu=coef(b.reg1), 
+Sigma=vcov(b.reg1 ) )
+> post2<-as.data.frame(post2)
+> sapply(post2,mean)
+         b0          b1       sigma 
+113.9997660   0.9023735   5.0691332 
 \end{verbatim}
 
 
@@ -710,11 +738,446 @@ Sigma=vcov(b.reg1))
 \end{frame}
 
 
+
+\begin{frame}[fragile]{Plotting posterior inference against the data}
+\scriptsize{
+\begin{itemize}
+\item In truth, tables of estimates are usually insufficient for understanding the information contained in the posterior distribution.
+
+\item It's almost always much more useful to plot the posterior inference against the data.
+
+\item We’re going to start with a simple version of that task, superimposing just the MAP values over the height and weight data.
+
+\begin{verbatim}
+plot( height ~ weight , data=d2 , col=rangi2 )
+b0_map <- mean(post$b0)
+b1_map <- mean(post$b1)
+curve( b0_map + b1_map*x, add=TRUE ) 
+\end{verbatim}
+
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+
+\begin{frame}{Plotting posterior inference against the data}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.65]{pics/height_points.pdf}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Plotting regression intervals}
+\scriptsize{
+\begin{itemize}
+\item The previous plot doesn't incorporate the uncertainty embodied in the posterior.
+
+\item This can be done by by plotting a credible interval around the MAP regression line.
+
+\item To understand how it works, let's focus for the moment on a single weight value, say 50 kilograms. 
+
+\item We can quickly make a list of 10,000 values of $\mu$ for an individual who weighs 50 kilograms, by using our samples from the posterior:
+
+\begin{verbatim}
+mu_at_50 <- post$b0 + post$b1 * 50 
+\end{verbatim}
+
+\item It might be helpful at this point to actually plot the density for this vector of means:
+
+\begin{verbatim}
+dens( mu_at_50 , col=rangi2 , lwd=2 , xlab="mu|weight=50" )
+\end{verbatim}
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+\begin{frame}{Plotting regression intervals}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.45]{pics/mu50.pdf}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Plotting regression intervals}
+\scriptsize{
+\begin{itemize}
+\item Since the components of $\mu$ have distributions ($\beta_0,\beta_1$), so too does $\mu$.
+
+\item And since the distributions of $\beta_0$ and $\beta_1$ are Gaussian, so to is the distribution of $\mu$.
+
+\item Adding Gaussian distributions always produces a Gaussian distribution.
+
+\item Since the posterior for $\mu$ is a distribution, you can find intervals for it, just like for any posterior distribution. 
+
+\item To find the 89\% highest posterior density interval of $\mu$ at 50 kg, we just use the HPDI command as usual:
+
+\begin{verbatim}
+> HPDI( mu_at_50 , prob=0.95 )
+   |0.95    0.95| 
+158.4883 159.8061  
+\end{verbatim}
+
+\item Now, we need to repeat the above calculation for every weight value on the horizontal axis, not just when it is 50 kg.
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Plotting regression intervals}
+\scriptsize{
+\begin{itemize}
+
+
+\item We first define a sequence of weights to compute predictions for:
+
+\begin{verbatim}
+weight.seq <- seq( from=25 , to=70 , by=1 ) 
+\end{verbatim}
+
+\item These values will be on the horizontal axis of our plot.
+
+\item Now, for each of these weights we will compute a posterior distribution of the average height $\mu$ using samples from the posterior:
+
+\begin{verbatim}
+mu.link <- function(weight) post$b0 + post$b1*weight
+\end{verbatim}
+
+\item The function above will use the $1000$ different sampled regression lines to compute various values of $\mu$ for a given weight.
+
+\item We can apply this function to all our 46 weights (from 25 to 70) and obtain a matrix of $1000 \times 46$:
+
+\begin{verbatim}
+> mu <- sapply( weight.seq , mu.link )
+> dim(mu)
+[1] 10000    46 
+\end{verbatim}
+
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Plotting regression intervals}
+\scriptsize{
+\begin{itemize}
+
+
+\item Now, we can get a MAP value of $\mu$ for each weight, simply by by averaging the rows of the matrix:
+
+\begin{verbatim}
+> mu.mean <- apply( mu , 2 , mean )
+> head(mu.mean)
+[1] 136.5526 137.4555 138.3583 139.2612 140.1641 141.0669
+\end{verbatim}
+
+\item And we can get our 95\% HPDIs analogously:
+
+\begin{verbatim}
+mu.HPDI <- apply( mu , 2 , HPDI , prob=0.95 ) 
+\end{verbatim}
+
+\item The variable mu.HPDI contains 95\% lower and upper bounds for each weight value.
+
+\item Now we can plot these intervals as shaded regions around the MAP estimates as follows:
+
+\begin{verbatim}
+plot( height ~ weight , data=d2 , col=col.alpha(rangi2,0.5) )
+# plot the MAP line, aka the mean mu for each weight
+lines( weight.seq , mu.mean )
+# plot a shaded region for 95% HPPDI
+shade( mu.HPDI , weight.seq ) 
+\end{verbatim}
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}{Plotting regression intervals}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.9]{pics/height_interval.pdf}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{Plotting regression intervals}
+\scriptsize{
+\begin{itemize}
+
+
+\item In case of working with more complex linear models (i.e., multiple attributes, interactions) we can use the \textbf{link} function from the rethinking package:
+
+\begin{verbatim}
+mu <- link( b.reg1 , data=data.frame(weight=weight.seq),
+n=1000 ) 
+\end{verbatim}
+
+\item This function will generate distributions of posterior values for $\mu$ using the formula declared in \textbf{quap} (e.g., $\mu= \beta_0 + \beta_1 * x$).
+
+\item The default behavior of link is to use the original data.
+
+\item So we have to pass it a list of new horizontal
+axis values we want to plot posterior predictions across.
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Prediction Intervals}
+\scriptsize{
+\begin{itemize}
+
+
+\item Now let’s walk through generating prediction intervals for simulated heights $\tilde{y}$ using the posterior predictive distribution.
+
+\item What we did before was to use samples from the posterior to visualize the uncertainty in $\mu_i$ , the linear model of the mean: $\mu_i=\beta_0+\beta_1*x_i$. 
+
+\item But actual predictions of heights $\tilde{y}$ depend also upon the stochastic definition of $y$ given in the likelihood function: $y_i\sim N(\mu_i,\sigma)$.
+
+\item The Gaussian distribution of the likelihood tells us that the model expects observed heights $\tilde{y}$ to be distributed around $\mu$, not right on top of it. 
+
+\item And the spread around $\mu$ is governed by $\sigma$. 
+
+\item All of this suggests we need to incorporate $\sigma$ in the predictions somehow.
+
+ 
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Prediction Intervals}
+\scriptsize{
+\begin{itemize}
+
+
+\item The posterior predictive distribution introduces in previous class can exactly do that.
+
+  \begin{displaymath}
+ f(\tilde{y}|y)  =  \int_{\theta}f(\tilde{y}|\theta)f(\theta|y)d\theta 
+ \end{displaymath}
+
+\item For our height regression model it would take the following form: 
+
+  \begin{displaymath}
+ f(\tilde{y}|y)  = \int_{\beta_0} \int_{\beta_1} \int_{\sigma}f(\tilde{y}|\beta_0,\beta_1,\sigma)f(\beta_0,\beta_1,\sigma|y)d\beta_0 d\beta_1 d\sigma
+ \end{displaymath}
+ 
+where $f(\tilde{y}|\beta_0,\beta_1,\sigma)$ is the likelihood function $N(\beta_0+\beta_1*\tilde{x},\sigma^2)$ and $f(\beta_0,\beta_1,\sigma|y)$ is our posterior distribution.
+
+\item Instead of working with these complex integrals we will simulate heights using samples from the posterior.
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+\begin{frame}[fragile]{Prediction Intervals}
+\scriptsize{
+\begin{itemize}
+
+
+\item Here's how we will do it. 
+
+\item For any unique weight value, we sample from a Gaussian distribution with the correct mean $\mu$ for that weight, using the correct value of $\sigma$ sampled from the same posterior distribution.
+\item We do this for every sample from the posterior and for every weight value of interest.
+
+\item We end up with a collection of simulated heights that embody the uncertainty in the posterior as well as the uncertainty in the Gaussian likelihood.
+
+\item The first think we need is a function that can generate a sample of heights for given weight $w$.
+
+\item The sampling should use the likelihood function $N(\beta_0+\beta_1*w,\sigma^2)$, using different values of  $\beta_0, \beta_1$ and$\sigma^2$ given by our posterior sample.
+
+\begin{verbatim}
+height.weight <- function(weight) 
+  rnorm(
+    n=nrow(post) ,
+    mean=post$b0 + post$b1*weight ,
+    sd=post$sigma )
+\end{verbatim}
+
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Prediction Intervals}
+\scriptsize{
+\begin{itemize}
+
+
+\item Notice that we are passing  vectors of parameters $\vec{\mu}$ and $\vec{\sigma}$ to rnorm instead of scalars.
+
+\item This will result in different samples generated with different parameter values:
+
+\begin{verbatim}
+> rnorm(4,mean=c(-100,100),sd=c(1,50))
+[1]  -99.32946  126.17836 -100.62118  194.68311
+\end{verbatim}
+
+\item Now, we can apply this function to our sequence of weights and obtain a similar matrix  than before:
+
+\begin{verbatim}
+> sim.height <- sapply( weight.seq , height.weight)
+> dim(sim.height)
+[1] 10000    46 
+\end{verbatim}
+
+\item This matrix is much like the earlier one, mu , but it contains simulated heights, not distributions of plausible average height, $\mu$
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Prediction Intervals}
+\scriptsize{
+\begin{itemize}
+
+
+\item We can summarize these simulated heights in the same way we summarized the distributions of $\mu$, by using apply:
+
+\begin{verbatim}
+height.HPDI <- apply( sim.height , 2 , HPDI , prob=0.95 ) 
+\end{verbatim}
+
+\item Now height.HPDI contains the 95\% HPDIs of observable (according to the model) heights, across the values of weight in weight.seq.
+
+\item Let's plot everything we've built up: (1) the MAP line, (2) the shaded region of 95\% plausible $\mu$, and (3) the boundaries of the simulated heights the model expects.
+
+\begin{verbatim}
+# plot raw data
+plot( height ~ weight , d2 , col=col.alpha(rangi2,0.5) )
+# draw MAP line
+lines( weight.seq , mu.mean )
+# draw HPDI region for line
+shade( mu.HPDI , weight.seq )
+# draw HPDI region for simulated heights
+shade( height.HPDI , weight.seq ) 
+\end{verbatim}
+
+
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
+\begin{frame}{Prediction Intervals}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.55]{pics/sim_height.pdf}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Prediction Intervals}
+\scriptsize{
+\begin{itemize}
+
+
+\item The two shaded regions of the figure show different 95\% plausible regions. 
+
+\item The narrow shaded interval around the line is the
+distribution of $\mu$. 
+\item The wider shaded region represents the region within which the model expects to find 95\% of actual heights in the population, at each weight.
+
+\item In the procedure above, we encountered both uncertainty in parameter values: $\beta_0,\beta_1,\sigma$, and uncertainty in a sampling process: $N(\mu_i,\sigma)$. 
+
+\item These are distinct concepts, even though they are processed much the same way and end up blended together in the posterior predictive simulation
+
+\item Finally, the \textbf{sim} function of the rethinking package allows to easily generate samples of the posterior predictive distribution of any linear model declared with \textbf{quap}.
+
+\begin{verbatim}
+sim.height <- sim( b.reg1 , data=list(weight=weight.seq) )
+ 
+\end{verbatim}
+
+
+
+\end{itemize}
+ 
+
+ 
+}
+\end{frame}
+
 \begin{frame}{Conclusions}
 \scriptsize{
 
 \begin{itemize}
-\item Blabla
+\item In this class we have revisited the linear regression model using a Bayesian approach.
+
+\item The posterior distribution can be interpreted as a distribution of possible lines.
+
+\item We introduced Laplace approximation to fit these models to data.
+
+\item We also introduced new procedures for visualizing posterior distributions and posterior predictions
+
+\item In the next classes we will see more complex linear models, such as models with multiple attributes, binary attributes or interactions.
+
+\item Notice that these models can also be built with \textbf{quap}.
+
+\item However, a more sophisticated technique called Markov Chain Monte Carlo will allow us to sample from the posterior without making any assumptions about its shape.
+
+
 \end{itemize}
 
 
