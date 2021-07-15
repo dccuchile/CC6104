@@ -725,7 +725,7 @@ more dense.
 
 
 
-\item Next, we will see how to use Stan to fit the models from earlier classes. 
+\item Next, we will see how to use Stan to fit a linear model with an interaction. 
 
 \item Make sure that the \textbf{rstan} package is installed to access Stan from within R.
 
@@ -741,11 +741,256 @@ more dense.
 } 
 \end{frame}
 
+\begin{frame}{Easy HMC: ulam}
+\scriptsize{
+
+\begin{itemize}
+\item Stan provides its own language to delcare models.
+
+\item  The rethinking package provides a convenient interface, \textbf{ulam}, to compile lists of formulas, like the lists we've been using so far to construct quap estimates, into Stan HMC
+code.
+
+\item All that ulam does is translate formulas into  Stan models, and then Stan defines
+the sampler and does the hard part.
+
+\item Stan models look very similar, but require some more explicit definitions.
+
+\item We will show them later.
+
+\item Before using ulam we must preprocess any variable transformations (log, exp, etc).
+
+\item We also must construct a clean data list with only the variables we will use.
+
+
+
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{A model of ruggedness}
+\scriptsize{
+
+\begin{itemize}
+\item We are are going to work with the \textbf{rugged} dataset from the rethinking package.
+\item Each row in these data is a country, and the various columns are economic, geographic, and
+historical features. 
+\item The variable rugged is a Terrain Ruggedness Index that quantifies the topographic heterogeneity of a landscape. 
+
+\item The outcome variable of our regression model will be the logarithm of real gross domestic product per capita, from the year 2000, \textbf{rgdppc\_2000}.
+
+\item Ruggedness is usually associated with poorer countries, in most of the world.
+
+\item Rugged terrain usually means transport is difficult, which means market access is hampered, which means reduced gross domestic product.
+
+\item However, this associated gets inverted for African countries.
+
+
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{A model of ruggedness}
+\scriptsize{
+
+\begin{itemize}
+\item Let's load and explore the data:
+
+\begin{verbatim}
+library(rethinking)
+data(rugged)
+d <- rugged
+d$log_gdp <- log(d$rgdppc_2000)
+#remove rows with missing values
+dd <- d[ complete.cases(d$rgdppc_2000) , ]
+# discard columns we are not going to use
+dd.trim <- dd[ , c("log_gdp","rugged","cont_africa") ]
+summary(dd.trim)
+
+> summary(dd.trim)
+    log_gdp           rugged        cont_africa    
+ Min.   : 6.146   Min.   :0.0030   Min.   :0.0000  
+ 1st Qu.: 7.539   1st Qu.:0.4422   1st Qu.:0.0000  
+ Median : 8.578   Median :0.9795   Median :0.0000  
+ Mean   : 8.517   Mean   :1.3332   Mean   :0.2882  
+ 3rd Qu.: 9.480   3rd Qu.:1.9572   3rd Qu.:1.0000  
+ Max.   :10.965   Max.   :6.2020   Max.   :1.0000 
+\end{verbatim}
+
+
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{A model of ruggedness}
+\scriptsize{
+
+\begin{itemize}
+\item Let's load and explore the data:
+
+\begin{verbatim}
+library(rethinking)
+data(rugged)
+d <- rugged
+d$log_gdp <- log(d$rgdppc_2000)
+#remove rows with missing values
+dd <- d[ complete.cases(d$rgdppc_2000) , ]
+# discard columns we are not going to use
+dd.trim <- dd[ , c("log_gdp","rugged","cont_africa") ]
+# convert cont_africa to factor
+dd.trim$cont_africa<-as.factor(dd.trim$cont_africa)
+
+
+> summary(dd.trim)
+    log_gdp           rugged       cont_africa
+ Min.   : 6.146   Min.   :0.0030   0:121      
+ 1st Qu.: 7.539   1st Qu.:0.4422   1: 49      
+ Median : 8.578   Median :0.9795              
+ Mean   : 8.517   Mean   :1.3332              
+ 3rd Qu.: 9.480   3rd Qu.:1.9572              
+ Max.   :10.965   Max.   :6.2020   
+\end{verbatim}
+
+
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{A model of ruggedness}
+\scriptsize{
+
+\begin{itemize}
+\item We have a dataset with countries as rows and 3 columns: 
+
+\begin{enumerate}
+\scriptsize{
+ \item log\_gdp: the log GDP of the country in year 2000.
+ \item rugged: the Terrain Ruggedness Index of the country
+ \item cont\_africa: a binary variable (1 for African countries and 0 for non-African ones).}
+\end{enumerate}
+
+
+\item Let's compute the correlation between log\_gdp and rugged:
+
+\begin{verbatim}
+> cor(dd.trim$rugged,dd.trim$log_gdp)
+[1] 0.002833496 
+\end{verbatim}
+
+\item It is very low. Now let's calculate them separately for African and non-African countries:
+
+\begin{verbatim}
+> dd.A<-dd.trim[dd.trim$cont_africa==1,]
+> cor(dd.A$rugged,dd.A$log_gdp)
+[1] 0.2607532
+> 
+> dd.NA<-dd.trim[dd.trim$cont_africa==0,]
+> cor(dd.NA$rugged,dd.NA$log_gdp)
+[1] -0.2307945 
+\end{verbatim}
+
+\item We now observe a stronger relationship between the two variables that is reversed for African and non-African countries.
+
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+\begin{frame}{A model of ruggedness}
+\scriptsize{
+
+\begin{itemize}
+\item We will now construct a Bayesian Linear Regression between log GDP ($y$) and terrain ruggedness ($x$) capable of incorporating the different relationships for these two groups of countries encoded by the variable $A$.
+\item As we learned in a previous lecture, interactions are a convenient way to include different slopes for different categories in our data.
+\item Our model will be as follows:
+
+ \vspace{0.3cm}
+ \begin{table}
+ \centering
+ \begin{tabular}{lr}  
+$y_i \sim N(\mu_i,\sigma)$ & [likelihood] \\
+$\mu_i = \beta_0 + \beta_1 x_i+ \beta_2 A_i+\beta_3*x_i*A_i$ & [linear model] \\
+$\beta_0 \sim N(0,100)$ & [$\beta_0$ prior] \\
+$\beta_1 \sim N(0,10)$ & [$\beta_1$ prior] \\
+$\beta_2 \sim N(0,10)$ & [$\beta_2$ prior] \\
+$\beta_3 \sim N(0,10)$ & [$\beta_3$ prior] \\
+$\sigma \sim $ Cauchy$(0,2)$ & [$\sigma$ prior] \\
+\end{tabular}
+\end{table}
+
+\item We put Gaussian priors on all $\beta$ coefficients and a Cauchy prior for $\sigma$ (a t-student with 1 degree of freedom).
+
+\item The Cauchy distribution is heavy-tailed and has proven to be a useful prior for standard deviations (especially when restrained to postive values, taking the name of half-Cauchy). 
+
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{A model of ruggedness}
+\scriptsize{
+
+\begin{itemize}
+\item The R code for the model would be:
+
+\begin{verbatim}
+model<-alist(
+  log_gdp ~ dnorm( mu , sigma ) ,
+  mu <- b0 + b1*rugged + b2*cont_africa 
+  + b3*rugged*cont_africa,
+  b0 ~ dnorm(0,100),
+  b1 ~ dnorm(0,10),
+  b2 ~ dnorm(0,10),
+  b3 ~ dnorm(0,10),
+  sigma ~ dcauchy(0,2)
+) 
+\end{verbatim}
+
+
+\end{itemize}
+
+
+
+
+} 
+\end{frame}
+
 \begin{frame}{Conclusions}
 \scriptsize{
 
 \begin{itemize}
-\item Blabla
+\item This class has been an  introduction to Markov chain Monte Carlo (MCMC) estimation. 
+
+\item The goal has been to introduce the purpose and approach MCMC algorithms.
+\item The major algorithms introduced were the Metropolis, Gibbs sampling, and Hamiltonian
+Monte Carlo algorithms.
+\item Each has its advantages and disadvantages. 
+\item A function in the rethinking package, ulam , was introduced that uses the Stan Hamiltonian Monte Carlo engine to a linear model with an interaction.
 \end{itemize}
 
 

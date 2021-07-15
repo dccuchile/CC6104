@@ -27,31 +27,46 @@ library(rethinking)
 data(rugged)
 d <- rugged
 d$log_gdp <- log(d$rgdppc_2000)
+#remove rows with missing values
 dd <- d[ complete.cases(d$rgdppc_2000) , ]
-
+# discard columns we are not going to use
 dd.trim <- dd[ , c("log_gdp","rugged","cont_africa") ]
-str(dd.trim)
+dd.trim$cont_africa<-as.factor(dd.trim$cont_africa)
+summary(dd.trim)
 
 
-m8.1 <- ulam(
-  alist(
-    log_gdp ~ dnorm( mu , sigma ) ,
-    mu <- a + bR*rugged + bA*cont_africa + bAR*rugged*cont_africa ,
-    a ~ dnorm(0,100),
-    bR ~ dnorm(0,10),
-    bA ~ dnorm(0,10),
-    bAR ~ dnorm(0,10),
-    sigma ~ dcauchy(0,2)
-  ) ,
-  data=dd.trim )
+cor(dd.trim$rugged,dd.trim$log_gdp)
 
-precis(m8.1)
+dd.A<-dd.trim[dd.trim$cont_africa==1,]
+cor(dd.A$rugged,dd.A$log_gdp)
 
-show( m8.1 )
+dd.NA<-dd.trim[dd.trim$cont_africa==0,]
+cor(dd.NA$rugged,dd.NA$log_gdp)
 
-traceplot( m8.1 )
 
-pairs( m8.1 )
+model<-alist(
+  log_gdp ~ dnorm( mu , sigma ) ,
+  mu <- b0 + b1*rugged + b2*cont_africa + b3*rugged*cont_africa ,
+  b0 ~ dnorm(0,100),
+  b1 ~ dnorm(0,10),
+  b2 ~ dnorm(0,10),
+  b3 ~ dnorm(0,10),
+  sigma ~ dcauchy(0,2)
+)
 
-trankplot( m8.1 )
+quap(model,data=dd.trim)
+
+m.reg1 <- ulam(model ,data=dd.trim )
+
+precis(m.reg1)
+
+pairs( m.reg1)
+
+show(m.reg1 )
+
+stancode(m.reg1) 
+
+traceplot( m.reg1 )
+
+
 
