@@ -826,6 +826,7 @@ summary(dd.trim)
  Max.   :10.965   Max.   :6.2020   Max.   :1.0000 
 \end{verbatim}
 
+\item Note that we do not convert cont\_africa into a factor because that produces numerical problems with the rethinking methods.
 
 \end{itemize}
 
@@ -836,43 +837,6 @@ summary(dd.trim)
 \end{frame}
 
 
-\begin{frame}[fragile]{A model of ruggedness}
-\scriptsize{
-
-\begin{itemize}
-\item Let's load and explore the data:
-
-\begin{verbatim}
-library(rethinking)
-data(rugged)
-d <- rugged
-d$log_gdp <- log(d$rgdppc_2000)
-#remove rows with missing values
-dd <- d[ complete.cases(d$rgdppc_2000) , ]
-# discard columns we are not going to use
-dd.trim <- dd[ , c("log_gdp","rugged","cont_africa") ]
-# convert cont_africa to factor
-dd.trim$cont_africa<-as.factor(dd.trim$cont_africa)
-
-
-> summary(dd.trim)
-    log_gdp           rugged       cont_africa
- Min.   : 6.146   Min.   :0.0030   0:121      
- 1st Qu.: 7.539   1st Qu.:0.4422   1: 49      
- Median : 8.578   Median :0.9795              
- Mean   : 8.517   Mean   :1.3332              
- 3rd Qu.: 9.480   3rd Qu.:1.9572              
- Max.   :10.965   Max.   :6.2020   
-\end{verbatim}
-
-
-\end{itemize}
-
-
-
-
-} 
-\end{frame}
 
 \begin{frame}[fragile]{A model of ruggedness}
 \scriptsize{
@@ -971,6 +935,89 @@ model<-alist(
 ) 
 \end{verbatim}
 
+\item Let's try to fit this model using Laplace Approximation:
+
+\begin{verbatim}
+> b.reg3<-quap(model,data=dd.trim)
+Error in quap(model, data = dd.trim) : 
+  initial value in 'vmmin' is not finite
+The start values for the parameters were invalid. 
+\end{verbatim}
+
+\item The optimizer is having a hard time finding the MAP estimates for this model!
+
+\item This can sometimes be corrected by using start values (declared with the \textbf{start} parameter), but in many models even this does not help.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{A model of ruggedness}
+\scriptsize{
+
+\begin{itemize}
+\item After trying to fit b.reg3 with quap many times, it worked!
+
+\begin{verbatim}
+> precis(b.reg3)
+       mean   sd  2.5% 97.5%
+b0     9.22 0.14  8.95  9.49
+b1    -0.20 0.08 -0.35 -0.05
+b2    -1.95 0.22 -2.39 -1.51
+b3     0.39 0.13  0.14  0.65
+sigma  0.93 0.05  0.83  1.03
+\end{verbatim}
+
+\item Let's interpret the mean values for the posterior marginals of each $\beta$ coefficient:
+
+\begin{itemize}\scriptsize{
+ \item mean(b0) = 9.22: this is the intercept for non-African countries.
+ \item mean(b1)=-0.20: this is the slope for non-African countries, which is clearly negative.
+ \item mean(b2)=-1.95: this is the difference between the intercept for African and non-African countries, which indicates that African countries have a lower GDP than non-African countries when rugedness is zero.
+\item mean(b3)=0.39: this is the difference between the slopes for African and non-African countries, which indicates that the slope for non-African countries is positive (0.39-0.2).
+}
+ \end{itemize}
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{A model of ruggedness}
+\scriptsize{
+
+\begin{itemize}
+\item Now, let's fit the same model using Stan HMC with \textbf{ulam}:
+
+\begin{verbatim}
+m.reg1 <- ulam(model ,data=dd.trim) 
+\end{verbatim}
+
+
+
+\item After messages about compiling, and sampling, ulam returns an object that contains a
+bunch of summary information, as well as samples from the posterior distribution.
+
+\item This process takes much longer than our previous quap estimates.
+
+\item We can summarize just like with quap:
+
+\begin{verbatim}
+> precis(m.reg1, prob=0.95 )
+       mean   sd  2.5% 97.5% n_eff Rhat4
+b0     9.21 0.15  8.89  9.51   169  1.03
+b1    -0.20 0.09 -0.37 -0.01   163  1.04
+b2    -1.95 0.23 -2.37 -1.48   241  1.01
+b3     0.39 0.13  0.10  0.66   243  1.03
+sigma  0.95 0.05  0.85  1.06   348  1.00
+\end{verbatim}
+
+\item These estimates are very similar to the Laplace approximation.
+
 
 \end{itemize}
 
@@ -979,6 +1026,39 @@ model<-alist(
 
 } 
 \end{frame}
+
+
+\begin{frame}[fragile]{A model of ruggedness}
+\scriptsize{
+
+\begin{itemize}
+
+\item There are two new columns, n\_eff and Rhat, which provide MCMC diagnostic criteria, to help us tell how well estimation worked. 
+
+\item The column n\_eff is a crude estimate of the number of independent samples we managed to get.
+
+\item Rhat is a complicated estimate of the convergence of the Markov chains to the target distribution. It should approach 1.00 from above, when all is well.
+
+\item We can also control the number of samples from the chain by using the iter and warmup parameters. 
+\item The defaults are 1000 for iter and warmup is set to iter/2 , which gives you 500 warmup samples and 500 real samples to use for inference.
+
+\item 
+
+\item Here we are sampling 4 different chains distributed over 4 CPU cores.
+
+ \end{itemize}
+
+
+
+
+
+
+
+} 
+\end{frame}
+
+
+
 
 \begin{frame}{Conclusions}
 \scriptsize{

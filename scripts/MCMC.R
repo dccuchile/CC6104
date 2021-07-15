@@ -31,7 +31,6 @@ d$log_gdp <- log(d$rgdppc_2000)
 dd <- d[ complete.cases(d$rgdppc_2000) , ]
 # discard columns we are not going to use
 dd.trim <- dd[ , c("log_gdp","rugged","cont_africa") ]
-dd.trim$cont_africa<-as.factor(dd.trim$cont_africa)
 summary(dd.trim)
 
 
@@ -54,15 +53,23 @@ model<-alist(
   sigma ~ dcauchy(0,2)
 )
 
-quap(model,data=dd.trim)
+b.reg3<-quap(model,data=dd.trim)
+precis(b.reg3, prob=0.95 )
 
-m.reg1 <- ulam(model ,data=dd.trim )
+m.reg1 <- ulam(model ,data=dd.trim)
 
-precis(m.reg1)
+# in case of using more chains
+# m.reg1 <- ulam(model ,data=dd.trim, chains=4, cores=4 )
+
+precis(m.reg1, prob=0.95 )
+
+show(m.reg1)
+
+
 
 pairs( m.reg1)
 
-show(m.reg1 )
+
 
 stancode(m.reg1) 
 
