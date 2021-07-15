@@ -65,13 +65,27 @@ precis(m.reg1, prob=0.95 )
 
 show(m.reg1)
 
+stancode(m.reg1) 
+
+
+m.reg2 <- ulam(model ,data=dd.trim, iter=3000, 
+               warmup =1000, chains=4, cores=4) 
+
+show(m.reg2)
+
+post <- extract.samples( m.reg1, n= 1e4 )
+str(post)
+
+
 
 
 pairs( m.reg1)
 
 
 
-stancode(m.reg1) 
+
+
+
 
 traceplot( m.reg1 )
 

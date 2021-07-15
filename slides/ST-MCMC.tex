@@ -987,7 +987,7 @@ sigma  0.93 0.05  0.83  1.03
 } 
 \end{frame}
 
-\begin{frame}[fragile]{A model of ruggedness}
+\begin{frame}[fragile]{Ulam}
 \scriptsize{
 
 \begin{itemize}
@@ -1028,7 +1028,7 @@ sigma  0.95 0.05  0.85  1.06   348  1.00
 \end{frame}
 
 
-\begin{frame}[fragile]{A model of ruggedness}
+\begin{frame}[fragile]{Ulam}
 \scriptsize{
 
 \begin{itemize}
@@ -1037,14 +1037,10 @@ sigma  0.95 0.05  0.85  1.06   348  1.00
 
 \item The column n\_eff is a crude estimate of the number of independent samples we managed to get.
 
-\item Rhat is a complicated estimate of the convergence of the Markov chains to the target distribution. It should approach 1.00 from above, when all is well.
+\item Rhat  is the Gelman Rubin convergence diagnostic, which estimates  the convergence of the Markov chains to the target distribution.
 
-\item We can also control the number of samples from the chain by using the iter and warmup parameters. 
-\item The defaults are 1000 for iter and warmup is set to iter/2 , which gives you 500 warmup samples and 500 real samples to use for inference.
+\item It should approach 1.00 from above, when all is well.
 
-\item 
-
-\item Here we are sampling 4 different chains distributed over 4 CPU cores.
 
  \end{itemize}
 
@@ -1058,7 +1054,347 @@ sigma  0.95 0.05  0.85  1.06   348  1.00
 \end{frame}
 
 
+\begin{frame}[fragile]{Ulam}
+\scriptsize{
 
+\begin{itemize}
+
+\item A report of the chain can be obtained with command \textbf{show}:
+\begin{verbatim}
+> show(m.reg1)
+Hamiltonian Monte Carlo approximation
+500 samples from 1 chain
+
+Sampling durations (seconds):
+        warmup sample total
+chain:1    0.2   0.17  0.37
+
+Formula:
+log_gdp ~ dnorm(mu, sigma)
+mu <- b0 + b1 * rugged + b2 * cont_africa +
+b3 * rugged * cont_africa
+b0 ~ dnorm(0, 100)
+b1 ~ dnorm(0, 10)
+b2 ~ dnorm(0, 10)
+b3 ~ dnorm(0, 10)
+sigma ~ dcauchy(0, 2) 
+\end{verbatim}
+
+
+
+ \end{itemize}
+
+
+
+
+
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{Stan Code}
+\scriptsize{
+
+ We can also get the Stan code with: \verb+stancode(m.reg1)+:  
+\begin{verbatim}
+data{
+    vector[170] log_gdp;
+    int cont_africa[170];
+    vector[170] rugged;
+}
+parameters{
+    real b0;
+    real b1;
+    real b2;
+    real b3;
+    real sigma;
+}
+
+\end{verbatim}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Ulam}
+\scriptsize{
+
+ 
+\begin{verbatim}
+
+model{
+    vector[170] mu;
+    sigma ~ cauchy( 0 , 2 );
+    b3 ~ normal( 0 , 10 );
+    b2 ~ normal( 0 , 10 );
+    b1 ~ normal( 0 , 10 );
+    b0 ~ normal( 0 , 100 );
+    for ( i in 1:170 ) {
+        mu[i] = b0 + b1 * rugged[i] + b2 * cont_africa[i] 
+        + b3 * rugged[i] * cont_africa[i];
+    }
+    log_gdp ~ normal( mu , sigma );
+}
+
+\end{verbatim}
+
+This is Stan code, not R code. It is essentially the formula list we provided to ulam , but in reverse order.
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Ulam}
+\scriptsize{
+
+
+\begin{block}{Additional Ulam Parameters}
+\begin{itemize}
+
+
+\item \textbf{iter}: the number of samples from the chain. The default is 1000.
+\item \textbf{warmup}: the number of tuning samples. These samples are used to adapt sampling, and so are not actually part of the target posterior distribution. The default value is iter/2 , which gives us 500 warmup samples and 500 real samples to use for inference.
+
+\item \textbf{chains}: the number of independent Markov chains to sample from. All of the non-warmup samples from each chain will be automatically combined in the resulting inferences.
+
+\item \textbf{cores}: the number of procesors over which the chains will be distributed.
+
+
+
+ \end{itemize}
+
+ \end{block}
+
+\begin{itemize}
+
+
+\item Let's fit the same model sampling 4 different chains distributed over 4 CPU cores with 3000 iterarions and 1000  warmups.
+
+\begin{verbatim}
+m.reg2 <- ulam(model ,data=dd.trim, iter=3000, 
+               warmup =1000, chains=4, cores=4) 
+
+show(m.reg2) 
+\end{verbatim}
+
+
+ \end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Ulam}
+\scriptsize{
+
+
+\begin{itemize}
+
+
+\item Let's fit the same model sampling 4 different chains distributed over 4 CPU cores with 3000 iterarions and 1000  warmups.
+
+\begin{verbatim}
+> m.reg2 <- ulam(model ,data=dd.trim, iter=3000, 
+               warmup =1000, chains=4, cores=4) 
+> show(m.reg2)
+Hamiltonian Monte Carlo approximation
+8000 samples from 4 chains
+
+Sampling durations (seconds):
+        warmup sample total
+chain:1   0.62   1.08  1.70
+chain:2   0.54   1.06  1.60
+chain:3   0.60   0.89  1.49
+chain:4   0.37   0.82  1.19
+
+\end{verbatim}
+
+
+ \end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Ulam}
+\scriptsize{
+
+
+\begin{itemize}
+
+
+\item We can extract samples from the posterior in the usual way:
+
+\begin{verbatim}
+post <- extract.samples( m.reg1 )
+\end{verbatim}
+
+\item We also use \textbf{link} and \textbf{sim} functions to get posterior predictions.
+
+\item  We can plot the correlations between samples using the function \textbf{pairs}:
+
+\begin{verbatim}
+pairs( m.reg1)
+\end{verbatim}
+
+\item This will show a pairs plot: a matrix of bivariate scatter plots. \item Along the diagonal the smoothed histogram of each parameter is shown, along with its name.
+\item In in the lower triangle of the matrix, below the diagonal, the correlation between each pair of parameters is shown, with stronger correlations indicated by relative size.
+
+ \end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Ulam Pairs}
+
+
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.55]{pics/MCMC_pairs.pdf}
+	\end{figure} 
+
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ulam Pairs}
+\scriptsize{
+
+
+\begin{itemize}
+
+
+\item For this model and these data, the resulting posterior distribution is quite nearly multivariate Gaussian.
+\item The density for sigma is certainly skewed in the expected direction. \item But otherwise the Lapalce approximation does almost as well as Hamiltonian Monte Carlo.
+\item This is a very simple kind of model structure of course, with Gaussian priors, so an approximately Gaussian posterior should be no surprise. 
+\item For more complex models, posterior distributions take more exotic shapes.
+
+ \end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Checking the Chain }
+\scriptsize{
+
+
+\begin{itemize}
+
+
+\item Provided the Markov chain is defined correctly then it is guaranteed to converge in the long run to the answer we want, the posterior distri-
+bution. 
+\item But the machine does sometimes malfunction.
+
+\item We won't study these cases in detail.
+
+\item A trace plot is a very useful tool for diagnosing malfunction.
+
+\item It basically plots the samples in sequential order, joined by a line.
+
+\item In the terrain ruggedness example, the trace plot shows a very healthy chain.
+
+\item We can obtain it with the following command:
+
+\begin{verbatim}
+traceplot( m.reg1 ) 
+\end{verbatim}
+
+
+ \end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Trace Plot}
+
+
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.7]{pics/traceplot.pdf}
+	\end{figure} 
+
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Checking the Chain }
+\scriptsize{
+
+
+\begin{itemize}
+
+
+\item The plot shows the zig-zagging trace of each parameter as the path the chain took through each dimension of parameter space.
+
+\item The gray region in each plot, the first 500 samples, marks the warmups samples.
+
+\item During adaptation, the Markov chain is learning to more efficiently sample from the posterior distribution.
+
+\item So these samples are not necessarily reliable to use for inference. 
+\item They are automatically discarded by \textbf{extract.samples} , which returns only the samples shown in the white regions.
+
+
+\item Typically we look for two things in these trace plots: stationarity and good mixing. 
+
+ \end{itemize}
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Checking the Chain }
+\scriptsize{
+
+
+\begin{itemize}
+
+
+\item Stationarity refers to the path staying within the poste-
+rior distribution. 
+
+\item Notice that these traces, for example, all stick around a very stable central tendency, the center of gravity of each dimension of the posterior.
+
+\item Another way to think of this is that the mean value of the chain is quite stable from beginning to end.
+
+\item A well-mixing chain means that each successive sample within each parameter is not highly correlated with the sample before it.
+
+\item Visually, you can see this by the rapid zig-zag motion of each path, as the trace traverses the posterior distribution without getting mired
+anyplace.
+
+ \end{itemize}
+
+
+
+
+} 
+\end{frame}
 
 \begin{frame}{Conclusions}
 \scriptsize{
