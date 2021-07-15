@@ -787,7 +787,7 @@ historical features.
 
 \item Rugged terrain usually means transport is difficult, which means market access is hampered, which means reduced gross domestic product.
 
-\item However, this associated gets inverted for African countries.
+\item However, this association is not valid for African countries.
 
 
 \end{itemize}
@@ -842,7 +842,7 @@ summary(dd.trim)
 \scriptsize{
 
 \begin{itemize}
-\item We have a dataset with countries as rows and 3 columns: 
+\item We end up with a data.frame formed by the countries as rows and the following 3 columns: 
 
 \begin{enumerate}
 \scriptsize{
@@ -1002,7 +1002,7 @@ m.reg1 <- ulam(model ,data=dd.trim)
 \item After messages about compiling, and sampling, ulam returns an object that contains a
 bunch of summary information, as well as samples from the posterior distribution.
 
-\item This process takes much longer than our previous quap estimates.
+\item This process takes much longer than \textbf{quap}.
 
 \item We can summarize just like with quap:
 
@@ -1116,7 +1116,7 @@ model{
 
 \end{verbatim}
 
-This is Stan code, not R code. It is essentially the formula list we provided to ulam , but in reverse order.
+This is Stan code, not R code. It is essentially the formula list we provided to ulam, but in reverse order.
 
 } 
 \end{frame}
@@ -1352,7 +1352,7 @@ traceplot( m.reg1 )
 \item During adaptation, the Markov chain is learning to more efficiently sample from the posterior distribution.
 
 \item So these samples are not necessarily reliable to use for inference. 
-\item They are automatically discarded by \textbf{extract.samples} , which returns only the samples shown in the white regions.
+\item They are automatically discarded by \textbf{extract.samples}, which returns only the samples shown in the white regions.
 
 
 \item Typically we look for two things in these trace plots: stationarity and good mixing. 
@@ -1402,7 +1402,7 @@ anyplace.
 \item The major algorithms introduced were the Metropolis, Gibbs sampling, and Hamiltonian
 Monte Carlo algorithms.
 \item Each has its advantages and disadvantages. 
-\item A function in the rethinking package, ulam , was introduced that uses the Stan Hamiltonian Monte Carlo engine to a linear model with an interaction.
+\item A function in the rethinking package, \textbf{ulam}, was introduced that uses the Stan Hamiltonian Monte Carlo engine to a linear model with an interaction.
 \end{itemize}
 
 
