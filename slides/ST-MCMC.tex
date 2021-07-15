@@ -1028,30 +1028,6 @@ sigma  0.95 0.05  0.85  1.06   348  1.00
 \end{frame}
 
 
-\begin{frame}[fragile]{Ulam}
-\scriptsize{
-
-\begin{itemize}
-
-\item There are two new columns, n\_eff and Rhat, which provide MCMC diagnostic criteria, to help us tell how well estimation worked. 
-
-\item The column n\_eff is a crude estimate of the number of independent samples we managed to get.
-
-\item Rhat  is the Gelman Rubin convergence diagnostic, which estimates  the convergence of the Markov chains to the target distribution.
-
-\item It should approach 1.00 from above, when all is well.
-
-
- \end{itemize}
-
-
-
-
-
-
-
-} 
-\end{frame}
 
 
 \begin{frame}[fragile]{Ulam}
@@ -1211,6 +1187,41 @@ chain:4   0.37   0.82  1.19
 \end{frame}
 
 
+
+\begin{frame}[fragile]{Diagnostic criteria: n\_eff and Rhat }
+\scriptsize{
+
+\begin{itemize}
+
+\item Note that \textbf{precis} reported two new columns: n\_eff and Rhat, which provide MCMC diagnostic criteria.
+
+\item They help us tell how well estimation worked. 
+
+\item The column n\_eff is a crude estimate of the number of independent samples we managed to get.
+
+\item When n\_eff is much lower than the actual number of iterations
+(minus warmup) of your chains, it means the chains are inefficient, but possibly still okay.
+
+\item Rhat  is the Gelman Rubin convergence diagnostic, which estimates  the convergence of the Markov chains to the target distribution.
+
+\item It should approach 1.00 from above, when all is well.
+
+\item When Rhat is above 1.00, it usually indicates that the chain has not yet converged, and probably we shouldn't trust the samples.
+
+\item If we draw more iterations, it could be fine, or it could never converge.
+
+
+ \end{itemize}
+
+
+
+
+
+
+
+} 
+\end{frame}
+
 \begin{frame}[fragile]{Ulam}
 \scriptsize{
 
@@ -1266,9 +1277,9 @@ pairs( m.reg1)
 
 
 \item For this model and these data, the resulting posterior distribution is quite nearly multivariate Gaussian.
-\item The density for sigma is certainly skewed in the expected direction. \item But otherwise the Lapalce approximation does almost as well as Hamiltonian Monte Carlo.
+\item The density for sigma is certainly skewed in the expected direction. \item But otherwise the Laplace approximation does almost as well as Hamiltonian Monte Carlo.
 \item This is a very simple kind of model structure of course, with Gaussian priors, so an approximately Gaussian posterior should be no surprise. 
-\item For more complex models, posterior distributions take more exotic shapes.
+\item For more complex models, posterior distributions can take more exotic shapes.
 
  \end{itemize}
 
@@ -1286,9 +1297,8 @@ pairs( m.reg1)
 \begin{itemize}
 
 
-\item Provided the Markov chain is defined correctly then it is guaranteed to converge in the long run to the answer we want, the posterior distri-
-bution. 
-\item But the machine does sometimes malfunction.
+\item If the Markov chain is defined correctly then it is guaranteed to converge in the long run to the right posterior distribution. 
+\item But the machine can sometimes fail.
 
 \item We won't study these cases in detail.
 
@@ -1363,16 +1373,15 @@ traceplot( m.reg1 )
 \begin{itemize}
 
 
-\item Stationarity refers to the path staying within the poste-
-rior distribution. 
+\item Stationarity refers to the path staying within the posterior distribution. 
 
-\item Notice that these traces, for example, all stick around a very stable central tendency, the center of gravity of each dimension of the posterior.
+\item Notice that these traces, all stick around a very stable central tendency.
 
 \item Another way to think of this is that the mean value of the chain is quite stable from beginning to end.
 
-\item A well-mixing chain means that each successive sample within each parameter is not highly correlated with the sample before it.
+\item A well-mixing chain means that each successive sample within each parameter is not highly correlated with the sample before it, which is known as \textbf{autocorrelation}.
 
-\item Visually, you can see this by the rapid zig-zag motion of each path, as the trace traverses the posterior distribution without getting mired
+\item Visually, we can see this by the rapid zig-zag motion of each path, as the trace traverses the posterior distribution without getting mired
 anyplace.
 
  \end{itemize}
