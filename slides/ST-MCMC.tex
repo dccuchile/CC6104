@@ -1167,20 +1167,7 @@ This is Stan code, not R code. It is essentially the formula list we provided to
 
  \end{block}
 
-\begin{itemize}
 
-
-\item Let's fit the same model sampling 4 different chains distributed over 4 CPU cores with 3000 iterarions and 1000  warmups.
-
-\begin{verbatim}
-m.reg2 <- ulam(model ,data=dd.trim, iter=3000, 
-               warmup =1000, chains=4, cores=4) 
-
-show(m.reg2) 
-\end{verbatim}
-
-
- \end{itemize}
 
 
 
