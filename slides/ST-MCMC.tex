@@ -670,18 +670,7 @@ more dense.
 \end{frame}
 
 
-\begin{frame}{Hamiltonian Monte Carlo}
 
-
-
- \begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.3]{pics/HMC.png}
-	\end{figure} 
-
-
-
-\end{frame}
 
 
 \begin{frame}{Hamiltonian Monte Carlo}
@@ -696,7 +685,7 @@ more dense.
 \item The log-posterior provides a surface for this particle to glide across. 
 
 
-\item Then the job is to sweep across this surface, adjusting speed in proportion to how high up we are.
+\item Then the job is to sweep across this surface, adjusting speed (momentum) in proportion to how high up we are.
 
 
 
@@ -708,6 +697,19 @@ more dense.
 
 
 } 
+\end{frame}
+
+\begin{frame}{Hamiltonian Monte Carlo}
+
+
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.25]{pics/HMC.png}
+	\end{figure} 
+
+source: \cite{izmailov2021bayesian}
+
 \end{frame}
 
 
