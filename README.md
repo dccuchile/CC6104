@@ -1,4 +1,4 @@
-# Statistical Thinking
+# CC6104 Statistical Thinking
 
 The purpose of this course is to introduce students to statistical thinking, a systematic way of thinking to describe "real world" phenomena taking into account their inherent uncertainty and using data for decision making.
 
