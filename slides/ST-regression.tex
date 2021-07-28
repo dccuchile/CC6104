@@ -79,22 +79,22 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \scriptsize{
 \begin{itemize}
 
- \item  A regression model is used to model the relationship of a numerical dependent variable $\mathbf{y}$ with $n$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$ \cite{wasserman2013all}. 
+ \item  A regression model is used to model the relationship of a numerical dependent variable $\mathbf{y}$ with $m$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_m$ \cite{wasserman2013all}. 
  
  \item The dependent variable $\mathbf{y}$ is also called \textbf{target}, \textbf{outcome}, or \textbf{response} variable.
  
- \item The independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$ are also called \textbf{covariates}, \textbf{attributes}, \textbf{features}, por \textbf{predictor variables}.
+ \item The independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_m$ are also called \textbf{covariates}, \textbf{attributes}, \textbf{features}, por \textbf{predictor variables}.
  
  
  \item  Roughly speaking we want to know the expected value of $\mathbf{y}$ from the values of $\mathbf{x}$:
  \begin{displaymath}
- \mathbb{E}(y|x_1,x_2,\dots,x_n)
+ \mathbb{E}(y|x_1,x_2,\dots,x_m)
  \end{displaymath}
 
  
  \item  We use these models when we believe that the response variable $\mathbf{y}$ can be modeled by other independent variables.
  
- \item To perform this type of analysis we need a dataset consisting of $m$ observations that include both the response variable and each of the attributes.
+ \item To perform this type of analysis we need a dataset consisting of $n$ observations that include both the response variable and each of the attributes.
  
  \item We refer to the process of \textbf{fitting} a regression function as the process in which from the data we infer a hypothesis function $h$ that allows us to \textbf{predict} unknown $\mathbf{y}$ values using the values of the attributes.
 
@@ -118,7 +118,7 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
  
  \item Since we need observations where the value of $\mathbf{y}$ is known to learn the function, such techniques are referred to as \textbf{supervised learning} techniques.
  
- \item When $\mathbf{y}$ is a categorical variable we have a \textbf{classification} problem.
+ \item When $\mathbf{y}$ is a categorical variable we have a \textbf{classification} problem. 
  
 
  
@@ -127,7 +127,7 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.6]{pics/learning.pdf}
+	\includegraphics[scale=0.4]{pics/learning.pdf}
 \end{figure}
 
 } 
@@ -188,20 +188,20 @@ h(x)=\beta_{0}+\beta_{1}x
 
  \item The ordinary least squares method is used to estimate  $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ by minimizing the sum of squared errors (SSE) of the observed data.
 
- \item Suppose we have $m$ observations of $\mathbf{y}$ and $\mathbf{x}$, we compute the sum of squared errors (SSE) as follows:
+ \item Suppose we have $n$ observations of $\mathbf{y}$ and $\mathbf{x}$, we compute the sum of squared errors (SSE) as follows:
 
 \begin{equation}
-SSE = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_i)^2
+SSE = \sum_{i=1}^{n} (y_i-h(x_i))^2 =  \sum_{i=1}^{n} (y_i-\beta_{0}-\beta_{1}x_i)^2
 \end{equation}
 
  \item To find the parameters that minimize the error we calculate the partial derivatives of SSE with respect to $\beta_{0}$ and $\beta_{1}$. Then we equal the derivatives to zero and solve the equation to find the parameter values.
  
  \begin{equation}
- \frac{\partial SSE}{ \partial \beta_0} = -2\sum_{i=1}^{m}(y_i-\beta_{0}-\beta_{1}x_i)=0
+ \frac{\partial SSE}{ \partial \beta_0} = -2\sum_{i=1}^{n}(y_i-\beta_{0}-\beta_{1}x_i)=0
  \end{equation}
 
   \begin{equation}
- \frac{\partial SSE}{ \partial \beta_1} = -2\sum_{i=1}^{m}(y_i-\beta_{0}-\beta_{1}x)x_i=0
+ \frac{\partial SSE}{ \partial \beta_1} = -2\sum_{i=1}^{n}(y_i-\beta_{0}-\beta_{1}x)x_i=0
  \end{equation}
 
 
@@ -218,7 +218,7 @@ SSE = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_
 \begin{itemize}
  \item From the above system of equations the normal solutions are obtained:
   \begin{equation}
- \hat{\beta}_{1} = \frac{\sum_{i}^{m} (x_i-\overline{x})(y_i-\overline{y}) }{ \sum_{i}^{m} (x_i-\overline{x})^2}    
+ \hat{\beta}_{1} = \frac{\sum_{i}^{n} (x_i-\overline{x})(y_i-\overline{y}) }{ \sum_{i}^{n} (x_i-\overline{x})^2}    
  \end{equation}
 
  \begin{equation}
@@ -249,12 +249,12 @@ SSE = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_
  \item  It is calculated from errors that are different than the SSE squared errors.
  \item The total sum of squares (SST)  is defined as the predictive error when we use the mean $\overline{y}$  to predict the response variable $y$ (it is very similar to the variance of the variable):
  \begin{displaymath}
-  \text{SST} = \sum_{i}^{m}(y_i-\overline{y})^2  
+  \text{SST} = \sum_{i}^{n}(y_i-\overline{y})^2  
  \end{displaymath}
  \item  The regression sum of squares (SSM), on the other hand, represents the amount of error in the regression model: 
 
  \begin{displaymath}
-  \text{SSM} = \sum_{i}^{m}(\hat{y}_i-\overline{y})^2 
+  \text{SSM} = \sum_{i}^{n}(\hat{y}_i-\overline{y})^2 
  \end{displaymath}
   
  \item  SSM indicates the variability of the values predicted by the model with respect to the mean. 
@@ -275,12 +275,12 @@ SSE = \sum_{i=1}^{m} (y_i-h(x_i))^2 =  \sum_{i=1}^{m} (y_i-\beta_{0}-\beta_{1}x_
 
  \item The coefficient of determination for a linear model $R^2$ is defined as:
  \begin{equation}
-  R^2= \frac{\text{SSM}}{\text{SST}} = \frac{\sum_{i}^{m}(\hat{y}_i-\overline{y})^2 }{\sum_{i}^{m}(y_i-\overline{y})^2  }
+  R^2= \frac{\text{SSM}}{\text{SST}} = \frac{\sum_{i}^{n}(\hat{y}_i-\overline{y})^2 }{\sum_{i}^{n}(y_i-\overline{y})^2  }
  \end{equation}
  
  \item An alternative but equivalent definition:
   \begin{equation}
-  R^2= 1-\frac{\text{SSE}}{\text{SST}} = 1- \frac{\sum_{i}^{m}(y_i-\hat{y}_i)^2 }{\sum_{i}^{m}(y_i-\overline{y})^2  }
+  R^2= 1-\frac{\text{SSE}}{\text{SST}} = 1- \frac{\sum_{i}^{n}(y_i-\hat{y}_i)^2 }{\sum_{i}^{n}(y_i-\overline{y})^2  }
   \label{eq:r2}
  \end{equation}
  
@@ -379,16 +379,16 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
  \item The likelihood function of $\beta$ can be written as:
  
  \begin{displaymath}
-  \mathcal{L}(\beta) = \prod_{i=i}^{m}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right)
+  \mathcal{L}(\beta) = \prod_{i=1}^{n}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right)
  \end{displaymath}
 
  \item and the the log likelihood $l_n(\beta)$:
  
    \begin{align}
 l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
- & = \log \prod_{i=i}^{m}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right) \\
-  & = \sum_{i=1}^m  \log \prod_{i=i}^{m}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right) \\
-    & = m \log\left(\frac{1}{\sqrt{2\pi} \sigma}\right) - \frac{1}{\sigma^2}\times \frac{1}{2}\sum_{i=1}^m(y_i - h_{\beta}(x_{i}) )^{2}  
+ & = \log \prod_{i=1}^{n}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right) \\
+  & = \sum_{i=1}^n  \log \prod_{i=1}^{n}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right) \\
+    & = n \log\left(\frac{1}{\sqrt{2\pi} \sigma}\right) - \frac{1}{\sigma^2}\times \frac{1}{2}\sum_{i=1}^n(y_i - h_{\beta}(x_{i}) )^{2}  
  \end{align}
  
 
@@ -409,7 +409,7 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
  \item Hence, maximizing $l_n(\beta)$ gives the same answer as minimizing
  
  \begin{displaymath}
-\sum_{i=1}^m(y_i - h_{\beta}(x_{i}))^{2}
+\sum_{i=1}^n(y_i - h_{\beta}(x_{i}))^{2}
  \end{displaymath}
 
  \item which is equivalent as minimizing SSE.
@@ -435,10 +435,10 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
  \item We need to compute the mean squared error:
  
  \begin{displaymath}
-  MS_{error} = \frac{SSE}{df} = \frac{\sum_{i=1}^{m} (y_i-h(x_i))^2}{m-p}
+  MS_{error} = \frac{SSE}{df} = \frac{\sum_{i=1}^{n} (y_i-h(x_i))^2}{n-p}
  \end{displaymath}
 
- \item The degrees of freedom ($df$) are determined by subtracting the number of estimated parameters (2 in this case: $\beta_0$ and $\beta_1$) from the number of observations ($m$)
+ \item The degrees of freedom ($df$) are determined by subtracting the number of estimated parameters (2 in this case: $\beta_0$ and $\beta_1$) from the number of observations ($n$)
 
  \item  We can compute the standard error for the model as: $SE_{model} = \sqrt{MS_{error}}$
  
@@ -461,7 +461,7 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
  \item In order to get the standard error for a specific regression parameter estimate, $SE_{\beta_x}$, we need to rescale the standard error of the model by the square root of the sum of squares of the X variable:
  
  \begin{displaymath}
-  SE_{\hat{\beta}_x} = \frac{SE_{model}}{\sqrt{\sum_{i=1}^m(x_i-\overline{x})^2}}
+  SE_{\hat{\beta}_x} = \frac{SE_{model}}{\sqrt{\sum_{i=1}^n(x_i-\overline{x})^2}}
    \end{displaymath}
 
 
@@ -470,7 +470,7 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
  \item In this case we will test against the null hypothesis of no effect (i.e. $\beta_{H_0}=0$):
  
  \begin{displaymath}
-  t_{m-p} = \frac{\hat{\beta}-\beta_{H_0}}{ SE_{\hat{\beta}_x}} = \frac{\hat{\beta}}{ SE_{\hat{\beta}_x}}
+  t_{n-p} = \frac{\hat{\beta}-\beta_{H_0}}{ SE_{\hat{\beta}_x}} = \frac{\hat{\beta}}{ SE_{\hat{\beta}_x}}
  \end{displaymath}
 
  \item Later we will see that R automatically reports the t-statistics and p-values of all coefficients of a linear model.
@@ -782,11 +782,11 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
 \begin{frame}{Multivariate Linear Regression}
 \scriptsize{
 \begin{itemize}
- \item Suppose we have $n$ independent variables:  $x_1,x_2,\dots,x_n$.
+ \item Suppose we have $m$ independent variables:  $x_1,x_2,\dots,x_m$.
  \item In many cases more variables can better explain the variability of the response variable $\mathbf{y}$ than a single one.
  \item A multivariate linear model is defined as follows:
  \begin{displaymath}
- y_i=\beta_{0}+\beta_{1}x_{i,1}+ +\beta_{2}x_{i,2} + \cdots + \beta_{n}x_{i,n} +  \epsilon_i \quad \forall i \in \{1,m\}
+ y_i=\beta_{0}+\beta_{1}x_{i,1}+ +\beta_{2}x_{i,2} + \cdots + \beta_{m}x_{i,m} +  \epsilon_i \quad \forall i \in \{1,n\}
 \end{displaymath}
 
 \item In essence we are adding a parameter for each independent variable.
@@ -816,7 +816,7 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
 \begin{frame}{Multivariate Linear Regression (2)}
 \scriptsize{
 \begin{itemize} 
-\item Where $Y$ is a vector $m\times 1$ response variables:
+\item Where $Y$ is a vector $n\times 1$ response variables:
 
 \begin{displaymath}
  Y =
@@ -824,19 +824,19 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
   y_{1} \\
   y_{2}  \\
   \vdots  \\
-  y_{m}
+  y_{n}
  \end{pmatrix}
 \end{displaymath}
 
-\item $X$ is a $m \times (n+1)$  matrix with the explanatory variables. We have $m$ observations of the $n$ variables.  The first column is constant equal to $1$ ($x_{i,0}=1 \quad \forall i$) to model the intercept variables $\beta_0$.
+\item $X$ is a $n \times (m+1)$  matrix with the explanatory variables. We have $n$ observations of the $m$ variables.  The first column is constant equal to $1$ ($x_{i,0}=1 \quad \forall i$) to model the intercept variables $\beta_0$.
 
 \begin{displaymath}
  X =
  \begin{pmatrix}
-x_{1,0} &  x_{1,1} & x_{1,2} & \cdots & x_{1,n} \\
-x_{2,0} &  x_{2,1} & x_{2,2} & \cdots & x_{2,n} \\
+x_{1,0} &  x_{1,1} & x_{1,2} & \cdots & x_{1,m} \\
+x_{2,0} &  x_{2,1} & x_{2,2} & \cdots & x_{2,m} \\
 \vdots  &  \vdots  & \vdots  & \ddots & \vdots  \\
-x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
+x_{n,0} &  x_{n,1} & x_{n,2} & \cdots & x_{n,m}
  \end{pmatrix}
 \end{displaymath}
 
@@ -854,7 +854,7 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
 \begin{frame}{Multivariate Linear Regression (2)}
 \scriptsize{
 \begin{itemize}
- \item Then, $\beta$ is a $(n+1) \times 1$ vector of parameters.
+ \item Then, $\beta$ is a $(m+1) \times 1$ vector of parameters.
 
 \begin{displaymath}
  \beta =
@@ -862,12 +862,12 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
   \beta_{0}  \\
   \beta_{1}  \\
   \vdots    \\
-  \beta_{n} 
+  \beta_{m} 
  \end{pmatrix}
 \end{displaymath}
 
 
-\item Finally, $\epsilon$  is a $m \times 1$ vector with the model errors. 
+\item Finally, $\epsilon$  is a $n \times 1$ vector with the model errors. 
 
 \begin{displaymath}
  \epsilon =
@@ -875,7 +875,7 @@ x_{m,0} &  x_{m,1} & x_{m,2} & \cdots & x_{m,n}
   \epsilon_{1}  \\
   \epsilon_{2}  \\
   \vdots    \\
-  \epsilon_{m} 
+  \epsilon_{n} 
  \end{pmatrix}
 \end{displaymath}
 
@@ -1003,13 +1003,13 @@ s3d$plane3d(reg2, lty.box = "solid")
   
   \item This is not desirable a property  when we want to compare different models.
 
-\item $R^2$ adjusted or $\overline{R}^2$ penalizes for the number of variables $p$.
+\item $R^2$ adjusted or $\overline{R}^2$ penalizes for the number of variables $m$.
  
 \begin{displaymath}
- \overline{R}^2= 1-(1-R^2)\frac{m-1}{m-p-1}
+ \overline{R}^2= 1-(1-R^2)\frac{n-1}{n-m-1}
 \end{displaymath}
 
-where $m$ is the number of examples.
+where $n$ is the number of examples.
 
  \end{itemize}
  }

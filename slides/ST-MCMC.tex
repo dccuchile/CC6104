@@ -394,7 +394,7 @@ long run, adjacent positions will be visited proportionally to their relative va
 \begin{itemize}
 \item So far, we have only considered the case with a single discrete parameter $\theta$ that can only move to the left or right.
 
-\item The general Metropolis algorithm allows working with multiple continuous parameters $\theta_1,\theta_2,\dots,\theta_n$ and more general proposal distributions.  
+\item The general Metropolis algorithm allows working with multiple continuous parameters $\theta_1,\theta_2,\dots,\theta_m$ and more general proposal distributions.  
 
 
 \item The essentials of the general method are the same as for the simple case. 
@@ -488,7 +488,7 @@ that efficiently explores the regions of the parameter space where $P(\theta)$ h
 the conditional probability distribution of that parameter given all the others and $d$: 
 
 \begin{displaymath}
-f(\theta_i | \theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_n,d)  
+f(\theta_i | \theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_m,d)  
 \end{displaymath}
 
 
@@ -509,7 +509,7 @@ f(\theta_i | \theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_n,d)
 
 \item Since we are using conjugate combinations, this conditional distribution has a closed form that facilitates the sampling of random numbers from it.
 
-\item The new value for $\theta_i$ , combined with the unchanged values of $\theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_n$, constitutes the new position in the random walk.
+\item The new value for $\theta_i$ , combined with the unchanged values of $\theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_m$, constitutes the new position in the random walk.
 
 \item The process then repeats: select the next parameter $\theta_{i+1}$ and select a new value for that parameter from its conditional posterior distribution.
 

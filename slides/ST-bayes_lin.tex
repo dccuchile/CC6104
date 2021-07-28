@@ -61,7 +61,7 @@
 \item In this class, which  is mostly based on chapter 4 of \cite{mcelreath2020statistical}, we are going to revisit the linear regression model from a Bayesian point of view.
 
 
-\item The idea is the same: to model the relationship of a numerical dependent variable $\mathbf{y}$ with $n$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n$ from a dataset $d$.
+\item The idea is the same: to model the relationship of a numerical dependent variable $\mathbf{y}$ with $m$ independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_m$ from a dataset $d$.
 
 \item The response variable $\mathbf{y}$ is again modeled with a Gaussian distribution: $y_i \sim N(\mu_i,\sigma^2)$.
 
@@ -69,7 +69,7 @@
 \item We also maintain the assumption that each attribute has a linear relationship to the mean of the outcome.
 
 \begin{displaymath}
-\mu_i = \beta_0 + \beta_1 x_i + \dots \beta_n x_n
+\mu_i = \beta_0 + \beta_1 x_i + \dots \beta_m x_m
 \end{displaymath}
 
 \item However, we are not going to use least squares or maximum likelihood to obtain point estimates of the parameters.
@@ -77,7 +77,7 @@
 \item Instead, we are going to estimate the joint posterior distribution of all the parameters of the model:
 
 \begin{displaymath}
-f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma|d)
+f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_m,\sigma|d)
 \end{displaymath}
 
 
@@ -106,23 +106,23 @@ f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma|d)
 
 \item It also allows to interpret the uncertainty of the model in a much richer way.
 
-\item Notice that the the parameters of the model are $\beta_0,\beta_1,\dots,\beta_n$ and $\sigma$ but not $\mu_i$.
+\item Notice that the the parameters of the model are $\beta_0,\beta_1,\dots,\beta_m$ and $\sigma$ but not $\mu_i$.
 
 \item This is because $\mu_i$ it is determined deterministically from the linear model's coefficients.
 
 \item In order to build our posterior we need to define a likelihood function:
 
 \begin{displaymath}
- f(d|\beta_0,\beta_1,\cdots,\beta_n,\sigma) =\prod_{i=1}^m f(d_i|\beta_0,\beta_1,\cdots,\beta_n,\sigma) 
+ f(d|\beta_0,\beta_1,\cdots,\beta_m,\sigma) =\prod_{i=1}^n f(d_i|\beta_0,\beta_1,\cdots,\beta_m,\sigma) 
 \end{displaymath}
 
 
-\item Where $d_i$ corresponds to each data point in the dataset containing values for $y$ and $x_1,\dots,x_n$ (IID assumption).
+\item Where $d_i$ corresponds to each data point in the dataset $d$ containing $n$ values for $y$ and $x_1,\dots,x_m$ (IID assumption).
 
 \item The likelihood of each point is modeled with a Gaussian distribution:
 
 \begin{displaymath}
- f(d_i|\beta_0,\beta_1,\cdots,\beta_n,\sigma)= N(\mu_i, \sigma^2)
+ f(d_i|\beta_0,\beta_1,\cdots,\beta_m,\sigma)= N(\mu_i, \sigma^2)
 \end{displaymath}
 
 
@@ -146,21 +146,21 @@ f(\theta|d)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma|d)
 \item Now we need a joint prior density:
 
 \begin{displaymath}
-f(\theta)= f(\beta_0,\beta_1,\dots,\beta_n,\sigma)
+f(\theta)= f(\beta_0,\beta_1,\dots,\beta_m,\sigma)
 \end{displaymath}
 
 
 \item And the posterior gets specified as follows:
 
 \begin{displaymath}
-f(\theta|d)= \frac{ \prod_{i=1}^m f(d_i|\beta_0,\beta_1,\cdots,\beta_n,\sigma)*f(\beta_0,\beta_1,\dots,\beta_n,\sigma)}{f(d)}
+f(\theta|d)= \frac{ \prod_{i=1}^n f(d_i|\beta_0,\beta_1,\cdots,\beta_m,\sigma)*f(\beta_0,\beta_1,\dots,\beta_m,\sigma)}{f(d)}
 \end{displaymath}
 
 
 \item The evidence is expressed by a multiple integral:
 
 \begin{displaymath}
- f(d) = \int \int \dots \int \prod_{i=1}^m f(d_i|\beta_0,\beta_1,\cdots,\beta_n,\sigma)* f(\beta_0,\beta_1,\dots,\beta_n,\sigma) d\beta_0 d\beta_1 \cdots d\beta_nd\sigma
+ f(d) = \int \int \dots \int \prod_{i=1}^n f(d_i|\beta_0,\beta_1,\cdots,\beta_m,\sigma)* f(\beta_0,\beta_1,\dots,\beta_m,\sigma) d\beta_0 d\beta_1 \cdots d\beta_md\sigma
 \end{displaymath}
 
 
@@ -169,7 +169,7 @@ f(\theta|d)= \frac{ \prod_{i=1}^m f(d_i|\beta_0,\beta_1,\cdots,\beta_n,\sigma)*f
 
 
 \begin{displaymath}
-f(\beta_0,\beta_1,\cdots,\beta_b,\sigma)=f(\beta_0)*f(\beta_1)*\dots*f(\beta_n)*f(\sigma). 
+f(\beta_0,\beta_1,\cdots,\beta_m,\sigma)=f(\beta_0)*f(\beta_1)*\dots*f(\beta_m)*f(\sigma). 
 \end{displaymath}
 
 
@@ -287,19 +287,19 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 \scriptsize{
 \begin{itemize}
  
-  \item The multivariate Gaussian distribution in $d$-dimensions defined by the following density function (PDF):
+  \item The multivariate Gaussian distribution in $m$-dimensions is defined by the following density function (PDF):
   
   \begin{displaymath}
    f_x = \frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}}\exp \left( -\frac{1}{2}(\vec{x}-\vec{\mu})^T  \Sigma^{-1}(\vec{x}-\mu)\right)
   \end{displaymath}
 
   
-\item This density function allows working with a $d$-dimensional vector of random variables $\vec{X}$.
+\item This density function allows working with a $m$-dimensional vector of random variables $\vec{X}$.
 
 
-\item The first parameter of this distributions is a mean vector $\vec{\mu} \in \mathcal{R}^d$ with the mean value of each dimension.
+\item The first parameter of this distributions is a mean vector $\vec{\mu} \in \mathcal{R}^m$ with the mean value of each dimension.
 
-\item The second parameter is a covariance matrix $\Sigma \in R^{d\times d}$.
+\item The second parameter is a covariance matrix $\Sigma \in R^{m\times m}$.
 
 \item This matrix contains the variance of each variable in the diagonal and the covariance of variables $X_i$ and $X_j$ in the other cells $\Sigma_{i,j}$:
 
@@ -418,7 +418,7 @@ $\sigma \sim $ Uniform$(0,50)$ & [$\sigma$ prior] \\
 \scriptsize{
 
 \begin{itemize}
-\item In Laplace approximation we assume that the joint posterior follows a multivariate Gaussian distribution $f(\theta_1,\dots,\theta_n) = N(\vec{\mu},\Sigma)$.
+\item In Laplace approximation we assume that the joint posterior follows a multivariate Gaussian distribution $f(\theta_1,\dots,\theta_m) = N(\vec{\mu},\Sigma)$.
 
 \item  According to \cite{gelman2013bayesian}, this approximation is convenient for unimodal and roughly symmetric posterior distributions.
 
@@ -522,7 +522,7 @@ sigma   5.07 0.19   4.70   5.45
 \item The marginal of multivariate distribution is the univariate distribution of a single parameter $\theta_i$ after integrating (averaging) over all the other parameters  $\theta_j \ \forall j \neq i$:
 
 \begin{displaymath}
-f(\theta_i |d) = \int \dots \int f(\theta_1,\dots,\theta_n|d)d\theta_1,\dots,d\theta_{i-1},d\theta_{i+1},\dots,d\theta_{n} 
+f(\theta_i |d) = \int \dots \int f(\theta_1,\dots,\theta_m|d)d\theta_1,\dots,d\theta_{i-1},d\theta_{i+1},\dots,d\theta_{m} 
 \end{displaymath}
 
  
