@@ -1,8 +1,8 @@
-# Introducción a R
+# Introduction to R
 # Felipe Bravo-Marquez
 
 
-# R puede ser usado como una calculadora
+# R can be used as a calculator
 
 
 4*5
@@ -13,22 +13,22 @@ log(4)
 # Declarando variables
 a<-1
 b=3
-assign("tres",3)
+assign("three",3)
 d<-a+b
-ver<-T # equivalente a TRUE
-pal<-"hola"
-normales<-rnorm(n=100)
+ver<-T # equivalent to TRUE
+word<-"hello"
+normals<-rnorm(n=100)
 
-# Declarando funciones
-suma<-function(a=2,b=1){
+# Functions
+my.sum<-function(a=2,b=1){
   return(a+b);
 }
 
-suma(3,4)
-suma()
-class(suma)
+my.sum(3,4)
+my.sum()
+class(my.sum)
 
-#Recursividad
+#Recursion
 fac<-function(n){
   ifelse(n==1,return(1),return(n*fac(n-1)))    
 }
@@ -37,23 +37,23 @@ fac<-function(n){
 class(a) 
 class(ver)
 class(pal)
-class(suma)
+class(my.sum)
 
-#Ayuda
+#help
 help(ls)
 ?ls
-#Para un comando
+#for a particular command
 help("for")
 
-#Para ver mis variables de mi workspace y borrar
+# View my workspace variables and delete them
 objects()
 ls()
 rm(a)
 rm(list=ls())
 
-# Para dejar grabado el workspace en un archivo
+# We can save all my workspace variables in a file
 save.image("~/la.RData")
-#Luego lo cargamos
+# we can load it in a new session
 load("~/la.RData")
 
 
@@ -62,16 +62,21 @@ load("~/la.RData")
 c(1,3,4)
 ages<-c(21,33,12,34,23,70,90,80,7,29,14,2,
           88,11,55,24,13,11,56,28,33)
-suma<-sum(ages)
-largo<-length(ages)
+a.sum<-sum(ages)
+a.length<-length(ages)
+a.sum
+a.length
+
 numbers<-c(1,2,3)
 numbers+3
 numbers*5
 numbers^2
 
 #Si opero un vector a un escalar este se recicla
-media<-sum(ages)/length(ages)
-varianza<-sum((ages-media)^2)/(length(ages)-1)
+a.mean<-sum(ages)/length(ages)
+a.mean
+a.var<-sum((ages-a.mean)^2)/(length(ages)-1)
+a.var
 var(ages)
 mean(ages)
 
