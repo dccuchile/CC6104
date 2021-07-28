@@ -521,9 +521,7 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
 \item Let's explore the linear correlations between the variables
 
  \begin{verbatim}
-> library(rethinking)
-> data(Howell1)
-> d <- Howell1
+> d <- read.csv("howell1.csv")
 > cor(d)
           height    weight         age        male
 height 1.0000000 0.9408222 0.683688567 0.139229021

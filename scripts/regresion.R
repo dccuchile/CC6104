@@ -1,9 +1,8 @@
 # Análisis de Regresión
 # Felipe Bravo Márquez
 
-library(rethinking)
-data(Howell1)
-d <- Howell1
+
+d <- read.csv("howell1.csv")
 cor(d)
 
 
