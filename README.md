@@ -78,7 +78,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 
 
 ## Links
-
+* [Statistical Rethinking with brms, ggplot2, and the tidyverse](https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/)
 * [Statistical Rethinking with Python and PyMC3](https://github.com/pymc-devs/resources/tree/master/Rethinking)
 * [Statistical Rethinking with PyTorch and Pyro](https://fehiepsi.github.io/rethinking-pyro/)
 * [Demystifying hypothesis testing with simple Python examples](https://towardsdatascience.com/demystifying-hypothesis-testing-with-simple-python-examples-4997ad3c5294)
