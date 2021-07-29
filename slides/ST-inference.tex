@@ -82,10 +82,10 @@
 \begin{frame}{Populations and Samples}
 \scriptsize{
 \begin{itemize}
- \item In statisical inference we try to make reasonable conclusions about a population based on the evidence provided by \textbf{sample data}.
+ \item In statistical inference we try to make reasonable conclusions about a population based on the evidence provided by \textbf{sample data}.
 
  
- \item A \textbf{sample staticic} or simply \textbf{statistic} is a quantitative measure calculated from a sample. Examples: the mean, the standard deviation, the minimum, the maximum.
+ \item A \textbf{sample statistic} or simply \textbf{statistic} is a quantitative measure calculated from a sample. Examples: the mean, the standard deviation, the minimum, the maximum.
  
  
 
@@ -178,7 +178,7 @@ Sample selection bias happens when samples tend to result in estimates of popula
  \item \textbf{Voluntary response bias}: letting people volunteer to be in the sample. 
  \begin{itemize}
  \scriptsize{
-  \item  Example:  When a radio program asks people to call in and take sides on some issue, those who care about the issue will be overrepresented, and those who don't care as much might not be represented at all.}
+  \item  Example:  When a radio program asks people to call in and take sides on some issue, those who care about the issue will be over-represented, and those who don't care as much might not be represented at all.}
  \end{itemize}
 
 
@@ -262,7 +262,7 @@ These types of bias derive from the method of obtaining the response.
 \begin{itemize}
  \item \textbf{Nonresponse bias}: people often refuse to respond to a survey. These people may be different from those who agree to participate.
  
- \item \textbf{Incorrent response or measurement bias}: the bias might be the result of intentional lying, or come from inaccurate measuring devices, including inaccurate memories of people being interviewed in self-reported data.
+ \item \textbf{Incorrect response or measurement bias}: the bias might be the result of intentional lying, or come from inaccurate measuring devices, including inaccurate memories of people being interviewed in self-reported data.
  \begin{itemize}
  \begin{scriptsize}
     \item Example 1: many people don't want to admit that they watch a certain television program.
@@ -381,15 +381,15 @@ These types of bias derive from the method of obtaining the response.
 \end{frame}
 
 
-\begin{frame}{Frequentist Aproach}
+\begin{frame}{Frequentist Approach}
 \scriptsize{
-The satistical methods to be presented is this class are known as \textbf{frequentist (or classical)} methods. They are based on the following postulates  \cite{wasserman2013all}:
+The statistical methods to be presented is this class are known as \textbf{frequentist (or classical)} methods. They are based on the following postulates  \cite{wasserman2013all}:
 \begin{itemize}
 \item Probability refers to limiting relative frequencies. Probabilities are objective properties of the real world.
 \item Parameters are fixed, unknown constants. Because they are not fluctuating, no useful probability statements can be made about parameters.
 \item Statistical procedures should be designed to have well-defined long run frequency properties. For example, a 95 percent confidence interval should trap the true value of the parameter with limiting frequency at least 95 percent.
 \end{itemize}
-There is another approach to inference called \textbf{Bayesian inference}, which is based on different posulates, to be discussed later in the course.
+There is another approach to inference called \textbf{Bayesian inference}, which is based on different postulates, to be discussed later in the course.
 
 } 
 \end{frame}
@@ -400,7 +400,7 @@ There is another approach to inference called \textbf{Bayesian inference}, which
 \scriptsize{
 \begin{itemize}
  \item Point estimation is the process of finding the \textbf{best guess} for some quantity of interest from a \textbf{statistical sample}.
- \item In a general sence, this quantity of interest could be a parameter in a parametric model, a CDF $F$, a probability density function $f$, a regression function $r$, or a prediction for a future value $Y$ of some random variable.
+ \item In a general sense, this quantity of interest could be a parameter in a parametric model, a CDF $F$, a probability density function $f$, a regression function $r$, or a prediction for a future value $Y$ of some random variable.
  \item In this class we will consider this quantity of interest as a \textbf{population parameter} $\theta$. 
   \item By convention, we denote a point estimate of $\theta$ by $\hat{\theta}$ or $\hat{\theta}_n$.
  \item It is important to remark that while $\theta$ is an unknown fixed value, $\hat{\theta}$  depends on the sample data and is therefore a random variable. 
@@ -455,7 +455,7 @@ There is another approach to inference called \textbf{Bayesian inference}, which
 
 \item The sampling distribution describes the variability of the point estimate around the true population parameter from sample to sample. 
 
-\item We need to bear in mind this is an imaginary concept, since in real sitations we can't obtain all possible samples.
+\item We need to bear in mind this is an imaginary concept, since in real situations we can't obtain all possible samples.
 
 \item Actually, in most cases we will only work with a single sample.
 
@@ -511,7 +511,7 @@ se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})
 \scriptsize{
 
 \begin{itemize}
-\item The standard error of the sample mean $se(\overline{X_{n}}) = \sqrt{\mathbb{V}(\overline{X_{n}})}$ can be calulated as:
+\item The standard error of the sample mean $se(\overline{X_{n}}) = \sqrt{\mathbb{V}(\overline{X_{n}})}$ can be calculated as:
 \begin{displaymath}
  \mathbb{V}(\overline{X_{n}})=\mathbb{V}(\frac 1n \sum_{i=1}^{n} X_i) = \frac{1}{n^2} \mathbb{V}(\sum_{i=1}^{n} X_i) = \frac{n}{n^2} \mathbb{V}(X_i)=\frac{\sigma^2}{n} 
 \end{displaymath}
@@ -711,7 +711,7 @@ $\mu$=4 and $\sigma=1.414214$
 \begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
 \scriptsize{
 \begin{itemize}
-\item The distribution of these sample means is the \textbf{sampling distributiion}.
+\item The distribution of these sample means is the \textbf{sampling distribution}.
 \item We can visualize its shape by plotting an histogram: 
 \begin{verbatim}
 ggplot(samples, aes(x=sample_mean)) + 
@@ -734,7 +734,7 @@ ggplot(samples, aes(x=sample_mean)) +
 \begin{frame}[fragile]{The Sampling Distribution of the Sample Mean}
 \scriptsize{
 \begin{itemize}
-\item You may noticed that the historgram is peaked in the middle, and symmetrical.
+\item You may noticed that the histogram is peaked in the middle, and symmetrical.
 \item This is a consequence of the Central Limit Theorem!!!
 \item We can see that the population distribution is very different from the sampling distribution:
 \begin{verbatim}
@@ -890,11 +890,11 @@ se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}
 \begin{frame}{Maximum Likelihood Estimation}
 \scriptsize{
 \begin{itemize}
- \item The estimators we have presented so far (e.g., the sample mean, the sample proportion) are ituitive, easy to compute, and consistent.
+ \item The estimators we have presented so far (e.g., the sample mean, the sample proportion) are intuitive, easy to compute, and consistent.
  \item Maximum Likelihood Estimation (MLE) is a more general framework  for estimating the \textbf{parameters} of any \textbf{parametric model}.
  \item In MLE, we assume that the sample data is generated by a given probability distribution ( continuous or discrete) parameterized by $\theta$ and try to find the value of $\theta$ that maximizes the joint probability of the data under that distribution. 
  \item Idea: find the parameter values of the assumed statistical model that make the observed data most probable.
- \item For example, we can asssume that each data point is generated by $N(\mu,\sigma^2)$, then we compute the joint PDF (or PMF) of our data and find the parameter values for $\mu$ and $\sigma$ that maximize that joint density (or mass).
+ \item For example, we can assume that each data point is generated by $N(\mu,\sigma^2)$, then we compute the joint PDF (or PMF) of our data and find the parameter values for $\mu$ and $\sigma$ that maximize that joint density (or mass).
  
 \end{itemize}
 
@@ -1391,7 +1391,7 @@ lines(y4~x,type="l",col="red")
 \begin{frame}{Confidence Interval for a Population Proportion}
 \scriptsize{
 \begin{itemize}
- \item Suppose we want to compute the proportion of subjects who will vote for a candiate and we also want a confidence interval for the estimated proportion.
+ \item Suppose we want to compute the proportion of subjects who will vote for a candidate and we also want a confidence interval for the estimated proportion.
  
  \item As showed earlier, the sampling distribution of a the sample proportion follows a Normal distribution.
 
@@ -1516,9 +1516,9 @@ lines(y4~x,type="l",col="red")
 \begin{itemize}
 \item From the figure, we can see that the distribution of means across bootstrap samples is fairly close to the theoretical estimate based on the assumption of normality. 
 
-\item It doesn't make much sense to use bootstrap for the sample mean because we know the theoerical shape of the sampling distribution.
+\item It doesn't make much sense to use bootstrap for the sample mean because we know the theoretical shape of the sampling distribution.
 
-\item The bootstrap would more often be used to generate standard errors and confidence intervals for estimates of statistics (e.g., the median, the maximum) where we know or suspect that the normal distribution is not appropriate. 
+\item The bootstrap would more often be used to generate standard errors and confidence intervals for estimates of statistics (e.g., the median, the standard deviation) where we know or suspect that the normal distribution is not appropriate. 
 
 \item Bootstrap is especially useful when CI doesn't have a closed form, or it has a very complicated one.
 
