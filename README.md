@@ -20,7 +20,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 ## Slides
 
 ### PART I: Foundations 
-1. [Introduction to Statistical Thinking](slides/ST-intro.pdf) | ([tex source file](slides/ST-intro.tex))
+1. [Introduction to Statistical Thinking](slides/ST-intro.pdf) | ([tex source file](slides/ST-intro.tex)), , [video 1](https://youtu.be/X4SqJu6lExM), [video 2](https://youtu.be/YbiQU5TTBX4)
 1. [Introduction to R](slides/ST-R.pdf) | ([tex source file](slides/ST-R.tex))
 1. [Descriptive Statistics](slides/ST-explore.pdf) | ([tex source file](slides/ST-explore.tex))
 1. [Probability](slides/ST-prob.pdf) | ([tex source file](slides/ST-prob.tex))
