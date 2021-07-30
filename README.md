@@ -14,6 +14,8 @@ The course introduces the fundamentals of statistical thinking, which are descri
 
 * [Course Calendar](calendar.md)
 
+* [Youtube Playlist with lectures](https://youtube.com/playlist?list=PLppKo85eGXiXpvRVYM5ZJEHWWofjzuiXw)
+
 
 ## Slides
 
