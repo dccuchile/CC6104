@@ -47,6 +47,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 
 * [Rethinking R package](https://github.com/rmcelreath/rethinking)
 * [STAN: a state-of-the-art platform for statistical modeling and high-performance statistical computation](https://mc-stan.org/)
+* [Rstan: the R interface to Stan ](http://mc-stan.org/rstan/), [installation instructions](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started)
 * [Pyro:  a universal probabilistic programming language (PPL) written in Python and supported by PyTorch on the backend](https://pyro.ai/)
 
 
