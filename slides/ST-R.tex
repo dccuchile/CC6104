@@ -113,7 +113,7 @@
 \begin{itemize}
   \item R works through the command line.
  \item To work in a more friendly environment we will use RStudio.
- \item It is also free and can be downloaded for different operating systems at this link: \url{http://www.rstudio.com/ide/download/desktop}
+ \item It is also free and can be downloaded for different operating systems at this link: \url{https://www.rstudio.com/products/rstudio/download/}
 \end{itemize}
 
 } 
@@ -596,7 +596,7 @@ mean(ages[ages>=18])
 > runif(n=5, min = 1, max = 10)
 [1] 5.058862 1.737830 9.450956 9.149376 2.652774
  \end{verbatim}
- \item  If we want numbers centered on a mean $\mu$ with a standard deviation $\sigma$, we use a normal distribution with the command \textbf{rnorm} where we know that $68\%$  of the observationswill be within the range $\mu\pm\sigma$, $95\%$ in $\mu\pm2\sigma$ and $99.7\%$ in $\mu\pm3\sigma$:
+ \item  If we want numbers centered on a mean $\mu$ with a standard deviation $\sigma$, we use a normal distribution with the command \textbf{rnorm} where we know that $68\%$  of the observations will be within the range $\mu\pm\sigma$, $95\%$ in $\mu\pm2\sigma$ and $99.7\%$ in $\mu\pm3\sigma$:
  
  \begin{verbatim}
 > rnorm(n=5, mean = 10, sd = 4)
@@ -673,7 +673,7 @@ categ_ages<-ifelse(ages<12,"child",
                       ifelse(ages<18,"adolescent","adult"))
 class(categ_ages)
 [1] "character"
-#Convierto a factor con as.factor
+#We convert variables to factor with as.factor
 categ_ages<-as.factor(categ_ages)
  \end{verbatim}
 
@@ -699,7 +699,7 @@ adolescent      adult      child
 \end{frame}
 
 
-\begin{frame}[fragile]{Strings handling}
+\begin{frame}[fragile]{Strings}
 \scriptsize{
  \begin{itemize}
   \item We can print a string using the command \textbf{cat}:
@@ -839,7 +839,7 @@ r4 10 11 12  1
  \end{verbatim}
 
  
-\item  If we use only the operator \verb+*+, the multiplication is done element by element (only for arrays of equal dimension). This also applies to addition, subtraction, division and other operators.
+\item  If we use only the operator \verb+*+, the multiplication is done element by element (only for matrices of equal dimension). This also applies to addition, subtraction, division and other operators.
 
 \end{itemize}
 

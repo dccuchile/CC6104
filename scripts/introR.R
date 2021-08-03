@@ -10,7 +10,7 @@
 exp(-5)
 log(4)
 
-# Declarando variables
+# Declaring Variables
 a<-1
 b=3
 assign("three",3)
@@ -33,10 +33,10 @@ fac<-function(n){
   ifelse(n==1,return(1),return(n*fac(n-1)))    
 }
 
-#tipos
+#types
 class(a) 
 class(ver)
-class(pal)
+class(word)
 class(my.sum)
 
 #help
@@ -52,13 +52,13 @@ rm(a)
 rm(list=ls())
 
 # We can save all my workspace variables in a file
-save.image("~/la.RData")
+save.image("~/myworkspace.RData")
 # we can load it in a new session
-load("~/la.RData")
+load("~/myworkspace.RData")
 
 
 
-# Vectores tipo básico de dato en R
+# Vectors
 c(1,3,4)
 ages<-c(21,33,12,34,23,70,90,80,7,29,14,2,
           88,11,55,24,13,11,56,28,33)
@@ -72,7 +72,7 @@ numbers+3
 numbers*5
 numbers^2
 
-#Si opero un vector a un escalar este se recicla
+
 a.mean<-sum(ages)/length(ages)
 a.mean
 a.var<-sum((ages-a.mean)^2)/(length(ages)-1)
@@ -82,8 +82,9 @@ mean(ages)
 
 
 
-# Reciclaje
-# si son del mismo largo es uno a uno
+# Recycling
+# If both vectors are of the same length 
+# and we operate on them, the operation is done element by element
 a<-c(1,2)
 b<-c(3,4)
 a+b
@@ -91,7 +92,7 @@ a*b
 #Si hay uno de largo 1 se aplica a todos
 unidad<-1
 a+unidad
-# Si uno es más largo que otro se recicla
+# If the vectors are of different lengths, the smaller one recycles its elements:
 d<-c(4,5,6,9)
 a+d
 #ojo que el largo del menor debe ser múltiple del largo del mayor
