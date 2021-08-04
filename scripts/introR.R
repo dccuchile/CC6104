@@ -247,7 +247,7 @@ for(i in 1:length(vectors)){
   means[i]<-mean(vectors[[i]])
   desv[i]<-sd(vectors[[i]])
 }
-medias
+means
 desv
 # Forma inteligente
 lapply(vectors,mean)
