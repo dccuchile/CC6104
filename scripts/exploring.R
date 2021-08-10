@@ -19,7 +19,7 @@ attach(iris)
 table(iris$Species)
 vec<-c(1,1,1,0,0,3,3,3,3,2)
 table(vec)
-table(vec)/length(vec)  # Percent frequency
+table(vec)/length(vec)  # Relative frequencies
 
 # The mode
 my_mode<-function(var){
