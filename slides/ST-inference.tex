@@ -1522,13 +1522,71 @@ lines(y4~x,type="l",col="red")
 
 \item Bootstrap is especially useful when CI doesn't have a closed form, or it has a very complicated one.
 
-\item Tutorials: \url{https://www.datacamp.com/community/tutorials/bootstrap-r}, \url{https://github.com/statsthinking21/statsthinking21-R/blob/master/07-ResamplingAndSimulation.Rmd}.
 
 \end{itemize}
 }
  
 \end{frame}
 
+\begin{frame}[fragile]{The Boostrap}
+\scriptsize{
+
+\begin{itemize}
+\item The following function implements Bootstrap confidence intervals for a generic R function:
+
+\begin{verbatim}
+myboot<-function(x,fun,nRuns,sampleSize,alpha){
+values<-vector()
+for(i in 1:nRuns){
+  samp.i<-sample(x, size = sampleSize, replace = T)
+  values[i]<-fun(samp.i)
+}
+point.est <-fun(x)
+se <- sd(values)
+l.CI <- quantile(values, alpha/2)
+u.CI <- quantile(values, 1-alpha/2)
+
+
+return(c("Point Estimate"=point.est,
+         "Standard error"=se,
+         "Lower CI limit" = l.CI,
+         "Upper CI limit" = u.CI))
+}
+
+\end{verbatim}
+
+
+
+
+\end{itemize}
+}
+ 
+\end{frame}
+
+\begin{frame}[fragile]{The Boostrap}
+\scriptsize{
+
+\begin{itemize}
+
+
+\item The lower and upper CI limits are obtained from the $\alpha/2$ and $(1-\alpha/2)$ sample quantiles.
+
+
+\item Let's compute a Bootstrap CI for the median of Petal.Length using $6000$ runs, a sample size of 64, and a level of significance of $0.05$:
+
+\begin{verbatim}
+> myboot(iris$Petal.Length,median,6000,64,0.05)
+      Point Estimate       Standard error  Lower CI limit.2.5% 
+           4.3500000            0.2779297            3.7500000 
+Upper CI limit.97.5% 
+           4.7000000
+\end{verbatim}
+
+
+\end{itemize}
+}
+ 
+\end{frame}
 
 
 \begin{frame}{Conclusions}

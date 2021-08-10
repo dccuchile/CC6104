@@ -69,13 +69,13 @@ summary(iris)
 #frequency
 table(iris$Species)
 
-# Dispersion
+# Variability
 range(Sepal.Length)
 max(Sepal.Length)-min(Sepal.Length)
 
 sd(Sepal.Length)
 sepal.var<-var(Sepal.Length)
-#It is equivalent to compute it as
+# This can be equivalenty computed as
 myvar<-sum((Sepal.Length-mean(Sepal.Length))^2)/(length(Sepal.Length-1))
 
 var(Sepal.Length)
@@ -138,7 +138,7 @@ kurtosis(x)
 # As expected we get a negative excess kurtosis (i.e. less than 3)
 #since the distribution has thiner tails. 
 
-#Visualización
+#Visualization
 
 png("imagen.png")
 plot(1:10)
@@ -154,13 +154,13 @@ legend('topright', c("lines","dots","both") ,
 
 
 
-## Histogramas
+## Histograms
 
 hist(Sepal.Length)
 lines(density(Sepal.Length))
 hist(Sepal.Length,nclass=length(Sepal.Length))
 
-## con ggplot2
+## with ggplot2
 
 library(ggplot2)
 # Basic histogram
