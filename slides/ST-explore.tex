@@ -461,7 +461,7 @@ tapply(iris$Sepal.Width,iris$Species,summary)
    \text{AAD}(x) = \frac{1}{n}\sum_{i=1}^{n}|x_i-m(x)| 
   \end{displaymath}
   
-  \item Excercise: Program the function \verb+add+ in R, as a function that receives a vector \verb+x+ and a central mean function \verb+fun+. The absolute value is calculated with the command \verb+abs+:
+  \item Exercise: Program the function \verb+add+ in R, as a function that receives a vector \verb+x+ and a central mean function \verb+fun+. The absolute value is calculated with the command \verb+abs+:
   
   \begin{verbatim}
 aad<-function(x,fun=median){
@@ -495,7 +495,7 @@ aad<-function(x,fun=median){
 [1] 0.7 
  \end{verbatim}
 
- \item Finally, the inter-quartile range (IQR) is defined as the difference between the third and the first quartile ($Q_3 - Q_1$).
+ \item Finally, the interquartile range (IQR) is defined as the difference between the third and the first quartile ($Q_3 - Q_1$).
  \begin{verbatim}
 IQR(Sepal.Length)
 [1] 1.3  
@@ -820,7 +820,7 @@ There are other two summary statistics that focus on more complex properties of 
 
 \scriptsize{
 \begin{itemize} 
- \item Now using data generated with a thiner-tailed Beta distribution with hyperparameters $5,5$:
+ \item Now using data generated with a thinner-tailed Beta distribution with hyperparameters $5,5$:
  
  \begin{verbatim}
 > x <-rbeta(1000,2,2)
@@ -829,7 +829,7 @@ There are other two summary statistics that focus on more complex properties of 
 [1] 2.1046
  \end{verbatim}
 
- \item  As expected we get a negative excess kurtosis (i.e. less than 3) since the distribution has thiner tails (Platykurtic). 
+ \item  As expected we get a negative excess kurtosis (i.e. less than 3) since the distribution has thinner tails (Platykurtic). 
  
    \begin{figure}[h!]
 	\centering
