@@ -67,6 +67,9 @@
  \item It is based mainly on two types of techniques: \textbf{summary statistics} and \textbf{data visualization}.
  
  \item In this class you will see both types of techniques, in addition to their application in R for some toy datasets.
+ 
+ \item This class in partially based on chapter 3 of \cite{tan2016introduction}.  
+ 
 \end{itemize}
 
 }
@@ -210,8 +213,7 @@ vec
  \begin{verbatim}
 my_mode<-function(var){
   frec.var<-table(var)
-  valor<-which(frec.var==max(frec.var))# Elements with 
-  the maximum value
+  value<-which(frec.var==max(frec.var))
   as.numeric(names(value))
 }
 > my_mode(vec)
@@ -234,9 +236,9 @@ my_mode<-function(var){
 \begin{itemize}
  \item These measures attempt to summarize the observed values into a single value associated with the centrally located value.
  \item The mean is the most common measure of central tendency for a numeric variable.  
- \item If we have $m$ observations it is calculated as the arithmetic mean or average.
+ \item If we have $n$ observations it is calculated as the arithmetic mean or average.
  \begin{displaymath}
-   \text{mean}(x) = \overline{x} = \frac{1}{m} \sum_{i=1}^{m} x_i
+   \text{mean}(x) = \overline{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
  \end{displaymath}
 
  \item The major problem with the mean is that it is very sensitive to \textbf{outliers} or outliers.
@@ -425,7 +427,7 @@ tapply(iris$Sepal.Width,iris$Species,summary)
  \end{verbatim}
  \item The standard deviation is the square root of the variance that measures the mean squared differences of the observations from the mean.  
  \begin{displaymath}
-  \text{var}(x)=\frac{1}{m-1}\sum_{i=1}^{m}(x_{i} - \overline{x} )^2
+  \text{var}(x)=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i} - \overline{x} )^2
  \end{displaymath}
  \begin{displaymath}
   \text{sd}(x)=\sqrt{\text{var}(x)}
@@ -456,7 +458,7 @@ tapply(iris$Sepal.Width,iris$Species,summary)
 
   \item Let $m(x)$ be a measure of central tendency of $x$ (usually the median), we define the textbf{average absolute deviation} (AAD)  as:
   \begin{displaymath}
-   \text{AAD}(x) = \frac{1}{m}\sum_{i=1}^{m}|x_i-m(x)| 
+   \text{AAD}(x) = \frac{1}{n}\sum_{i=1}^{n}|x_i-m(x)| 
   \end{displaymath}
   
   \item Excercise: Program the function \verb+add+ in R, as a function that receives a vector \verb+x+ and a central mean function \verb+fun+. The absolute value is calculated with the command \verb+abs+:
@@ -512,7 +514,7 @@ IQR(Sepal.Length)
  \item To compare how one variable varies with respect to another, we use multivariate measures.
  \item The covariance $cov(x,y)$ measures the degree of joint linear variation of a pair of variables $x$, $y$:
  \begin{displaymath}
-  cov(x,y)=\frac{1}{m-1}\sum_{i=1}^{n}(x-\overline{x})(y-\overline{y})
+  cov(x,y)=\frac{1}{n-1}\sum_{i=1}^{n}(x-\overline{x})(y-\overline{y})
  \end{displaymath}
  \item Where $cov(x,x)=var(x)$
 \item In R it is computed with the command  \verb+cov+:
@@ -591,9 +593,9 @@ Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
 \begin{frame}[fragile]{Contingency Tables}
 \scriptsize{
 \begin{itemize}
- \item Para analizar la relación entre variables de naturaleza categórica usamos \textbf{tablas de contingencia}.
- \item La tabla se llena con las frecuencias marginales de todos los pares de valores entre dos variables categóricas.
- \item En R se crean usando el comando \verb+table+ que usábamos para frecuencias, pero entregándole dos vectores:
+ \item To analyze the relationship between categorical variables  we use \textbf{contingency tables}.
+ \item The table is filled with the marginal frequencies of all pairs of values between two categorical variables.
+ \item In R they are created using the command \verb+table+ that we used before for computing frequencies, but now giving two vectors as input:
  \begin{verbatim}
 gender<-c("Male", "Female", "Male", "Female", "Female", "Male")
 studies<-c("college","postgraduate","high school",
@@ -617,22 +619,232 @@ gender   college high school postgraduate
 
 \begin{frame}{Skweness and Kurtosis}
 \scriptsize{
+There are other two summary statistics that focus on more complex properties of the data distribution called skeweness and kurtosis \cite{pipis_2020}.
+\begin{block}{Skeweness}
 \begin{itemize}
-\item There are other two summary statistics that focus on more complex properties of the data distribution called skeweness and kurtosis
-\item Skeweness: is a measure of the asymmetry of the probability distribution. The skewness value can be positive, zero, negative, or undefined. 
-\item Kurtosis: it  describe the ``tailedness'' of the distribution.
+ \item Skeweness is a measure of the \textbf{asymmetry} of the probability distribution.  
+ \begin{displaymath}
+  \text{skewness}(x) = \frac{\sum_{i=1}^{n}(x_i-\overline{x})^3}{(n-1)sd(x)^3}
+ \end{displaymath}
 
-\item More details here: \url{https://www.r-bloggers.com/2020/11/skewness-and-kurtosis-in-statistics/}.
+ 
+ \item It indicates how much our underlying distribution deviates from the normal distribution since the normal distribution has skewness 0.
+ \item  Generally, we have three types of skewness:
+ 
+ \begin{enumerate}
+ \scriptsize{
+  \item     \textbf{Symmetrical}: the skewness is close to 0 and the mean is almost the same as the median.
+  \item \textbf{Negative skew}: the majority of the observations are concentrated on the right tail (the median is greater than the mean).
+  \item  \textbf{Positive skew}: the majority of the observations are concentrated on the left tail (the median is less than the mean). }
+ \end{enumerate}
 
 \end{itemize}
+
+
+\end{block}
+
+
+
+
 }
  
 \end{frame}
 
 
+\begin{frame}{Skweness}
 
-%%% Tablas de contingencia
-%%% Correlaciones
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.68]{pics/skewness.png}
+     \caption{Source: Wikipedia}
+	\end{figure} 
+
+
+
+
+ 
+\end{frame}
+
+
+\begin{frame}[fragile]{Skweness}
+
+\scriptsize{
+\begin{itemize} 
+ \item In R, we can calculate skweness with the formula \textbf{skewness} from the library \textbf{moments}:
+ 
+ \begin{verbatim}
+> library(moments)
+#positive skew
+> skewness(c(1,1,2,3)) 
+[1] 0.4933822
+#symmetrical
+> skewness(c(1,2,3)) 
+[1] 0
+#negative skew
+> skewness(c(1,2,3,3)) 
+[1] -0.4933822
+ \end{verbatim}
+
+ 
+ 
+\end{itemize}
+
+}
+
+
+
+ 
+\end{frame}
+
+
+\begin{frame}{Kurtosis}
+\scriptsize{
+
+
+\begin{block}{Kurtosis}
+\begin{itemize}
+ \item The Kurtosis  describes the ``tailedness'' of a distribution \cite{westfall2014kurtosis}. 
+ 
+  \begin{displaymath}
+  \text{kurtosis}(x) = \frac{\sum_{i=1}^{n}(x_i-\overline{x})^4}{(n-1)sd(x)^4}
+ \end{displaymath}
+ 
+  \item  Let's see the main three types of kurtosis.
+ 
+ \begin{enumerate}
+ \scriptsize{
+   \item  \textbf{Mesokurtic}: This is the normal distribution (kurtosis $\approx 3$)
+    \item \textbf{Leptokurtic}: This distribution has fatter tails than a normal distribution (kurtsosis $> 3$). Consequently, outliers are more likely to occur than in a normal distribution.
+    \item \textbf{Platykurtic}: The distribution has thinner tails than a normal distribution (kurtosis $< 3$). Consequently, outliers are less likely to occur than in a normal distribution.}
+ \end{enumerate}
+
+ 
+ 
+\end{itemize}
+
+
+
+\end{block}
+
+
+}
+ 
+\end{frame}
+
+
+\begin{frame}{Kurtosis}
+
+
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.9]{pics/kurtosis.jpg}
+     \caption{Source: tutorialspoints}
+	\end{figure} 
+ 
+ 
+
+
+
+
+ 
+\end{frame}
+
+\begin{frame}[fragile]{Kurtosis}
+
+\scriptsize{
+\begin{itemize} 
+ \item In R, we can calculate kurtosis with the formula \textbf{kurtosis} from the library \textbf{moments}.
+ 
+ \item Let's calculate kurtosis for normal data:
+ 
+ \begin{verbatim}
+> x <- rnorm(1000, 0,1)
+> plot(density(x))
+> kurtosis(x)
+[1] 2.946869
+ \end{verbatim}
+
+ \item  As expected we got a value close to 3.
+
+ 
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/kurt1.pdf}
+	\end{figure} 
+ 
+ 
+ 
+\end{itemize}
+
+}
+
+ 
+\end{frame}
+
+
+\begin{frame}[fragile]{Kurtosis}
+
+\scriptsize{
+\begin{itemize} 
+ \item Now using random data generated with an exponential long-tailed distribution:
+ 
+ \begin{verbatim}
+> x<-rexp(1000)
+> plot(density(x))
+> kurtosis(x)
+[1] 6.839485
+ \end{verbatim}
+
+ \item  As expected we get a positive excess kurtosis (i.e. greater than 3) since the distribution has fatter tails (Leptokurtic).
+
+ 
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/kurt2.pdf}
+	\end{figure} 
+ 
+ 
+ 
+\end{itemize}
+
+}
+
+ 
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Kurtosis}
+
+\scriptsize{
+\begin{itemize} 
+ \item Now using data generated with a thiner-tailed Beta distribution with hyperparameters $5,5$:
+ 
+ \begin{verbatim}
+> x <-rbeta(1000,2,2)
+> plot(density(x))
+> kurtosis(x)
+[1] 2.1046
+ \end{verbatim}
+
+ \item  As expected we get a negative excess kurtosis (i.e. less than 3) since the distribution has thiner tails (Platykurtic). 
+ 
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/kurt3.pdf}
+	\end{figure} 
+ 
+ 
+ 
+\end{itemize}
+
+}
+
+ 
+\end{frame}
+
 
 \section{Visualization}
 
@@ -1191,24 +1403,15 @@ parcoord(iris[1:4], col=iris$Species,var.label=T)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
-\frametitle{Bibliography}
-%\bibliography{bio}
-%\bibliographystyle{apalike}
-\begin{thebibliography}{8}
-
-\bibitem{William}
-Venables, William N., David M. Smith, and R Development Core Team. \emph{An introduction to R.}, 2002.
-\bibitem{Pang}
-Tan, P. N., Steinbach, M., \& Kumar, V. \emph{Introduction to Data Mining}, 2005.
-
-\bibitem{cran}
-\url{http://cran.r-project.org/doc/contrib/grafi3.pdf}
-\end{thebibliography}
-
-
+\frametitle{References}
+\bibliography{bio}
+\bibliographystyle{apalike}
 %\bibliographystyle{flexbib}
-\end{frame}
+\end{frame}  
+
+
 
 
 

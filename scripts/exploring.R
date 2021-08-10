@@ -1,27 +1,27 @@
-# Exploración de datos y Visualización
-# basado en el capítulo 3 del libro Introduction to Data Mining
-# Autor: Felipe Bravo-Marquez
+# Data Exploration and Visualization
+# Based on chapter 3 of the book Introduction to Data Mining
+# Author: Felipe Bravo-Marquez
 
 data(iris)
 
-#Para ver las promediedades estadisticas básicas hacemos summary
+#To see the basic statistics we do summary
 summary(iris)
 
-#Para ver los atributos del data.frame
+#To see the attributes of the data.frame
 names(iris)
 
 dim(iris)
 
-#Para pasar todas las variables del data.frame al ambiente
+#To pass all the variables of the data.frame to the environment
 attach(iris)
 
-#frecuencias
+#frequencies
 table(iris$Species)
 vec<-c(1,1,1,0,0,3,3,3,3,2)
 table(vec)
-table(vec)/length(vec)  # Frecuencia porcentual
+table(vec)/length(vec)  # Percent frequency
 
-# La moda
+# The mode
 my_mode<-function(var){
   frec.var<-table(var)
   value<-which(frec.var==max(frec.var))# Elements with  the maximum value
@@ -31,13 +31,13 @@ my_mode<-function(var){
 my_mode(vec)
 my_mode(iris$Sepal.Length)
 
-#Estadisticos básicos
+#Basic statistics
 mean(Sepal.Length)
 median(Sepal.Length)
-#media truncada define el porcentaje de elementos extremos que no considera
+#truncated mean defines the percentage of extreme elements that it does not consider
 mean(Sepal.Length, trim=0.1)
 
-# Creamos un vector de tamaño 10, con media 20 y sd 10
+# we create a vector of size 10, with mean 20 and sd 10
 vec<-rnorm(10,20,10)
 mean(vec)
 vec.noise<-c(vec,rnorm(1,300,100))
@@ -50,7 +50,7 @@ median(vec)
 median(vec.noise)
 
 
-# Todos los percentiles
+# All percentiles
 quantile(Sepal.Length,seq(0,1,0.01))
 quantile(Sepal.Length,seq(0,1,0.25))
 
@@ -66,16 +66,16 @@ tapply(iris$Sepal.Width,iris$Species,summary)
 summary(iris)
 
 
-#frecuencia
+#frequency
 table(iris$Species)
 
-# Dispercion
+# Dispersion
 range(Sepal.Length)
 max(Sepal.Length)-min(Sepal.Length)
 
 sd(Sepal.Length)
 sepal.var<-var(Sepal.Length)
-#Es equivalente a computarlo como
+#It is equivalent to compute it as
 myvar<-sum((Sepal.Length-mean(Sepal.Length))^2)/(length(Sepal.Length-1))
 
 var(Sepal.Length)
@@ -102,7 +102,7 @@ cov(iris[,1:4])
 cor(iris[,1:4])
 
 
-# Tablas de Contingencia
+# Contingency Tables
 gender<-c("Male", "Female", "Male", "Female", "Female", "Male")
 studies<-c("college","postgraduate","high school",
             "postgraduate","high school","college")
@@ -112,7 +112,31 @@ table(weather$outlook,weather$play)
 table(weather$temperature,weather$play)
 library(modeest)
 
+# Skweness and Kurtosis
+library(moments)
+#positive skew
+skewness(c(1,1,2,3)) 
+#symmetrical
+skewness(c(1,2,3)) 
+#negative skew
+skewness(c(1,2,3,3)) 
 
+
+x <- rnorm(1000, 0,1)
+plot(density(x))
+kurtosis(x)
+# As expected we got a value close to 3!
+
+x<-rexp(1000)
+plot(density(x))
+kurtosis(x)
+# As expected we get a positive excess kurtosis (i.e. greater than 3) since the distribution has fatter tails.
+
+x <-rbeta(1000,2,2)
+plot(density(x))
+kurtosis(x)
+# As expected we get a negative excess kurtosis (i.e. less than 3)
+#since the distribution has thiner tails. 
 
 #Visualización
 

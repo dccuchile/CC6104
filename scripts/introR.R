@@ -317,7 +317,7 @@ library(tidyverse)
 ages.tibble<-as_tibble(ages.frame)
 print(ages.tibble)
 
-ages.tibble %>% filter(age < 20)
+ages.tibble %>% filter(age < 20) 
 
 
 weights<-c(60,80,31,70,71,101,59,67,11,78,55,11,
@@ -333,7 +333,7 @@ ages.tibble <- ages.tibble %>%
   mutate(future.age = age + 10) 
 
 #modify a variable
-ages.tibble %>% mutate(age=1:21)
+mod.ages <- ages.tibble %>% mutate(age=1:21)
 
 # select specififc columns
 ages.tibble %>% select(c(weights,categ))
