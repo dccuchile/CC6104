@@ -485,7 +485,7 @@ aad<-function(x,fun=median){
 \begin{frame}[fragile]{Variability Measures (3)}
 \scriptsize{ 
 \begin{itemize}
- \item Let $b$ be a constant we define the \textbf{mean absolute deviation} as: 
+ \item Let $b$ be a constant we define the \textbf{median absolute deviation} as: 
  \begin{displaymath}
   \text{MAD}(x) = b \times \text{median}(|x_{i}-\text{m}(x)|)
  \end{displaymath}
@@ -820,7 +820,7 @@ There are other two summary statistics that focus on more complex properties of 
 
 \scriptsize{
 \begin{itemize} 
- \item Now using data generated with a thinner-tailed Beta distribution with hyperparameters $5,5$:
+ \item Now using data generated with a thinner-tailed Beta distribution with hyperparameters $2,2$:
  
  \begin{verbatim}
 > x <-rbeta(1000,2,2)
@@ -1062,6 +1062,8 @@ pie(table(iris$Species))
 	
 	
 \end{figure} 
+
+\item Many people consider pie charts to be misleading and recommend using histograms as a better alternative \cite{poldrack2019statistical}.
 
 \end{itemize}
 
