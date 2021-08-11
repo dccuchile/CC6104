@@ -107,10 +107,6 @@ gender<-c("Male", "Female", "Male", "Female", "Female", "Male")
 studies<-c("college","postgraduate","high school",
             "postgraduate","high school","college")
 table(gender,studies)
-weather<-read.table("weather.nominal.csv",header=T,sep=",")
-table(weather$outlook,weather$play)
-table(weather$temperature,weather$play)
-library(modeest)
 
 # Skweness and Kurtosis
 library(moments)
