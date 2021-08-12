@@ -4,8 +4,8 @@ Semana | Fecha | Tema | Asíncrono (Revisar en casa) | Síncrono (En clase) | Ev
 :------------: | :------------- | :------------- | :------------- | :-------------: | :-------------: 
 1 | Martes 17/08 | Introduction to Statistical Thinking | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-intro.pdf) [video 1](https://youtu.be/X4SqJu6lExM), [video 2](https://youtu.be/YbiQU5TTBX4) |Presentación (Zoom)|
 1 | Jueves 19/08 | Introduction to R | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-R.pdf) , [video 1](https://youtu.be/MbeLD3hWWVo), [video 2](https://youtu.be/9W_eWCy86F4),  [video 3](https://youtu.be/QvFXSw2-1r4), [video 4](https://youtu.be/y4JY7klrbfQ) |  |
-2 | Martes 24/08 | Descriptive Statistics | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-explore.pdf), [video 1](https://youtu.be/MbeLD3hWWVo), [video 2](https://youtu.be/9W_eWCy86F4) |  |
-2 | Jueves 26/08 | Descriptive Statistics | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-explore.pdf), [video 3](https://youtu.be/QvFXSw2-1r4), [video 4](https://youtu.be/y4JY7klrbfQ) | Horario de consulta (Discord) |
+2 | Martes 24/08 | Descriptive Statistics | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-explore.pdf), [video 1](https://youtu.be/kWNskZ8_98o), [video 2](https://youtu.be/_FJ8x9M4b1w) |  |
+2 | Jueves 26/08 | Descriptive Statistics | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-explore.pdf), [video 3](https://youtu.be/m7VBNZ2mYWI), [video 4](https://youtu.be/ylGMJ_aSQk0) | Horario de consulta (Discord) |
 3 | Martes 31/08 | Probability | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-prob.pdf) | |Tarea 1
 3 | Jueves 02/09 | Probability | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-prob.pdf) | Horario de consulta (Discord) |
 4 | Martes 07/09 | Introduction to Statistical Inference | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-inference.pdf) | |
