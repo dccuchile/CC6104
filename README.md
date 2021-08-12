@@ -21,8 +21,8 @@ The course introduces the fundamentals of statistical thinking, which are descri
 
 ### PART I: Foundations 
 1. [Introduction to Statistical Thinking](slides/ST-intro.pdf) | ([tex source file](slides/ST-intro.tex)), [video 1](https://youtu.be/X4SqJu6lExM), [video 2](https://youtu.be/YbiQU5TTBX4)
-1. [Introduction to R](slides/ST-R.pdf) | ([tex source file](slides/ST-R.tex)), [video 1](https://youtu.be/MbeLD3hWWVo), [video 2](https://youtu.be/9W_eWCy86F4),  [video 3](https://youtu.be/QvFXSw2-1r4), [video 4](https://youtu.be/y4JY7klrbfQ)
-1. [Descriptive Statistics](slides/ST-explore.pdf) | ([tex source file](slides/ST-explore.tex))
+1. [Introduction to R](slides/ST-R.pdf) | ([tex source file](slides/ST-R.tex)), [video 1](https://youtu.be/kWNskZ8_98o), [video 2](https://youtu.be/_FJ8x9M4b1w),  [video 3](https://youtu.be/m7VBNZ2mYWI), [video 4](https://youtu.be/ylGMJ_aSQk0)
+1. [Descriptive Statistics](slides/ST-explore.pdf) | ([tex source file](slides/ST-explore.tex)), [video 1](https://youtu.be/MbeLD3hWWVo), [video 2](https://youtu.be/9W_eWCy86F4),  [video 3](https://youtu.be/QvFXSw2-1r4), [video 4](https://youtu.be/y4JY7klrbfQ)
 1. [Probability](slides/ST-prob.pdf) | ([tex source file](slides/ST-prob.tex))
 
 ### PART II: Frequentist Inference
