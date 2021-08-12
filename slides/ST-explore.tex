@@ -905,7 +905,7 @@ There are other two summary statistics that focus on more complex properties of 
  
  \item To do it from the R command line:
  \begin{verbatim}
-png("imagen.png")
+png("image.png")
 plot(1:10)
 dev.off() 
  \end{verbatim}
@@ -1079,7 +1079,7 @@ pie(table(iris$Species))
 \begin{itemize}
  \item Boxplots are built from the percentiles. 
  \item A rectangle is constructed between the first and third quartiles ($Q_1$ and $Q_3$).
- \item The height of the rectangle is the interquartile range RIC ($Q_3 - Q_1$).
+ \item The height of the rectangle is the interquartile range IQR ($Q_3 - Q_1$).
  \item The median is a line that divides the rectangle.
  \item Each end of the rectangle is extended with a line or arms of length $Q1-1.5*$IQR for the lower line and $Q_3+1.5*$IQR for the upper line.
  \item Values more extreme than the length of the arms are considered outliers.
