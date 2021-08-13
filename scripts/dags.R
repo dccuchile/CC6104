@@ -15,3 +15,8 @@ coordinates(fo) <- list( x=c(lo=0,fo=1,do=2,hb=2,bp=3) , y=c(fo=0,bp=0,lo=1,do=1
 
 plot(fo)
 impliedConditionalIndependencies(fo)
+
+library(ggdag)
+tidy_dagitty(fo)
+ggdag(fo, layout = "circle")
+

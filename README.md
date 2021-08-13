@@ -97,3 +97,5 @@ The course introduces the fundamentals of statistical thinking, which are descri
 * [Stats with R by Manny Gimond](https://mgimond.github.io/Stats-in-R/index.html)
 * [FiveMinuteStats by Matthew Stephens](https://stephens999.github.io/fiveMinuteStats/index.html)
 * [Experimentation - Yale Universtity](http://www.stat.yale.edu/Courses/1997-98/101/expdes.htm) 
+* [Probabilistic graphical models notes by Stefano Ermon](https://ermongroup.github.io/cs228-notes/)
+
