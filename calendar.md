@@ -26,10 +26,10 @@ Receso Académico | | | | |
 Receso Académico | | | | |
 11 | Martes 09/11 | Model Evaluation and Information Theory | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-eval.pdf) | |Tarea 4
 11 | Jueves 11/11 | Model Evaluation and Information Theory | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-eval.pdf) | Horario de consulta (Discord) |
-12 | Martes 16/11 | Probabilistic Graphical Models and DAGs |  | |
-12 | Jueves 18/11 | Probabilistic Graphical Models and DAGs |  | Hora de consulta (Discord) |
-13 | Martes 23/11 | Multi-level Models |  | | Tarea 5
-13 | Jueves 25/11 | Multi-level Models |  | Horario de consulta (Discord) |
+12 | Martes 16/11 | Probabilistic Graphical Models and DAGs | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-dag.pdf) | |
+12 | Jueves 18/11 | Probabilistic Graphical Models and DAGs | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-dag.pdf) | Hora de consulta (Discord) |
+13 | Martes 23/11 | Multi-level Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-multi.pdf) | | Tarea 5
+13 | Jueves 25/11 | Multi-level Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/ST-multi.pdf) | Horario de consulta (Discord) |
 14 | Martes 30/11 | Ponerse al día |  | |
 14 | Jueves 02/11 | Reflexiones finales | |  |
 Exámenes | | | | |
