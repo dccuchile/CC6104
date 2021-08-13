@@ -164,6 +164,9 @@ acyclic graph or DAG.
 
 \item From now on, we only deal with directed acyclic graphs since it is very difficult to provide a coherent probability semantics over graphs with directed cycles.
  
+\item For the remainder of this class we will use the terms Bayesian Network, directed graphical model (DGM) and directed acyclical graph (DAG) interchangeably. 
+ 
+ 
 \end{itemize}
 
 
@@ -176,6 +179,21 @@ acyclic graph or DAG.
 \begin{frame}{Probability and DAGs}
 \scriptsize{
 \begin{itemize}
+
+\item An important concept we need to introduce to understand DAGs is the chain rule of probability.
+
+\item For a set of random variables $X_1,\dots, X_n$ we can write the joint probability function $f(x_1,x_2,\dots, x_n)$ as 
+
+\begin{displaymath}
+f(x_1,x_2,\dots,x_n)=f(x_1)f(x_2|x_1)\dots f(x_n|x_{n-1},\dots,x_2,x_1).
+ \end{displaymath}
+
+
+
+\item A DAG is a distribution in which each factor on the right hand side depends only on a small number of ancestor variables $\pi(x)$. \cite{ermon_kuleshov}
+
+
+
 \item Let $G$ be a DAG with vertices $V = (X_1 , \dots , X_d )$. 
 
 \item If $P$ is a distribution for $V$ with probability function $f(x)$ (density or masss), we say that $G$ represents $P$ , if
@@ -185,19 +203,6 @@ acyclic graph or DAG.
 \end{displaymath}
 
 where $\pi_{x_j}$ is the set of parent nodes of $X_j$
-
-\item The next figure shows a DAG with four variables.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.3]{pics/dag3.png}
-	\end{figure} 
-
-
-
-\item The probability function takes the following decomposition:
-
-\item $f($overweight, smoking, heart disease, cough$) =$ \\    $f($overweight$) \times f($smoking$) \times f($heart, disease$|$ overweight, smoking$) \times f($cough$|$smoking$)$. 
 
 
 
@@ -209,7 +214,32 @@ where $\pi_{x_j}$ is the set of parent nodes of $X_j$
 
 \end{frame}
 
+\begin{frame}{Probability and DAGs}
+\scriptsize{
+\begin{itemize}
 
+
+\item The next figure shows a DAG with four variables.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/dag3.png}
+	\end{figure} 
+
+
+
+\item The probability function takes the following decomposition:
+
+\item $f($overweight, smoking, heart disease, cough$) =$ \\    $f($overweight$) \times f($smoking$) \times f($heart, disease$|$ overweight, smoking$) \times f($cough$|$smoking$)$. 
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
 
 
 
@@ -242,10 +272,182 @@ for all x, y and z.
 \end{frame}
 
 
+\begin{frame}{An Example}
+\scriptsize{
+\begin{itemize}
+\item The best way to understand DAGs is to imagine trying to model a situation in which causality plays a role.
+\item And also our understanding of what is actually going on is
+incomplete
+\item So we need to describe things probabilistically. 
+
+\item The following example is based on \cite{charniak1991bayesian}.
+
+\item Eugene Charniak is a famous AI researcher who's got the following situation.
+
+\item When he goes home at night, he wants to know if his family is home before trying the doors. 
+
+\item Often when his wife leaves the house, she turns on an outdoor light. 
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{An Example}
+\scriptsize{
+\begin{itemize}
+
+\item Eugene's wife can also turn on the outdoor light if she is expecting a guest.
+
+\item Also, they have a female dog. 
+
+\item When nobody is home, the dog is put in the back yard. 
+
+\item The same is true if the dog has bowel troubles. 
+
+\item Finally, if the dog is in the backyard, Eugene's will probably hear her barking 
+
+\item The next slide shows a DAG encoding all the above causal relationships.
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{An Example}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/fodag.png}
+	\end{figure} 
+
+\begin{itemize}
+
+\item The DAG can help to predict what will happen in a particular scenario (if his family goes out, the dog goes out) 
+\item Or to infer causes from observed effects (if the light is on and the dog is out, then his family is probably out).
+
+
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
 \begin{frame}{D-separation}
 \scriptsize{
 \begin{itemize}
 \item sdsad
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Plate Notation}
+\scriptsize{
+\begin{itemize}
+\item sdsad
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{Estirnation for DAGs}
+\scriptsize{
+\begin{itemize}
+\item Two estimation questions arise in the context of DAGs. 
+\item First, given a DAG $\mathcal{G}$ and data $V_1,\dots,V_n$ from a distribution $f$ consistent with $\mathcal{G}$, how do we estimate f?
+
+\item Second, given data $d_1,\dots,d_n$ how do we estimate $\mathcal{G}$?
+
+\item The first question is pure estimation while the second involves model selection.
+
+\item These are very involved topics and are beyond the scope of this course.
+
+\item We will just briefly mention the main ideas.
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Estirnation for DAGs}
+\scriptsize{
+\begin{itemize}
+
+\item If we are doing frequentist inference, we typically use some parametric model $f(x|\pi_x;\theta_x)$ for each conditional density. 
+
+\item The likelihood function is then
+
+\begin{displaymath}
+ \mathcal{L}(\theta) = \prod_{i=1}^nf(d_i;\theta) ) =  \prod_{i=1}^n\prod_{j=1}^mf(X_{ij}|\pi_j;\theta_j) 
+\end{displaymath}
+
+\item where $X_{ij}$ is the value of $X_j$ for the ith data point and j are the parameters for the-jth conditional density. 
+
+\item We can then estimate the parameters by maximum likelihood.
+
+\item On the other hand, if we want to perform Bayesian inference we must set priors for all our variables $X_1,\dots,X_m$ and estimate the posterior accordingly.
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}{Estirnation for DAGs}
+\scriptsize{
+\begin{itemize}
+
+\item To estimate the structure of the DAG itself, we could fit every possible DAG
+using maximum likelihood and use AIC (or some other method) to choose a
+DAG. 
+
+\item However, there are many possible DAGs so we would need much data
+for such a method to be reliable.
+
+\item Also, searching through all possible DAGs is a serious computational challenge. 
+
+\item Producing a valid, accurate confidence set for the DAG structure would require astronomical sample sizes. 
+
+\item If prior information is available about part of the DAG structure, the computational and statistical problems are at least partly ameliorated \cite{wasserman2013all}.
 
  
 \end{itemize}
