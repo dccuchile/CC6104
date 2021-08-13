@@ -39,8 +39,8 @@ The course introduces the fundamentals of statistical thinking, which are descri
 
 ### Part IV: Other Topics
 1. [Model Evaluation and Information Theory](slides/ST-eval.pdf) | ([tex source file](slides/ST-eval.tex)) (Chapter 7 of Statistical Rethinking)
-1. Probabilistic Graphical Models and DAGs (Chapter 17 of All of Statistics and Chapter 6 of Statistical Rethinking)
-1. Multi-level Models (Chapter 13 of Statistical Rethinking)
+1. [Directed Graphical Models](slides/ST-dag.pdf) | ([tex source file](slides/ST-dag.tex)) (Chapter 17 of All of Statistics and Chapter 6 of Statistical Rethinking)
+1. [Multilevel Models](slides/ST-multi.pdf) | ([tex source file](slides/ST-multi.tex))  (Chapter 13 of Statistical Rethinking)
 
 
 ## Software
