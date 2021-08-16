@@ -35,6 +35,9 @@ choose(4,2)*0.91^2*(1-0.91)^2
 dbinom(x=2,size=4,p=0.91)
 
 
+pnorm(0.6)-pnorm(-0.4)
+pnorm(18,mean=15,sd=5)-pnorm(13,mean=15,sd=5)
+
 
 1-pnorm(q=(1-3)/sqrt(5))
 1-pnorm(q=1,mean=3,sd=sqrt(5))

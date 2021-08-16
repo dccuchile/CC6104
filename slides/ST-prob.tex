@@ -1036,6 +1036,10 @@ up one step left or right of zero, and so on, with the number of possible sequen
 
 
 
+
+
+
+
 \begin{frame}{The Normal Distribution}
 
 \scriptsize{
@@ -1111,11 +1115,44 @@ up one step left or right of zero, and so on, with the number of possible sequen
 
 
 
-\begin{frame}{The  Normal Distribution}
+\begin{frame}[fragile]{Example Normal}
+\scriptsize{
+\begin{itemize}
+ \item In R we can access the PDF, CDF, quantile function and random number generation of the distributions.
+ \item For a Normal distribution the R commands are:
+\begin{verbatim}
+dnorm(x, mean = 0, sd = 1, log = FALSE)
+pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
+qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
+rnorm(n, mean = 0, sd = 1) 
+\end{verbatim}
+ 
+\end{itemize}
+
+\begin{block}{Example}
+Let $X\sim N(3,5)$, calculate $\mathbb{P}(X > 1)$ \\
+$\mathbb{P}(X >1) = 1-\mathbb{P}(X<1) = 1-\mathbb{P}(Z < \frac{1-3}{\sqrt{5}})=1-\Phi(-0.8944)= 0.81$ \\
+In R:
+\begin{verbatim}
+ > 1-pnorm(q=(1-3)/sqrt(5))
+[1] 0.8144533
+\end{verbatim}
+Or directly:
+\begin{verbatim}
+> 1-pnorm(q=1,mean=3,sd=sqrt(5))
+[1] 0.8144533 
+\end{verbatim}
+\end{block}
+}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{The  Normal Distribution}
 
 \scriptsize{
 \begin{itemize}
- \item If follows from property 1 that if $X\sim N(\mu,\sigma^2)$, then
+ \item If follows from property 1 that if $X\sim N(\mu,\sigma^2)$, then:
  
  \begin{align}
   \mathbb{P}(a<X<b) & = \mathbb{P}\left(\frac{a-\mu}{\sigma}<X<\frac{b-\mu}{\sigma}\right) \\
@@ -1124,6 +1161,21 @@ up one step left or right of zero, and so on, with the number of possible sequen
 
  
 \end{itemize}
+
+\begin{block}{Example}
+Let $X\sim N(15,5)$, calculate $\mathbb{P}(13<X<18)$: \\
+$\mathbb{P}(13<X<18)=\Phi \left(\frac{18-15}{5}\right)-\Phi \left(\frac{13-15}{5}\right)=\Phi(0.6)-\Phi(-0.4)$= 0.381\\
+In R:
+\begin{verbatim}
+> pnorm(0.6)-pnorm(-0.4)
+[1] 0.3811686
+\end{verbatim}
+Or directly:
+\begin{verbatim}
+> pnorm(18,mean=15,sd=5)-pnorm(13,mean=15,sd=5)
+[1] 0.3811686
+\end{verbatim}
+\end{block}
 
 
 }
@@ -1178,37 +1230,6 @@ up one step left or right of zero, and so on, with the number of possible sequen
 }
 \end{frame}
 
-
-\begin{frame}[fragile]{Example Normal}
-\scriptsize{
-\begin{itemize}
- \item In R we can access the PDF, CDF, quantile function and random number generation of the distributions.
- \item For a Normal distribution the R commands are:
-\begin{verbatim}
-dnorm(x, mean = 0, sd = 1, log = FALSE)
-pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
-qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
-rnorm(n, mean = 0, sd = 1) 
-\end{verbatim}
- 
-\end{itemize}
-
-\begin{block}{Example}
-Let $X\sim N(3,5)$, calculate $\mathbb{P}(X > 1)$ \\
-$\mathbb{P}(X >1) = 1-\mathbb{P}(X<1) = 1-\mathbb{P}(Z < \frac{1-3}{\sqrt{5}})=1-\Phi(-0.8944)= 0.81$ \\
-In R:
-\begin{verbatim}
- > 1-pnorm(q=(1-3)/sqrt(5))
-[1] 0.8144533
-\end{verbatim}
-Or directly:
-\begin{verbatim}
-> 1-pnorm(q=1,mean=3,sd=sqrt(5))
-[1] 0.8144533 
-\end{verbatim}
-\end{block}
-}
-\end{frame}
 
 
 \begin{frame}[fragile]{The 68-95-99.7 rule of a Normal Distribution}
@@ -1415,6 +1436,8 @@ as $F_{X,Y} = \mathbb{P}(X \leq x, Y \leq y)$.
 	\centering
 	\includegraphics[scale=0.4]{pics/expectations.png}
 \end{figure} 
+ 
+Source: \cite{wasserman2013all}.
  
 \end{frame}
 
