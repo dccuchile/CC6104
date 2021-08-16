@@ -236,7 +236,7 @@ read ``n choose k'', which is the number of distinct ways of choosing k objects 
 
 \end{frame}
 
-\begin{frame}\frametitle{Combinatorial methods}
+\begin{frame}[fragile]\frametitle{Combinatorial methods}
 \begin{scriptsize}
 
 
@@ -246,6 +246,18 @@ read ``n choose k'', which is the number of distinct ways of choosing k objects 
   {20 \choose 3} = \frac{20!}{3!17!}=1140
  \end{displaymath}
  possible committees.
+ 
+\item In R:
+ 
+ \begin{verbatim}
+> factorial(20)/(factorial(3)*factorial(17))
+[1] 1140
+> choose(20,3)
+[1] 1140  
+ \end{verbatim}
+
+ 
+ 
  \item We note the following properties: 
  \begin{displaymath}
   {n \choose 0} = {n \choose n}=1
@@ -254,6 +266,11 @@ and
  \begin{displaymath}
   {n \choose k} = {n \choose n-k}.
  \end{displaymath}
+
+\begin{verbatim}
+> choose(20,17)
+[1] 1140 
+\end{verbatim}
 
  
  
@@ -292,7 +309,7 @@ and
 
 
 
-\begin{frame}{Conditional Probabilities: Example}
+\begin{frame}[fragile]{Conditional Probabilities: Example}
 \scriptsize{
 \begin{itemize}
 \item A medical test for a disease D has outcomes ``positive'' and ``negative'',  the probabilities are:
@@ -310,10 +327,28 @@ negative & 0.001 & 0.891 \\
 \begin{displaymath}
 \mathbb{P}(\text{positive}|D) = \frac{\mathbb{P}(\text{positive},D)}{\mathbb{P}(D)}  = \frac{0.009}{0.009+0.001} = 0.9  
 \end{displaymath}
+
+\begin{verbatim}
+> pos.d <- 0.009/(0.009+0.001)
+> pos.d
+[1] 0.9 
+\end{verbatim}
+
+
+
 and 
 \begin{displaymath}
 \mathbb{P}(\text{negative}|\neg D) = \frac{\mathbb{P}(\text{negative},\neg D)}{\mathbb{P}(\neg D)}  = \frac{0.891}{0.891+0.0991} \approx 0.9  
 \end{displaymath}
+
+\begin{verbatim}
+> neg.notd <- 0.891/(0.891+0.0991)
+> neg.notd
+[1] 0.8999091 
+\end{verbatim}
+
+
+
 \end{itemize}
 
 
@@ -323,7 +358,7 @@ and
 \end{frame}
 
 
-\begin{frame}{Conditional Probabilities: Example}
+\begin{frame}[fragile]{Conditional Probabilities: Example}
 \scriptsize{
 \begin{itemize}
 \item Apparently, the test is fairly accurate. 
@@ -334,6 +369,14 @@ and
 \begin{displaymath}
 \mathbb{P}(D|\text{positive}) = \frac{\mathbb{P}(D,\text{positive})}{\mathbb{P}(\text{positive})}  = \frac{0.009}{0.009+0.099} \approx 0.08  
 \end{displaymath}
+\begin{verbatim}
+> d.pos <- 0.009/(0.009+0.099)
+> d.pos
+[1] 0.08333333 
+\end{verbatim}
+
+
+
 \item The lesson here is that you need to compute the answer numerically. 
 \item Don't trust your intuition.
  
@@ -372,11 +415,50 @@ and
  \item Let $B$ be the event that the mail contains the word ``free''.
  \item We know that $\mathbb{P}(B|A_1)=0.9$ $\mathbb{P}(B|A_2)=0.01$ y $\mathbb{P}(B|A_3)=0.01$ clearly $0.9+0.01+0.01 \neq 1$
  \item  What is the probability that an email with the word ``free'' in it is ``spam''?
- \item Using Bayes and Total Probabilities:
+ \item Using Bayes:
  \begin{displaymath}
-  \mathbb{P}(A_1|B) = \frac{0.9 \times 0.7}{(0.9 \times 0.7) + (0.01 \times 0.2) + (0.01 \times 0.1)} = 0.995
+   \mathbb{P}(A_1|B) = \frac{\mathbb{P}(B|A_1)\times \mathbb{P}(A_1)}{\mathbb{P}(B)} = \frac{0.9 \times 0.7}{\mathbb{P}(B)} = \frac{0.63}{\mathbb{P}(B)}
  \end{displaymath}
 
+ 
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+\scriptsize{
+\begin{itemize}
+ \item Using Total Probabilities:
+ 
+  \begin{eqnarray*}
+  \mathbb{P}(B) & = & \mathbb{P}(B|A_1)\times\mathbb{P}(A_1)+\mathbb{P}(B|A_2)\times\mathbb{P}(A_2)+\mathbb{P}(B|A_3)\times\mathbb{P}(A_3) \\
+  & = & 0.9 \times 0.7 + 0.01 \times 0.2 + 0.01 \times 0.1 = 0.633
+ \end{eqnarray*}
+
+Finally =  
+
+
+ 
+ 
+ \begin{displaymath}
+  \mathbb{P}(A_1|B) = \frac{0.62}{0.633} = 0.995
+ \end{displaymath}
+
+\item In R:
+\begin{verbatim}
+> a1 <-0.7
+> a2 <- 0.2
+> a3 <-0.1
+> b.a1 <- 0.9 
+> b.a2<-0.01
+> b.a3<-0.01
+> b<-b.a1*a1+b.a2*a2+b.a3*a3
+> a1.b<-b.a1*a1/b
+> a1.b
+[1] 0.9952607 
+\end{verbatim}
 
 
 \end{itemize}
@@ -386,7 +468,6 @@ and
 
 } 
 \end{frame}
-
 
 
 
@@ -640,6 +721,19 @@ F_X(x) =
 \item Don't try to think of $f(x)$ as $\mathbb{P}(X = x)$. 
 \item This only holds for discrete random variables. 
 \item We get probabilities from a PDF by integrating. 
+
+\end{itemize}
+
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}{R.V Definitions}
+\scriptsize{
+\begin{itemize}
 \item A PDF can be bigger than 1 (unlike a mass function). 
 \item For example, if $f(x) = 5$ for $x \in  [0,1/5]$ and $0$ otherwise.
 \item Then $f(x) \geq 0$ and $\int f(x)dx = 1$, so this is a well-defined PDF even though $f(x) = 5$ in some places.
@@ -654,7 +748,6 @@ F_X(x) =
 
 }
 \end{frame}
-
 
 
 \begin{frame}{Some Properties}
@@ -751,14 +844,17 @@ We defined random variables to be mappings from a sample space $\Omega$ to $\mat
 \scriptsize{
 \begin{itemize}
 \item Example: on Jan 20 2018, the basketball player Steph Curry hit only 2 out of 4 free throws in a game against the Houston Rockets.
-\item We know that Curry’s overall probability of hitting free throws across the entire season was 0.91.
+\item We know that Curry's overall probability of hitting free throws across the entire season was 0.91.
 \item What is probability that he would hit only 50\% of his free throws in a game?
 \begin{displaymath}
  f_2(4,0.91) = {4 \choose 2}0.91^{2}(1-0.91)^{4-2}=0.040 
 \end{displaymath}
 In R: 
 \begin{verbatim}
- > dbinom(x=2,size=4,p=0.91)
+> choose(4,2)*0.91^2*(1-0.91)^2
+[1] 0.04024566
+> # more compactly
+> dbinom(x=2,size=4,p=0.91)
 [1] 0.04024566
 \end{verbatim}
  
@@ -1139,10 +1235,10 @@ In R for $X\sim N(0,1)$:
 \begin{frame}[fragile]{Plotting the PDF of Normals with different variance in R}
 \scriptsize{
 \begin{verbatim}
-x=seq(-8,8,length=400)
-y1=dnorm(x,mean=0,sd=0.5)
-y2=dnorm(x,mean=0,sd=1) 
-y3=dnorm(x,mean=0,sd=2)
+x<-seq(-8,8,length=400)
+y1<-dnorm(x,mean=0,sd=0.5)
+y2<-dnorm(x,mean=0,sd=1) 
+y3<-dnorm(x,mean=0,sd=2)
 plot(y1~x,type="l",col="red")
 lines(y2~x,type="l",col="green")
 lines(y3~x,type="l",col="blue")
@@ -1437,20 +1533,52 @@ where $Z\sim N(0,1)$
 
 
 
-\begin{frame}{Example: Central Limit Theorem }
+\begin{frame}[fragile]{Example: Central Limit Theorem }
 \scriptsize{
 \begin{itemize}
- \item Suppose that the number of errors of a computer program follows a Poisson distribution with parameter $\lambda=5$
+ \item Suppose that the number of errors X of a computer program in a week follows a Poisson distribution with parameter $\lambda=5$.
  \item If $X \sim Poisson(\lambda)$, $\mathbb{E}(X)=\lambda$ and $\mathbb{V}(X)=\lambda$.
- \item If we have 125 independent programs $X_{1},\dots,X_{125}$ we would like to approximate $\mathbb{P}(\overline{X_{n}} < 5.5)$
- \item Using the CLT we have that
+ \item This means that, on average, a computer program makes 5 errors in a week
+ 
+ \item If we have 125 independent programs $X_{1},\dots,X_{125}$ we would like to approximate the probability that the average number of errors for all these programs during a week is less than 5.5:  $\mathbb{P}(\overline{X_{n}} < 5.5)$.
+
+
+
+\end{itemize}
+
+
+
+
+
+
+}
+ 
+\end{frame}
+
+
+\begin{frame}[fragile]{Example: Central Limit Theorem }
+\scriptsize{
+\begin{itemize}
+ \item Using the CLT we have that:
  \begin{eqnarray*}
  \mathbb{P}(\overline{X_{n}} < 5.5) & = & \mathbb{P} \left( \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}} <  \frac{5.5 -\mu}{\frac{\sigma}{\sqrt{n}}}  \right) \nonumber \\ 
                                     & \approx & \mathbb{P}\left( Z < \frac{5.5 - 5}{\frac{\sqrt{5}}{\sqrt{125}}}  \right) = \mathbb{P}( Z < 2.5) =0.9938
 \end{eqnarray*}
 
+\item In R:
+
 \end{itemize}
 
+\begin{verbatim}
+> n <- 125
+> sigma <- sqrt(5)
+> mu <-5
+> pnorm(5.5,mean = 5,sd =sigma/sqrt(n))
+[1] 0.9937903
+> # alternatively
+> pnorm(2.5)
+[1] 0.9937903 
+\end{verbatim}
 
 
 
