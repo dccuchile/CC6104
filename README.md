@@ -6,7 +6,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 
 
 * Lecturer: [Felipe Bravo-Marquez](https://felipebravom.com/)
-* TAs: TBA
+* TAs: Ignacio Meza, Sebastián Bustos, Mauricio Araneda, Matías Rojas, Arie Wortsman
 
 * Lectures: Tuesday 14:30 - 16:00, Thursday 14:30 - 16:00  
 
