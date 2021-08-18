@@ -1198,7 +1198,7 @@ Or directly:
  \item If follows from property 1 that if $X\sim N(\mu,\sigma^2)$, then:
  
  \begin{align}
-  \mathbb{P}(a<X<b) & = \mathbb{P}\left(\frac{a-\mu}{\sigma}<X<\frac{b-\mu}{\sigma}\right) \\
+  \mathbb{P}(a<X<b) & = \mathbb{P}\left(\frac{a-\mu}{\sigma}<Z<\frac{b-\mu}{\sigma}\right) \\
    & = \Phi \left(\frac{b-\mu}{\sigma}\right)-\Phi \left(\frac{a-\mu}{\sigma}\right)
  \end{align}
 
@@ -1628,7 +1628,7 @@ where $Z\sim N(0,1)$
 \begin{itemize}
  \item Suppose that the number of errors X of a computer program in a week follows a Poisson distribution with parameter $\lambda=5$.
  \item If $X \sim Poisson(\lambda)$, $\mathbb{E}(X)=\lambda$ and $\mathbb{V}(X)=\lambda$.
- \item This means that, on average, a computer program makes 5 errors in a week
+ \item This means that, on average, a computer program makes 5 errors in a week.
  
  \item If we have 125 independent programs $X_{1},\dots,X_{125}$ we would like to approximate the probability that the average number of errors for all these programs during a week is less than 5.5:  $\mathbb{P}(\overline{X_{n}} < 5.5)$.
 
