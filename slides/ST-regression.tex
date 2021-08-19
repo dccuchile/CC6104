@@ -307,9 +307,9 @@ SSE = \sum_{i=1}^{n} (y_i-h(x_i))^2 =  \sum_{i=1}^{n} (y_i-\beta_{0}-\beta_{1}x_
 
  \item It is often interpreted as the ``variance explained'' by the model.
  
- \item The coefficient takes values between $0$ to $1$ and the closer its value is to 1 the higher the quality of the model.
+ \item The coefficient usually takes values between $0$ to $1$ and the closer its value is to 1 the higher the quality of the model\footnote{It can take negative values when predictions are worse than using $\overline{y}$ in all predictions.}.
  
- \item The value of $R^2$ is equivalent to the linear correlation (Pearsons) between $y$ and $\hat{y}$ squared.
+ \item The value of $R^2$ is equivalent to the squared linear correlation (Pearsons) between $y$ and $\hat{y}$.
 \begin{displaymath}
  R^2=\text{cor}(y,\hat{y})^2
 \end{displaymath}
