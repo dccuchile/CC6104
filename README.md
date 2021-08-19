@@ -20,27 +20,27 @@ The course introduces the fundamentals of statistical thinking, which are descri
 ## Slides
 
 ### PART I: Foundations 
-1. [Introduction to Statistical Thinking](slides/ST-intro.pdf) | ([tex source file](slides/ST-intro.tex)), [video 1](https://youtu.be/X4SqJu6lExM), [video 2](https://youtu.be/YbiQU5TTBX4)
-1. [Introduction to R](slides/ST-R.pdf) | ([tex source file](slides/ST-R.tex)), [video 1](https://youtu.be/MbeLD3hWWVo), [video 2](https://youtu.be/9W_eWCy86F4),  [video 3](https://youtu.be/QvFXSw2-1r4), [video 4](https://youtu.be/y4JY7klrbfQ)
-1. [Descriptive Statistics](slides/ST-explore.pdf) | ([tex source file](slides/ST-explore.tex)), [video 1](https://youtu.be/kWNskZ8_98o), [video 2](https://youtu.be/_FJ8x9M4b1w),  [video 3](https://youtu.be/m7VBNZ2mYWI), [video 4](https://youtu.be/ylGMJ_aSQk0)
-1. [Probability](slides/ST-prob.pdf) | ([tex source file](slides/ST-prob.tex)), [video 1](https://youtu.be/R9AVYV73m1M), [video 2](https://youtu.be/zubh1jbRiKE),  [video 3](https://youtu.be/uiwToagp0z4), [video 4](https://youtu.be/RlhN3t_VIyw), [video 5](https://youtu.be/4kV1dBaeWVc), [video 6]( https://youtu.be/MGyXc70JdSk)
+1. [Introduction to Statistical Thinking](slides/1_1_ST-intro.pdf) | ([tex source file](slides/1_1_ST-intro.tex)), [video 1](https://youtu.be/X4SqJu6lExM), [video 2](https://youtu.be/YbiQU5TTBX4)
+1. [Introduction to R](slides/1_2_ST-R.pdf) | ([tex source file](slides/1_2_ST-R.tex)), [video 1](https://youtu.be/MbeLD3hWWVo), [video 2](https://youtu.be/9W_eWCy86F4),  [video 3](https://youtu.be/QvFXSw2-1r4), [video 4](https://youtu.be/y4JY7klrbfQ)
+1. [Descriptive Statistics](slides/1_3_ST-explore.pdf) | ([tex source file](slides/1_3_ST-explore.tex)), [video 1](https://youtu.be/kWNskZ8_98o), [video 2](https://youtu.be/_FJ8x9M4b1w),  [video 3](https://youtu.be/m7VBNZ2mYWI), [video 4](https://youtu.be/ylGMJ_aSQk0)
+1. [Probability](slides/1_4_ST-prob.pdf) | ([tex source file](slides/1_4_ST-prob.tex)), [video 1](https://youtu.be/R9AVYV73m1M), [video 2](https://youtu.be/zubh1jbRiKE),  [video 3](https://youtu.be/uiwToagp0z4), [video 4](https://youtu.be/RlhN3t_VIyw), [video 5](https://youtu.be/4kV1dBaeWVc), [video 6]( https://youtu.be/MGyXc70JdSk)
 
 ### PART II: Frequentist Inference
 
-1. [Introduction to Statistical Inference](slides/ST-inference.pdf) | ([tex source file](slides/ST-inference.tex))
-1. [Design of Experiments & Hypothesis Testing](slides/ST-hypothesis.pdf) | ([tex source file](slides/ST-hypothesis.tex))
-1. [Linear Regression](slides/ST-regression.pdf) | ([tex source file](slides/ST-regression.tex))
+1. [Introduction to Statistical Inference](slides/2_1_ST-inference.pdf) | ([tex source file](slides/2_1_ST-inference.tex))
+1. [Design of Experiments & Hypothesis Testing](slides/2_2_ST-hypothesis.pdf) | ([tex source file](slides/2_2_ST-hypothesis.tex))
+1. [Linear Regression](slides/2_3_ST-regression.pdf) | ([tex source file](slides/2_3_ST-regression.tex))
 
 ### Part III: Bayesian Inference 
-1. [Introduction to Bayesian Inference](slides/ST-bayesian.pdf) | ([tex source file](slides/ST-bayesian.tex))
-1. [Summarizing the Posterior](slides/ST-posterior.pdf) | ([tex source file](slides/ST-posterior.tex))  
-1. [Bayesian Linear Regression](slides/ST-bayes_lin.pdf) | ([tex source file](slides/ST-bayes_lin.tex))
-1. [Markov Chain Monte Carlo](slides/ST-MCMC.pdf) | ([tex source file](slides/ST-MCMC.tex)) 
+1. [Introduction to Bayesian Inference](slides/3_1_ST-bayesian.pdf) | ([tex source file](slides/3_1_ST-bayesian.tex))
+1. [Summarizing the Posterior](slides/3_2_ST-posterior.pdf) | ([tex source file](slides/3_2_ST-posterior.tex))  
+1. [Bayesian Linear Regression](slides/3_3_ST-bayes_lin.pdf) | ([tex source file](slides/3_3_ST-bayes_lin.tex))
+1. [Markov Chain Monte Carlo](slides/3_4_ST-MCMC.pdf) | ([tex source file](slides/3_4_ST-MCMC.tex)) 
 
 ### Part IV: Other Topics
-1. [Model Evaluation and Information Theory](slides/ST-eval.pdf) | ([tex source file](slides/ST-eval.tex)) (Chapter 7 of Statistical Rethinking)
-1. [Directed Graphical Models](slides/ST-dag.pdf) | ([tex source file](slides/ST-dag.tex)) (Chapter 17 of All of Statistics and Chapter 6 of Statistical Rethinking)
-1. [Multilevel Models](slides/ST-multi.pdf) | ([tex source file](slides/ST-multi.tex))  (Chapter 13 of Statistical Rethinking)
+1. [Model Evaluation and Information Theory](slides/4_1_ST-eval.pdf) | ([tex source file](slides/4_1_ST-eval.tex)) (Chapter 7 of Statistical Rethinking)
+1. [Directed Graphical Models](slides/4_2_ST-dag.pdf) | ([tex source file](slides/4_2_ST-dag.tex)) (Chapter 17 of All of Statistics and Chapter 6 of Statistical Rethinking)
+1. [Multilevel Models](slides/4_3_ST-multi.pdf) | ([tex source file](slides/4_3_ST-multi.tex))  (Chapter 13 of Statistical Rethinking)
 
 
 ## Software
