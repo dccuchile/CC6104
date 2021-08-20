@@ -31,6 +31,6 @@ Receso Académico | | | | |
 13 | Martes 23/11 | Multilevel Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_3_ST-multi.pdf) | | Tarea 5
 13 | Jueves 25/11 | Multilevel Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_3_ST-multi.pdf) | Horario de consulta (Discord) |
 14 | Martes 30/11 | Ponerse al día |  | |
-14 | Jueves 02/11 | Reflexiones finales | |  |
+14 | Jueves 02/12 | Reflexiones finales | |  |
 Exámenes | | | | |
 
