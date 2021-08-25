@@ -1000,6 +1000,8 @@ l_n(\theta) = S\log p+ (n-S)\log(1-p).
  \end{displaymath}  
  
 \item Take the derivative of $l_n(\theta)$, set it equal to 0 to find that the MLE is $\hat{p}_n =S/n$, which is the sample proportion.
+
+% solve for p{D[S*log(p) + (n-S)*log(1-p),p]==0}
  
 \end{itemize}
 
@@ -1007,6 +1009,32 @@ l_n(\theta) = S\log p+ (n-S)\log(1-p).
 } 
  
 \end{frame}
+
+
+\begin{frame}[fragile]{Maximum Likelihood Estimation}
+\scriptsize{
+\begin{itemize}
+ \item This can be verified by pasting the following formula into WolframAlpha\footnote{\url{https://www.wolframalpha.com}}:
+ 
+\begin{verbatim}
+solve for p{D[S*log(p) + (n-S)*log(1-p),p]==0} 
+\end{verbatim}
+
+ 
+ 
+\end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/wolfram_p.png}
+\end{figure}
+
+
+
+} 
+ 
+\end{frame}
+
 
 \begin{frame}{Maximum Likelihood Estimation}
 \scriptsize{
@@ -1061,6 +1089,69 @@ l_n(\mu,\sigma) = -n\log \sigma - \frac{nS^2}{2\sigma^2} - \frac{n(\overline{X}-
 
 
 } 
+ 
+% solve for mu{D[-n*log(sigma) -n*S^2/(2*sigma^2)- n(x_b-mu)^2/(2*sigma^2),mu]==0} 
+
+% Since mu equals xbar we omit the last expression
+%solve for sigma{D[-n*log(sigma) -n*S^2/(2*sigma^2),sigma]==0}
+ 
+\end{frame}
+
+
+\begin{frame}[fragile]{Maximum Likelihood Estimation}
+\scriptsize{
+\begin{itemize}
+\item Let's verify this using WolframAlpha:
+
+\begin{verbatim}
+solve for mu{D[-n*log(sigma) -(n*S^2)/(2*sigma^2)- 
+n*(x_b-mu)^2/(2*sigma^2),mu]==0}  
+\end{verbatim}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.32]{pics/wolfram_mu.png}
+\end{figure}
+
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}[fragile]{Maximum Likelihood Estimation}
+\scriptsize{
+\begin{itemize}
+\item Now, if we replace $\mu$ by $\overline{X}$, the last expression of $l_n$ cancels out.
+
+\item the value of $\sigma$ can be obtained as follows:
+
+\begin{verbatim}
+solve for sigma{D[-n*log(sigma) -n*S^2/(2*sigma^2),sigma]==0}
+\end{verbatim}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.32]{pics/wolfram_s.png}
+\end{figure}
+
+
+
+\end{itemize}
+
+
+
+} 
+
+ 
+% solve for mu{D[-n*log(sigma) -(n*S^2)/(2*sigma^2)- n*(x_b-mu)^2/(2*sigma^2),mu]==0}  
+
+% Since mu equals xbar we omit the last expression
+%solve for sigma{D[-n*log(sigma) -n*S^2/(2*sigma^2),sigma]==0}
  
 \end{frame}
 
