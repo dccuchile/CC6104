@@ -2,10 +2,6 @@
 
 
 
-# Show that 
-
-
-
 
 pop <-c(2,3,4,5,6)
 mean(pop)
@@ -39,6 +35,49 @@ sd.p(pop)/sqrt(samp_size)
 
 
 
+
+alpha <- 0.05
+xbar <- 5
+sigma <- 2
+n <- 20
+se <-sigma/sqrt(n)
+error <- qnorm(1-alpha/2)*se
+left <- xbar-error
+right <- xbar+error
+left
+right
+
+
+x<-seq(-8,8,length=400)
+y1<-dnorm(x)
+y2<-dt(x=x,df=1)
+y3<-dt(x=x,df=10)
+y4<-dt(x=x,df=350)
+plot(y1~x,type="l",col="green")
+lines(y2~x,type="l",col="blue")
+lines(y3~x,type="l",col="black")
+lines(y4~x,type="l",col="red")
+
+
+
+data(iris)
+alpha<-0.05
+n<-length(iris$Petal.Length)
+xbar<-mean(iris$Petal.Length)
+xbar
+
+s<-sd(iris$Petal.Length)
+se<-s/sqrt(n)
+error<-qt(p=1-alpha/2,df=n-1)*se
+left<-xbar-error
+left
+right<-xbar+error
+right
+
+test<-t.test(iris$Petal.Length,conf.level=0.95)
+test$conf.int
+
+qnorm(1-0.025)
 prop<-prop.test(1219,3532,correct=FALSE)
 prop$conf.int
 
