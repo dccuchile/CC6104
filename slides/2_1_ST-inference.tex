@@ -1369,7 +1369,7 @@ solve for sigma{D[-n*log(sigma) -n*S^2/(2*sigma^2),sigma]==0}
 \scriptsize{
 \begin{itemize}
  \item In practice, if we do not know $\mu$ we are unlikely to know $\sigma$.
- \item If we estimate $\sigma$ using $s$, confidence intervals are better build using the \textbf{T-student} distribution, especially when the sample size is small.
+ \item When the data is assumed to be Normal and we estimate $\sigma$ using $s$, confidence intervals are better build using the \textbf{T-student} distribution, especially when the sample size is small.
 \end{itemize}
 
 \begin{block}{T Distribution}
@@ -1380,15 +1380,13 @@ solve for sigma{D[-n*log(sigma) -n*S^2/(2*sigma^2),sigma]==0}
 \end{displaymath}
 \item  When $k=1$ it is called \textbf{Cauchy} distribution.
 \item When $k\rightarrow \infty$ it converges to a standardized normal distribution.
- \item The t-distribution has wider tails than the normal distribution when it has few degrees of freedom.
+ \item The t-distribution has wider tails than the normal distribution when it has few degrees of freedom (i.e.,  it is more prone to producing values that fall far from its mean).
 
 
 \end{itemize}
 
  
 \end{block}
-
-
 
 
 } 
@@ -1419,6 +1417,36 @@ lines(y4~x,type="l",col="red")
 
 
 }
+\end{frame}
+
+
+\begin{frame}{T Distribution}
+\scriptsize{
+\begin{itemize}
+ \item The T distribution was developed by English statistician William Sealy Gosset under the pseudonym ``Student''.
+ 
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/William_Sealy_Gosset.jpg}
+\end{figure}
+ 
+ \item Gosset worked at the Guinness Brewery in Dublin, Ireland, and was interested in the problems of small samples.
+ 
+ \item For example, the chemical properties of barley where sample sizes might be as few as 3.
+ 
+ \item Gosset's employer preferred staff to hide their identities  when publishing scientific papers,
+ 
+ \item Another version is that Guinness did not want their competitors to know that they were using the t-test to determine the quality of raw material \cite{wiki:Student's_t-distribution}.
+
+\end{itemize}
+
+
+
+
+
+
+
+} 
 \end{frame}
 
 
