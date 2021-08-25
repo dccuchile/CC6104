@@ -1239,14 +1239,14 @@ solve for sigma{D[-n*log(sigma) -n*S^2/(2*sigma^2),sigma]==0}
 \begin{frame}{Confidence Interval of the Mean }
 \scriptsize{
 \begin{itemize}
- \item We have $n$ independent observations $X_1, \dots, X_n$ (IID) of distribution $N(\mu,\sigma^2)$.
+ \item We have $n$ independent observations $X_1, \dots, X_n$ (IID) of some unknown distribution with mean $\mu$ and variance $\sigma^2$.
 \item Suppose $\mu$ is \textbf{unknown} but $\sigma^2$ is \textbf{known}.
  \item We know that $\overline{X_{n}}$ is an unbiased estimator of $\mu$.
  \item By the law of large numbers we know that the distribution of $\overline{X_{n}}$ is concentrated around $\mu$ when $n$ is large.
- \item By the CLT we know that \begin{displaymath}
+ \item By the CLT we know that $\overline{X_{n}}$ is asymptotically Normal when $n$ is large: \begin{displaymath}
  Z=\frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}}  \sim N(0,1)
 \end{displaymath}
-when $n$ is large.
+
 \end{itemize}
 
 
