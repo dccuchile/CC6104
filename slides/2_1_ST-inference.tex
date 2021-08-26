@@ -1183,9 +1183,12 @@ solve for sigma{D[-n*log(sigma) -n*S^2/(2*sigma^2),sigma]==0}
  \begin{displaymath}
  \mathbb{P}(\theta \in C_n) = 1-\alpha
 \end{displaymath}
- \item In addition $a= a(X_1, \dots, X_n)$ and $b=b(X_1,\dots,X_n)$ are functions of the data.
+ \item Where $a= a(X_1, \dots, X_n)$ and $b=b(X_1,\dots,X_n)$ are functions of the data.
  \item The $\alpha$ value is known as the \textbf{significance} level, generally taken as $0.05$, which is equivalent to working with a confidence level of $95\%$.
- \item Significance can be interpreted as the probability of being wrong.
+ \item Statistical significance helps quantify whether a result is likely due to chance or to some factor of interest \cite{gallo2016refresher}. 
+ 
+ \item Basically, a statistically significant result is a result that is not attributable to chance.
+ 
 \end{itemize}
 
 \end{block}
@@ -1201,7 +1204,7 @@ solve for sigma{D[-n*log(sigma) -n*S^2/(2*sigma^2),sigma]==0}
 
 \begin{itemize}
  \item There is a lot of \textbf{confusion} about how to interpret a confidence interval.
- \item A confidence interval is not a probability statement about $\theta$ since $\theta$ is a fixed quantity in frequentist inference, not a random variable
+ \item A confidence interval is not a probability statement about $\theta$ since $\theta$ is a fixed quantity in frequentist inference, not a random variable.
  \item One way to interpret them is to say that if we repeat the \textbf{same experiment} many times, the interval will contain the value of the parameter $(1-\alpha)\%$ of the times.
  \item This interpretation is correct, but we rarely repeat the same experiment several times.
  \item A better interpretation: one day I collect data I create a $95\%$ confidence interval for a parameter $\theta_1$. Then on day 2, I do the same for a parameter $\theta_2$ and so repeatedly $n$ times. The $95\%$ of my intervals will contain the actual values of the parameters. 
