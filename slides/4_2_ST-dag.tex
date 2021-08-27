@@ -178,6 +178,8 @@ for all a, b and c.
 
 
 
+
+
 } 
 
 \end{frame}
@@ -212,7 +214,7 @@ using the definition of conditional probabilities we have that
 f(x_3|x_2,x_1)=f(x_1,x_2,x_3)/f(x_1,x_2)       
      \end{displaymath}
 
-\item By replacing these expressions into the chain of products we obtain $f(x_1,x_2,x_3)$.     
+\item By replacing these expressions into the chain of products, many expressions cancel out and we obtain $f(x_1,x_2,x_3)$.     
 
 \end{itemize}
 
@@ -222,6 +224,100 @@ f(x_3|x_2,x_1)=f(x_1,x_2,x_3)/f(x_1,x_2)
 
 \end{frame}
 
+
+\begin{frame}{Joint Probabilities}
+\scriptsize{
+\begin{itemize}
+
+\item Expressing a joint probability function can be expensive.
+
+\item For example if there are $m$ binary random variables, the complete distribution is specificied by $2^{m}-1$ joint probabilities.
+
+\item For example, if we have two Boolean variables $(A,B)$, we need the probabilities $\mathbb{P}(A,B)$, $\mathbb{P}(\neg A,B)$, $\mathbb{P}(A,\neg B)$, and $\mathbb{P}(\neg A, \neg B)$.
+
+\item A joint distribution for a set of random variables gives all the information there is about the distribution.
+
+
+\item Note that for $m$ boolean variables, the joint distribution contains $2^m$ values. 
+
+\item However, the sum of all the joint probabilities must be 1 because the probability of all possible outcomes must be 1. 
+
+\item Thus, to specify the joint distribution, one needs to specify $2^{m-1}$ numbers.
+
+
+\item The main idea of DGMs is that by assuming that some variables are conditionally independent we can use the probability chain rule to represent the joint distribution more compactly.
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}{Example}
+\scriptsize{
+\begin{itemize}
+
+\item Let's try to understand these ideas with the following example taken from \cite{koller2009probabilistic}.
+\item Consider the problem faced by a company trying to hire a recent college graduate. 
+\item The company's goal is to hire intelligent employees, but there is no way to test intelligence directly. 
+
+\item However, the company has access to the student's SAT scores, which are informative but not fully indicative. 
+
+\item Thus, our probability space is induced by the two random variables Intelligence (I) and SAT (S). 
+\item For simplicity, we assume that each of these takes two values: $Val(I) = \{i_1 , i_0 \}$, which represent
+the values high intelligence ($i_1$ ) and low intelligence $(i_0)$.
+\item Similarly $Val(S) = \{s_1 , s_0 \}$, which
+also represent the values high (score) and low (score), respectively.
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Example}
+\scriptsize{
+\begin{itemize}
+
+\item Thus, our joint distribution in this case has four entries. 
+\item For example, one possible joint distribution P would be:
+
+\begin{table}
+\centering
+  \begin{tabular}{cc|c} \hline
+$I$ & $S$ & $f(I,S)$  \\ \hline
+$i^0$ & $s^0$ & 0.665 \\
+$i^0$ & $s^1$ & 0.035 \\
+$i^1$ & $s^0$ & 0.06 \\
+$i^1$ & $s^1$ & 0.24 
+\end{tabular} 
+\end{table}
+
+\item Using the chain rule of conditional probabilities, we have that
+
+\begin{displaymath}
+ f(I,S) = f(I)f(S|I)
+\end{displaymath}
+\item Intuitively, we are representing the process in a way that is more compatible with causality.
+
+\item Various factors (genetics, upbringing, . . . ) first determined (stochastically) the student's intelligence.
+\item His performance on the SAT is determined (stochastically) by his intelligence. 
+\item We note that the models we construct are not required to follow causal intuitions, but they often do.
+\item We return to this issue later on.
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
 
 
 \begin{frame}{Directed Acyclic Graphs (DAGs)}
