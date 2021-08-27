@@ -198,10 +198,11 @@ f(x_1,x_2,\dots,x_n)=f(x_1)f(x_2|x_1)f(x_3|x_2,x_1)\dots f(x_n|x_{n-1},\dots,x_2
 \item For example for the case of $n=3$
 
 \begin{displaymath}
-f(x_1,x_2,\dots,x_n)=f(x_1)f(x_2|x_1)f(x_3|x_2,x_1)
+f(x_1,x_2,x_3)=f(x_1)f(x_2|x_1)f(x_3|x_2,x_1)
  \end{displaymath}
 
-using the definition of conditional probabilities
+using the definition of conditional probabilities we have that
+
 
 \begin{displaymath}
  f(x_2|x_1) = f(x_1,x_2)/f(x_1)
@@ -211,6 +212,7 @@ using the definition of conditional probabilities
 f(x_3|x_2,x_1)=f(x_1,x_2,x_3)/f(x_1,x_2)       
      \end{displaymath}
 
+\item By replacing these expressions into the chain of products we obtain $f(x_1,x_2,x_3)$.     
 
 \end{itemize}
 
