@@ -62,13 +62,13 @@
 
 \item In this class we will focus on directed graphical models (DGMs), which are one type of PGM.
 
-\item Directed graphical models (DGMs) are a family of probability distributions that admit a compact parametrization that can be naturally described using a directed graph.
+\item Directed graphical models (DGMs) are a family of probability distributions that admit a compact parametrization that can be naturally described using a \textbf{directed graph}.
 
-\item DGMs are also known as Bayesian networks.
+\item DGMs are also known as \textbf{Bayesian networks}.
 
-\item Statistical inference for DGMs can be performed using frequentist or Bayesian methods, so it is misleading to call them Bayesian networks \cite{wasserman2013all}.
+\item We won't use that term in this class because statistical inference for DGMs can be performed using frequentist or Bayesian methods \cite{wasserman2013all}.
 
-
+\item These types of graphs are also called \textbf{causal graphs} or \textbf{causal diagrams}.
 
  
 \end{itemize}
@@ -78,6 +78,148 @@
 } 
 
 \end{frame}
+
+
+\begin{frame}{Directed Graphical Models}
+\scriptsize{
+\begin{itemize}
+\item DGMs link two very different branches of mathematics: probability and graph theory. 
+
+\item They also have intriguing connections to philosophy, particularly the question of \textbf{causality}.
+
+\item At the same time, they are widely used in statistics and machine learning.
+
+\item DGMs can be used to solve problems in fields as diverse as medicine, language processing, vision, and many others \cite{ermon_kuleshov}. 
+
+\item But before introducing them more formally we need to learn the following mathematical concepts:
+
+\begin{enumerate}
+\scriptsize{
+ \item Conditional independence
+ \item The chain rule of probability
+ \item Directed acyclical graphs }
+\end{enumerate}
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{Conditional Independence}
+\scriptsize{
+\begin{itemize}
+
+\item Two random variables $X$ and $Y$ are independent, written $X \perp Y$ if $f(x,y)=f(x)f(y)$ for all values of $x$, $y$.
+
+
+\item This also implies that $f(x|y)=f(x)$ and $f(y|x)=f(y)$.
+
+
+\item Notice that $f$ can be either a density function for continous random variables or a probability mass function for discrete random variables.
+
+\item In the same way  $f(x|y)$ and $f(y|x)$ correspond to conditional densities or mass functions. 
+
+\item Now, suppose we have three random variables $A,B,C$. 
+
+\item $A$ and $B$ are conditionally independent given $C$, written $A \perp B | C$, if:
+
+\begin{displaymath}
+f(a, b|c) = f(a|c)
+\end{displaymath}
+
+
+for all a, b and c.
+
+
+ 
+\end{itemize}
+
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{Conditional Independence}
+\scriptsize{
+
+\begin{itemize}
+ \item Intuitively, $A \perp B | C$ means that, once you know $C$, $B$ provides no extra information about $A$.
+
+\item Notice that $A \perp B | C$ doesn't necessarily imply that $A \perp B$.
+ 
+\end{itemize}
+
+
+
+\begin{block}{Example}
+\begin{itemize}
+ \item Let $H,V,A$ be three random variables representing a person's height, vocabulary and age.
+ \item H and V are dependent $f(V|H) \neq f(V)$ 
+ since very small people tend to be children, known for their more basic vocabularies. 
+ \item But knowing that two people are 19 years old (i.e., conditional on age) there is no reason to think that one person's vocabulary is larger if we are told that they are taller: 
+ \begin{displaymath}
+ f(v,h|a)=f(v|a) \Leftrightarrow V \perp H | A 
+ \end{displaymath}
+
+\end{itemize}
+
+
+\end{block}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{The chain rule of probability}
+\scriptsize{
+\begin{itemize}
+
+\item For a set of random variables $X_1,\dots, X_n$, the chain rule of probability allow us to express the joint probability function $f(x_1,x_2,\dots, x_n)$ as a product of $n$ conditional probabilities:
+
+
+
+\begin{displaymath}
+f(x_1,x_2,\dots,x_n)=f(x_1)f(x_2|x_1)f(x_3|x_2,x_1)\dots f(x_n|x_{n-1},\dots,x_2,x_1).
+ \end{displaymath}
+
+\item For example for the case of $n=3$
+
+\begin{displaymath}
+f(x_1,x_2,\dots,x_n)=f(x_1)f(x_2|x_1)f(x_3|x_2,x_1)
+ \end{displaymath}
+
+using the definition of conditional probabilities
+
+\begin{displaymath}
+ f(x_2|x_1) = f(x_1,x_2)/f(x_1)
+\end{displaymath}
+
+ and \begin{displaymath}
+f(x_3|x_2,x_1)=f(x_1,x_2,x_3)/f(x_1,x_2)       
+     \end{displaymath}
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
 
 
 \begin{frame}{Directed Acyclic Graphs (DAGs)}
@@ -164,7 +306,6 @@ acyclic graph or DAG.
 
 \item From now on, we only deal with directed acyclic graphs since it is very difficult to provide a coherent probability semantics over graphs with directed cycles.
  
-\item For the remainder of this class we will use the terms Bayesian Network, directed graphical model (DGM) and directed acyclical graph (DAG) interchangeably. 
  
  
 \end{itemize}
@@ -180,15 +321,7 @@ acyclic graph or DAG.
 \scriptsize{
 \begin{itemize}
 
-\item An important concept we need to introduce to understand DAGs is the chain rule of probability.
-
-\item For a set of random variables $X_1,\dots, X_n$ we can write the joint probability function $f(x_1,x_2,\dots, x_n)$ as 
-
-\begin{displaymath}
-f(x_1,x_2,\dots,x_n)=f(x_1)f(x_2|x_1)\dots f(x_n|x_{n-1},\dots,x_2,x_1).
- \end{displaymath}
-
-
+\item For the remainder of this class we will use the terms   directed graphical model (DGM) and directed acyclical graph (DAG) interchangeably. 
 
 \item A DAG is a distribution in which each factor on the right hand side depends only on a small number of ancestor variables $\pi(x)$. \cite{ermon_kuleshov}
 
@@ -242,27 +375,21 @@ where $\pi_{x_j}$ is the set of parent nodes of $X_j$
 \end{frame}
 
 
-
-
-
-\begin{frame}{Conditional Independence}
+\begin{frame}{Causal DAGs}
 \scriptsize{
 \begin{itemize}
-\item Let $X$, $Y$ and $Z$ be random variables. 
-
-\item $X$ and $Y$ are conditionally independent given $Z$, written $X \perp Y | Z$, if:
-
-\begin{displaymath}
-f(x, y|z) = f(x|z)f(y|z) 
-\end{displaymath}
 
 
-for all x, y and z.
+\item The interpretation of direct acyclic graphs as carriers of independence assumptions does not necessarily imply causation.
 
-\item Notice that $f$ can be either a density function for continous random variables or a probability mass function for discrete random variables.
- 
-\item Intuitively, this means that, once you know $Z$, $Y$ provides no extra information about $X$. 
- 
+\item In fact, it will be valid for any set of recursive independencies along any ordering of the variables, not necessarily causal or chronological.
+
+\item However, the ubiquity of DAG models in statistical and AI applications stems (often unwittingly) primarily from their causal interpretation 
+
+\item That is, as a system of processes, one per family, that could account for the generation of the observed data. 
+
+\item It is this causal interpretation that explains why DAG models are rarely used in any variable ordering other than those which respect the direction of time and causation. \cite{pearl2009causality}
+
 \end{itemize}
 
 
@@ -270,6 +397,9 @@ for all x, y and z.
 } 
 
 \end{frame}
+
+
+
 
 
 \begin{frame}{An Example}
