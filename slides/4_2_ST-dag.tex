@@ -294,8 +294,7 @@ f(x_1,x_2,x_3)=f(x_1)f(x_2|x_1)f(x_3|x_2)
 \item Thus, our probability space is induced by the two random variables Intelligence (I) and SAT (S). 
 \item For simplicity, we assume that each of these takes two values: $Val(I) = \{i_1 , i_0 \}$, which represent
 the values high intelligence ($i_1$ ) and low intelligence $(i_0)$.
-\item Similarly $Val(S) = \{s_1 , s_0 \}$, which
-also represent the values high (score) and low (score), respectively.
+
 
 \end{itemize}
 
@@ -309,6 +308,9 @@ also represent the values high (score) and low (score), respectively.
 \begin{frame}{Example}
 \scriptsize{
 \begin{itemize}
+
+\item Similarly $Val(S) = \{s_1 , s_0 \}$, which
+also represent the values high (score) and low (score), respectively.
 
 \item Thus, our joint distribution in this case has four entries. 
 \item For example, one possible joint distribution f would be:
@@ -329,10 +331,29 @@ $i^1$ & $s^1$ & 0.24
 \begin{displaymath}
  f(I,S) = f(I)f(S|I)
 \end{displaymath}
-\item Intuitively, we are representing the process in a way that is more compatible with causality.
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Example}
+\scriptsize{
+\begin{itemize}
+
+\item Note that we could use the chain rule to represent the joint probability with any order.
+
+\item For example  $f(I,S) = f(S)f(I|S)$
+
+
+\item However, it is convenient to represent the process in a way that is more compatible with causality.
 
 \item Various factors (e.g., genetics, upbringing) first determined (stochastically) the student's intelligence.
-\item Her performance on the SAT is determined (stochastically) by his intelligence. 
+\item Her performance on the SAT is determined (stochastically) by her  intelligence. 
 \item We note that the models we construct are not required to follow causal intuitions, but they often do.
 
 
