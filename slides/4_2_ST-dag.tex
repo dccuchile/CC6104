@@ -130,7 +130,7 @@
 \item $A$ and $B$ are conditionally independent given $C$, written $A \perp B | C$, if:
 
 \begin{displaymath}
-f(a, b|c) = f(a|c)
+f(a|b,c) = f(a|c)
 \end{displaymath}
 
 
@@ -164,11 +164,11 @@ for all a, b and c.
 \begin{block}{Example}
 \begin{itemize}
  \item Let $H,V,A$ be three random variables representing a person's height, vocabulary and age.
- \item H and V are dependent $f(V|H) \neq f(V)$ 
+ \item H and V are dependent $f(v|h) \neq f(v)$ 
  since very small people tend to be children, known for their more basic vocabularies. 
  \item But knowing that two people are 19 years old (i.e., conditional on age) there is no reason to think that one person's vocabulary is larger if we are told that they are taller: 
  \begin{displaymath}
- f(v,h|a)=f(v|a) \Leftrightarrow V \perp H | A 
+ f(v|h,a)=f(v|a) \Leftrightarrow V \perp H | A 
  \end{displaymath}
 
 \end{itemize}
@@ -262,9 +262,9 @@ f(x_3|x_2,x_1)=f(x_1,x_2,x_3)/f(x_1,x_2)
 
 \item The main idea of DGMs is that by assuming that some variables are conditionally independent we can use the probability chain rule to represent the joint distribution more compactly.
 
-\item For example in the previous example, a conditional independence assumption could tell us that: $f(x_3|x_2,x_1)= f(x_3|x_2)$.
+\item For example in the previous example, a conditional independence assumption could be: $X_3 \perp X_2| X_1$: $f(x_3|x_2,x_1)= f(x_3|x_2)$.
 
-\item Then
+\item Then our joint distribution would be reduced to:
 
 \begin{displaymath}
 f(x_1,x_2,x_3)=f(x_1)f(x_2|x_1)f(x_3|x_2)
