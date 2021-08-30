@@ -281,7 +281,7 @@ f(x_1,x_2,x_3)=f(x_1)f(x_2|x_1)f(x_3|x_2)
 
 \end{frame}
 
-\begin{frame}{Example}
+\begin{frame}{SAT Scores}
 \scriptsize{
 \begin{itemize}
 
@@ -305,7 +305,7 @@ the values high intelligence ($i_1$ ) and low intelligence $(i_0)$.
 \end{frame}
 
 
-\begin{frame}{Example}
+\begin{frame}{SAT Scores}
 \scriptsize{
 \begin{itemize}
 
@@ -326,7 +326,9 @@ $i^1$ & $s^1$ & 0.24
 \end{tabular} 
 \end{table}
 
-\item Using the chain rule of conditional probabilities, we have that
+\item Notice that we would need 3 parameters to specify this joint distribution ($2^{m-1}$).
+
+\item Alternatively, we could use the the chain rule of conditional probabilities to represent the joint distribution as follows:
 
 \begin{displaymath}
  f(I,S) = f(I)f(S|I)
@@ -341,19 +343,17 @@ $i^1$ & $s^1$ & 0.24
 \end{frame}
 
 
-\begin{frame}{Example}
+\begin{frame}{SAT Scores}
 \scriptsize{
 \begin{itemize}
 
-\item Note that we could use the chain rule to represent the joint probability with any order.
-
-\item For example  $f(I,S) = f(S)f(I|S)$
+\item Other factorizations obtained by changing the order of the variables are also valid (e.g., $f(I,S) = f(S)f(I|S)$).
 
 
 \item However, it is convenient to represent the process in a way that is more compatible with causality.
 
 \item Various factors (e.g., genetics, upbringing) first determined (stochastically) the student's intelligence.
-\item Her performance on the SAT is determined (stochastically) by her  intelligence. 
+\item Her/his performance on the SAT is determined (stochastically) by her/his  intelligence. 
 \item We note that the models we construct are not required to follow causal intuitions, but they often do.
 
 
@@ -366,6 +366,111 @@ $i^1$ & $s^1$ & 0.24
 
 \end{frame}
 
+
+\begin{frame}{SAT Scores}
+\scriptsize{
+\begin{itemize}
+
+\item From a mathematical perspective, $ f(I,S) = f(I)f(S|I)$ leads to an alternative way of representing the joint distribution. 
+
+\item Instead of specifying the various joint entries $f(I,S)$, we would specify it in the form of $f(I)$ and $f(S|I)$. 
+\item Thus, we could represent the joint distribution using two tables.
+
+\item The first one representing the marginal distribution of $I$.
+
+
+\begin{table}
+\centering
+  \begin{tabular}{cc} \hline
+$i^0$ & $i^1$  \\ \hline
+0.7 & 0.3   
+\end{tabular} 
+\end{table}
+
+\item These numbers can be easily verified from the previous table. For example 
+
+\begin{displaymath}
+f(i^{0})=f(i^{0},s^0)+f(i^{0},s^1)=0.665+0.035=0.7 
+\end{displaymath}
+
+
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{SAT Scores}
+\scriptsize{
+\begin{itemize}
+
+\item The second table represents the conditional probability distribution (CPD) of $S$ given $I$:
+
+\begin{table}
+\centering
+  \begin{tabular}{c||cc} \hline
+$I$ & $s^0$ & $s^1$  \\ \hline
+$i^0$ & 0.95 & 0.5 \\
+$i^1$ & 0.2 & 0.8 \\
+
+\end{tabular} 
+\end{table}
+
+\item which can also be verified from previous table using the Bayes theorem. For example:
+
+\begin{displaymath}
+f(s^{0}|i^0)=f(s^{0},i^0)/f(i^0)= 0.665/0.7=0.95
+\end{displaymath}
+
+\item The CPD $f(S | I)$ represents the probability that the student will succeed on his SATs in the two possible cases:
+\begin{enumerate}
+\scriptsize{
+\item The case where the student's intelligence is low.
+\item The case where it is high. }
+\end{enumerate}
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{SAT Scores}
+\scriptsize{
+\begin{itemize}
+
+\item The CPD asserts that a student of low intelligence is extremely unlikely to get a high SAT score ($f(s_1 | i_0 ) = 0.05$).
+\item On the other hand, a student of high intelligence is likely, but far from
+certain, to get a high SAT score ($f(s_1 | i_1 ) = 0.8$).
+
+\item It is instructive to consider how we could parameterize this alternative representation. 
+\item Here, we are using three Bernoulli distributions, one for $f(I)$, and two for $f(S | i_0)$ and $f(S|i_1)$.
+\item Hence, we can parameterize this representation using three independent parameters, say $\theta_{i^1}$ ,$\theta_{s^1|i^1}$, and $\theta_{s^1|i^0}$
+
+\item Recall that the original representation also required 3 parameters.
+
+\item Thus, although the conditional representation is more natural
+than the explicit representation of the joint, it is not more compact.
+
+\item However, as we will soon see, the conditional parameterization provides a basis for our compact representations of more complex distributions.
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
 
 \begin{frame}{Directed Acyclic Graphs (DAGs)}
 \scriptsize{
