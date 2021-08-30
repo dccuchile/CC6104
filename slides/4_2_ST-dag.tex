@@ -58,11 +58,12 @@
 \begin{frame}{Directed Graphical Models}
 \scriptsize{
 \begin{itemize}
-\item Probabilistic graphical models (PGMs) are a rich framework for encoding probability distributions over complex domains  \cite{koller2009probabilistic}.
+\item Probabilistic graphical models (PGMs) provide a visual representation of the underlying structure of a joint probablity distribution \cite{ruozzi}.
+
 
 \item In this class we will focus on directed graphical models (DGMs), which are one type of PGM.
 
-\item Directed graphical models (DGMs) are a family of probability distributions that admit a compact parametrization that can be naturally described using a \textbf{directed graph}.
+\item Directed graphical models (DGMs) are a family of probability distributions that admit a compact parametrization that can be naturally described using a \textbf{directed acyclic graph}.
 
 \item DGMs are also known as \textbf{Bayesian networks}.
 
@@ -97,7 +98,7 @@
 \scriptsize{
  \item Conditional independence
  \item The chain rule of probability
- \item Directed acyclical graphs }
+ \item Directed acyclical graphs (DAGs) }
 \end{enumerate}
 
  
@@ -271,7 +272,7 @@ f(x_1,x_2,x_3)=f(x_1)f(x_2|x_1)f(x_3|x_2)
  \end{displaymath}
 
  
-\item In the following slides we will try to explain these ideas with an example taken from \cite{koller2009probabilistic}. 
+\item In the following slides we will clarify these concepts with the Student example given in \cite{koller2009probabilistic}. 
 
 \end{itemize}
 
@@ -281,7 +282,7 @@ f(x_1,x_2,x_3)=f(x_1)f(x_2|x_1)f(x_3|x_2)
 
 \end{frame}
 
-\begin{frame}{SAT Scores}
+\begin{frame}{The Student Example}
 \scriptsize{
 \begin{itemize}
 
@@ -305,7 +306,7 @@ the values high intelligence ($i_1$ ) and low intelligence $(i_0)$.
 \end{frame}
 
 
-\begin{frame}{SAT Scores}
+\begin{frame}{The Student Example}
 \scriptsize{
 \begin{itemize}
 
@@ -343,7 +344,7 @@ $i^1$ & $s^1$ & 0.24
 \end{frame}
 
 
-\begin{frame}{SAT Scores}
+\begin{frame}{The Student Example}
 \scriptsize{
 \begin{itemize}
 
@@ -367,7 +368,7 @@ $i^1$ & $s^1$ & 0.24
 \end{frame}
 
 
-\begin{frame}{SAT Scores}
+\begin{frame}{The Student Example}
 \scriptsize{
 \begin{itemize}
 
@@ -405,7 +406,7 @@ f(i^{0})=f(i^{0},s^0)+f(i^{0},s^1)=0.665+0.035=0.7
 \end{frame}
 
 
-\begin{frame}{SAT Scores}
+\begin{frame}{The Student Example}
 \scriptsize{
 \begin{itemize}
 
@@ -444,7 +445,7 @@ f(s^{0}|i^0)=f(s^{0},i^0)/f(i^0)= 0.665/0.7=0.95
 \end{frame}
 
 
-\begin{frame}{SAT Scores}
+\begin{frame}{The Student Example}
 \scriptsize{
 \begin{itemize}
 
@@ -458,10 +459,65 @@ certain, to get a high SAT score ($f(s_1 | i_1 ) = 0.8$).
 
 \item Recall that the original representation also required 3 parameters.
 
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{The Student Example}
+\scriptsize{
+\begin{itemize}
+
 \item Thus, although the conditional representation is more natural
 than the explicit representation of the joint, it is not more compact.
 
 \item However, as we will soon see, the conditional parameterization provides a basis for our compact representations of more complex distributions.
+
+
+\item Although we haven't defined directed acyclical graphs (DAGs) yet, it is instructive to see how this example would be represented as one. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/sat1.png}
+	\end{figure} 
+
+
+\item The DAG from above has a node for each of the two random variables $I$ and $S$, with an edge from $I$ to $S$ representing the direction of the dependence in this model.
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{The Student Example}
+\scriptsize{
+\begin{itemize}
+
+\item Elaborating our example, we now assume that the company also has access to the student's grade $G$ in some course. 
+\item In this case, our probability space is the joint distribution over the
+three relevant random variables $I$, $S$, and $G$. 
+
+\item Assuming that $I$ and $S$ are as before, and that $G$ takes on three values $g^1, g^2, g^3$, representing the grades A, B, and C, respectively, then the
+joint distribution has twelve entries.
+
+\item Before we even consider the specific numerical aspects of our distribution $f$ in this example, we can see that independence does not help us.
+\item For any reasonable $f$ , there are no independencies that hold.
+\item The student's intelligence is clearly correlated both with his SAT score and
+with his grade.
+\item The SAT score and grade are also not independent.
+\item if we condition on the fact that the student received a high score on his SAT, the chances that he gets a high grade in his class are also likely to increase. \item Thus, we may assume that, for our particular distribution $f$,
+$f(g^1|s^1) > f(g^1|s^0)$.
 
 
 \end{itemize}
@@ -571,15 +627,19 @@ acyclic graph or DAG.
 \scriptsize{
 \begin{itemize}
 
-\item For the remainder of this class we will use the terms   directed graphical model (DGM) and directed acyclical graph (DAG) interchangeably. 
-
-\item A DAG is a distribution in which each factor on the right hand side depends only on a small number of ancestor variables $\pi(x)$. \cite{ermon_kuleshov}
 
 
+%\item A DAG is a distribution in which each factor on the right hand side depends only on a small number of ancestor variables $\pi(x)$. \cite{ermon_kuleshov}
 
-\item Let $G$ be a DAG with vertices $V = (X_1 , \dots , X_d )$. 
 
-\item If $P$ is a distribution for $V$ with probability function $f(x)$ (density or masss), we say that $G$ represents $P$ , if
+
+\item Let $G$ be a DAG with vertices $V = (X_1 , \dots , X_i, \dots, X_d )$. 
+\item Each vertex $X_i$ is random variable
+\item The order of vertices $(1,\dots,i,\dots,d)$ forms a topological sort on the random variables.
+
+\item This means that every variable comes before all its descendants in the graph.
+
+\item If $F$ is a distribution for $V$ with probability function $f(x)$ (density or mass), we say that $G$ represents $F$, if
 
 \begin{displaymath}
  f(x) = \prod_{j=1}^d f(x_j| \pi_{x_j})
@@ -587,7 +647,9 @@ acyclic graph or DAG.
 
 where $\pi_{x_j}$ is the set of parent nodes of $X_j$
 
+\item So, a DAG used to encode a multivariate probability distribution $F$ with given conditional independence relations is a Directed Graphical Model or Bayesian Network.
 
+\item Warning: It is common to find in the literature the terms DAG, DGM or Bayesian network used interchangeably. 
 
 \end{itemize}
 
