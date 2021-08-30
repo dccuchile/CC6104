@@ -245,7 +245,33 @@ f(x_3|x_2,x_1)=f(x_1,x_2,x_3)/f(x_1,x_2)
 \item Thus, to specify the joint distribution, one needs to specify $2^{m-1}$ numbers.
 
 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Joint Probabilities}
+\scriptsize{
+\begin{itemize}
+
+
+
 \item The main idea of DGMs is that by assuming that some variables are conditionally independent we can use the probability chain rule to represent the joint distribution more compactly.
+
+\item For example in the previous example, a conditional independence assumption could tell us that: $f(x_3|x_2,x_1)= f(x_3|x_2)$.
+
+\item Then
+
+\begin{displaymath}
+f(x_1,x_2,x_3)=f(x_1)f(x_2|x_1)f(x_3|x_2)
+ \end{displaymath}
+
+ 
+\item In the following slides we will try to explain these ideas with an example taken from \cite{koller2009probabilistic}. 
 
 \end{itemize}
 
@@ -259,11 +285,11 @@ f(x_3|x_2,x_1)=f(x_1,x_2,x_3)/f(x_1,x_2)
 \scriptsize{
 \begin{itemize}
 
-\item Let's try to understand these ideas with the following example taken from \cite{koller2009probabilistic}.
+
 \item Consider the problem faced by a company trying to hire a recent college graduate. 
 \item The company's goal is to hire intelligent employees, but there is no way to test intelligence directly. 
 
-\item However, the company has access to the student's SAT scores, which are informative but not fully indicative. 
+\item However, the company has access to the student's SAT scores\footnote{The SAT is a standardized test widely used for college admissions in the United States.}, which are informative but not fully indicative. 
 
 \item Thus, our probability space is induced by the two random variables Intelligence (I) and SAT (S). 
 \item For simplicity, we assume that each of these takes two values: $Val(I) = \{i_1 , i_0 \}$, which represent
@@ -285,7 +311,7 @@ also represent the values high (score) and low (score), respectively.
 \begin{itemize}
 
 \item Thus, our joint distribution in this case has four entries. 
-\item For example, one possible joint distribution P would be:
+\item For example, one possible joint distribution f would be:
 
 \begin{table}
 \centering
@@ -305,10 +331,10 @@ $i^1$ & $s^1$ & 0.24
 \end{displaymath}
 \item Intuitively, we are representing the process in a way that is more compatible with causality.
 
-\item Various factors (genetics, upbringing, . . . ) first determined (stochastically) the student's intelligence.
-\item His performance on the SAT is determined (stochastically) by his intelligence. 
+\item Various factors (e.g., genetics, upbringing) first determined (stochastically) the student's intelligence.
+\item Her performance on the SAT is determined (stochastically) by his intelligence. 
 \item We note that the models we construct are not required to follow causal intuitions, but they often do.
-\item We return to this issue later on.
+
 
 
 \end{itemize}
