@@ -872,7 +872,7 @@ $H_1$: $\mu>3000g$
  \begin{itemize}
  \item In the previous example, we assumed that $\sigma$ was known.
  \item In many cases  $\sigma$ is unknown and we must estimate it using the unbiased estimator $s$ that we saw in the previous class.
- \item In these cases we can calculate a $T$ statistic $\frac{\overline{X_{n}}-\mu_{o}}{\frac{s}{\sqrt{n}}}$
+ \item If the sample size is small and we assume the data to be normal, we can calculate a $T$ statistic $\frac{\overline{X_{n}}-\mu_{o}}{\frac{s}{\sqrt{n}}}$:
  \begin{verbatim}
 > s<-sd(babyboom$wt)
 > s
@@ -1239,11 +1239,75 @@ statistic is less than -1.96 or greater than 1.96 we would reject the null hypot
 
 
 
-\begin{frame}[fragile]{Two-sided Tests}
+\begin{frame}[fragile]{Two-sided P-value}
 \scriptsize{
 \begin{itemize}
 
 \item In order to calculate a p-value in a two-sided test we need to consider both left and right tails:
+
+\begin{displaymath}
+ p.value = \Phi(-Z)+(1-\Phi(Z))=2\Phi(-|Z|)
+\end{displaymath}
+
+
+
+\begin{verbatim}
+> pvalue<-pnorm(-Z.score)+(1-pnorm(Z.score))
+> pvalue
+[1] 0.0002512811
+> # or more compactly
+> 2*pnorm(-abs(Z.score))
+[1] 0.0002512811
+\end{verbatim}
+
+\item Notice that this p-value is larger than for the one-sided test.
+
+\item This reflects the fact that an extreme value is less surprising since it could have occurred in either direction.
+\end{itemize}
+
+} 
+\end{frame}
+
+
+\begin{frame}{Two-sided P-value}
+
+ 
+ 
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.8]{pics/twosidepval.pdf}
+\end{figure}
+
+Here $p.value$ is less than $\alpha$ so we reject $H_0$.
+
+
+
+
+\end{frame}
+
+
+\begin{frame}{Two-sided P-value}
+
+ 
+ 
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.8]{pics/twosidepval_fail.pdf}
+\end{figure}
+
+Here $p.value$ is greater than $\alpha$ so we fail to reject $H_0$.
+
+
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Two-sided P-value}
+\scriptsize{
+\begin{itemize}
+
+\item Now, let's calculate the p-value for the T-test:
 
 \begin{verbatim}
 > pvalue<-pt(-T.sta,df=n-1)+(1-pt(T.sta,df=n-1))
@@ -1254,9 +1318,7 @@ statistic is less than -1.96 or greater than 1.96 we would reject the null hypot
 [1] 0.001208524
 \end{verbatim}
 
-\item Notice that this p-value is larger than for the one-sided test.
 
-\item This reflects the fact that an extreme value is less surprising since it could have occurred in either direction.
 \end{itemize}
 
 } 

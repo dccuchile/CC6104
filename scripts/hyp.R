@@ -81,6 +81,15 @@ mu0 >= left.conf | mu0 <= right.conf
 
 
 # P-value by hand Two-sided
+
+#with a Normal distribution
+pvalue<-pnorm(-Z.score)+(1-pnorm(Z.score))
+pvalue
+# or more compactly
+2*pnorm(-abs(Z.score))
+
+
+
 pvalue<-pt(-T.sta,df=n-1)+(1-pt(T.sta,df=n-1))
 pvalue
 # or more compactly
