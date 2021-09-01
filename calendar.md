@@ -14,10 +14,10 @@
 | 5 | Martes 21/09 | Design of Experiments & Hypothesis Testing | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_2_ST-hypothesis.pdf) | Horario de consulta de tareas con auxiliar (Discord) | Tarea 2 |
 | 5 | Jueves 23/09 | Design of Experiments & Hypothesis Testing | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_2_ST-hypothesis.pdf) | Horario de consulta con profesor (Discord) |  |
 | 6 | Martes 28/09 | Linear Regression | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_3_ST-regression.pdf) | Horario de consulta de tareas con auxiliar (Discord) |  |
-| 6 | Jueves 30/09 | Introduction to Bayesian Inference | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_1_ST-bayesian.pdf) | Horario de consulta con profesor (Discord) |  |
-| 7 | Martes 05/10 | Introduction to Bayesian Inference | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_1_ST-bayesian.pdff) | Horario de consulta de tareas con auxiliar (Discord) | Tarea 3 |
-| 7 | Jueves 07/10 | Summarizing the Posterior | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_2_ST-posterior.pdf) | Horario de consulta con profesor (Discord) |  |
-| 8 | Martes 12/10 | Ponerse al día |  |  |  |
+| 6 | Jueves 30/09 | Ponerse al día |  | Horario de consulta con profesor (Discord) |  |
+| 7 | Martes 05/10 | Introduction to Bayesian Inference | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_1_ST-bayesian.pdf) | Horario de consulta de tareas con auxiliar (Discord) | Tarea 3 |
+| 7 | Jueves 07/10 | Introduction to Bayesian Inference | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_1_ST-bayesian.pdf) | Horario de consulta con profesor (Discord) |  |
+| 8 | Martes 12/10 | Summarizing the Posterior | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_2_ST-posterior.pdf) |  |  |
 | 8 | Jueves 14/10 | Bayesian Linear Regression | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_3_ST-bayes_lin.pdf) | Horario de consulta con profesor (Discord) |  |
 | 9 | Martes 19/10 | Bayesian Linear Regression | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_3_ST-bayes_lin.pdf) | Horario de consulta de tareas con auxiliar (Discord) | Tarea 4 |
 | 9 | Jueves 21/10 | Markov Chain Monte Carlo | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_4_ST-MCMC.pdf) | Horario de consulta con profesor (Discord) |  |
