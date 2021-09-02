@@ -99,3 +99,4 @@ The course introduces the fundamentals of statistical thinking, which are descri
 * [Experimentation - Yale Universtity](http://www.stat.yale.edu/Courses/1997-98/101/expdes.htm) 
 * [Probabilistic graphical models notes by Stefano Ermon](https://ermongroup.github.io/cs228-notes/)
 * [D-separation without tears by Judea Pearl](http://bayes.cs.ucla.edu/BOOK-2K/d-sep.html)
+* [ML beyond Curve Fitting: An Intro to Causal Inference and do-Calculus by Ferenc Huszár](https://www.inference.vc/untitled/)
