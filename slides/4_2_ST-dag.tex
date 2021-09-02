@@ -319,7 +319,7 @@ also represent the values high (score) and low (score), respectively.
 \begin{table}
 \centering
   \begin{tabular}{cc|c} \hline
-$I$ & $S$ & $f(I,S)$  \\ \hline
+$I$ & $S$ & $f(i,s)$  \\ \hline
 $i^0$ & $s^0$ & 0.665 \\
 $i^0$ & $s^1$ & 0.035 \\
 $i^1$ & $s^0$ & 0.06 \\
@@ -332,7 +332,7 @@ $i^1$ & $s^1$ & 0.24
 \item Alternatively, we could use the the chain rule of conditional probabilities to represent the joint distribution as follows:
 
 \begin{displaymath}
- f(I,S) = f(I)f(S|I)
+ f(i,s) = f(i)f(s|i)
 \end{displaymath}
 
 \end{itemize}
@@ -348,7 +348,7 @@ $i^1$ & $s^1$ & 0.24
 \scriptsize{
 \begin{itemize}
 
-\item Other factorizations obtained by changing the order of the variables are also valid (e.g., $f(I,S) = f(S)f(I|S)$).
+\item Other factorizations obtained by changing the order of the variables are also valid (e.g., $f(i,s) = f(s)f(i|s)$).
 
 
 \item However, it is convenient to represent the process in a way that is more compatible with causality.
@@ -372,9 +372,9 @@ $i^1$ & $s^1$ & 0.24
 \scriptsize{
 \begin{itemize}
 
-\item From a mathematical perspective, $ f(I,S) = f(I)f(S|I)$ leads to an alternative way of representing the joint distribution. 
+\item From a mathematical perspective, $ f(i,s) = f(i)f(s|i)$ leads to an alternative way of representing the joint distribution. 
 
-\item Instead of specifying the various joint entries $f(I,S)$, we would specify it in the form of $f(I)$ and $f(S|I)$. 
+\item Instead of specifying the various joint entries $f(i,s)$, we would specify it in the form of $f(i)$ and $f(s|i)$. 
 \item Thus, we could represent the joint distribution using two tables.
 
 \item The first one representing the marginal distribution of $I$.
@@ -416,7 +416,7 @@ f(i^{0})=f(i^{0},s^0)+f(i^{0},s^1)=0.665+0.035=0.7
 \centering
   \begin{tabular}{c||cc} \hline
 $I$ & $s^0$ & $s^1$  \\ \hline
-$i^0$ & 0.95 & 0.5 \\
+$i^0$ & 0.95 & 0.05 \\
 $i^1$ & 0.2 & 0.8 \\
 
 \end{tabular} 
@@ -428,7 +428,7 @@ $i^1$ & 0.2 & 0.8 \\
 f(s^{0}|i^0)=f(s^{0},i^0)/f(i^0)= 0.665/0.7=0.95
 \end{displaymath}
 
-\item The CPD $f(S | I)$ represents the probability that the student will succeed on his SATs in the two possible cases:
+\item The CPD $f(s| i)$ represents the probability that the student will succeed on his SATs in the two possible cases:
 \begin{enumerate}
 \scriptsize{
 \item The case where the student's intelligence is low.
@@ -454,7 +454,7 @@ f(s^{0}|i^0)=f(s^{0},i^0)/f(i^0)= 0.665/0.7=0.95
 certain, to get a high SAT score ($f(s_1 | i_1 ) = 0.8$).
 
 \item It is instructive to consider how we could parameterize this alternative representation. 
-\item Here, we are using three Bernoulli distributions, one for $f(I)$, and two for $f(S | i_0)$ and $f(S|i_1)$.
+\item Here, we are using three Bernoulli distributions, one for $f(i)$, and two for $f(s | i_0)$ and $f(s|i_1)$.
 \item Hence, we can parameterize this representation using three independent parameters, say $\theta_{i^1}$ ,$\theta_{s^1|i^1}$, and $\theta_{s^1|i^0}$
 
 \item Recall that the original representation also required 3 parameters.
@@ -504,21 +504,140 @@ than the explicit representation of the joint, it is not more compact.
 \scriptsize{
 \begin{itemize}
 
-\item Elaborating our example, we now assume that the company also has access to the student's grade $G$ in some course. 
+\item Let's assume now that the company also has access to the student's grade $G$ in some course. 
 \item In this case, our probability space is the joint distribution over the
 three relevant random variables $I$, $S$, and $G$. 
 
-\item Assuming that $I$ and $S$ are as before, and that $G$ takes on three values $g^1, g^2, g^3$, representing the grades A, B, and C, respectively, then the
-joint distribution has twelve entries.
+\item We will assume that $I$ and $S$ are as before, and that $G$ takes on three values $g^1, g^2, g^3$, representing the grades A, B, and C, respectively.
 
-\item Before we even consider the specific numerical aspects of our distribution $f$ in this example, we can see that independence does not help us.
-\item For any reasonable $f$ , there are no independencies that hold.
-\item The student's intelligence is clearly correlated both with his SAT score and
-with his grade.
+\item So, the joint distribution has twelve entries.
+
+\item We can see that for any reasonable joint distribution function $f$, there are no independencies that hold.
+\item The student's intelligence is clearly correlated both with SAT score and  grade.
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{The Student Example}
+\scriptsize{
+\begin{itemize}
+
 \item The SAT score and grade are also not independent.
-\item if we condition on the fact that the student received a high score on his SAT, the chances that he gets a high grade in his class are also likely to increase. \item Thus, we may assume that, for our particular distribution $f$,
+\item A high SAT score increases the chances of getting a high grade.
+
+\item Thus, we may assume that, for our particular distribution $f$,
 $f(g^1|s^1) > f(g^1|s^0)$.
 
+\item However, it is quite plausible that our distribution f in this case satisfies a conditional independence property.
+
+\item If we know that the student has high intelligence, a high grade on the
+SAT no longer gives us information about the student's performance in the class.
+
+\item More formally: $f(g|s,i)=f(g|i)$ or $G \perp S|I$
+
+\item So the join distribution can be reduced from
+
+\begin{displaymath}
+ f(i,s,g)=f(i)f(s|i)f(g|i,s)
+\end{displaymath}
+
+to
+
+\begin{displaymath}
+ f(i,s,g)=f(i)f(s|i)f(g|i) 
+\end{displaymath}
+
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}{The Student Example}
+\scriptsize{
+\begin{itemize}
+
+\item Now our joint distribution is specified by $f(i)$, $f(s|i)$, and $f(g|i)$.
+
+\item While  $f(i)$, $f(s|i)$ might be the same as before, and  $f(g|i)$ might be:
+
+
+\begin{table}
+\centering
+  \begin{tabular}{c||ccc} \hline
+$I$ & $g^1$ & $g^2$ & $g^3$  \\ \hline
+$i^0$ & 0.2 & 0.34 & 0.46 \\
+$i^1$ & 0.74 & 0.17 & 0.09 \\
+
+\end{tabular} 
+\end{table}
+
+\item Now we can calculate the joint probability of any combinatio of imputs.
+
+\item For example 
+
+ \begin{align}
+  f(i^1,s^1,g^2) & = f(i^1)f(s^1|i^1)f(g^2|i^1) \\
+   & = 0.3*0.8*0.17 \\
+   & = 0.0408
+ \end{align}
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{The Student Example}
+\scriptsize{
+\begin{itemize}
+
+\item The corresponding DAG would be as follows:
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/sat2.png}
+	\end{figure} 
+
+	\item In this case, the alternative parameterization is more compact than the joint. 
+	\item We now have three Bernoulli distributions $f(i), f(s | i^1)$ and $f(s | i^0)$, and two three-valued categorical distributions $f(g | i_1 )$ and $f(g | i^0)$.
+	\item A categorical distribution is  discrete probability distribution that describes the possible results of a random variable that can take on one of K possible categories, with the probability of each category separately specified\footnote{\url{https://en.wikipedia.org/wiki/Categorical_distribution}}.
+
+	
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+\begin{frame}{The Student Example}
+\scriptsize{
+\begin{itemize}
+	\item Each of the Bernoullis requires one independent parameter, and each three-valued categorical requires two independent parameters, for a total of seven. 
+	\item By contrast, our joint distribution has twelve entries, so that eleven independent
+parameters are required to specify an arbitrary joint distribution over these three variables.
+\item It is important to note another advantage of this way of representing the joint: modularity.
+\item When we added the new variable $G$, the joint distribution changed entirely. 
+\item Had we used the explicit representation of the joint, we would have had to write down twelve new numbers. 
+\item In the factored representation, we could reuse our local probability models for the variables $I$ and $S$, and specify only the probability model for $G$, the CPD $f(G | I)$. 
+\item This property will turn out to be invaluable in modeling real-world systems.
+	
 
 \end{itemize}
 
@@ -531,6 +650,9 @@ $f(g^1|s^1) > f(g^1|s^0)$.
 \begin{frame}{Directed Acyclic Graphs (DAGs)}
 \scriptsize{
 \begin{itemize}
+
+\item Now that we understand how the chain rule of probability and conditional independence assumptions enable us to obtain a compact representation of a joint distribution, we are in a position to introduce the DAGs more formally.
+
 \item A directed graph consists of a set of nodes with arrows between some nodes.
 
 
