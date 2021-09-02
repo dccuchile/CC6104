@@ -651,17 +651,15 @@ parameters are required to specify an arbitrary joint distribution over these th
 \scriptsize{
 \begin{itemize}
 
-\item Now that we understand how the chain rule of probability and conditional independence assumptions enable us to obtain a compact representation of a joint distribution, we are in a position to introduce the DAGs more formally.
+\item Now that we understand how the chain rule of probability and conditional independence assumptions enable us to obtain a compact representation of a joint distribution, we are in a position to introduce DAGs more formally.
 
 \item A directed graph consists of a set of nodes with arrows between some nodes.
 
 
-\item Graphs are useful for representing independence relations between variables.
 
 \item More formally, a directed graph G consists of a set of vertices V and an edge set E of ordered pairs of
 vertices.
 
-\item For our purposes, each vertex corresponds to a random variable. 
 
 \item If $(Y, X) \in E$  then there is an arrow pointing from Y to X. 
 
@@ -686,15 +684,14 @@ vertices.
 \begin{frame}{Directed Acyclic Graphs (DAGs)}
 \scriptsize{
 \begin{itemize}
-\item If an arrow connects two variables X and Y (in either direction) we say that X and Y are adjacent.
+\item If an arrow connects two variables X and Y (in either direction) we say that X and Y are \textbf{adjacent}.
 
 
-\item If there is an arrow from X to Y then X is a parent of Y and Y is a child of X.
+\item If there is an arrow from X to Y then X is a \textbf{parent} of Y and Y is a \textbf{child} of X.
 
 \item The set of all parents of X is denoted by $\pi_{X}$ or $\pi(X)$.
 
-\item A directed path between two variables is a set of arrows all pointing in the same direction linking one variable to the
-other such as the chain shown below:
+\item A \textbf{directed path} between two variables is a set of arrows all pointing in the same direction linking one variable to the other such as the chain shown below:
 
 \begin{figure}[h!]
 	\centering
@@ -702,9 +699,12 @@ other such as the chain shown below:
 	\caption{A chain graph with a directed path.}
 	\end{figure} 
 
-\item X is an ancestor of Y if there is a directed path from X to Y (or X = Y ).
+\item A sequence of adjacent vertices starting with X and ending with Y but ignoring the
+direction of the arrows is called an \textbf{undirected path}.
+	
+\item X is an \textbf{ancestor} of Y if there is a directed path from X to Y (or X = Y ).
 
-\item We also say that Y is a descendant of X.
+\item We also say that Y is a \textbf{descendant} of X.
  
 \end{itemize}
 
@@ -749,19 +749,24 @@ acyclic graph or DAG.
 \scriptsize{
 \begin{itemize}
 
+\item When a DAG is used to encode a joint probability function $f$ (density or mass) with given conditional independence relations, we have a Directed Graphical Model or Bayesian Network.
+
+\item Warning: It is common to find terms DAG, DGM or Bayesian network used interchangeably in the literature. 
 
 
-%\item A DAG is a distribution in which each factor on the right hand side depends only on a small number of ancestor variables $\pi(x)$. \cite{ermon_kuleshov}
-
-
-
-\item Let $G$ be a DAG with vertices $V = (X_1 , \dots , X_i, \dots, X_d )$. 
+\item Let $G$ be a DAG with vertices $V = (X_1 , \dots , X_i, \dots, X_m )$. 
 \item Each vertex $X_i$ is random variable
-\item The order of vertices $(1,\dots,i,\dots,d)$ forms a topological sort on the random variables.
+
+
+\item The edges of $G$ represent (conditional) independence relations between variables.
+
+
+
+\item The order of vertices $(1,\dots,i,\dots,m)$ forms a topological sort on the random variables.
 
 \item This means that every variable comes before all its descendants in the graph.
 
-\item If $F$ is a distribution for $V$ with probability function $f(x)$ (density or mass), we say that $G$ represents $F$, if
+\item Let $f$ be probability function  for $V$, $f(x_1,\dots,x_d)$,  we say that $G$ represents $f$, if
 
 \begin{displaymath}
  f(x) = \prod_{j=1}^d f(x_j| \pi_{x_j})
@@ -769,9 +774,7 @@ acyclic graph or DAG.
 
 where $\pi_{x_j}$ is the set of parent nodes of $X_j$
 
-\item So, a DAG used to encode a multivariate probability distribution $F$ with given conditional independence relations is a Directed Graphical Model or Bayesian Network.
 
-\item Warning: It is common to find in the literature the terms DAG, DGM or Bayesian network used interchangeably. 
 
 \end{itemize}
 
