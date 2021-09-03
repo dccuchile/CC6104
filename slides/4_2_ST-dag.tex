@@ -69,7 +69,6 @@
 
 \item We won't use that term in this class because statistical inference for DGMs can be performed using frequentist or Bayesian methods \cite{wasserman2013all}.
 
-\item These types of graphs are also called \textbf{causal graphs} or \textbf{causal diagrams}.
 
  
 \end{itemize}
@@ -766,13 +765,7 @@ acyclic graph or DAG.
 
 \item This means that every variable comes before all its descendants in the graph.
 
-\item Let $f$ be probability function  for $V$, $f(x_1,\dots,x_d)$,  we say that $G$ represents $f$, if
 
-\begin{displaymath}
- f(x) = \prod_{j=1}^d f(x_j| \pi_{x_j})
-\end{displaymath}
-
-where $\pi_{x_j}$ is the set of parent nodes of $X_j$
 
 
 
@@ -789,18 +782,27 @@ where $\pi_{x_j}$ is the set of parent nodes of $X_j$
 \begin{itemize}
 
 
-\item The next figure shows a DAG with four variables.
+
+
+\item For example, the next figure shows a DAG with four variables, the numbers indicate the topological order.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.4]{pics/dag3.png}
 	\end{figure} 
 
+\item It is clear from the figure, that no vertex comes before any of its descendant in the DAG.	
+
+\item Let $f$ be probability function  for $V$, $f(x_1,\dots,x_d)$,  we say that $G$ represents $f$, if
+
+\begin{equation}
+ f(x) = \prod_{j=1}^d f(x_j| \pi_{x_j}) 
+\end{equation}
 
 
-\item The probability function takes the following decomposition:
 
-\item $f($overweight, smoking, heart disease, cough$) =$ \\    $f($overweight$) \times f($smoking$) \times f($heart, disease$|$ overweight, smoking$) \times f($cough$|$smoking$)$. 
+where $\pi_{x_j}$ is the set of parent nodes of $X_j$	
+	
 
 
 \end{itemize}
@@ -812,20 +814,34 @@ where $\pi_{x_j}$ is the set of parent nodes of $X_j$
 \end{frame}
 
 
-\begin{frame}{Causal DAGs}
+\begin{frame}{Probability and DAGs}
 \scriptsize{
 \begin{itemize}
 
 
-\item The interpretation of direct acyclic graphs as carriers of independence assumptions does not necessarily imply causation.
 
-\item In fact, it will be valid for any set of recursive independencies along any ordering of the variables, not necessarily causal or chronological.
+\item Based on the equation above, probability function $f$ of the previous graph takes the following decomposition:
 
-\item However, the ubiquity of DAG models in statistical and AI applications stems (often unwittingly) primarily from their causal interpretation 
+\begin{displaymath}
+f(o,s,h,c) = f(o)f(s)f(h|o,s)f(c|s).  
+\end{displaymath}
 
-\item That is, as a system of processes, one per family, that could account for the generation of the observed data. 
 
-\item It is this causal interpretation that explains why DAG models are rarely used in any variable ordering other than those which respect the direction of time and causation. \cite{pearl2009causality}
+
+\item If no conditional independence assumptions we made, the joint probability function $f$ would the following:
+
+\begin{displaymath}
+ f(o)f(s|o)f(h|o,s)f(c|o,s,h)
+\end{displaymath}
+
+\item That means that the graph above encodes the following independence asssumptions:
+
+\begin{enumerate}
+ \item $f(s|o) = f(s)$ 
+ \item $f(c|o,s,h) = f(c|s)$   
+\end{enumerate}
+
+
 
 \end{itemize}
 
@@ -836,39 +852,165 @@ where $\pi_{x_j}$ is the set of parent nodes of $X_j$
 \end{frame}
 
 
-
-
-
-\begin{frame}{An Example}
+\begin{frame}{Probability and DAGs}
 \scriptsize{
 \begin{itemize}
-\item The best way to understand DAGs is to imagine trying to model a situation in which causality plays a role.
-\item And also our understanding of what is actually going on is
-incomplete
-\item So we need to describe things probabilistically. 
 
-\item The following example is based on \cite{charniak1991bayesian}.
 
-\item Eugene Charniak is a famous AI researcher who's got the following situation.
 
-\item When he goes home at night, he wants to know if his family is home before trying the doors. 
+\item How can we know all the independence assumptions encoded by a DAG?
+
+\item The answer is \textbf{d-separation}.
+
+
+\item D-separation is a criterion for deciding,  whether a set X of variables is independent of another set Y, given a third set Z. 
+
+\item The idea is to associate ``dependence'' with ``connectedness'' (i.e., the existence of a connecting path) and ``independence'' with ``unconnectedness'' or ``separation''.
+
+\item Warning: D-separation is hard to understand.
+
+\item Before trying to understand it we are going to introduce an R library for playing with DAGS: dagitty.
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Dagitty}
+\scriptsize{
+\begin{itemize}
+
+
+
+\item DAGitty is a browser-based environment for creating, editing, and analyzing DAGs: \url{http://dagitty.net/}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{pics/DAGitty.png}
+	\end{figure} 
+
+
+
+\item The R package ‘dagitty’ provides access to all of the capabilities of the DAGitty web application within R.
+
+
+\end{itemize}
+
+
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Dagitty}
+\scriptsize{
+\begin{itemize}
+
+
+
+\item We can use Dagitty to create the DAG from before with the command ``dag'':
+
+\begin{verbatim}
+> library(dagitty)
+> 
+> over <- dagitty("dag{ o -> h; s -> h; s ->c }")
+\end{verbatim}
+
+
+\item Now, in order to visualize the DAG we need to specify the coordinates of each vertex:
+
+\begin{verbatim}
+> coordinates(over) <- 
+list( x=c(o=0,h=1,s=2,c=3) , y=c(o=0,h=1,s=0,c=1) )
+> plot(over)  
+\end{verbatim}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/overdag1.pdf}
+	\end{figure} 
+
+
+
+\end{itemize}
+
+
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Dagitty}
+\scriptsize{
+\begin{itemize}
+
+
+
+\item We can obtain the children of a node:
+
+\begin{verbatim}
+> children(over,"s")
+[1] "c" "h"
+\end{verbatim}
+
+\item Or the parents:
+
+\begin{verbatim}
+> children(over,"s")
+[1] "c" "h" 
+\end{verbatim}
+
+
+\item Or the undirected paths between two nodes:
+
+\begin{verbatim}
+> paths( over, "o", "c" )$path
+[1] "o -> h <- s -> c"
+\end{verbatim}
+
+\item Or just the directed paths between two nodes:
+
+\begin{verbatim}
+> paths( over, "s", "c",directed = T )$path
+[1] "s -> c" 
+\end{verbatim}
+
+\item Finally we can obtained all the conditional independencies encoded by the DAG:
+
+\begin{verbatim}
+> impliedConditionalIndependencies(over)
+c _||_ h | s
+c _||_ o
+o _||_ s 
+\end{verbatim}
+
+
+\end{itemize}
+
+
+} 
+
+\end{frame}
+
+\begin{frame}{The Family Out Problem}
+\scriptsize{
+\begin{itemize}
+\item We are going to use the ``family out'' example proposed by Eugene Charniak in  \cite{charniak1991bayesian} to understand d-separation.
+
+\item When Eugene goes home at night, he wants to know if his family is home before trying the doors. 
 
 \item Often when his wife leaves the house, she turns on an outdoor light. 
-
- 
-\end{itemize}
-
-
-
-} 
-
-\end{frame}
-
-
-
-\begin{frame}{An Example}
-\scriptsize{
-\begin{itemize}
 
 \item Eugene's wife can also turn on the outdoor light if she is expecting a guest.
 
@@ -880,7 +1022,61 @@ incomplete
 
 \item Finally, if the dog is in the backyard, Eugene's will probably hear her barking 
 
-\item The next slide shows a DAG encoding all the above causal relationships.
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{The Family Out Problem}
+\scriptsize{
+\begin{itemize}
+
+
+
+\item All these causal relationships are represented in the DAG below:
+
+ 
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{pics/fodag.png}
+	\end{figure} 
+ 
+\item The numbers show the corresponding  position of each vertex in the topological sort. 
+ 
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{The Family Out Problem}
+\scriptsize{
+
+
+
+\begin{itemize}
+\item Taking each random variable as binary, the marginal and conditional probability functions representing our DAG are shown below: 
+
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/fodagProb.png}
+	\end{figure} 
+
+
+
+
+
 
  
 \end{itemize}
@@ -892,21 +1088,60 @@ incomplete
 \end{frame}
 
 
-\begin{frame}{An Example}
+\begin{frame}{The Family Out Problem}
 \scriptsize{
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.4]{pics/fodag.png}
-	\end{figure} 
+
 
 \begin{itemize}
+\item Let's try to understand now the built-in independence assumptions of this DAG.
 
-\item The DAG can help to predict what will happen in a particular scenario (if his family goes out, the dog goes out) 
-\item Or to infer causes from observed effects (if the light is on and the dog is out, then his family is probably out).
+\item Consider the random variables family-out $fo$ and hear-bark $hb$.
+
+\item Are these variables independent? 
+
+\item Intuitively not, because if his family leaves home, then the dog is more likely to be out.
+\item Thus, he is more likely to hear it bark. 
+
+\item However, what if he knows that dog-out $do$ is true or false?
+
+\item Now $hb$ is independent of $fo$ given $do$, $f(hb | fo, do) = f(hb | do)$.
+
+\item Hearing the dog bark was dependent on her being in or out.
+
+\item Once he knows whether she is in or out, then where the family is is of no concern.
 
 
 
+
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{The Family Out Problem}
+\scriptsize{
+
+
+
+\begin{itemize}
+\item Note that if we wanted to say that the location of the family is directly relevant to hearing the dog bark, then we would have to put another arc directly between the two variables.
+\item Direct relevance would occur, say, if the dog is more likely to bark when the family is away than when it is at home.
+\item This is not the case here.
+
+\item Now we can give the rule specifying dependence and independence in DAGs.
+
+\item In a DAG, a variable $A$ is dependent on a variable $B$ given evidence $E=\{E_1,\dots,E_m\}$ if there is a d-connecting path from $A$ to $B$ given $E$.
+
+\item Two nodes are d-separated if there is no d-connecting path between them.
+
+\item So, if $A$ and $B$ are d-separated given $E$, they are conditionally independent $A \perp B |E$. 
  
 \end{itemize}
 
@@ -920,8 +1155,16 @@ incomplete
 \begin{frame}{D-separation}
 \scriptsize{
 \begin{itemize}
-\item sdsad
 
+\item To understand d-connecting paths, we need to keep in mind the three kinds of connections between a random variable Z and its two immediate neighbors X and Y in an undirected path:
+
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{pics/collider.png}
+	\end{figure} 
+
+\item Now we can give the definition of a d-connecting path.
+ 
  
 \end{itemize}
 
@@ -931,12 +1174,19 @@ incomplete
 
 \end{frame}
 
-
-\begin{frame}{Plate Notation}
+\begin{frame}{D-separation}
 \scriptsize{
 \begin{itemize}
-\item sdsad
 
+\item To understand d-connecting paths, we need to keep in mind the three kinds of connections between a random variable Z and its two immediate neighbors X and Y in an undirected path:
+
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{pics/collider.png}
+	\end{figure} 
+
+\item Now we can give the definition of a d-connecting path.
+ 
  
 \end{itemize}
 
@@ -946,6 +1196,61 @@ incomplete
 
 \end{frame}
 
+
+
+\begin{frame}{D-separation}
+\scriptsize{
+\begin{itemize}
+
+\item A path from q to r is d-connecting with respect to the evidence nodes E if every interior node $n$ in the undirected path has the property that either
+
+\begin{enumerate}
+ \item It is a fork or a pipe and not a member of E or
+ \item It is converging, and either n or one of its descendants is in E.
+\end{enumerate}
+
+\item In the literature, the term d-separation is more common.
+
+\item Two nodes are d-separated if there is no d-connecting path between them.
+
+ 
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{Causal DAGs}
+\scriptsize{
+\begin{itemize}
+
+
+\item A DGM can help to predict what will happen in a particular scenario (if his family goes out, the dog goes out) 
+
+\item However, the interpretation of DAGs as carriers of independence assumptions does not necessarily imply \textbf{causation}.
+
+
+\item \textbf{Causal inference} is a huge topic and goes beyond the scope of this course.
+
+\item When DAGs are given a causal interpretation, they are usually called \textbf{causal graphs} or \textbf{causal diagrams}.
+
+
+\item This causal interpretation allows us to infer causes from observed effects (if the light is on and the dog is out, then his family is probably out).
+
+\item It is this causal interpretation that explains why DAG models are rarely used in any variable ordering other than those which respect the direction of \textbf{time} and \textbf{causation}. \cite{pearl2009causality}
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
 
 
 \begin{frame}{Estimation for DAGs}
@@ -988,7 +1293,7 @@ incomplete
 
 \item We can then estimate the parameters by maximum likelihood.
 
-\item On the other hand, if we want to perform Bayesian inference we must set priors for all our variables $X_1,\dots,X_m$ and estimate the posterior accordingly.
+\item On the other hand, if we want to perform Bayesian inference we must set priors for all our variables $X_1,\dots,X_m$ and estimate the posterior accordingly (using MCMC for example).
 
  
 \end{itemize}
@@ -1015,6 +1320,21 @@ for such a method to be reliable.
 \item Producing a valid, accurate confidence set for the DAG structure would require astronomical sample sizes. 
 
 \item If prior information is available about part of the DAG structure, the computational and statistical problems are at least partly ameliorated \cite{wasserman2013all}.
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Plate Notation}
+\scriptsize{
+\begin{itemize}
+\item sdsad
 
  
 \end{itemize}
