@@ -1139,9 +1139,6 @@ o _||_ s
 
 \item In a DAG, a variable $A$ is dependent on a variable $B$ given evidence $E=\{E_1,\dots,E_m\}$ if there is a d-connecting path from $A$ to $B$ given $E$.
 
-\item Two nodes are d-separated if there is no d-connecting path between them.
-
-\item So, if $A$ and $B$ are d-separated given $E$, they are conditionally independent $A \perp B |E$. 
  
 \end{itemize}
 
@@ -1174,35 +1171,13 @@ o _||_ s
 
 \end{frame}
 
-\begin{frame}{D-separation}
-\scriptsize{
-\begin{itemize}
-
-\item To understand d-connecting paths, we need to keep in mind the three kinds of connections between a random variable Z and its two immediate neighbors X and Y in an undirected path:
-
-  \begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.5]{pics/collider.png}
-	\end{figure} 
-
-\item Now we can give the definition of a d-connecting path.
- 
- 
-\end{itemize}
-
-
-
-} 
-
-\end{frame}
-
 
 
 \begin{frame}{D-separation}
 \scriptsize{
 \begin{itemize}
 
-\item A path from q to r is d-connecting with respect to the evidence nodes E if every interior node $n$ in the undirected path has the property that either
+\item An undirected path from $Q$ to $R$ is d-connecting with respect to the evidence nodes $E$ if every interior node $n$ in the path has the property that either
 
 \begin{enumerate}
  \item It is a fork or a pipe and not a member of E or
@@ -1212,6 +1187,9 @@ o _||_ s
 \item In the literature, the term d-separation is more common.
 
 \item Two nodes are d-separated if there is no d-connecting path between them.
+
+
+\item So, if $A$ and $B$ are d-separated given $E$, they are conditionally independent $A \perp B |E$. 
 
  
  
