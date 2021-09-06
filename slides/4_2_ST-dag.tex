@@ -1153,14 +1153,15 @@ o _||_ s
 \scriptsize{
 \begin{itemize}
 
-\item To understand d-connecting paths, we need to keep in mind the three kinds of connections between a random variable Z and its two immediate neighbors X and Y in an undirected path:
+\item We need to keep in mind that  there are only four types of variable relations that combine to form all possible undirected paths in a DAG between any pair of variables X and Y with one inmmediate neightbor Z: 
 
   \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.5]{pics/collider.png}
+	\includegraphics[scale=0.6]{pics/collider.png}
+	\caption{source: \cite{mcelreath2020statistical}}
 	\end{figure} 
 
-\item Now we can give the definition of a d-connecting path.
+
  
  
 \end{itemize}
@@ -1174,15 +1175,26 @@ o _||_ s
 
 
 \begin{frame}{D-separation}
-\scriptsize{
-\begin{itemize}
 
-\item An undirected path from $Q$ to $R$ is d-connecting with respect to the evidence nodes $E$ if every interior node $n$ in the path has the property that either
+\begin{block}{Definition}
+ \begin{itemize}
+
+\item An undirected path from $X$ to $Y$ is d-connecting with respect to the evidence nodes $E$ if \textbf{every} interior node $E_i$ in the path has the property that either:
 
 \begin{enumerate}
  \item It is a fork or a pipe and not a member of E or
- \item It is converging, and either n or one of its descendants is in E.
+ \item It is a collider, and either $E_i$ or one of its descendants is in E.
 \end{enumerate}
+ 
+ 
+\end{itemize}
+
+\end{block}
+
+
+
+\begin{itemize}
+
 
 \item In the literature, the term d-separation is more common.
 
@@ -1197,7 +1209,7 @@ o _||_ s
 
 
 
-} 
+
 
 \end{frame}
 
