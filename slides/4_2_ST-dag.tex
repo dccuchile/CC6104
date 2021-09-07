@@ -998,7 +998,7 @@ list( x=c(o=0,h=1,s=2,c=3) , y=c(o=0,h=1,s=0,c=1) )
 [1] "s -> c" 
 \end{verbatim}
 
-\item Finally we can obtained all the conditional independencies encoded by the DAG:
+\item Finally we can obtainall the conditional independencies encoded by the DAG:
 
 \begin{verbatim}
 > impliedConditionalIndependencies(over)
@@ -1100,6 +1100,40 @@ o _||_ s
 \end{frame}
 
 
+\begin{frame}[fragile]{The Family Out Problem}
+\scriptsize{
+
+
+
+\begin{itemize}
+\item Let's build the DAG using dagitty:
+
+\begin{verbatim}
+fo <- dagitty("dag{ fo -> lo; fo -> do; bp -> do;do->hb }")
+coordinates(fo) <- list( x=c(lo=0,fo=1,do=2,hb=2,bp=3)
+                         , y=c(fo=0,bp=0,lo=1,do=1,hb=2) )
+plot(fo) 
+\end{verbatim}
+
+ \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/fodagitty.pdf}
+	\end{figure} 
+
+
+
+
+
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
 \begin{frame}{The Family Out Problem}
 \scriptsize{
 
@@ -1165,12 +1199,13 @@ o _||_ s
 \scriptsize{
 \begin{itemize}
 
-\item We need to keep in mind that  there are only four types of variable relations that combine to form all possible undirected paths in a DAG between any pair of variables X and Y with one inmmediate neightbor Z: 
+\item We need to keep in mind that there are only four types of variable relations that combine to form all possible undirected paths in a DAG \cite{mcelreath2020statistical}.
+
+\item For a random variable $Z$ and its two immediate neighbors in the path $X$ and $Y$, the 4 possible relations are:
 
   \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.6]{pics/collider.png}
-	\caption{source: \cite{mcelreath2020statistical}}
 	\end{figure} 
 
 
@@ -1191,7 +1226,7 @@ o _||_ s
 \begin{block}{Definition}
  \begin{itemize}
 
-\item An undirected path from $A$ to $B$ is d-connecting with respect to the evidence nodes $E$ if \textbf{every} interior node $E_i$ in the path has the property that either:
+\item An undirected path from $A$ to $B$ is d-connecting with respect to the evidence nodes $E$ if \textbf{every} interior node $E_i$ in the path satisfies one of these two rules:
 
 \begin{enumerate}
  \item It is a fork or a pipe and not a member of E.
@@ -1222,6 +1257,199 @@ o _||_ s
 
 
 
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Rule 1}
+\scriptsize{
+\begin{itemize}
+
+\item The rule 1 tells us that a d-connecting path must not be \textbf{blocked} by evidence.
+
+\item This means that once we know about a middle node, we do not need to know about anything further away.
+
+\item For example, the path from $fo$ to $hb$, $fo \rightarrow do \rightarrow hb$ forms a pipe.
+
+\item We already discussed that $fo$ and $hb$ are dependent from each other, but conditionally independent given $do$.
+
+\item Now we can use the first rule of d-separation to answer these questions about dependency.
+
+\item Let's use the commands \textbf{dconnected} and \textbf{dseparated} from daggify.
+
+\begin{verbatim}
+> dconnected(fo,"fo","hb",c()) 
+[1] TRUE
+> dseparated(fo,"fo","hb",c()) 
+[1] FALSE
+> dconnected(fo,"fo","hb",c("do")) 
+[1] FALSE
+> dseparated(fo,"fo","hb",c("do")) 
+[1] TRUE
+\end{verbatim}
+
+\item So, $do$ blocks the path between $fo$ and $hb$.
+
+
+
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Rule 1}
+\scriptsize{
+\begin{itemize}
+
+\item Let's consider the path with a fork: $lo \leftarrow fo \rightarrow do$.
+
+\item By rule 1, $lo$ and $do$ are d-connected but d-separated give $fo$.
+
+\begin{verbatim}
+> dconnected(fo,"lo","do",c()) 
+[1] TRUE
+> dconnected(fo,"lo","do",c("fo")) 
+[1] FALSE
+\end{verbatim}
+
+
+\item So $fo$ blocks the path between $lo$ and $do$.
+
+\item From a causal point of view, this is the classical problem of confounding.
+
+\item Light-on and dog-out are both caused by family-out, hence they are dependent.
+
+\item However, once the cause if known, they become independent.
+
+
+
+
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Rule 1}
+\scriptsize{
+\begin{itemize}
+
+\item Rule 1 also tell us that there can be no colliders interior nodes in the path.
+
+\item Let's consider the path from $fo$ to $bp$, $fo \rightarrow do \leftarrow bo$.
+
+\item Here we have a collider (not a fork nor a pipe), so by rule one $fo$ and $bp$ are marginally independent.
+
+\begin{verbatim}
+> dconnected(fo,"fo","bp",c())
+[1] FALSE 
+\end{verbatim}
+
+
+
+\item If two things can cause the same state of affairs and have no other connections, then the two things are independent.
+
+
+
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Rule 2}
+\scriptsize{
+\begin{itemize}
+
+\item Suppose we know that the dog is out (i.e., dog-out is a member of $E$)
+
+\item Now, are family-out and bowel-problem conditionally independent given dog-out?
+
+\item By rule number 2 we know that fo and bp given do are d-connected (a collider node in the evidence).
+
+\begin{verbatim}
+> dconnected(fo,"fo","bp",c("do"))
+[1] TRUE 
+\end{verbatim}
+
+\item So, they became dependent given the evidence.
+
+\item How do we explain this?
+
+\item For example, if we know that the dog is out, knowing that the family is at home should raise (slightly) the probability that the dog has bowel problems.
+
+\item Because we eliminated the most likely explanation for the dog being out, less likely explanations become more likely.
+
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Rule 2}
+\scriptsize{
+\begin{itemize}
+
+\item We would have a similar situation if we did not know that the
+dog was out but heard the barking.
+
+\item Since $hb$ is a descendant of the collider node $do$, $fo$ and $bp$ are d-connected with respect to $hb$
+
+\begin{verbatim}
+> dconnected(fo,"fo","bp",c("hb"))
+[1] TRUE 
+\end{verbatim}
+
+
+
+\item In this case, we would not be sure the dog was out, but we do have relevant evidence (which raises the probability), so hear-bark, in effect, connects the two nodes above the collider. 
+
+\item Intuitively, rule 2 means that a d-connecting path can only go through a collider if we are conditioning on any of its potential effects.
+
+\item By ``any effect'' we mean the collider node itself or any of its descendants.
+\end{itemize}
+
+} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Rule 2}
+\scriptsize{
+\begin{itemize}
+
+\item We have finished the explanation of d-separation.
+
+\item This is definitely the hardest part in understanding DAGs.
+
+\item Exercise: explain all the conditional independencies of the family out DAG using the rules of d-separation.
+
+\begin{verbatim}
+> impliedConditionalIndependencies(fo)
+bp _||_ fo
+bp _||_ hb | do
+bp _||_ lo
+do _||_ lo | fo
+fo _||_ hb | do
+hb _||_ lo | fo
+hb _||_ lo | do 
+\end{verbatim}
+
+
+
+
+\end{itemize}
+
+} 
 
 \end{frame}
 

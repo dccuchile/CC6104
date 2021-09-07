@@ -25,9 +25,29 @@ dseparated(over,"o","s",c("h"))
 impliedConditionalIndependencies(over)
 
 fo <- dagitty("dag{ fo -> lo; fo -> do; bp -> do;do->hb }")
-coordinates(fo) <- list( x=c(lo=0,fo=1,do=2,hb=2,bp=3) , y=c(fo=0,bp=0,lo=1,do=1,hb=2) )
+coordinates(fo) <- list( x=c(lo=0,fo=1,do=2,hb=2,bp=3)
+                         , y=c(fo=0,bp=0,lo=1,do=1,hb=2) )
+plot(fo)
 
-    plot(fo)
+
+
+
+#Rule 1 d-connected    
+dconnected(fo,"fo","hb",c()) 
+dseparated(fo,"fo","hb",c()) 
+dconnected(fo,"fo","hb",c("do")) 
+dseparated(fo,"fo","hb",c("do")) 
+
+
+
+dconnected(fo,"lo","do",c()) 
+dconnected(fo,"lo","do",c("fo")) 
+    
+dconnected(fo,"fo","bp",c())
+dconnected(fo,"fo","bp",c("do"))
+dconnected(fo,"fo","bp",c("hb"))
+
+
 impliedConditionalIndependencies(fo)
 
 
