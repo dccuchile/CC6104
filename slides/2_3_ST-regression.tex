@@ -83,7 +83,7 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
  
  \item The dependent variable $\mathbf{y}$ is also called \textbf{target}, \textbf{outcome}, or \textbf{response} variable.
  
- \item The independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_m$ are also called \textbf{covariates}, \textbf{attributes}, \textbf{features}, por \textbf{predictor variables}.
+ \item The independent variables  $\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_m$ are also called \textbf{covariates}, \textbf{attributes}, \textbf{features}, or \textbf{predictor variables}.
  
  
  \item  Roughly speaking we want to know the expected value of $\mathbf{y}$ from the values of $\mathbf{x}$:
@@ -96,7 +96,7 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
  
  \item To perform this type of analysis we need a dataset consisting of $n$ observations that include both the response variable and each of the attributes.
  
- \item We refer to the process of \textbf{fitting} a regression function as the process in which from the data we infer a hypothesis function $h$ that allows us to \textbf{predict} unknown $\mathbf{y}$ values using the values of the attributes.
+ \item We refer to the process of \textbf{fitting} a regression function as the process in which we infer a hypothesis function $h$ from the data  that allows us to \textbf{predict} unknown values for $\mathbf{y}$ using the values of the attributes.
 
  
 \end{itemize}
@@ -116,7 +116,7 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 
  \item In those disciplines, functions are said to \textbf{learn} from data.
  
- \item Since we need observations where the value of $\mathbf{y}$ is known to learn the function, such techniques are referred to as \textbf{supervised learning} techniques.
+ \item Since we need observations where the value of $\mathbf{y}$ (the output) is known to learn the function, such techniques are referred to as \textbf{supervised learning}.
  
  \item When $\mathbf{y}$ is a categorical variable we have a \textbf{classification} problem. 
  
@@ -138,7 +138,7 @@ arge $#1$}}{\hbox{\large $#1$}}{#1}}}
 \begin{frame}{Simple Linear Regression}
 \scriptsize{
 \begin{itemize}
- \item In simple linear regression, we have a single independent variable $x$ to model the dependent variable $\mathbf{y}$.
+ \item In simple linear regression, we have a single independent variable $\mathbf{x}$ to model the dependent variable $\mathbf{y}$.
 
  \item The following linear relationship between the variables is assumed:
 
@@ -186,7 +186,7 @@ h(x)=\beta_{0}+\beta_{1}x
 \scriptsize{
 \begin{itemize}
 
- \item The ordinary least squares method is used to estimate  $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ by minimizing the sum of squared errors (SSE) of the observed data.
+ \item The ordinary least squares method allows us to estimate  $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ by minimizing the sum of squared errors (SSE) of the observed data.
 
  \item Suppose we have $n$ observations of $\mathbf{y}$ and $\mathbf{x}$, we compute the sum of squared errors (SSE) as follows:
 
@@ -244,20 +244,20 @@ SSE = \sum_{i=1}^{n} (y_i-h(x_i))^2 =  \sum_{i=1}^{n} (y_i-\beta_{0}-\beta_{1}x_
 \begin{frame}{Coefficient of Determination $R^2$}
 \scriptsize{
 \begin{itemize}
- \item  Once we have fitted our linear model we must evaluate the quality of the model.
+ \item  How can we evaluate the quality of our fitted model?
  \item A very common metric is the coefficient of determination $R^2$. 
- \item  It is calculated from errors that are different than the SSE squared errors.
+ \item  It is calculated from errors that are different from SSE.
  \item The total sum of squares (SST)  is defined as the predictive error when we use the mean $\overline{y}$  to predict the response variable $y$ (it is very similar to the variance of the variable):
  \begin{displaymath}
   \text{SST} = \sum_{i}^{n}(y_i-\overline{y})^2  
  \end{displaymath}
- \item  The regression sum of squares (SSM), on the other hand, represents the amount of error in the regression model: 
+ \item  The regression sum of squares (SSM), on the other hand, indicates the variability of the model's predictions with respect to the mean:
 
  \begin{displaymath}
   \text{SSM} = \sum_{i}^{n}(\hat{y}_i-\overline{y})^2 
  \end{displaymath}
   
- \item  SSM indicates the variability of the values predicted by the model with respect to the mean. 
+ 
  
   
 \end{itemize}
@@ -350,7 +350,7 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
 \begin{frame}{Probabilistic Interpretation}
 \scriptsize{
 \begin{itemize}
- \item Considering the above assumptions, we are saying that the probability density (PDF) of the errors $\epsilon$ is defined by a normal of zero mean and constant variance:
+ \item Considering the above assumptions, we are saying that the probability density (PDF) of the errors $\epsilon$ is a Gaussian with zero mean and constant variance $\sigma^2$:
  \begin{displaymath}
   \text{PDF}(\epsilon_{i})=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{\epsilon_{i}^{2}}{2\sigma^2}\right)
  \end{displaymath}
@@ -359,7 +359,7 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
   \begin{displaymath}
   \text{PDF}(y_i|x_{i};\beta)=\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right)
  \end{displaymath}
-\item Which implies that the distribution of $\mathbf{y}$ given the values of $\mathbf{x}$ and parameterized by $\beta$ follows a normal distribution.
+\item Which implies that the distribution of $\mathbf{y}$ given the values of $\mathbf{x}$,  parameterized by $\beta$ is also normally distributed.
 
 \item Let's estimate the parameters of the model  ($\beta$) using maximum likelihood estimation.
 
@@ -406,16 +406,16 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
 
 
 
- \item Hence, maximizing $l_n(\beta)$ gives the same answer as minimizing
+ \item After ignoring the constants, we realize that maximizing $l_n(\beta)$ is equivalent to minimizing:
  
  \begin{displaymath}
 \sum_{i=1}^n(y_i - h_{\beta}(x_{i}))^{2}
  \end{displaymath}
 
- \item which is equivalent as minimizing SSE.
+ \item Which is equivalent to minimizing SSE!
  
  \item  Then, if one estimates the parameters of $\beta$ using maximum likelihood estimation one arrives at the same results as doing least squares estimation.
- \item This tells us that when we estimate the model parameters using least squares we are making the same probabilistic assumptions mentioned above.
+ \item Therefore, every time we perform least squares estimation, we are implicitly making the same probabilistic assumptions mentioned above (e.g., normality, homoscedasticity).
 
 \end{itemize}
 
@@ -430,17 +430,21 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
 \scriptsize{
 \begin{itemize}
  \item If we want to make inferences about the regression parameter estimates, then we also need an estimate of their variability. \cite{poldrack2019statistical}
- \item To compute this, we first need to compute the residual variance or error variance for the model.
- \item That is, how much variability in the dependent variable is not explained by the model. 
- \item We need to compute the mean squared error:
+ \item To compute this, we first need to compute the \textbf{mean squared error} $MS_{error}$:
  
  \begin{displaymath}
   MS_{error} = \frac{SSE}{df} = \frac{\sum_{i=1}^{n} (y_i-h(x_i))^2}{n-p}
  \end{displaymath}
 
- \item The degrees of freedom ($df$) are determined by subtracting the number of estimated parameters (2 in this case: $\beta_0$ and $\beta_1$) from the number of observations ($n$)
+ \item The degrees of freedom ($df$) are determined by subtracting the number of estimated parameters (2 in this case: $\beta_0$ and $\beta_1$) from the number of observations ($n$).
 
- \item  We can compute the standard error for the model as: $SE_{model} = \sqrt{MS_{error}}$
+ \item  We can compute the standard error for the model as:
+ 
+ \begin{displaymath}
+ SE_{model} = \sqrt{MS_{error}}
+  \end{displaymath}
+
+ 
  
 
 
@@ -593,7 +597,7 @@ male    0.6999934  0.5244527  0.02845498 1.00000000
 
 \begin{itemize}
 
-  \item In R the linear models are created with the command \verb+lm+ that receives as parameter a formula of the form \verb+y~x+ ($y=f(x)$).
+  \item In R the linear models are created with the command \verb+lm+ that receives formulas of the form \verb+y~x+ ($y=f(x)$).
 
 \begin{verbatim}
 > reg1<-lm(height~weight,d2)
@@ -791,7 +795,7 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
 
 \item Then, we multiply the parameter by the variable and add that term to the linear model.
 
-\item  In the multivariate model all the properties of the simple linear model are extended.
+\item  In the multivariate model, all the properties of the simple linear model are extended.
 
 \item The problem can be represented in a matrix form:
 \begin{displaymath}
@@ -1060,7 +1064,7 @@ Coefficients:
 \begin{itemize}
  \item We can also add categorical predictors to our model. 
  
- \item For example let's try using the sex of the Kalahari people to predict height: 
+ \item For example, let's try using the sex of the Kalahari people to predict height: 
 
 
   \begin{displaymath}

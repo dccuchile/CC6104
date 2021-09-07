@@ -65,9 +65,9 @@
 
 \item Directed graphical models (DGMs) are a family of probability distributions that admit a compact parametrization that can be naturally described using a \textbf{directed acyclic graph}.
 
-\item DGMs are also known as \textbf{Bayesian networks}.
+\item DGMs were created by Turig prize awardee Judea Pearl under the name of \textbf{Bayesian networks}.
 
-\item We won't use that term in this class because statistical inference for DGMs can be performed using frequentist or Bayesian methods \cite{wasserman2013all}.
+\item We won't use that term much in this class because statistical inference for DGMs can be performed using frequentist or Bayesian methods, which makes the name misleading \cite{wasserman2013all}.
 
 
  
@@ -76,6 +76,18 @@
 
 
 } 
+
+\end{frame}
+
+
+\begin{frame}{Judea Pearl}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.8]{pics/judea.jpg}
+	\caption{Judea Pearl, source: \url{https://www.amacad.org/person/judea-pearl}}
+	\end{figure} 
+
 
 \end{frame}
 
@@ -1179,10 +1191,10 @@ o _||_ s
 \begin{block}{Definition}
  \begin{itemize}
 
-\item An undirected path from $X$ to $Y$ is d-connecting with respect to the evidence nodes $E$ if \textbf{every} interior node $E_i$ in the path has the property that either:
+\item An undirected path from $A$ to $B$ is d-connecting with respect to the evidence nodes $E$ if \textbf{every} interior node $E_i$ in the path has the property that either:
 
 \begin{enumerate}
- \item It is a fork or a pipe and not a member of E or
+ \item It is a fork or a pipe and not a member of E.
  \item It is a collider, and either $E_i$ or one of its descendants is in E.
 \end{enumerate}
  
@@ -1220,10 +1232,11 @@ o _||_ s
 \begin{itemize}
 
 
-\item A DGM can help to predict what will happen in a particular scenario (if his family goes out, the dog goes out) 
+\item The interpretation of DAGs as carriers of independence assumptions does not necessarily imply \textbf{causation}.
 
-\item However, the interpretation of DAGs as carriers of independence assumptions does not necessarily imply \textbf{causation}.
+\item In some cases we can even reverse the order of arrows and  preserve all the encoded independence assumptions.
 
+\item From a causal point of view, such a change would completely change the causal order of things.
 
 \item \textbf{Causal inference} is a huge topic and goes beyond the scope of this course.
 
@@ -1241,6 +1254,49 @@ o _||_ s
 } 
 
 \end{frame}
+
+
+
+
+\begin{frame}{Causal Inference}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/causalMeme.jpeg}
+	\end{figure} 
+
+
+
+\end{frame}
+
+
+\begin{frame}{Causal Inference}
+\scriptsize{
+\begin{itemize}
+
+
+\item DGMs or Bayesian Networks are very fundamental in causal inference.
+
+\item Judea Pearl, the creator of them is also a foundational figure in causal inference.
+
+\item His book, ``The Book of Why'' \cite{pearl2018book} is a highly recommended introduction to the field.
+
+\end{itemize}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/bookofwhy.png}
+	\end{figure} 
+
+
+
+
+} 
+
+\end{frame}
+
 
 
 \begin{frame}{Estimation for DAGs}
@@ -1298,9 +1354,7 @@ o _||_ s
 \scriptsize{
 \begin{itemize}
 
-\item To estimate the structure of the DAG itself, we could fit every possible DAG
-using maximum likelihood and use AIC (or some other method) to choose a
-DAG. 
+\item To estimate the structure of the DAG itself, we could fit every possible DAG using maximum likelihood and use AIC (or some other method) to choose a DAG. 
 
 \item However, there are many possible DAGs so we would need much data
 for such a method to be reliable.
