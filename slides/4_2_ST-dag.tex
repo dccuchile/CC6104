@@ -1213,7 +1213,7 @@ plot(fo)
 
   \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.6]{pics/collider.png}
+	\includegraphics[scale=0.61]{pics/collider.png}
 	\end{figure} 
 
 
@@ -1237,7 +1237,7 @@ plot(fo)
 \item An undirected path from $A$ to $B$ is d-connecting with respect to the evidence nodes $E$ if \textbf{every} interior node $E_i$ in the path satisfies one of these two rules:
 
 \begin{enumerate}
- \item It is a fork or a pipe and not a member of E.
+ \item It is a chain or a fork and not a member of E.
  \item It is a collider, and either $E_i$ or one of its descendants is in E.
 \end{enumerate}
  
@@ -1278,7 +1278,7 @@ plot(fo)
 
 \item This means that once we know about a middle node, we do not need to know about anything further away.
 
-\item For example, the path from $fo$ to $hb$, $fo \rightarrow do \rightarrow hb$ forms a pipe.
+\item For example, the path from $fo$ to $hb$, $fo \rightarrow do \rightarrow hb$ forms a chain.
 
 \item We already discussed that $fo$ and $hb$ are dependent from each other, but conditionally independent given $do$.
 
@@ -1352,7 +1352,7 @@ plot(fo)
 
 \item Let's consider the path from $fo$ to $bp$, $fo \rightarrow do \leftarrow bo$.
 
-\item Here we have a collider (not a fork nor a pipe), so by rule one $fo$ and $bp$ are marginally independent.
+\item Here we have a collider (not a fork nor a chain), so by rule one $fo$ and $bp$ are marginally independent.
 
 \begin{verbatim}
 > dconnected(fo,"fo","bp",c())
@@ -1470,7 +1470,7 @@ hb _||_ lo | do
 
 \item The interpretation of DAGs as carriers of independence assumptions does not necessarily imply \textbf{causation}.
 
-\item For example, for a DAG consisting only of pipes, we could reverse the order of all the arrows while retaining all the encoded independence assumptions.
+\item For example, for a DAG consisting only of chains, we could reverse the order of all the arrows while retaining all the encoded independence assumptions.
 
 \item From a causal point of view, such a change would completely change the causal order of things.
 
