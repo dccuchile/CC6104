@@ -201,7 +201,7 @@ SSE = \sum_{i=1}^{n} (y_i-h(x_i))^2 =  \sum_{i=1}^{n} (y_i-\beta_{0}-\beta_{1}x_
  \end{equation}
 
   \begin{equation}
- \frac{\partial SSE}{ \partial \beta_1} = -2\sum_{i=1}^{n}(y_i-\beta_{0}-\beta_{1}x)x_i=0
+ \frac{\partial SSE}{ \partial \beta_1} = -2\sum_{i=1}^{n}(y_i-\beta_{0}-\beta_{1}x_i)x_i=0
  \end{equation}
 
 
@@ -429,8 +429,8 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
 \begin{frame}{Standard errors for regression models}
 \scriptsize{
 \begin{itemize}
- \item If we want to make inferences about the regression parameter estimates, then we also need an estimate of their variability. \cite{poldrack2019statistical}
- \item To compute this, we first need to compute the \textbf{mean squared error} $MS_{error}$:
+ \item If we want to make inferences about the regression parameter estimates, then we also need an estimate of their variability \cite{poldrack2019statistical}. 
+ \item To compute this, we first need to compute the \textbf{mean squared error} $MS_{error}$ of the model:
  
  \begin{displaymath}
   MS_{error} = \frac{SSE}{df} = \frac{\sum_{i=1}^{n} (y_i-h(x_i))^2}{n-p}
@@ -438,7 +438,7 @@ l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
 
  \item The degrees of freedom ($df$) are determined by subtracting the number of estimated parameters (2 in this case: $\beta_0$ and $\beta_1$) from the number of observations ($n$).
 
- \item  We can compute the standard error for the model as:
+ \item  We can then compute the standard error for the model as:
  
  \begin{displaymath}
  SE_{model} = \sqrt{MS_{error}}
