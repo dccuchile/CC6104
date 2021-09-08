@@ -324,8 +324,8 @@ the values high intelligence ($i_1$ ) and low intelligence $(i_0)$.
 \item Similarly $Val(S) = \{s_1 , s_0 \}$, which
 also represent the values high (score) and low (score), respectively.
 
-\item Thus, our joint distribution in this case has four entries. 
-\item For example, one possible joint distribution f would be:
+\item Thus, our joint probability function in this case has four entries. 
+\item For example, one possible joint probability function $f$ would be:
 
 \begin{table}
 \centering
@@ -338,9 +338,9 @@ $i^1$ & $s^1$ & 0.24
 \end{tabular} 
 \end{table}
 
-\item Notice that we would need 3 parameters to specify this joint distribution ($2^{m-1}$).
+\item Notice that we would need 3 parameters to specify this joint probability function ($2^{m-1}$).
 
-\item Alternatively, we could use the the chain rule of conditional probabilities to represent the joint distribution as follows:
+\item Alternatively, we could use the the chain rule of conditional probabilities to represent the joint probability function as follows:
 
 \begin{displaymath}
  f(i,s) = f(i)f(s|i)
@@ -383,12 +383,12 @@ $i^1$ & $s^1$ & 0.24
 \scriptsize{
 \begin{itemize}
 
-\item From a mathematical perspective, $ f(i,s) = f(i)f(s|i)$ leads to an alternative way of representing the joint distribution. 
+\item From a mathematical perspective, $ f(i,s) = f(i)f(s|i)$ leads to an alternative way of representing the joint probability function. 
 
 \item Instead of specifying the various joint entries $f(i,s)$, we would specify it in the form of $f(i)$ and $f(s|i)$. 
-\item Thus, we could represent the joint distribution using two tables.
+\item Thus, we could represent the joint probability function using two tables.
 
-\item The first one representing the marginal distribution of $I$.
+\item The first one representing the marginal probability function of $I$.
 
 
 \begin{table}
@@ -421,7 +421,7 @@ f(i^{0})=f(i^{0},s^0)+f(i^{0},s^1)=0.665+0.035=0.7
 \scriptsize{
 \begin{itemize}
 
-\item The second table represents the conditional probability distribution (CPD) of $S$ given $I$:
+\item The second table represents the conditional probability function of $S$ given $I$:
 
 \begin{table}
 \centering
@@ -439,7 +439,7 @@ $i^1$ & 0.2 & 0.8 \\
 f(s^{0}|i^0)=f(s^{0},i^0)/f(i^0)= 0.665/0.7=0.95
 \end{displaymath}
 
-\item The CPD $f(s| i)$ represents the probability that the student will succeed on his SATs in the two possible cases:
+\item The conditional probability function $f(s| i)$ represents the probability that the student will succeed on his SATs in the two possible cases:
 \begin{enumerate}
 \scriptsize{
 \item The case where the student's intelligence is low.
@@ -460,7 +460,7 @@ f(s^{0}|i^0)=f(s^{0},i^0)/f(i^0)= 0.665/0.7=0.95
 \scriptsize{
 \begin{itemize}
 
-\item The CPD asserts that a student of low intelligence is extremely unlikely to get a high SAT score ($f(s_1 | i_0 ) = 0.05$).
+\item The conditional probability function asserts that a student of low intelligence is extremely unlikely to get a high SAT score ($f(s_1 | i_0 ) = 0.05$).
 \item On the other hand, a student of high intelligence is likely, but far from
 certain, to get a high SAT score ($f(s_1 | i_1 ) = 0.8$).
 
@@ -516,14 +516,14 @@ than the explicit representation of the joint, it is not more compact.
 \begin{itemize}
 
 \item Let's assume now that the company also has access to the student's grade $G$ in some course. 
-\item In this case, our probability space is the joint distribution over the
+\item In this case, our probability space is the joint probability function over the
 three relevant random variables $I$, $S$, and $G$. 
 
 \item We will assume that $I$ and $S$ are as before, and that $G$ takes on three values $g^1, g^2, g^3$, representing the grades A, B, and C, respectively.
 
-\item So, the joint distribution has twelve entries.
+\item So, the joint probability function  has twelve entries.
 
-\item We can see that for any reasonable joint distribution function $f$, there are no independencies that hold.
+\item We can see that for any reasonable joint probability function  $f$, there are no independencies that hold.
 \item The student's intelligence is clearly correlated both with SAT score and  grade.
 
 
@@ -543,17 +543,16 @@ three relevant random variables $I$, $S$, and $G$.
 \item The SAT score and grade are also not independent.
 \item A high SAT score increases the chances of getting a high grade.
 
-\item Thus, we may assume that, for our particular distribution $f$,
+\item Thus, we may assume that, for our particular probability function  $f$,
 $f(g^1|s^1) > f(g^1|s^0)$.
 
-\item However, it is quite plausible that our distribution f in this case satisfies a conditional independence property.
+\item However, it is quite plausible that our probability function $f$ in this case satisfies a conditional independence property.
 
-\item If we know that the student has high intelligence, a high grade on the
-SAT no longer gives us information about the student's performance in the class.
+\item If we know that the student has high intelligence, a high grade on the SAT no longer gives us information about the student's performance in the class.
 
 \item More formally: $f(g|s,i)=f(g|i)$ or $G \perp S|I$
 
-\item So the join distribution can be reduced from
+\item So the joint probability function  can be reduced from
 
 \begin{displaymath}
  f(i,s,g)=f(i)f(s|i)f(g|i,s)
@@ -578,7 +577,7 @@ to
 \scriptsize{
 \begin{itemize}
 
-\item Now our joint distribution is specified by $f(i)$, $f(s|i)$, and $f(g|i)$.
+\item Now our joint probability function  is specified by $f(i)$, $f(s|i)$, and $f(g|i)$.
 
 \item While  $f(i)$, $f(s|i)$ might be the same as before, and  $f(g|i)$ might be:
 
@@ -593,9 +592,9 @@ $i^1$ & 0.74 & 0.17 & 0.09 \\
 \end{tabular} 
 \end{table}
 
-\item Now we can calculate the joint probability of any combinatio of imputs.
+\item Now we can calculate the joint probability of any combination of inputs.
 
-\item For example 
+\item For example: 
 
  \begin{align}
   f(i^1,s^1,g^2) & = f(i^1)f(s^1|i^1)f(g^2|i^1) \\
@@ -641,12 +640,11 @@ $i^1$ & 0.74 & 0.17 & 0.09 \\
 \scriptsize{
 \begin{itemize}
 	\item Each of the Bernoullis requires one independent parameter, and each three-valued categorical requires two independent parameters, for a total of seven. 
-	\item By contrast, our joint distribution has twelve entries, so that eleven independent
-parameters are required to specify an arbitrary joint distribution over these three variables.
+	\item By contrast, our joint probability function  has twelve entries, so that eleven independent parameters are required to specify an arbitrary joint probability function over these three variables.
 \item It is important to note another advantage of this way of representing the joint: modularity.
-\item When we added the new variable $G$, the joint distribution changed entirely. 
+\item When we added the new variable $G$, the joint probability function changed entirely. 
 \item Had we used the explicit representation of the joint, we would have had to write down twelve new numbers. 
-\item In the factored representation, we could reuse our local probability models for the variables $I$ and $S$, and specify only the probability model for $G$, the CPD $f(G | I)$. 
+\item In the factored representation, we could reuse our local probability models for the variables $I$ and $S$, and specify only the probability model for $G$, the conditional probability function  $f(G | I)$. 
 \item This property will turn out to be invaluable in modeling real-world systems.
 	
 
@@ -662,14 +660,15 @@ parameters are required to specify an arbitrary joint distribution over these th
 \scriptsize{
 \begin{itemize}
 
-\item Now that we understand how the chain rule of probability and conditional independence assumptions enable us to obtain a compact representation of a joint distribution, we are in a position to introduce DAGs more formally.
+\item We just learned how the chain rule of probability and conditional independence assumptions enable us to obtain a compact representation of a joint probability function.
+
+\item Now we are in a position to introduce DAGs.
 
 \item A directed graph consists of a set of nodes with arrows between some nodes.
 
 
 
-\item More formally, a directed graph G consists of a set of vertices V and an edge set E of ordered pairs of
-vertices.
+\item More formally, a directed graph G consists of a set of vertices V and an edge set E of ordered pairs of vertices.
 
 
 \item If $(Y, X) \in E$  then there is an arrow pointing from Y to X. 
@@ -840,10 +839,10 @@ f(o,s,h,c) = f(o)f(s)f(h|o,s)f(c|s).
 
 
 
-\item If no conditional independence assumptions we made, the joint probability function $f$ would the following:
+\item If no conditional independence assumptions were made, the joint probability function $f$ would the following:
 
 \begin{displaymath}
- f(o)f(s|o)f(h|o,s)f(c|o,s,h)
+f(o,s,h,c) = f(o)f(s|o)f(h|o,s)f(c|o,s,h)
 \end{displaymath}
 
 \item That means that the graph above encodes the following independence asssumptions:
@@ -881,7 +880,7 @@ f(o,s,h,c) = f(o)f(s)f(h|o,s)f(c|s).
 
 \item Warning: D-separation is hard to understand.
 
-\item Before trying to understand it we are going to introduce an R library for playing with DAGS: dagitty.
+\item Before trying to understand it we are going to introduce an R library for playing with DAGs: \textbf{Dagitty}.
 
 \end{itemize}
 
@@ -998,7 +997,7 @@ list( x=c(o=0,h=1,s=2,c=3) , y=c(o=0,h=1,s=0,c=1) )
 [1] "s -> c" 
 \end{verbatim}
 
-\item Finally we can obtainall the conditional independencies encoded by the DAG:
+\item Finally, we can obtain all the conditional independencies encoded by the DAG:
 
 \begin{verbatim}
 > impliedConditionalIndependencies(over)
@@ -1020,6 +1019,8 @@ o _||_ s
 \begin{itemize}
 \item We are going to use the ``family out'' example proposed by Eugene Charniak in  \cite{charniak1991bayesian} to understand d-separation.
 
+\item The situation is as follows:
+
 \item When Eugene goes home at night, he wants to know if his family is home before trying the doors. 
 
 \item Often when his wife leaves the house, she turns on an outdoor light. 
@@ -1032,7 +1033,7 @@ o _||_ s
 
 \item The same is true if the dog has bowel troubles. 
 
-\item Finally, if the dog is in the backyard, Eugene's will probably hear her barking 
+\item Finally, if the dog is in the backyard, Eugene's will probably hear her barking.
 
  
 \end{itemize}
@@ -1061,6 +1062,13 @@ o _||_ s
  
 \item The numbers show the corresponding  position of each vertex in the topological sort. 
  
+\item So, the joint probability function would be as follows:
+
+\begin{displaymath}
+ f(fo,bp,lo,do,hb)=f(fo)f(bp)f(lo|fo)f(do|fo,bp)f(hb|do)
+\end{displaymath}
+
+
 
 \end{itemize}
 
@@ -1276,7 +1284,7 @@ plot(fo)
 
 \item Now we can use the first rule of d-separation to answer these questions about dependency.
 
-\item Let's use the commands \textbf{dconnected} and \textbf{dseparated} from daggify.
+\item Let's use the commands \textbf{dconnected} and \textbf{dseparated} from daggity.
 
 \begin{verbatim}
 > dconnected(fo,"fo","hb",c()) 
@@ -1340,7 +1348,7 @@ plot(fo)
 \scriptsize{
 \begin{itemize}
 
-\item Rule 1 also tell us that there can be no colliders interior nodes in the path.
+\item Rule 1 also tell us that there can be no colliding interior nodes in the path.
 
 \item Let's consider the path from $fo$ to $bp$, $fo \rightarrow do \leftarrow bo$.
 
@@ -1402,7 +1410,7 @@ plot(fo)
 \item We would have a similar situation if we did not know that the
 dog was out but heard the barking.
 
-\item Since $hb$ is a descendant of the collider node $do$, $fo$ and $bp$ are d-connected with respect to $hb$
+\item Since $hb$ is a descendant of the collider node $do$, $fo$ and $bp$ are d-connected with respect to $hb$:
 
 \begin{verbatim}
 > dconnected(fo,"fo","bp",c("hb"))
@@ -1429,7 +1437,7 @@ dog was out but heard the barking.
 
 \item We have finished the explanation of d-separation.
 
-\item This is definitely the hardest part in understanding DAGs.
+\item This is undoubtedly the most difficult part of DAGs to understand.
 
 \item Exercise: explain all the conditional independencies of the family out DAG using the rules of d-separation.
 
@@ -1462,7 +1470,7 @@ hb _||_ lo | do
 
 \item The interpretation of DAGs as carriers of independence assumptions does not necessarily imply \textbf{causation}.
 
-\item In some cases we can even reverse the order of arrows and  preserve all the encoded independence assumptions.
+\item For example, for a DAG consisting only of pipes, we could reverse the order of all the arrows while retaining all the encoded independence assumptions.
 
 \item From a causal point of view, such a change would completely change the causal order of things.
 
@@ -1606,8 +1614,17 @@ for such a method to be reliable.
 \begin{frame}{Plate Notation}
 \scriptsize{
 \begin{itemize}
-\item sdsad
+\item DGM are widely used to represent probabilistic machine learning models.
 
+\item For example: Naive Bayes, Latent Dirichlet Allocation, Hidden Markov Models.
+
+\item However, when the number of variables is large, the standard DAG notation is not useful.
+
+\item Plate notation is a method of representing variables that repeat in a DAG.
+
+\item A plate or rectangle is used to group variables into a subgraph that repeat together.
+
+\item A number is drawn on the plate to represent the number of repetitions of the subgraph in the plate.
  
 \end{itemize}
 
@@ -1617,11 +1634,54 @@ for such a method to be reliable.
 
 \end{frame}
 
+\begin{frame}{Plate Notation}
+\scriptsize{
 
-\begin{frame}{Applications}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{pics/plate.png}
+	\end{figure} 
+
+
+\begin{itemize}
+\item Left: variables $X_i$ are conditionally independent given $Y$. 
+\item Right: Same model, using plate notation. 
+\item This represents the same model as the one on the left, except the repeated $X_i$ nodes are inside a box, known as a plate.
+\item The number in the lower right hand corner, $D$ , specifies the number of repetitions of the $X_i$ node. 
+\item  Shaded nodes indicate observed data. 
+\item Open nodes are latent/hidden (e.g., a parameter in Bayesian inference).
+
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{A real-world application}
 \scriptsize{
 \begin{itemize}
-\item sdsad
+\item  The Netherlands Forensic Institute uses the  \textbf{Bonaparte DNA-matching software}  every day, mostly for missing-persons cases, criminal investigations, and immigration cases \cite{pearl2018book}. 
+
+
+\item Applicants for asylum must prove that they have fifteen family members in the Netherlands.
+
+ \item The idea behind Bonaparte is to make it possible to use DNA information from more distant relatives or from multiple relatives.
+
+  
+\item Bonaparte does this by converting the pedigree of the family  into a DAG.
+
+\item The central problem is that the genotype of an individual, detected in a DNA test, contains a contribution from both the father and the mother, but we cannot tell which part is which.
+
+
+\item Thus these two contributions (called ``alleles'') have to be treated as hidden, unmeasurable variables in the Bayesian network.
+
+
+
 
  
 \end{itemize}
@@ -1631,13 +1691,97 @@ for such a method to be reliable.
 } 
 
 \end{frame}
+
+
+\begin{frame}{A real-world application}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/bonaparte.png}
+	\caption{The figure shows  how Bonaparte converts one small piece of a pedigree to a (causal) DAG \cite{pearl2018book}}
+	\end{figure} 
+
+
+\end{frame}
+
+
+
+\begin{frame}{A real-world application}
+\scriptsize{
+\begin{itemize}
+
+\item The system did it most impressive work after a massive disaster, such as the crash of Malaysia Airlines Flight 17.
+
+\item Few, if any, of the victims of the plane crash could be identified by comparing DNA from the wreckage to DNA in a central database. 
+
+\item The next best thing to do was to ask family members to provide DNA swabs and look for partial matches to the DNA of the victims.
+
+\item Part of Bonaparte's job is to infer the probability of the cause from the evidence. 
+
+\item Cause example: the victim's gene for blue eyes came from his father.
+
+\item Evidence examples: he has a blue-eyed gene and a black-eyed gene, his cousins on the father's side have blue eyes, but his cousins on the mother’s side have black eyes. 
+ 
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
+
+\begin{frame}{A real-world application}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.45]{pics/malasyia.png}
+	\caption{Actual pedigree of a family with multiple victims in the Malaysia Airlines crash \cite{pearl2018book}}
+	\end{figure} 
+
+\end{frame}
+
+\begin{frame}{A real-world application}
+\scriptsize{
+\begin{itemize}
+
+\item Once the DAG is set up, the final step is to input the victim's
+DNA and compute the likelihood that it fits into a specific slot in the pedigree.
+
+\item This is done by belief propagation with Bayes’s rule.
+
+\item The DAG begins with a particular degree of belief in each possible statement about the nodes in the network, such as ``this person's paternal allele for eye color is blue.'' 
+\item As new evidence is entered into the network—at any place in the network—the degrees of belief at every node, up and down the network, will change in a cascading fashion. 
+\item Thus, for example, once we find out that a given sample is
+a likely match for one person in the pedigree, we can propagate that
+information up and down the network. 
+\item In this way, Bonaparte not only learns from the living family members' DNA but also from the identifications it has already made.
+\end{itemize}
+
+
+
+} 
+
+\end{frame}
+
+
 
 
 \begin{frame}{Conclusions}
 \scriptsize{
 
 \begin{itemize}
-\item Blabla
+\item This class introduced Directed Graphical Models (aka Bayesian Networks), a probabilistic framework for encoding conditional independence relation using graphs.
+
+\item We have introduced the three main mathematical ideas behind them: conditional independence, the chain rule of probability, and DAGs.
+
+\item D-separation is a rule for establishing whether two variables are conditionally independent given another in a DAG.
+
+\item DAGs play an important role in both machine learning and causal inference.
+
+
+
 \end{itemize}
 
 
