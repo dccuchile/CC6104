@@ -747,6 +747,16 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
 [1] 0.5696444
  \end{verbatim}
 
+ \item Or manually calculate the standard error for the model $SE_{\text{model}}$:
+ 
+ \begin{verbatim}
+> df <- dim(d2)[1]-2
+> SE <- sqrt(SSE/df)
+> SE
+[1] 5.086336 
+ \end{verbatim}
+
+ 
  
  \end{itemize}
  

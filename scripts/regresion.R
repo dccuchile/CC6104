@@ -32,6 +32,10 @@ sum.reg1$r.squared
 # Para ver los valores ajustados
 reg1$fitted.values
 
+
+
+
+
 # Puedo ver que la correlación al cuadrado de mis valores ajustados y los reales son los mismo que
 # el coeficiente de determinacion
 SSE<-sum(reg1$residuals^2)
@@ -42,9 +46,10 @@ SSM/SST
 1-var(reg1$residuals)/var(d2$height)
 cor(d2$height,reg1$fitted.values)^2
 
-
-
-
+# standard error
+df <- dim(d2)[1]-2
+SE <- sqrt(SSE/df)
+SE
 
 
 mean(reg1$residuals)
