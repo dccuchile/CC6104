@@ -1207,13 +1207,13 @@ plot(fo)
 \scriptsize{
 \begin{itemize}
 
-\item We need to keep in mind that there are only four types of variable relations that combine to form all possible undirected paths in a DAG \cite{mcelreath2020statistical}.
+\item We need to keep in mind that there are only three types of variable relations that combine to form all possible undirected paths in a DAG \cite{mcelreath2020statistical}.
 
-\item For a random variable $Z$ and its two immediate neighbors in the path $X$ and $Y$, the 4 possible relations are:
+\item For a random variable $Z$ and its two immediate neighbors in the path $X$ and $Y$, the 3 possible relations are:
 
   \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.61]{pics/collider.png}
+	\includegraphics[scale=0.65]{pics/collider.png}
 	\end{figure} 
 
 
@@ -1234,7 +1234,7 @@ plot(fo)
 \begin{block}{Definition}
  \begin{itemize}
 
-\item An undirected path from $A$ to $B$ is d-connecting with respect to the evidence nodes $E$ if \textbf{every} interior node $E_i$ in the path satisfies one of these two rules:
+\item An undirected path from $A$ to $B$ is d-connecting with respect to the evidence nodes $E$ if \textbf{every} interior node $Z_i$ in the path satisfies one of these two rules:
 
 \begin{enumerate}
  \item It is a chain or a fork and not a member of E.
