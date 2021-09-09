@@ -387,7 +387,7 @@ Whenever we fit a linear model we are implicitly making certain assumptions abou
    \begin{align}
 l_n(\beta)  & =  \log  \mathcal{L}(\beta) \\
  & = \log \prod_{i=1}^{n}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right) \\
-  & = \sum_{i=1}^n  \log \prod_{i=1}^{n}\frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right) \\
+  & = \sum_{i=1}^n  \log \frac{1}{\sqrt{2\pi} \sigma} \exp \left(- \frac{(y_i - h_{\beta}(x_{i}) )^{2}}{2\sigma^2}\right) \\
     & = n \log\left(\frac{1}{\sqrt{2\pi} \sigma}\right) - \frac{1}{\sigma^2}\times \frac{1}{2}\sum_{i=1}^n(y_i - h_{\beta}(x_{i}) )^{2}  
  \end{align}
  
