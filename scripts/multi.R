@@ -45,3 +45,26 @@ data(reedfrogs)
 d <- reedfrogs
 str(d)
 
+d$tank <- 1:nrow(d)
+dat <- list(
+  S = d$surv,
+  N = d$density,
+  tank = d$tank )
+# approximate posterior
+m13.1 <- ulam(
+  alist(
+    S ~ dbinom( N , p ) ,
+    logit(p) <- a[tank] ,
+    a[tank] ~ dnorm( 0 , 1.5 )
+  ), data=dat , chains=4 , log_lik=TRUE )
+
+
+m13.2 <- ulam(
+  alist(
+    S ~ dbinom( N , p ) ,
+    logit(p) <- a[tank] ,
+    a[tank] ~ dnorm( a_bar , sigma ) ,
+    a_bar ~ dnorm( 0 , 1.5 ) ,
+    sigma ~ dexp( 1 )
+  ), data=dat , chains=4 , log_lik=TRUE )
+

@@ -40,7 +40,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 ### Part IV: Other Topics
 1. [Model Evaluation and Information Theory](slides/4_1_ST-eval.pdf) | ([tex source file](slides/4_1_ST-eval.tex)) (TODO: Chapter 7 of Statistical Rethinking)
 1. [Directed Graphical Models](slides/4_2_ST-dag.pdf) | ([tex source file](slides/4_2_ST-dag.tex)) 
-1. [Multilevel Models](slides/4_3_ST-multi.pdf) | ([tex source file](slides/4_3_ST-multi.tex))  (TODO: Chapter 13 of Statistical Rethinking)
+1. [Generalized and Multilevel Linear Models](slides/4_3_ST-multi.pdf) | ([tex source file](slides/4_3_ST-multi.tex))  (TODO: Chapter 13 of Statistical Rethinking)
 
 
 ## Software
