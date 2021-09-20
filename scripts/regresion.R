@@ -82,6 +82,14 @@ d$weight_s <-( d$weight - mean(d$weight) )/sd(d$weight)
 reg4 <- lm(height~weight_s+I(weight_s^2),d) 
 reg4
 
+
+weight.seq <- seq( from=-2.2 , to=2 , length.out=30 )
+new.weights<-data.frame("weight_s"=weight.seq,
+                        "I(weight_s^2)"=weight.seq^2)
+h.pred <- predict.lm(object=reg4,newdata=new.weights)
+plot( height ~ weight_s , d, col="red"  )
+lines( weight.seq , h.pred )
+
 # Binary attributes
 d$male<-as.factor(d$male)
 reg5<-lm(height~male,d)

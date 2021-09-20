@@ -1038,14 +1038,34 @@ where $n$ is the number of examples.
  y_i=\beta_{0}+\beta_{1}x_i + \beta_{2}x_i^2 + \epsilon_i \quad \forall i
 \end{displaymath}
  
+ \item The additional term uses the square of $x_i$ to construct a parabola, rather than a perfectly straight line. 
+ 
+ \item The new parameter $\beta_2$ measures the curvature of the relationship.
+ 
+ 
  \item Let's fit a polynomial regression for the height variable using a parabolic model for weight
  
- 
- \item Because the square of a large number can be truly massive we are going to standardize the weight by substracting the mean and dividing by the standard deviation.
+  \item Because the square of a large number can be truly massive we are going to standardize the weight by substracting the mean and dividing by the standard deviation.
  
  \begin{verbatim}
   d$weight_s <-(d$weight-mean(d$weight))/sd(d$weight)
  \end{verbatim}
+
+ 
+ 
+\end{itemize}
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Polynomial Regression}
+\scriptsize{ 
+\begin{itemize}
+
+ 
+
 
 \item Then we fit the model as follows:
 \begin{verbatim}
@@ -1060,13 +1080,37 @@ Coefficients:
       146.660         21.415         -8.412
 \end{verbatim}
 
- 
+ \item We can also visualize the fitted parabola:
+
+\begin{verbatim}
+weight.seq <- seq( from=-2.2 , to=2 , length.out=30 )
+new.weights<-data.frame("weight_s"=weight.seq,
+                        "I(weight_s^2)"=weight.seq^2)
+h.pred <- predict.lm(object=reg4,newdata=new.weights)
+plot( height ~ weight_s , d, col="red"  )
+lines( weight.seq , h.pred )
+\end{verbatim}
  
 \end{itemize}
 
 
 }
 \end{frame}
+
+\begin{frame}[fragile]{Polynomial Regression}
+\scriptsize{ 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.55]{pics/parabola.pdf}
+\end{figure}
+
+
+
+
+}
+\end{frame}
+
 
 
 \begin{frame}[fragile]{Categorical Predictors}
@@ -1220,7 +1264,7 @@ Coefficients:
  
 \item In this model we use the same slope $\beta_1$ relating height to weight for both groups.
 
-\item The coefficient $\beta_2$ indicates an expected weight difference between males and females once the ``weight'' is known.
+\item The coefficient $\beta_2$ (\verb+male1+) indicates an expected weight difference between males and females once the ``weight'' is known.
  
 \end{itemize}
 
