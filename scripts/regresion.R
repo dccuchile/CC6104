@@ -61,7 +61,7 @@ predict.lm(object=reg1,newdata=new.weights)
 # this is equivalent to:
 reg1.coef[1]+reg1.coef[2]*new.weights[1:2,]
 
-# Regresión Mutilple
+# Mutilple regresion
 
 
 

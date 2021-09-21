@@ -798,7 +798,7 @@ F-statistic: 463.3 on 1 and 350 DF,  p-value: < 2.2e-16
  \item In many cases more variables can better explain the variability of the response variable $\mathbf{y}$ than a single one.
  \item A multivariate linear model is defined as follows:
  \begin{displaymath}
- y_i=\beta_{0}+\beta_{1}x_{i,1}+ +\beta_{2}x_{i,2} + \cdots + \beta_{m}x_{i,m} +  \epsilon_i \quad \forall i \in \{1,n\}
+ y_i=\beta_{0}+\beta_{1}x_{i,1}+\beta_{2}x_{i,2} + \cdots + \beta_{m}x_{i,m} +  \epsilon_i \quad \forall i \in \{1,n\}
 \end{displaymath}
 
 \item In essence we are adding a parameter for each independent variable.
@@ -1264,7 +1264,7 @@ Coefficients:
  
 \item In this model we use the same slope $\beta_1$ relating height to weight for both groups.
 
-\item The coefficient $\beta_2$ (\verb+male1+) indicates an expected weight difference between males and females once the ``weight'' is known.
+\item The coefficient $\beta_2$ (\verb+male1+) indicates an expected height difference between males and females once the ``weight'' is known.
  
 \end{itemize}
 
@@ -1286,6 +1286,37 @@ Coefficients:
   \text{height}_{int}(\text{weight,male})=\beta_0^{(i)}+\beta_1^{(i)}*\text{weight}+\beta_2^{(i)}*\text{male}+\beta_3^{(i)}*\text{weight}*\text{male}
  \end{displaymath}
 
+\item To understand why the interaction considers a different slope for each category we must study the above equation for the cases (male=1) and (male=0).
+
+\item If male=1, the expression takes the following form:
+
+  \begin{displaymath}
+  \beta_0^{(i)}+\beta_1^{(i)}*\text{weight}+\beta_2^{(i)}+\beta_3^{(i)}*\text{weight} = (\beta_0^{(i)} + \beta_2^{(i)}) + (\beta_1^{(i)}+\beta_3^{(i)})*\text{weight} 
+ \end{displaymath}
+ 
+which is essentially a linear model with an intercept of $(\beta_0^{(i)} + \beta_2^{(i)})$ and a slope of $(\beta_1^{(i)}+\beta_3^{(i)})$.
+
+
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Interactions}
+\scriptsize{ 
+\begin{itemize}
+
+\item If male=0:
+
+  \begin{displaymath}
+\beta_0^{(i)}+\beta_1^{(i)}*\text{weight}
+ \end{displaymath}
+ 
+this is another linear model with an intercept of $\beta_0^{(i)}$ and a slope of $\beta_1^{(i)}$. 
+ 
 \item In R, interactions are denoted by using the * or : symbol in the formula.
 \begin{verbatim}
 > reg7<-lm(height~weight+male+weight:male,d)
