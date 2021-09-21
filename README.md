@@ -29,7 +29,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 
 1. [Introduction to Statistical Inference](slides/2_1_ST-inference.pdf) | ([tex source file](slides/2_1_ST-inference.tex)), [video 1](https://youtu.be/A0BAhO9_RSI), [video 2](https://youtu.be/6Io555e2stM),  [video 3](https://youtu.be/2-Q2f6zmTns), [video 4](https://youtu.be/Hp2A5EJoXbk), [video 5](https://youtu.be/M0Ag4bww7Q0), [video 6](https://youtu.be/K7khgecup3I), [video 7](https://youtu.be/uZ126Lh3L-k), [video 8]( https://youtu.be/kHSPx99nJ7g)
 1. [Design of Experiments & Hypothesis Testing](slides/2_2_ST-hypothesis.pdf) | ([tex source file](slides/2_2_ST-hypothesis.tex)),  [video 1](https://youtu.be/3MueyHnNNig), [video 2](https://youtu.be/JuyIrya23E0),  [video 3](https://youtu.be/OXTyG6DIvK4), [video 4](https://youtu.be/95QeSwrNoLI), [video 5](https://youtu.be/ZCr3WCdc-54), [video 6](https://youtu.be/T6ZR0KoKhBQ)
-1. [Linear Regression](slides/2_3_ST-regression.pdf) | ([tex source file](slides/2_3_ST-regression.tex))
+1. [Linear Regression](slides/2_3_ST-regression.pdf) | ([tex source file](slides/2_3_ST-regression.tex)),  [video 1](https://youtu.be/ZLZXJPKH6tU), [video 2](https://youtu.be/mW7bHkJBcB4),  [video 3](https://youtu.be/SHa5Neb7bfg), [video 4](https://youtu.be/rCD_jofxecY), [video 5](https://youtu.be/ir4P_f3s44g), [video 6](https://youtu.be/wfNhJWHPOi8)
 
 ### Part III: Bayesian Inference 
 1. [Introduction to Bayesian Inference](slides/3_1_ST-bayesian.pdf) | ([tex source file](slides/3_1_ST-bayesian.tex))
