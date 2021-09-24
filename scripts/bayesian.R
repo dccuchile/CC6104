@@ -12,7 +12,8 @@ factory_prior<-c(0,3/6,2/6,1/6,0)
 posterior2<-factory_prior*likelihood
 posterior2<-posterior2/sum(posterior2)
 
-df<-data.frame(theta,likelihood,flat_prior,posterior1,factory_prior,posterior2)
+df<-data.frame(theta,likelihood,flat_prior,
+               posterior1,factory_prior,posterior2)
 
 library(ggplot2)
 library(reshape2)
