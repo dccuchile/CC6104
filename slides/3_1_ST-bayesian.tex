@@ -754,7 +754,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 \item It is not always possible to compute the posterior analytically unless we constrain our prior to special forms that are easy to do mathematics with.
 
-\item But bear in mind that in many of the interesting models in contemporary science we will need to approximate the posterior using computational techniques such as Markov Chain Montecarlo. 
+\item But bear in mind that in many of the interesting models in contemporary science we will need to approximate the posterior using computational techniques such as Markov Chain Monte Carlo. 
 
 \item This example is one the cases where the posterior can be found analytically as shown next.
 
@@ -783,10 +783,7 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \text{Beta}(\alpha,\beta)=\frac{p^{\alpha-1}(1-p)^{\beta-1}}{\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}}
 \end{displaymath}
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.4]{pics/Beta(a,b).png}
-\end{figure}
+
 
 \end{itemize}
 
@@ -796,6 +793,21 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 
 
 
+\begin{frame}{The Beta Distribution \cite{kruschke2014doing}}
+\scriptsize{
+
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.24]{pics/Beta(a,b).png}
+\end{figure}
+
+
+} 
+
+\end{frame}
+
 
 \begin{frame}{Calculating the Posterior}
 \scriptsize{
@@ -803,13 +815,17 @@ Now, we can assign a \textbf{likelihood} function  to our observed variables giv
 \begin{itemize}
 \item For any positive integer (such as W and L) the gamma function $\Gamma(n) = (n-1)!$
 
-\item Hence, \begin{displaymath}
+\item Hence, if que assume W and L as integers, the density can be rewritten as follows:
+
+\begin{displaymath}
 \text{Beta}(W+1 , L+1) = \frac{p^W(1-p)^L}{\frac{\Gamma(W+1)\Gamma(L+1)}{\Gamma(W+1 + L+1)}} = \frac{p^W(1-p)^L}{\frac{W!L!}{(W+L)!}} = \frac{(W+L)!}{W!L!}p^W(1-p)^L
 \end{displaymath}
 
 \item This surprisingly looks identical to the binomial distribution.
 
-\item This is because both distributions are very similar. The binomial distribution models the number of successes (W) and the beta distribution models the probability $p$ of success. 
+\item This is because both distributions are very similar. 
+
+\item The binomial distribution models the number of successes (W) and the beta distribution models the probability $p$ of success. 
 
 
 \item Let's build our posterior from the likelihood and the prior:
@@ -837,18 +853,16 @@ f(p|W,L) = \frac{f(W,L|p)*f(p)}{f(W,L)} = \frac{f(W,L|p)*f(p)}{\int_0^1f(W,L|p)*
 f(p|W,L) = \frac{f(W,L|p)}{\int_0^1f(W,L|p)dp} 
 \end{displaymath}
 
-\item The integral of the denominator is equal to 1 (essentially we are integrating a Beta distribution over its complete space of p):
+\item The integral of the denominator is equal to 1.
+
+
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.25]{pics/wolfram.png}
 \end{figure}
 
-\item So, we get 
-
-\begin{displaymath}
-f(p|W,L) =  \frac{(W+L)!}{W!L!}p^W(1-p)^L = \text{Beta}(W+1 , L+1) 
-\end{displaymath}
+\item Essentially we are integrating a Beta density function over its whole parameter space $p$, so it must be 1 by definition of PDFs.
 
 
 \end{itemize}
@@ -863,8 +877,14 @@ f(p|W,L) =  \frac{(W+L)!}{W!L!}p^W(1-p)^L = \text{Beta}(W+1 , L+1)
 
 \begin{itemize}
 
+\item Replacing the denominator by one we get:
 
-\item So, in our globe tossing model $(W=6,L=3)$ we can calculate the posterior distribution analytically 
+\begin{displaymath}
+f(p|W,L) =  \frac{(W+L)!}{W!L!}p^W(1-p)^L = \text{Beta}(W+1 , L+1) 
+\end{displaymath}
+
+
+\item That means that in our globe tossing model $(W=6,L=3)$, we can calculate the posterior distribution analytically: 
 
 \begin{displaymath}
 f(p|W=6,L=3) =  \text{Beta}(7,4) 
@@ -873,7 +893,7 @@ f(p|W=6,L=3) =  \text{Beta}(7,4)
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.55]{pics/beta(7,4).pdf}
+	\includegraphics[scale=0.5]{pics/beta(7,4).pdf}
 \end{figure}
 
 
@@ -917,7 +937,7 @@ f(p|W=6,L=3) =  \text{Beta}(7,4)
 \scriptsize{
 
 \begin{itemize}
-\item The Beta distribution is conjugate distribution to binomial distribution, which means that the posterior distribution in the same probability distribution family as the prior.
+\item The Beta distribution is conjugate to the binomial distribution, which means that the posterior distribution is in the same probability distribution family as the prior when the likelihood is binomial.
 
 \item In simple words there are some families of conjugate distributions that can be used to calculate posterior distributions analytically.
 
@@ -1102,7 +1122,7 @@ peak.
 \begin{scriptsize}
 
 \begin{itemize}
- \item Laplace approximation is implemented in function \textbf{quap} from the \textbf{rethinking} R package.
+ \item The Laplace approximation is implemented in the \textbf{quap} function of the \textbf{rethinking} R package.
  
  \item This package  will be used extensively in the remainder of this course.
  
@@ -1118,7 +1138,7 @@ globe.qa <- quap(
   ) ,
   data=list(W=6,L=3) )
 
-  # display summary of quadratic approximation
+  # display summary of Laplace approximation
 > precis( globe.qa )
   mean   sd 5.5% 94.5%
 p 0.67 0.16 0.42  0.92
@@ -1195,8 +1215,7 @@ Assuming the posterior is Gaussian, it is maximized at 0.67, and its standard de
 \item Instead of attempting to compute or approximate the posterior distribution directly, MCMC techniques merely draw samples from the posterior.
 \item You end up with a collection of parameter values, and the frequencies of these values correspond to the posterior plausibilities.
 \item You can then build a picture of the posterior from the histogram of these samples.
-We nearly always work directly with these samples, rather than first constructing some
-mathematical estimate from them.
+\item We nearly always work directly with these samples, rather than first constructing some mathematical estimate from them.
 \item It is fair to say that MCMC is largely responsible for the insurgence of Bayesian data analysis that began in the 1990s. 
 \item While MCMC is older than the 1990s, affordable computer power is not, so we must also thank the engineers.
 \item Probabilistic programming: environments for designing Bayesian models and performing inference using numerical techniques (e.g., STAN, Pyro).
