@@ -27,23 +27,23 @@ ggplot(d, aes(theta,Prob)) +
   stat_smooth() +
   facet_wrap(~variable)
 
-
-library(rethinking)
-library(rstan)
-
-
-globe.qa <- quap(
-  alist(
-    W ~ dbinom( W+L ,p) , # binomial likelihood
-    p ~ dunif(0,1)   # uniform prior
-  ) ,
-  data=list(W=6,L=3) )
-
-# display summary of quadratic approximation
-precis( globe.qa )
-sample.quap <- extract.samples(  globe.qa )
-dens(sample.quap)
-
+  
+  library(rethinking)
+  library(rstan)
+  
+  
+  globe.qa <- quap(
+    alist(
+      W ~ dbinom( W+L ,p) , # binomial likelihood
+      p ~ dunif(0,1)   # uniform prior
+    ) ,
+    data=list(W=6,L=3) )
+  
+  # display summary of quadratic approximation
+  precis( globe.qa )
+  sample.quap <- extract.samples(  globe.qa )
+  dens(sample.quap)
+  
 
 # globe tossing model posterior using grid approximation
 p_grid <- seq( from=0 , to=1 , length.out=1000 )

@@ -32,7 +32,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 1. [Linear Regression](slides/2_3_ST-regression.pdf) | ([tex source file](slides/2_3_ST-regression.tex)),  [video 1](https://youtu.be/ZLZXJPKH6tU), [video 2](https://youtu.be/mW7bHkJBcB4),  [video 3](https://youtu.be/SHa5Neb7bfg), [video 4](https://youtu.be/rCD_jofxecY), [video 5](https://youtu.be/ir4P_f3s44g), [video 6](https://youtu.be/wfNhJWHPOi8)
 
 ### Part III: Bayesian Inference 
-1. [Introduction to Bayesian Inference](slides/3_1_ST-bayesian.pdf) | ([tex source file](slides/3_1_ST-bayesian.tex))
+1. [Introduction to Bayesian Inference](slides/3_1_ST-bayesian.pdf) | ([tex source file](slides/3_1_ST-bayesian.tex)), [video 1](https://youtu.be/Gf2uuElPH0g), [video 2](https://youtu.be/5ZZ3PTPdZQw),  [video 3](https://youtu.be/d_jXwM_-5jc), [video 4](https://youtu.be/yZW1V3X4J94), [video 5](https://youtu.be/-fw0ktR7psM), [video 6](https://youtu.be/0oK9M82sw8Q), [video 7](https://youtu.be/u7Qdw5rDDDU)
 1. [Summarizing the Posterior](slides/3_2_ST-posterior.pdf) | ([tex source file](slides/3_2_ST-posterior.tex))  
 1. [Bayesian Linear Regression](slides/3_3_ST-bayes_lin.pdf) | ([tex source file](slides/3_3_ST-bayes_lin.tex))
 1. [Markov Chain Monte Carlo](slides/3_4_ST-MCMC.pdf) | ([tex source file](slides/3_4_ST-MCMC.tex)) 
