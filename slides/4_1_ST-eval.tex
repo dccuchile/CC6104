@@ -156,9 +156,141 @@ d <- data.frame( species=sppnames , brain=brainvolcc,
 \item It's not unusual for data like this to be highly correlated.
 \item Brain size is correlated with body size, across
 species. 
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{The problem with parameters}
+\scriptsize{
+
+\begin{itemize}
+
 \item We will model brain size as a linear function of body size.
 
 \item We will fit a series of increasingly complex model families and see which function fits the data best.
+
+\item Each of these models will just be a polynomial of
+higher degree.
+
+\begin{verbatim}
+reg.ev.1 <- lm( brain ~ mass , data=d )
+reg.ev.2 <- lm( brain ~ mass + I(mass^2)
+                , data=d )
+reg.ev.3 <- lm( brain ~ mass + I(mass^2)
+                + I(mass^3),data=d )
+reg.ev.4 <- lm( brain ~ mass + I(mass^2)
+                + I(mass^3) + I(mass^4),data=d )
+reg.ev.5 <- lm( brain ~ mass + I(mass^2)
+                + I(mass^3) + I(mass^4)
+                + I(mass^5),data=d )
+reg.ev.6 <- lm( brain ~ mass + I(mass^2)
+                + I(mass^3) + I(mass^4)+ 
+                  I(mass^5)+ I(mass^6),data=d ) 
+\end{verbatim}
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{The problem with parameters}
+\scriptsize{
+
+\begin{itemize}
+
+\item Let's calculate $R^2$ for each of these models:
+
+\begin{verbatim}
+> summary(reg.ev.1)$r.squared
+[1] 0.490158
+> summary(reg.ev.2)$r.squared
+[1] 0.5359967
+> summary(reg.ev.3)$r.squared
+[1] 0.6797736
+> summary(reg.ev.4)$r.squared
+[1] 0.8144339
+> summary(reg.ev.5)$r.squared
+[1] 0.988854
+> summary(reg.ev.6)$r.squared
+[1] 1
+\end{verbatim}
+
+\item As the degree of the polynomial defining the mean increases, the fit always improves.
+
+\item The sixth-degree polynomial actually has a perfect fit, $R  ^2 = 1$.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{The problem with parameters}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.41]{pics/polyover.png}
+\end{figure}
+
+Polynomial linear models of increasing degree, fit to the hominin data. Each plot shows the predicted mean in black, with 89\% interval of the mean shaded. $R^2$, is displayed above each plot. (a) First-degree polynomial. (b) Second-degree. (c) Third-degree. (d) Fourth-degree. (e) Fifth-degree. (f) Sixth-degree. Source: \cite{mcelreath2020statistical}. 
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}{The problem with parameters}
+\scriptsize{
+
+\begin{itemize}
+
+\item We can see from looking at the paths of the predicted means that the higher-degree polynomials are increasingly absurd. 
+
+\item For example panel (f) shows the most complex model, reg.ev.6.
+
+\item The fit is perfect, but the model is ridiculous. 
+
+\item Notice that there is a gap in the body mass data, because there are no fossil
+hominins with body mass between 55 kg and about 60 kg. 
+\item In this region, the predicted mean brain size from the high-degree polynomial models has nothing to predict, and so the models pay no price for swinging around wildly in this interval.
+\item The swing is so extreme that at around 58 kg, the model predicts a negative brain size!
+
+\item The model pays no price (yet) for this absurdity, because there are no cases in the data with body mass near 58 kg.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{The problem with parameters}
+\scriptsize{
+
+\begin{itemize}
+
+\item Why does the sixth-degree polynomial fit perfectly? 
+\item Because it has enough parameters to assign one to each point of data.
+
+\item The model's equation for the mean has 7 parameters:
+
+\begin{displaymath}
+ y_i=\beta_{0}+\beta_{1}x_i +\beta_{2}x_i^2 +\beta_{3}x_i^3 +\beta_{4}x_i^4 ++\beta_{5}x_i^5+\beta_{6}x_i^6+\epsilon_i \quad \forall i
+\end{displaymath}
+and there are 7 species to predict brain sizes for.
+
+\item So effectively, this model assigns a unique parameter to reiterate each observed brain size.
+\item This is a general phenomenon: If you adopt a model family with enough parameters, you can fit the data exactly. 
+\item But such a model will make rather absurd predictions for yet-to-be-observed cases.
+
 
 \end{itemize}
 
