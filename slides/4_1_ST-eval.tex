@@ -70,10 +70,10 @@
 
 \begin{itemize}\scriptsize{
  \item \textbf{Regularization}: a mechanism to tell our models not to get too excited by the data.
-\item \textbf{Information criterio}: a scoring device to estimate predictive accuracy of our models.}
+\item \textbf{Information criteria}: a scoring device to estimate predictive accuracy of our models.}
 \end{itemize}
 
-\item In order to introduce information criteria, this class must also introduce information theory.
+\item In order to introduce information criteria, this class must also introduce \textbf{information theory}.
 
  
 \end{itemize}
@@ -90,7 +90,76 @@
 \scriptsize{
 
 \begin{itemize}
-\item When we add more variables to a linear regression model $r^2$
+\item In the class of linear regression we learned that including more attributes can lead to a more accurate model.
+
+\item However, we have also learned that adding more variables almost always improves the fit of the model to the data, as measured by the coefficient of determination $R^2$. 
+\item This is true even when the variables you add to a model
+are just random numbers, with no relation to the outcome. 
+
+\item So it's no good to choose among models using only fit to the data.
+
+
+
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}{The problem with parameters}
+\scriptsize{
+
+\begin{itemize}
+
+\item While more complex models fit the data better, they often predict new data worse.
+
+\item This means that a complex model will be very sensitive to the exact sample used to fit it.
+
+\item This will lead to potentially large mistakes when future data is not exactly like the past data.
+
+\item But simple models, with too few parameters, tend instead to underfit, systematically over-predicting or under-predicting the data.
+
+\item Regardless of how well future data resemble past data. 
+\item So we can't always favor either simple models or complex models.
+
+\item Let’s examine both of these issues in the context of a simple data example.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{The problem with parameters}
+\scriptsize{
+
+\begin{itemize}
+
+\item We are going to create a data.frame containing  average brain volumes and body masses for seven hominin species.
+
+\begin{verbatim}
+sppnames <- c( "afarensis","africanus","habilis",
+               "boisei", "rudolfensis","ergaster",
+               "sapiens")
+brainvolcc <- c( 438 , 452 , 612, 521, 752, 871, 
+                 1350 )
+masskg <- c( 37.0 , 35.5 , 34.5 , 41.5 , 55.5 , 
+             61.0 , 53.5 )
+d <- data.frame( species=sppnames , brain=brainvolcc,
+                 mass=masskg ) 
+\end{verbatim}
+
+\item It's not unusual for data like this to be highly correlated.
+\item Brain size is correlated with body size, across
+species. 
+\item We will model brain size as a linear function of body size.
+
+\item We will fit a series of increasingly complex model families and see which function fits the data best.
+
 \end{itemize}
 
 
