@@ -551,7 +551,52 @@ rain, sun, and snow.
 
 \begin{itemize}
 
-\item  sdsd
+\item  Information entropy is a function that measures the uncertainty on probability functions.
+
+\item Let $X$ be a discrete random variable of $m$ different possible events, with a probaility mass function $f$, the entropy of $X$ is defnined as follows:
+
+\begin{equation}
+ H(X) = - \mathbb{E}(\log f(x_i)) = -\sum_{i=1}^{m} 
+\end{equation}
+
+\item If $X$ is continuos with density function $f$, the entropy $H(X)$ takes the following form:
+
+\begin{equation}
+ H(X) = - \mathbb{E}(\log f(x)) = -\int f(x)\log f(x)dx
+\end{equation}
+
+\item In plainer words: ``The uncertainty contained in a probability distribution is the average log-probability of an event''.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{Entropy}
+\scriptsize{
+
+\begin{itemize}
+
+\item  An example will help to demystify the function $H(X)$. 
+
+\item To compute the information entropy for the weather, suppose the true probabilities of rain ($X=1$) and shine ($X=2$) are $f(1) = 0.3$ and $f(2) = 0.7$, respectively. 
+
+\item Then:
+
+\begin{displaymath}
+ H(X) = - (f(1)\log f(1)+\left(f(2)\log f(2)\right) \approx 0.61
+\end{displaymath}
+
+\item As an R calculation:
+
+\begin{verbatim}
+> p <- c( 0.3 , 0.7 )
+> -sum( p*log(p) )
+[1] 0.6108643 
+\end{verbatim}
+
 
 \end{itemize}
 
@@ -560,12 +605,51 @@ rain, sun, and snow.
 \end{frame}
 
 
+\begin{frame}[fragile]{Entropy}
+\scriptsize{
+
+\begin{itemize}
+
+\item Suppose instead we live in Abu Dhabi. 
+
+\item Then the probabilities of rain and shine might be more like $f(1) = 0.01$ and $f(2) = 0.99$. 
+
+\begin{verbatim}
+> p <- c( 0.01 , 0.99 )
+> -sum( p*log(p) )
+[1] 0.05600153 
+\end{verbatim}
+
+
+\item Now the entropy is about 0.06. 
+
+\item Why has the uncertainty decreased? 
+\item Because in Abu Dhabi it hardly ever rains. 
+\item Therefore there's much less uncertainty about any given day, compared to a place in which it rains 30\% of the time.
+
+\item These entropy values by themselves don't mean much to us, though.
+
+\item Instead we can use them to build a measure of accuracy. That comes next.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
 \begin{frame}{Divergence}
 \scriptsize{
 
 \begin{itemize}
 
-\item  sdsd
+\item  How can we use information entropy to say how far a model is from the target? 
+
+\item The key lies in divergence.
+
+\item Divergence: The additional uncertainty induced by using probabilities from
+one distribution to describe another distribution.
+
+\item This is often known as Kullback-Leibler divergence or simply K-L divergence, named after the people who introduced it for this purpose.
 
 \end{itemize}
 
