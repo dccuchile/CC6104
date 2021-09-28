@@ -556,10 +556,12 @@ rain, sun, and snow.
 \item Let $X$ be a discrete random variable of $m$ different possible events, with a probaility mass function $f$, the entropy of $X$ is defnined as follows:
 
 \begin{equation}
- H(X) = - \mathbb{E}(\log f(x_i)) = -\sum_{i=1}^{m} 
+ H(X) = - \mathbb{E}(\log f(x)) = -\sum_{i=1}^{m}f(x_i)\log f(x_i) 
 \end{equation}
 
-\item If $X$ is continuos with density function $f$, the entropy $H(X)$ takes the following form:
+\item Usually we use log base 2, in which case the entropy units are called \textbf{bits} \cite{pml1Book}.
+
+\item If $X$ is continuous with density function $f$, the entropy $H(X)$ takes the following form:
 
 \begin{equation}
  H(X) = - \mathbb{E}(\log f(x)) = -\int f(x)\log f(x)dx
@@ -581,20 +583,20 @@ rain, sun, and snow.
 
 \item  An example will help to demystify the function $H(X)$. 
 
-\item To compute the information entropy for the weather, suppose the true probabilities of rain ($X=1$) and shine ($X=2$) are $f(1) = 0.3$ and $f(2) = 0.7$, respectively. 
+\item To compute the information entropy for the weather, suppose the true probabilities of rain ($X=1$) and shine ($X=2$) are $f(1) = \mathbb{P}(X=1)= 0.3$ and $f(2) = \mathbb{P}(X=2) = 0.7$, respectively. 
 
 \item Then:
 
 \begin{displaymath}
- H(X) = - (f(1)\log f(1)+\left(f(2)\log f(2)\right) \approx 0.61
+ H(X) = - (f(1)\log f(1)+\left(f(2)\log f(2)\right) \approx 0.88
 \end{displaymath}
 
 \item As an R calculation:
 
 \begin{verbatim}
 > p <- c( 0.3 , 0.7 )
-> -sum( p*log(p) )
-[1] 0.6108643 
+> -sum( p*log2(p) )
+[1] 0.8812909
 \end{verbatim}
 
 
@@ -616,12 +618,12 @@ rain, sun, and snow.
 
 \begin{verbatim}
 > p <- c( 0.01 , 0.99 )
-> -sum( p*log(p) )
-[1] 0.05600153 
+> -sum( p*log2(p) )
+[1] 0.08079314
 \end{verbatim}
 
 
-\item Now the entropy is about 0.06. 
+\item Now the entropy is about 0.08. 
 
 \item Why has the uncertainty decreased? 
 \item Because in Abu Dhabi it hardly ever rains. 

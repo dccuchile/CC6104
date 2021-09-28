@@ -34,10 +34,10 @@ reg.ev.0 <- lm( brain ~ 1 , data=d )
 summary(reg.ev.0)$r.squared
 
 p <- c( 0.3 , 0.7 )
--sum( p*log(p) )
+-sum( p*log2(p) )
 
 p <- c( 0.01 , 0.99 )
--sum( p*log(p) )
+-sum( p*log2(p) )
 
 library(rethinking)
 sim_train_test
