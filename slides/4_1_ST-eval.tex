@@ -58,14 +58,16 @@
 \begin{frame}{Model Evaluation and Information Criteria}
 \scriptsize{
 \begin{itemize}
-\item In the context of scientific models, there are two fundamental kinds of statistical error \cite{mcelreath2020statistical}:
+\item In this class we will introduce various concepts for evaluating statistical models.
+
+\item According to \cite{mcelreath2020statistical}, there are two fundamental kinds of statistical error:
 
 \begin{itemize}\scriptsize{
- \item \textbf{Overfitting}, which leads to poor prediction by learning too much from the data.
-\item \textbf{Underfitting}, which leads to poor prediction by learning too little from the data.}
+ \item \textbf{Overfitting}: models that learn  too much from the data leading to poor prediction.
+\item \textbf{Underfitting}: moderls that learn too little from the data, which also leads to poor prediction.}
 \end{itemize}
 
-\item There are two common families of approaches to tackle these problems.
+\item We will study two common families of approaches to tackle these problems.
 
 
 \begin{itemize}\scriptsize{
@@ -73,7 +75,7 @@
 \item \textbf{Information criteria}: a scoring device to estimate predictive accuracy of our models.}
 \end{itemize}
 
-\item In order to introduce information criteria, this class must also introduce \textbf{information theory}.
+\item In order to introduce information criteria, this class must also introduce some concepts of \textbf{information theory}.
 
  
 \end{itemize}
@@ -92,9 +94,8 @@
 \begin{itemize}
 \item In the class of linear regression we learned that including more attributes can lead to a more accurate model.
 
-\item However, we have also learned that adding more variables almost always improves the fit of the model to the data, as measured by the coefficient of determination $R^2$. 
-\item This is true even when the variables you add to a model
-are just random numbers, with no relation to the outcome. 
+\item However, we also learned that adding more variables almost always improves the fit of the model to the data, as measured by the coefficient of determination $R^2$. 
+\item This is true even when the variables we  add to a model have no relation to the outcome. 
 
 \item So it's no good to choose among models using only fit to the data.
 
@@ -163,17 +164,30 @@ species.
 } 
 \end{frame}
 
+
+\begin{frame}[fragile]{The problem with parameters}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.41]{pics/hominin.png}
+\end{figure}
+
+
+} 
+\end{frame}
+
+
 \begin{frame}[fragile]{The problem with parameters}
 \scriptsize{
 
 \begin{itemize}
 
-\item We will model brain size as a linear function of body size.
+\item We will model brain size as a function of body size.
 
 \item We will fit a series of increasingly complex model families and see which function fits the data best.
 
-\item Each of these models will just be a polynomial of
-higher degree.
+\item Each of these models will just be a polynomial of higher degree.
 
 \begin{verbatim}
 reg.ev.1 <- lm( brain ~ mass , data=d )
@@ -253,13 +267,11 @@ Polynomial linear models of increasing degree, fit to the hominin data. Each plo
 
 \item We can see from looking at the paths of the predicted means that the higher-degree polynomials are increasingly absurd. 
 
-\item For example panel (f) shows the most complex model, reg.ev.6.
-
-\item The fit is perfect, but the model is ridiculous. 
+\item For example, \textbf{reg.ev.6} the most complex model makes a perfect fit, but the model is ridiculous. 
 
 \item Notice that there is a gap in the body mass data, because there are no fossil
 hominins with body mass between 55 kg and about 60 kg. 
-\item In this region, the predicted mean brain size from the high-degree polynomial models has nothing to predict, and so the models pay no price for swinging around wildly in this interval.
+\item In this region, the models has nothing to predict, so it pays no price for swinging around wildly in this interval.
 \item The swing is so extreme that at around 58 kg, the model predicts a negative brain size!
 
 \item The model pays no price (yet) for this absurdity, because there are no cases in the data with body mass near 58 kg.
@@ -299,17 +311,215 @@ and there are 7 species to predict brain sizes for.
 \end{frame}
 
 
-\begin{frame}{Information theory and model performance}
+\begin{frame}[fragile]{Too few parameters hurts, too}
 \scriptsize{
 
 \begin{itemize}
-\item Blabla
+\item The overfit polynomial models manage to fit the data extremely well.
+
+\item But they suffer for this within-sample accuracy by making nonsensical out-of-
+sample predictions.
+
+\item In contrast, underfitting produces models that are inaccurate both
+within and out of sample.
+
+\item For example, consider this model of brain volume:
+
+\begin{displaymath}
+ y_i=\beta_{0}+\epsilon_i \quad \forall i
+\end{displaymath}
+
+\item There are no predictor variables here, just the intercept $\beta_{0}$.
+
+\item We can fit this model as follows:
+
+\begin{verbatim}
+> reg.ev.0 <- lm( brain ~ 1 , data=d )
+> summary(reg.ev.0)$r.squared
+[1] 0 
+\end{verbatim}
+
+\item The value of $R^2$ is 0.
+
 \end{itemize}
 
 
 } 
 \end{frame}
 
+
+\begin{frame}[fragile]{Too few parameters hurts, too}
+\scriptsize{
+
+\begin{itemize}
+
+
+\item This model estimates the mean brain volume, ignoring body mass.
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.41]{pics/regconstant.png}
+\end{figure}
+
+\item As a result, the regression line is perfectly horizontal and poorly fits both smaller and larger brain volumes.
+
+\item Such a model not only fails to describe the sample.
+
+\item It would also do a poor job for new data
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Roadmap}
+\scriptsize{
+
+\begin{itemize}
+\item The first thing we need to navigate between overfitting and underfitting problems is a criterion of model performance.
+
+\item We will see how information theory provides a useful criterion for model evaluation: the \textbf{out-of-sample deviance}.
+
+\item Once we learn about this cretierion we will se how both regularization and information criteria help to improve and estimate the out-of-sample deviance of a model.
+
+\item As usual, we will introduce these concepts with an example.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}{The Weatherperson}
+\scriptsize{
+
+\begin{itemize}
+\item Suppose in a certain city, a certain weatherperson issues uncertain predictions for rain or shine on each day of the year.
+
+\item The predictions are in the form of probabilities of rain. 
+
+\item The currently employed weatherperson predicted these chances of rain over a 10-day sequence: 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.41]{pics/weather1.png}
+\end{figure}
+
+
+\item A newcomer rolls into town, and this newcomer boasts that he can best the current weatherperson, by always predicting sunshine. 
+
+\item Over the same 10 day period, the newcomer's record would be:
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.41]{pics/weather2.png}
+\end{figure}
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{The Weatherperson}
+\scriptsize{
+
+\begin{itemize}
+\item Define hit rate as the average chance of a correct prediction. 
+\item So for the current weatherperson, she gets $3 \times 1 + 7 \times 0.4 = 5.8$ hits in 10 days, for a rate of $5.8/10 = 0.58$ correct predictions per day.
+\item In contrast, the newcomer gets $3 \times 0 + 7 \times 1 = 7$, for $7/10 = 0.7$ hits per day. 
+\item The newcomer wins.
+
+\item Let's compare now the two predictions using another metric, the joint likelihood: $\prod f(y_i;\theta)$ for a frequentist model or $\prod f(y_i|\theta)$ for a Bayesian one.
+
+\item The joint likelihood corresponds to the joint probability of correctly predicting the observed sequence.
+
+
+\item To calculate it we must first compute the probability of a correct prediction for each day.
+
+\item Then multiply all of these probabilities together to get the joint probability of correctly predicting the observed sequence. 
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}{The Weatherperson}
+\scriptsize{
+
+\begin{itemize}
+\item The probability for the current weather person is $1^3 \times 0.4^7 \approx 0.005$. 
+
+\item For the newcomer, it's $0^3 \times 1^7 = 0$. 
+\item So the newcomer has zero
+probability of getting the sequence correct. 
+\item This is because the newcomer's predictions never expect rain.
+\item So even though the newcomer has a high average probability of being correct
+(hit rate), he has a terrible joint probability (likelihood) of being correct.
+
+\item And the joint likelihood is the measure we want. 
+
+\item Because it is the unique measure that correctly counts up the relative number of ways each event (sequence of rain and shine) could happen.
+
+\item In the statistics literature, this measure is sometimes called the
+\textbf{log scoring rule}, because typically we compute the logarithm of the joint probability and report that.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Information and uncertainty}
+\scriptsize{
+
+\begin{itemize}
+\item So we want to use the log probability of the data to
+score the accuracy of competing models. 
+\item The next problem is how to measure distance from
+perfect prediction.
+\item A perfect prediction would just report the true probabilities of rain on each day. 
+\item So when either weatherperson provides a prediction that differs from the target, we can measure the distance of the prediction from the target.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Information and uncertainty}
+\scriptsize{
+
+\begin{itemize}
+
+\item What kind of distance should we adopt?
+
+\item Getting to the answer depends upon appreciating what an accuracy metric needs to do.
+
+\item It should appreciate that some targets are just easier to hit than other targets. 
+\item For example, suppose we extend the weather forecast into the winter. Now there are three types of days:
+rain, sun, and snow.
+\item Now there are three ways to be wrong, instead of just two.
+\item This has to be reflected in any reasonable measure of distance from the target, because by adding another type of event, the target has gotten harder to hit.
+
+\item Before presenting a distance metric that satisfies the properties described above, we must introduce some concepts from information theory.
+
+\end{itemize}
+
+
+} 
+\end{frame}
 
 \begin{frame}{Regularization}
 \scriptsize{

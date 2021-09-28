@@ -29,3 +29,6 @@ summary(reg.ev.3)$r.squared
 summary(reg.ev.4)$r.squared
 summary(reg.ev.5)$r.squared
 summary(reg.ev.6)$r.squared
+
+reg.ev.0 <- lm( brain ~ 1 , data=d )
+summary(reg.ev.0)$r.squared
