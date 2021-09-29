@@ -47,9 +47,6 @@ q<-f
 sum(f* log2(f/ q)) 
 
 
-install.packages("rcartocolor", dependencies = T)
-library("rcartocolor")
-
 t <- 
   tibble(f_1  = .3,
          f_2  = .7,
@@ -59,18 +56,12 @@ t <-
 
 t %>% 
   ggplot(aes(x = q_1, y = d_kl)) +
-  geom_vline(xintercept = .3, color = carto_pal(7, "BurgYl")[5], 
-             linetype = 2) +
-  geom_line(color = carto_pal(7, "BurgYl")[7], size = 1.5) +
-  annotate(geom = "text", x = .4, y = 1.5, label = "q = f",
-           color = carto_pal(7, "BurgYl")[5], 
-           family = "Courier", size = 3.5) +
+  geom_vline(xintercept = .3,  linetype = 2) +
+  geom_line(size = 1.5) +
+  annotate(geom = "text", x = .4, y = 1.5, label = "q = f", 
+           size = 3.5) +
   labs(x = "q[1]",
-       y = "Divergence of q from f") +
-  theme_classic() +
-  theme(text = element_text(family = "Courier"),
-        panel.background = 
-          element_rect(fill = alpha(carto_pal(7, "BurgYl")[3], 1/4)))
+       y = "Divergence of q from f") 
 
 
 

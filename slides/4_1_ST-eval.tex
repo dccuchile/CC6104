@@ -784,23 +784,18 @@ t <-
          q_1  = seq(from = .01, to = .99, by = .01)) %>% 
   mutate(q_2  = 1 - q_1) %>%
   mutate(d_kl = (f_1 * log2(f_1 / q_1)) + (f_2 * log2(f_2 / q_2)))
+
 t %>% 
   ggplot(aes(x = q_1, y = d_kl)) +
-  geom_vline(xintercept = .3, color = carto_pal(7, "BurgYl")[5], 
-             linetype = 2) +
-  geom_line(color = carto_pal(7, "BurgYl")[7], size = 1.5) +
-  annotate(geom = "text", x = .4, y = 1.5, label = "q = f",
-           color = carto_pal(7, "BurgYl")[5], 
-           family = "Courier", size = 3.5) +
+  geom_vline(xintercept = .3,  linetype = 2) +
+  geom_line(size = 1.5) +
+  annotate(geom = "text", x = .4, y = 1.5, label = "q = f", 
+           size = 3.5) +
   labs(x = "q[1]",
-       y = "Divergence of q from f") +
-  theme_classic() +
-  theme(text = element_text(family = "Courier"),
-        panel.background = 
-          element_rect(fill = alpha(carto_pal(7, "BurgYl")[3], 1/4)))
+       y = "Divergence of q from f") 
 \end{verbatim}
 
-source: \url{https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/overfitting-regularization-and-information-criteria.html#information-theory-and-model-performance}
+
 
 } 
 \end{frame}
@@ -810,7 +805,7 @@ source: \url{https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/overfitt
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.6]{pics/divergence.pdf}
+	\includegraphics[scale=0.4]{pics/divergence.pdf}
 \end{figure}
 
 \begin{itemize}
