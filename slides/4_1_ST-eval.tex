@@ -522,7 +522,7 @@ rain, sun, and snow.
 \end{frame}
 
 
-\begin{frame}{Information and uncertainty}
+\begin{frame}{Information Theory}
 \scriptsize{
 
 \begin{itemize}
@@ -567,7 +567,7 @@ rain, sun, and snow.
  H(X) = - \mathbb{E}(\log f(x)) = -\int f(x)\log f(x)dx
 \end{equation}
 
-\item In plainer words: ``The uncertainty contained in a probability distribution is the average log-probability of an event''.
+\item In plainer words: ``The uncertainty contained in a probability distribution is the negative average log-probability of an event''.
 
 
 \end{itemize}
@@ -594,8 +594,8 @@ rain, sun, and snow.
 \item As an R calculation:
 
 \begin{verbatim}
-> p <- c( 0.3 , 0.7 )
-> -sum( p*log2(p) )
+> f <- c( 0.3 , 0.7 )
+> -sum( f*log2(f) )
 [1] 0.8812909
 \end{verbatim}
 
@@ -617,8 +617,8 @@ rain, sun, and snow.
 \item Then the probabilities of rain and shine might be more like $f(1) = 0.01$ and $f(2) = 0.99$. 
 
 \begin{verbatim}
-> p <- c( 0.01 , 0.99 )
-> -sum( p*log2(p) )
+> f <- c( 0.01 , 0.99 )
+> -sum( f*log2(f) )
 [1] 0.08079314
 \end{verbatim}
 
@@ -651,13 +651,178 @@ rain, sun, and snow.
 \item Divergence: The additional uncertainty induced by using probabilities from
 one distribution to describe another distribution.
 
-\item This is often known as Kullback-Leibler divergence or simply K-L divergence, named after the people who introduced it for this purpose.
+\item This is often known as \textbf{Kullback-Leibler divergence} or simply K-L divergence, named after the people who introduced it for this purpose.
+
+\item Suppose for example that the true distribution of events is encoded by function $f$: $f(1) = 0.3$, $f(2) = 0.7$.
+\item Now, suppose we believe that these events happen according to another function $q$: $q(1) = 0.25$, $q(2) = 0.75$.
+
+\item How much additional uncertainty have we introduced, as a consequence of using $q$ to approximate $f$? 
+
+\item  The answer is the the K-L divergence $D_{KL}(f,q)$.
 
 \end{itemize}
 
 
 } 
 \end{frame}
+
+
+\begin{frame}[fragile]{Divergence}
+\scriptsize{
+
+\begin{itemize}
+
+
+
+\item If $f$ and $q$ are probability mass functions, the K-L divergence is defined as follows:
+
+\begin{equation}
+ D_{KL}(f,q) = \sum_{i=1}^m f(x_i)(\log f(x_i)-\log q(x_i)) = \sum_{i=1}^m f(x_i)\log \left(\frac{f(x_i)}{q(x_i)}\right)
+\end{equation}
+
+\begin{verbatim}
+> f<-c(0.3,0.7)
+> q<-c(0.25,0.75)
+> sum(f* log2(f/ q)) 
+[1] 0.00923535 
+\end{verbatim}
+
+
+\item This naturally extends to continuous density functions as well \cite{pml1Book}:
+
+\begin{equation}
+ D_{KL}(f,q) = \int f(x)\log \left(\frac{f(x)}{q(x)}\right)dx
+\end{equation}
+
+
+\item In plainer language, the divergence is the average difference in log probability between the target (f) and model (q). 
+
+\item This divergence is just the difference between two entropies.
+
+\item The entropy of the target distribution $f$ and the cross entropy arising from using $q$ to predict $f$
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Cross entropy and divergence}
+\scriptsize{
+
+\begin{itemize}
+
+
+
+\item  When we use a probability distribution $q$ to predict events from another
+distribution $f$, this defines something known as cross entropy $H(f,q)$:
+\begin{equation}
+ H(f,q) = - \sum_{i=1}^{m}f(x_i)\log q(x_i)
+\end{equation}
+
+\item The notion is that events arise according to $f$, but they are expected according to the $q$, so the entropy is inflated, depending upon how different $f$ and $q$ are.
+
+\item Divergence is defined as the additional entropy induced by using $q$.
+
+\item So it is the difference between $H(f)$, the actual entropy of events, and $H(f, q)$:
+
+\begin{equation}
+ D_{KL}(f,q) = H(f,q)-H(f)
+\end{equation}
+
+\item So divergence really is measuring how far q is from the target $f$, in units of entropy.
+
+\item Notice that which is the target matters: $H(f, q)$ does not in general equal $H(q, f)$.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Divergence}
+\scriptsize{
+
+\begin{itemize}
+
+\item  When $f = q$, we know the actual probabilities of the events. 
+
+\item In that case: \begin{displaymath}
+                     D_{KL}(f,q) =   D_{KL}(f,f) = 0
+                    \end{displaymath}
+
+
+\begin{verbatim}
+> q <- f
+> sum(f*log2(f/ q)) 
+[1] 0
+\end{verbatim}
+                    
+\item But more importantly, as q grows more different from $f$, the divergence $D_{KL}$ also grows.       
+       
+\item Suppose the true target distribution is $f = \{0.3, 0.7\}$.
+
+\item Suppose the approximating distribution q can be anything from $q = \{0.01, 0.99\}$ to $q = \{0.99, 0.01\}$.       
+       
+\item Let's build a plot with $q(1)$ on the horizontal axis and the divergence $D_{KL}(f, q)$ on vertical one.       
+       
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{Divergence}
+\scriptsize{
+
+\begin{verbatim}
+t <- 
+  tibble(f_1  = .3,
+         f_2  = .7,
+         q_1  = seq(from = .01, to = .99, by = .01)) %>% 
+  mutate(q_2  = 1 - q_1) %>%
+  mutate(d_kl = (f_1 * log2(f_1 / q_1)) + (f_2 * log2(f_2 / q_2)))
+t %>% 
+  ggplot(aes(x = q_1, y = d_kl)) +
+  geom_vline(xintercept = .3, color = carto_pal(7, "BurgYl")[5], 
+             linetype = 2) +
+  geom_line(color = carto_pal(7, "BurgYl")[7], size = 1.5) +
+  annotate(geom = "text", x = .4, y = 1.5, label = "q = f",
+           color = carto_pal(7, "BurgYl")[5], 
+           family = "Courier", size = 3.5) +
+  labs(x = "q[1]",
+       y = "Divergence of q from f") +
+  theme_classic() +
+  theme(text = element_text(family = "Courier"),
+        panel.background = 
+          element_rect(fill = alpha(carto_pal(7, "BurgYl")[3], 1/4)))
+\end{verbatim}
+
+source: \url{https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/overfitting-regularization-and-information-criteria.html#information-theory-and-model-performance}
+
+} 
+\end{frame}
+
+\begin{frame}{Divergence}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/divergence.pdf}
+\end{figure}
+
+\begin{itemize}
+ \item Only exactly where $q = f$, at $q(1) = 0.3$, does the divergence achieve a value of zero. Everyplace else, it grows.
+ 
+ \item Since predictive models specify probabilities of events (observations), we can use divergence to compare the accuracy of models. 
+\end{itemize}
+
+
+} 
+\end{frame}
+
 
 \begin{frame}{Deviance}
 \scriptsize{

@@ -33,11 +33,46 @@ summary(reg.ev.6)$r.squared
 reg.ev.0 <- lm( brain ~ 1 , data=d )
 summary(reg.ev.0)$r.squared
 
-p <- c( 0.3 , 0.7 )
--sum( p*log2(p) )
+f <- c( 0.3 , 0.7 )
+-sum( f*log2(f) )
 
-p <- c( 0.01 , 0.99 )
--sum( p*log2(p) )
+f <- c( 0.01 , 0.99 )
+-sum( f*log2(f) )
+
+f<-c(0.3,0.7)
+q<-c(0.25,0.75)
+sum(f* log2(f/ q)) 
+
+q<-f
+sum(f* log2(f/ q)) 
+
+
+install.packages("rcartocolor", dependencies = T)
+library("rcartocolor")
+
+t <- 
+  tibble(f_1  = .3,
+         f_2  = .7,
+         q_1  = seq(from = .01, to = .99, by = .01)) %>% 
+  mutate(q_2  = 1 - q_1) %>%
+  mutate(d_kl = (f_1 * log2(f_1 / q_1)) + (f_2 * log2(f_2 / q_2)))
+
+t %>% 
+  ggplot(aes(x = q_1, y = d_kl)) +
+  geom_vline(xintercept = .3, color = carto_pal(7, "BurgYl")[5], 
+             linetype = 2) +
+  geom_line(color = carto_pal(7, "BurgYl")[7], size = 1.5) +
+  annotate(geom = "text", x = .4, y = 1.5, label = "q = f",
+           color = carto_pal(7, "BurgYl")[5], 
+           family = "Courier", size = 3.5) +
+  labs(x = "q[1]",
+       y = "Divergence of q from f") +
+  theme_classic() +
+  theme(text = element_text(family = "Courier"),
+        panel.background = 
+          element_rect(fill = alpha(carto_pal(7, "BurgYl")[3], 1/4)))
+
+
 
 library(rethinking)
 sim_train_test
