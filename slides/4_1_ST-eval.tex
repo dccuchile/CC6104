@@ -971,7 +971,7 @@ D(q) = -2\times S(q)= -2 \sum_{i=1}^m \log q(x_i)
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.3]{pics/dev_ex.png}
+	\includegraphics[scale=0.4]{pics/dev_ex.png}
 \end{figure}
 
 
@@ -985,23 +985,258 @@ D(q) = -2\times S(q)= -2 \sum_{i=1}^m \log q(x_i)
 } 
 \end{frame}
 
-
-\begin{frame}{Regularization}
+\begin{frame}{From deviance to out-of-sample}
 \scriptsize{
 
 \begin{itemize}
-\item Blabla
+
+\item The following diagram shows in-sample and out-of-sample deviance scores for $10,000$ simulations of 20 training and 20 testing data points from our data generation process.
+\end{itemize}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{pics/dev_ex2.png}
+\end{figure}
+
+
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{From deviance to out-of-sample}
+\scriptsize{
+
+\begin{itemize}
+
+
+
+\item Models with different numbers of predictor variables are shown on the horizontal axis.
+
+\item Deviance across 10,000 simulations is shown on the vertical. 
+
+\item Blue shows deviance in-sample, the training data. 
+\item Black shows deviance out-of-sample, the test data. 
+\item Points show means, and the line segments show $\pm$ 1 standard
+deviation.
+
+\item A smaller deviance means a better fit. 
+
+
 \end{itemize}
 
 
 } 
 \end{frame}
 
+
+\begin{frame}{From deviance to out-of-sample}
+\scriptsize{
+
+\begin{itemize}
+
+
+\item Regarding the in-sample deviance we see that with increasing numbers of parameters, the average deviance declines. 
+\item This is the same phenomenon we saw earlier with $R^2$.
+
+\item On the other hand, the out-of-sample deviance is smallest on average for 3 parameters, which is the data-generating model
+\item And it gets worse (increases) with the addition of each parameter after the third.
+
+\item The point of this thought experiment is to demonstrate how deviance behaves, in theory. 
+\item While deviance on training data always improves with additional predictor variables, deviance on future data may or may not.
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+
+\begin{frame}{Cross Validation}
+\scriptsize{
+
+\begin{itemize}
+\item We just showed how to estimate the out-of-sample deviance by  evaluating the model on observations that were not used to fit the model. 
+
+\item However, in many cases, we do not want to waste a portion of our data just for evaluation. 
+
+\item So what is usually done is \textbf{cross-validation}: to divide the sample in a number of chunks, called ``folds''. 
+\item Then the model is asked to predict each fold, after training on all the others.
+\item We then average over the score (e.g., deviance) for each fold to get an estimate of out-of-sample performance. 
+\item The minimum number of folds is 2. 
+\item At the other extreme, you could make each point observation a fold and fit as many models as you have individual observations.
+\item This is called leave-one-out cross-validation (often abbreviated as LOOCV).
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Cross Validation}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{pics/crossvalidation.png}
+\end{figure}
+
+} 
+\end{frame}
+
+
+
+
+\begin{frame}{Regularization}
+\scriptsize{
+
+\begin{itemize}
+
+\item The root of overfitting is a model's tendency to get overexcited by the training sample.
+
+\item One way to prevent a linear model to overfit the training data is regularization.
+
+\item  From a frequentist point of view, the most popular regularization technique is ridge regression.
+
+
+\item In this approach we penalize large parameter values $\beta$ in the likelihood function.
+
+\item We add a penalization term to the target function SSE to keep  the squares of the parameter values low:
+
+\begin{equation}
+ \operatorname{argmin}_{\beta} SSE(\beta) + \lambda \sum_{j=0}^m\beta_j^2 
+\end{equation} 
+
+\item The value of $\lambda$ is an hyper-parameter that controls the ammount of overfitting.
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Regularization}
+\scriptsize{
+
+\begin{itemize}
+
+\item If $\lambda$ is zero, we are just doing least mean squares.
+
+\item If it is too large, on the other hand, we risk underfitting.
+
+\item This value is usually ``tuned'' on an independent partition of data referred to as ``validation set''. 
+
+\item The function lm.ridge built into R's MASS library implements the ridge regression method. 
+
+\begin{verbatim}
+library(MASS)
+rid.ev.4<- lm.ridge(brain ~ mass + I(mass^2)
+         + I(mass^3) + I(mass^4),data=d,lambda = 0.1) 
+
+> rid.ev.4
+                       mass     I(mass^2) 
+ 6.725187e+01  9.751407e+00  7.235780e-02 
+    I(mass^3)     I(mass^4) 
+ 4.874209e-04 -1.289110e-06         
+\end{verbatim}
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}{Regularization}
+\scriptsize{
+
+\begin{itemize}
+
+\item Ridge regression is an example of how a statistical procedure can be understood from both Bayesian and non-Bayesian perspectives.
+
+\item From Bayesian point of view, ridge regression is equivalent to setting a Gaussian prior centered at zero for each $\beta$ coefficient.
+
+\item In this setting, the value of $\sigma$ controls the ammount of regularization.
+
+\item For example, a prior $\beta \sim $Normal$(0, 1)$ says that, before seeing the data, the machine should be very skeptical of values above 2 and below -2.
+
+\item In the next slide, we repeat the experiment of computing  the in-sample and out-of-sample deviance for models with different number of attributes using different regularization priors.
+
+\item The data generation process is the same as before.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Regularization}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/regularization.png}
+\end{figure}
+
+\begin{itemize}
+
+\item The points in both plots are the same as in previous figure (no regularization).
+
+\item The lines show training (blue) and testing (black) deviance for three regularizing priors.
+
+\item Dashed: Each beta-coefficient is given a Normal(0, 1) prior. Thin solid: Normal(0, 0.5). Thick solid: Normal(0, 0.2).
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Regularization}
+\scriptsize{
+
+
+\begin{itemize}
+
+\item The training deviance always increases (gets worse) with tighter priors. 
+\item The thick blue trend is substantially larger than the others.
+
+\item This is because the skeptical prior prevents the model from adapting completely to the sample. 
+\item But the test deviances, out-of-sample, improve (get smaller) with the tighter priors. 
+\item The model with three parameters is still the best model out-of-sample.
+\item The regularizing priors have little impact on its deviance.
+
+\item But also notice that as the prior gets more skeptical, the harm done by an overly complex model is greatly reduced.
+\item For the Normal(0, 0.2) prior (thick line), the models with 4 and 5 parameters are barely worse than the correct model with 3 parameters. 
+\item If we can tune the
+regularizing prior right, then overfitting can be greatly reduced.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
 \begin{frame}{Information criteria}
 \scriptsize{
 
 \begin{itemize}
-\item Blabla
+\item Information criteria are a group of scoring devices that construct a theoretical estimate of the relative out-of-sample deviance using just the training data.
 \end{itemize}
 
 

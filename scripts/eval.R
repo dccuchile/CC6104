@@ -73,5 +73,8 @@ logLik(reg.ev.2)
 -2*logLik(reg.ev.3)
 -2*logLik(reg.ev.4)
 
-library(rethinking)
-sim_train_test
+library(MASS)
+rid.ev.4<- lm.ridge(brain ~ mass + I(mass^2)
+         + I(mass^3) + I(mass^4),data=d,lambda = 0.1) 
+rid.ev.4
+
