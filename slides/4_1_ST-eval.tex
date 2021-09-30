@@ -791,7 +791,7 @@ t %>%
   geom_line(size = 1.5) +
   annotate(geom = "text", x = .4, y = 1.5, label = "q = f", 
            size = 3.5) +
-  labs(x = "q[1]",
+  labs(x = "q(1)",
        y = "Divergence of q from f") 
 \end{verbatim}
 
@@ -805,7 +805,7 @@ t %>%
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.4]{pics/divergence.pdf}
+	\includegraphics[scale=0.45]{pics/divergence.pdf}
 \end{figure}
 
 \begin{itemize}
@@ -819,18 +819,172 @@ t %>%
 \end{frame}
 
 
-\begin{frame}{Deviance}
+\begin{frame}{Estimating divergence}
 \scriptsize{
 
 \begin{itemize}
 
-\item  sdsd
+\item  To use $D_{KL}$ to compare models, it seems like we would have to know $f$, the target probability distribution.
+\item In all of the examples so far, I've just assumed that $f$ is known.
+\item But when we want to find a model $q$ that is the best approximation to $f$, the ``truth,'' there is usually no way to access $f$ directly.
+\item We wouldn't be doing statistical inference, if we already knew $f$.
+
+\item But there's an amazing way out of this predicament. 
+\item It helps that we are only interested in comparing the divergences of different candidates, say $q$ and $r$. 
+\item In that case, most of $f$ just subtracts out, because there is a $\mathbb{E}(\log f(x))$ term in the divergence of both q and r.
+\item This term has no effect on the distance of q and r from one another. 
 
 \end{itemize}
 
 
 } 
 \end{frame}
+
+
+\begin{frame}{Estimating divergence}
+\scriptsize{
+
+\begin{itemize}
+
+\item So while we don't know where $f$ is, we can estimate how far apart $q$ and $r$ are, and which is closer to the target.
+
+
+\item All of this also means that all we need to know is a model's average log-probability: $\mathbb{E}(\log q(x))$ for q and $\mathbb{E}(\log r(x))$ for r. 
+
+\item Indeed, just summing the log-probabilities of each observed case provides an approximation of $\mathbb{E}(\log q(x))$ and $\mathbb{E}(\log r(x))$.
+
+\item This also means that the absolute magnitude of these values will not be interpretable.
+
+\item Only the difference  $\mathbb{E}(\log q(x)) - \mathbb{E}(\log r(x))$ informs us about the divergence of each model from the target f.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}[fragile]{Estimating divergence}
+\scriptsize{
+
+\begin{itemize}
+
+\item All of this delivers us to a very common measure of relative model fit, one that also turns out to be an approximation of K-L divergence. 
+\item To approximate the relative value of $\mathbb{E}(\log q(x))$, we can use the log-probability score of the model:
+
+\begin{equation}
+S(q) = \sum_{i=1}^m \log q(x_i)
+\end{equation}
+
+
+\item This sore is an estimate of $\mathbb{E}(\log q(x))$, just without the final step of dividing by the number of observations.
+
+
+\item Most of the standard model fitting functions in R support ``logLik'' , which computes the sum of log-probabilities, usually
+known as the log-likelihood of the data.
+
+\begin{verbatim}
+> logLik(reg.ev.1)
+'log Lik.' -47.46249 (df=3)
+> logLik(reg.ev.2)
+'log Lik.' -47.13276 (df=4) 
+\end{verbatim}
+
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Deviance}
+\scriptsize{
+
+\begin{itemize}
+
+\item It is also quite common to see something called the \textbf{deviance}, which is $S(q)$ multiplied by -2.
+
+\begin{equation}
+D(q) = -2\times S(q)= -2 \sum_{i=1}^m \log q(x_i)
+\end{equation}
+
+
+\item The 2 is there for historical reasons.
+
+\item When comparing the deviance,  smaller values are better.  
+
+\begin{verbatim}
+> -2*logLik(reg.ev.1)
+'log Lik.' 94.92499 (df=3)
+> -2*logLik(reg.ev.2)
+'log Lik.' 94.26553 (df=4)
+> -2*logLik(reg.ev.3)
+'log Lik.' 91.66948 (df=5)
+> -2*logLik(reg.ev.4)
+'log Lik.' 87.85016 (df=6) 
+\end{verbatim}
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{From deviance to out-of-sample}
+\scriptsize{
+
+\begin{itemize}
+
+\item Deviance has the same flaw as $R^2$: It always improves as the model gets more complex.
+
+\item It is really the deviance on new data that interests us.
+
+\item When we usually have data and use it to fit a statistical model, the data comprise a \textbf{training sample}.
+
+\item Parameters are estimated from it.
+
+\item Then we can imagine using those estimates to predict outcomes in a new sample, called the \textbf{test sample}.
+
+\item We can compute the deviance on the test sample to obtain the \textbf{out-of-sample deviance}. 
+
+\item Let's explore it with an example.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{From deviance to out-of-sample}
+\scriptsize{
+
+\begin{itemize}
+
+\item Suppose we have the following data generation process and we fit linear regressions with between 1 and 5 free parameters to the data:
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/dev_ex.png}
+\end{figure}
+
+
+\item Since the ``true'' model has non-zero coefficients for only the first two predictors, we can say that the true model has 3 parameters.
+
+\item In other words, $x_{3}$ and $x_{4}$ as uncorrelated with $y$.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
 
 \begin{frame}{Regularization}
 \scriptsize{

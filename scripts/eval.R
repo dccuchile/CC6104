@@ -46,6 +46,7 @@ sum(f* log2(f/ q))
 q<-f
 sum(f* log2(f/ q)) 
 
+library(tidyverse)
 
 t <- 
   tibble(f_1  = .3,
@@ -60,10 +61,17 @@ t %>%
   geom_line(size = 1.5) +
   annotate(geom = "text", x = .4, y = 1.5, label = "q = f", 
            size = 3.5) +
-  labs(x = "q[1]",
+  labs(x = "q(1)",
        y = "Divergence of q from f") 
 
 
+logLik(reg.ev.1)
+logLik(reg.ev.2)
+
+-2*logLik(reg.ev.1)
+-2*logLik(reg.ev.2)
+-2*logLik(reg.ev.3)
+-2*logLik(reg.ev.4)
 
 library(rethinking)
 sim_train_test
