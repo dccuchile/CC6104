@@ -100,3 +100,5 @@ The course introduces the fundamentals of statistical thinking, which are descri
 * [Probabilistic graphical models notes by Stefano Ermon](https://ermongroup.github.io/cs228-notes/)
 * [D-separation without tears by Judea Pearl](http://bayes.cs.ucla.edu/BOOK-2K/d-sep.html)
 * [ML beyond Curve Fitting: An Intro to Causal Inference and do-Calculus by Ferenc Huszár](https://www.inference.vc/untitled/)
+* [AIC and BIC by  Barum Park](https://barumpark.com/blog/2018/aic-and-bic/)
+
