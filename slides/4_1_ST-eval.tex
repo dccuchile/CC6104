@@ -67,12 +67,12 @@
 \item \textbf{Underfitting}: moderls that learn too little from the data, which also leads to poor prediction.}
 \end{itemize}
 
-\item We will study two common families of approaches to tackle these problems.
+\item We will study the following approaches to tackle these problems.
 
 
 \begin{itemize}\scriptsize{
  \item \textbf{Regularization}: a mechanism to tell our models not to get too excited by the data.
-\item \textbf{Information criteria}: a scoring device to estimate predictive accuracy of our models.}
+\item \textbf{Information criteria} and \textbf{Cross-validation}: scoring devices to estimate predictive accuracy of our models.}
 \end{itemize}
 
 \item In order to introduce information criteria, this class must also introduce some concepts of \textbf{information theory}.
@@ -864,7 +864,7 @@ S(q) = \sum_{i=1}^m \log q(x_i)
 
 \item This sore is an estimate of $\mathbb{E}(\log q(x))$, just without the final step of dividing by the number of observations.
 
-\item And is actually an approximation of K-L divergence. 
+\item It is also an approximation of the K-L divergence of the model relative to the unknown target model. 
 
 
 \end{itemize}
@@ -1109,7 +1109,7 @@ deviation.
 
 \item One way to prevent a linear model to overfit the training data is regularization.
 
-\item  From a frequentist point of view, the most popular regularization technique is ridge regression.
+\item  From a frequentist point of view, the most popular regularization technique is \textbf{ridge regression}.
 
 
 \item In this approach we penalize large parameter values $\beta$ in the likelihood function.
@@ -1171,7 +1171,7 @@ rid.ev.4<- lm.ridge(brain ~ mass + I(mass^2)
 
 \item Ridge regression is an example of how a statistical procedure can be understood from both Bayesian and non-Bayesian perspectives.
 
-\item From Bayesian point of view, ridge regression is equivalent to setting a Gaussian prior centered at zero for each $\beta$ coefficient.
+\item From a Bayesian point of view, ridge regression is equivalent to setting a Gaussian prior centered at zero for each $\beta$ coefficient.
 
 \item In this setting, the value of $\sigma$ controls the ammount of regularization.
 
@@ -1268,7 +1268,7 @@ where  $D_{\text{train}}$ is the in-sample deviance, and $p$ is the number of fr
 \scriptsize{
 
 \begin{itemize}
-\item We can calculate AIC for the model reg.ev.1 as follows:
+\item We can calculate AIC for the ``reg.ev.1'' model as follows:
 
 \begin{verbatim}
 > -2*logLik(reg.ev.1)+2*3
@@ -1277,7 +1277,7 @@ where  $D_{\text{train}}$ is the in-sample deviance, and $p$ is the number of fr
 
 \item In this model $p=3$, two $\beta$ coefficients ($\beta_0,\beta_1$) and $\sigma$.
 
-\item AIC can be computed directly with the R function AIC:
+\item AIC can be computed directly in R using the ``AIC'' function:
 
 \begin{verbatim}
 > AIC(reg.ev.1)
@@ -1292,7 +1292,7 @@ where  $D_{\text{train}}$ is the in-sample deviance, and $p$ is the number of fr
 [1] 82.16384 
 \end{verbatim}
 
-\item In AIC, the lower the better, so the criterion is still preferring overfitted models.
+\item In AIC, the lower the better, so the criterion is still preferring overfitted models in this example.
 
 
 \end{itemize}
@@ -1350,17 +1350,19 @@ twice the number of parameters, tracing closely along the average out-of-sample 
 \begin{itemize}
 \item AIC provides an approximation of predictive accuracy, as measured by out-of-sample deviance. 
 
-\item All information criteria aim at this same target, but are derived under more and less general assumptions. AIC is just the oldest and most restrictive.
-\item AIC is usually used for frequentist models fitted with maximum likilihood.
+\item All information criteria aim at this same target, but are derived under more and less general assumptions.
 
-\item When employed in a Bayesian setting it assumes that the priors are flat and the posterior is approximately a multivariate Gaussian.
+\item AIC is just the oldest and most restrictive.
+\item AIC is commonly used in frequentist models fitted with maximum likelihood estimation.
 
-\item Two more-general criteria are the  Deviance Information Criterion (DIC) and The Widely Applicable Information Criterion (WAIC). 
+\item When employed in a Bayesian setting, it assumes that the priors are flat and the posterior is approximately a multivariate Gaussian.
+
+\item Two more-general criteria are the  Deviance Information Criterion (DIC) and the Widely Applicable Information Criterion (WAIC). 
+
 \item DIC accommodates informative priors, but still assumes that the posterior is multivariate
 Gaussian. 
 \item WAIC is more general yet, making no assumption about the shape of the posterior.
 \item We will only study DIC in this class.
-
 
 \end{itemize}
 
@@ -1373,6 +1375,7 @@ Gaussian.
 \scriptsize{
 
 \begin{itemize}
+
 \item The Deviance Information Criterion (DIC) is a widely used and easy to compute Bayesian information criterion. 
 \item  DIC is essentially a version of AIC that is aware of informative priors.
 \item Like AIC, it assumes a multivariate Gaussian posterior distribution. 
@@ -1549,7 +1552,7 @@ attr(,"pD")
 
 \item In this case the lowest (better) score in achieved by the simplest model.
 
-\item What we just did is using information criteria for model comparison.
+\item What we have just done is to use the DIC information criterion for model comparison.
 
 
 \end{itemize}
@@ -1564,7 +1567,7 @@ attr(,"pD")
 
 
 \begin{itemize}
-\item With definition of DIC in hand, let's review one more simulation exercise.
+\item With the definition of DIC in hand, let's review one more simulation exercise.
 
 \begin{figure}[h!]
 	\centering
@@ -1617,7 +1620,8 @@ priors.
 
 \item Also notice that the regularizing prior (blue) still helps, and that DIC tracks this help.
 \item This suggests that using both regularization and information criteria will always beat using only one or the other alone. 
-\item Regularization, as long as it's not too strong, reduces  overfitting for any particular model. \item Information criteria instead help us measure overfitting across models fit to the same data. \item These are complementary functions. 
+\item Regularization, as long as it's not too strong, reduces  overfitting for any particular model. \item Information criteria instead help us measure overfitting across models fit to the same data. 
+\item These are complementary functions. 
 \item And since both are very easy to use and widely available, there's no reason to shy away from their use.
 
 
@@ -1634,8 +1638,8 @@ priors.
 \begin{itemize}
 \item This class has been a marathon. 
 \item It began with the problem of overfitting, a universal phenomenon by which models with more parameters fit a sample better, even when the additional parameters are meaningless.
-\item Theree common tools were introduced to address over-fitting: regularizing priors, cross-validation, and information criteria.
-\item Regularizing priors reduce overfitting during estimation, and both cross-validation and information criteria help estimate the degree of overfitting. 
+\item Theree common tools were introduced to address over-fitting: regularization, cross-validation, and information criteria.
+\item Regularization reduces overfitting during estimation, and both cross-validation and information criteria help estimate the degree of overfitting. 
 \item In all cases, keep in mind that these tools are heuristic. 
 \item They provide no guarantees. 
 \item No statistical procedure will ever substitute for iterative scientific investigation.
