@@ -381,11 +381,13 @@ within and out of sample.
 \begin{itemize}
 \item The first thing we need to navigate between overfitting and underfitting problems is a criterion of model performance.
 
-\item We will see how information theory provides a useful criterion for model evaluation: the \textbf{out-of-sample deviance}.
+\item We will see how \textbf{information theory} provides a useful criterion for model evaluation: the \textbf{out-of-sample deviance}.
 
-\item Once we learn about this cretierion we will se how both regularization and information criteria help to improve and estimate the out-of-sample deviance of a model.
+\item Once we learn about this criterion we will see how \textbf{cross-validation} and \textbf{information criteria} can help to estimate the out-of-sample deviance of a model.
 
-\item As usual, we will introduce these concepts with an example.
+\item We will also learn how to use \textbf{regularization} to improve the out-of-sample deviance of a model.
+
+\item As usual, we will start with an example.
 
 \end{itemize}
 
@@ -699,7 +701,7 @@ one distribution to describe another distribution.
 
 \item This divergence is just the difference between two entropies.
 
-\item The entropy of the target distribution $f$ and the cross entropy arising from using $q$ to predict $f$
+\item The entropy of the target distribution $f$ and the cross entropy arising from using $q$ to predict $f$.
 
 \end{itemize}
 
@@ -747,9 +749,9 @@ distribution $f$, this defines something known as cross entropy $H(f,q)$:
 
 \begin{itemize}
 
-\item  When $f = q$, we know the actual probabilities of the events. 
+\item  When $f = q$, we know the actual probabilities of the events and the divergence becomes zero: 
 
-\item In that case: \begin{displaymath}
+ \begin{displaymath}
                      D_{KL}(f,q) =   D_{KL}(f,f) = 0
                     \end{displaymath}
 
@@ -760,7 +762,7 @@ distribution $f$, this defines something known as cross entropy $H(f,q)$:
 [1] 0
 \end{verbatim}
                     
-\item But more importantly, as q grows more different from $f$, the divergence $D_{KL}$ also grows.       
+\item As q grows more different from $f$, the divergence $D_{KL}$ also grows.       
        
 \item Suppose the true target distribution is $f = \{0.3, 0.7\}$.
 
@@ -849,13 +851,20 @@ t %>%
 \item So while we don't know where $f$ is, we can estimate how far apart $q$ and $r$ are, and which is closer to the target.
 
 
-\item All of this also means that all we need to know is a model's average log-probability: $\mathbb{E}(\log q(x))$ for q and $\mathbb{E}(\log r(x))$ for r. 
+\item All we need to know is a model's average log-probability: $\mathbb{E}(\log q(x))$ for q and $\mathbb{E}(\log r(x))$ for r. 
 
-\item Indeed, just summing the log-probabilities of each observed case provides an approximation of $\mathbb{E}(\log q(x))$ and $\mathbb{E}(\log r(x))$.
 
-\item This also means that the absolute magnitude of these values will not be interpretable.
 
-\item Only the difference  $\mathbb{E}(\log q(x)) - \mathbb{E}(\log r(x))$ informs us about the divergence of each model from the target f.
+\item To approximate the relative value of $\mathbb{E}(\log q(x))$, we can use the log-probability score of the model:
+
+\begin{equation}
+S(q) = \sum_{i=1}^m \log q(x_i)
+\end{equation}
+
+
+\item This sore is an estimate of $\mathbb{E}(\log q(x))$, just without the final step of dividing by the number of observations.
+
+\item And is actually an approximation of K-L divergence. 
 
 
 \end{itemize}
@@ -869,19 +878,10 @@ t %>%
 
 \begin{itemize}
 
-\item All of this delivers us to a very common measure of relative model fit, one that also turns out to be an approximation of K-L divergence. 
-\item To approximate the relative value of $\mathbb{E}(\log q(x))$, we can use the log-probability score of the model:
-
-\begin{equation}
-S(q) = \sum_{i=1}^m \log q(x_i)
-\end{equation}
 
 
-\item This sore is an estimate of $\mathbb{E}(\log q(x))$, just without the final step of dividing by the number of observations.
 
-
-\item Most of the standard model fitting functions in R support ``logLik'' , which computes the sum of log-probabilities, usually
-known as the log-likelihood of the data.
+\item Most of the standard model fitting functions in R support ``logLik'' , which computes the sum of log-probabilities, usually known as the log-likelihood of the data.
 
 \begin{verbatim}
 > logLik(reg.ev.1)
@@ -889,6 +889,10 @@ known as the log-likelihood of the data.
 > logLik(reg.ev.2)
 'log Lik.' -47.13276 (df=4) 
 \end{verbatim}
+
+\item Recall that the absolute magnitude of these values are not interpretable.
+
+\item Only the difference  $S(q) - S(r)$ informs us about the divergence of each model from the unknown target $f$.
 
 
 
@@ -1073,6 +1077,8 @@ deviation.
 \item The minimum number of folds is 2. 
 \item At the other extreme, you could make each point observation a fold and fit as many models as you have individual observations.
 \item This is called leave-one-out cross-validation (often abbreviated as LOOCV).
+\item The key trouble with leave-one-out cross-validation is that, if we have 1000 observations, that means computing 1000 models.
+\item That can be time consuming.
 \end{itemize}
 
 
@@ -1085,7 +1091,7 @@ deviation.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.5]{pics/crossvalidation.png}
+	\includegraphics[scale=0.4]{pics/crossvalidation.png}
 \end{figure}
 
 } 
@@ -1237,6 +1243,20 @@ regularizing prior right, then overfitting can be greatly reduced.
 
 \begin{itemize}
 \item Information criteria are a group of scoring devices that construct a theoretical estimate of the relative out-of-sample deviance using just the training data.
+\item They are a cheaper alternative to cross-validation.
+
+\item The most known information criterion is the \textbf{Akaike information criterion}, abbreviated AIC. 
+\item AIC provides a surprisingly simple estimate of the average out-of-sample deviance:
+\begin{equation}
+AIC = D_{\text{train}} + 2p 
+\end{equation}
+
+
+where  $D_{\text{train}}$ is the in-sample deviance, and $p$ is the number of free parameters to be estimated in the model.
+
+\item In a linear regression model, $p$ equals to the number of $\beta$ coefficients (including the intercept)  plus 1, to account to the model's standard deviation $\sigma$.
+
+
 \end{itemize}
 
 
@@ -1244,11 +1264,79 @@ regularizing prior right, then overfitting can be greatly reduced.
 \end{frame}
 
 
-\begin{frame}{Using information criteria}
+\begin{frame}[fragile]{Akaike information criterion}
 \scriptsize{
 
 \begin{itemize}
-\item Blabla
+\item We can calculate AIC for the model reg.ev.1 as follows:
+
+\begin{verbatim}
+> -2*logLik(reg.ev.1)+2*3
+'log Lik.' 100.925 (df=3) 
+\end{verbatim}
+
+\item In this model $p=3$, two $\beta$ coefficients ($\beta_0,\beta_1$) and $\sigma$.
+
+\item AIC can be computed directly with the R function AIC:
+
+\begin{verbatim}
+> AIC(reg.ev.1)
+[1] 100.925
+> AIC(reg.ev.2)
+[1] 102.2655
+> AIC(reg.ev.3)
+[1] 101.6695
+> AIC(reg.ev.4)
+[1] 99.85016
+> AIC(reg.ev.5)
+[1] 82.16384 
+\end{verbatim}
+
+\item In AIC, the lower the better, so the criterion is still preferring overfitted models.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}{Akaike information criterion}
+\scriptsize{
+
+\begin{itemize}
+\item Let's try to understand with an example where the AIC formula comes from.\footnote{A more detailed derivation can be found here: \url{https://barumpark.com/blog/2018/aic-and-bic/}}
+
+\item The figure below shows again the in-sample and out-of-sample deviances for the simulated data.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.33]{pics/akaike.png}
+\end{figure}
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+\begin{frame}{Akaike information criterion}
+\scriptsize{
+
+\begin{itemize}
+
+\item The vertical line segments measure the average distance between training deviance (blue) and test
+deviance (open black).
+
+\item Each distance is nearly twice the number of parameters, as labeled on the horizontal axis. 
+
+\item The dashed lines show exactly the blue points plus
+twice the number of parameters, tracing closely along the average out-of-sample deviance for each model.
+
+\item These lines therefore show AIC for each model, an approximation of the out-of-sample deviance.
+
+
 \end{itemize}
 
 
@@ -1256,13 +1344,301 @@ regularizing prior right, then overfitting can be greatly reduced.
 \end{frame}
 
 
+\begin{frame}{Information criteria}
+\scriptsize{
+
+\begin{itemize}
+\item AIC provides an approximation of predictive accuracy, as measured by out-of-sample deviance. 
+
+\item All information criteria aim at this same target, but are derived under more and less general assumptions. AIC is just the oldest and most restrictive.
+\item AIC is usually used for frequentist models fitted with maximum likilihood.
+
+\item When employed in a Bayesian setting it assumes that the priors are flat and the posterior is approximately a multivariate Gaussian.
+
+\item Two more-general criteria are the  Deviance Information Criterion (DIC) and The Widely Applicable Information Criterion (WAIC). 
+\item DIC accommodates informative priors, but still assumes that the posterior is multivariate
+Gaussian. 
+\item WAIC is more general yet, making no assumption about the shape of the posterior.
+\item We will only study DIC in this class.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+\begin{itemize}
+\item The Deviance Information Criterion (DIC) is a widely used and easy to compute Bayesian information criterion. 
+\item  DIC is essentially a version of AIC that is aware of informative priors.
+\item Like AIC, it assumes a multivariate Gaussian posterior distribution. 
+\item This means if any parameter in the posterior is substantially skewed, and also has a substantial effect on prediction, then DIC like AIC can go horribly wrong.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+\begin{itemize}
+\item DIC is calculated from the posterior distribution of the training deviance.
+\item What does it mean for the deviance to have a posterior distribution?
+\item Since the parameters have a posterior distribution, and since the deviance is computed from the parameters, deviance must also have a posterior distribution.  
+\item Classical ``deviance'' is defined at the
+MAP values.
+\item But in principle the posterior distribution provides information about predictive uncertainty.
+\item That uncertainty turns out to help us estimate out-of-sample deviance.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+\begin{itemize}
+\item So define $D$ now as the posterior distribution of deviance. 
+\item This means we compute deviance (on the training sample) for each set of sampled parameter values in the posterior distribution. 
+\item So if we draw $10,000$ samples from the posterior, we compute 10,000 deviance values. 
+\item Let $\overline{D}$ indicate the average of $D$. 
+\item Also define $\hat{D}$ as the deviance calculated at the posterior mean. 
+\item This means we compute the average of each parameter in the posterior distribution. 
+\item Then we plug those averages into the deviance formula to get $\hat{D}$ out.
+\item Once you have $\overline{D}$ and $\hat{D}$, DIC is calculated as:
+
+\begin{equation}
+DIC = \overline{D}+ (\overline{D}-\hat{D}) =  \overline{D} + p_D
+\end{equation}
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+\begin{itemize}
+\item The difference $\overline{D}-\hat{D} = p_D$ is analogous to the number of parameters used in computing AIC.
+\item It is an ``effective'' number of parameters that measures how flexible the model is in
+fitting the training sample. 
+\item More flexible models entail greater risk of overfitting. 
+\item So this $p_D$ term is sometimes called a penalty term.
+\item It is just the expected distance between the deviance  in-sample and the deviance out-of-sample.
+\item In the case of flat priors, DIC reduces directly to AIC, because the expected distance is just the number of parameters. 
+\item But more generally, $p_D$  will be some fraction of the number of parameters, because regularizing priors constrain a model's flexibility.
+\item The function ``DIC'' in the ``rethinking'' package will compute DIC for a model fit with ``quap'' or ``ulam''.
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+\begin{itemize}
+\item Let's compare DIC for three Bayesian linear models for the Howell data.
+
+\item b.reg1: a simple linear regression of height using weight as a predictor.
+
+\item b.reg2: a multivariate linear regression of height using weight and age as predictors.
+
+\item b.reg3: a polynomial regression of height using weight and weight square as predictors.
+
+\begin{verbatim}
+library(rethinking)
+data(Howell1)
+d <- Howell1
+d2 <- d[ d$age >= 18 , ]
+
+b.reg1 <- quap(
+  alist(
+    height ~ dnorm( mu, sigma ),
+    mu <- b0 + b1*weight,
+    b0 ~ dnorm( 150 , 50 ) ,
+    b1 ~ dnorm( 0 , 1) ,
+    sigma ~ dunif( 0 , 50 )
+  ) , data=d2 )
+
+\end{verbatim}
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+\begin{verbatim}
+b.reg2 <- quap(
+  alist(
+    height ~ dnorm( mu, sigma ),
+    mu <- b0 + b1*weight+b2*age,
+    b0 ~ dnorm( 150 , 50 ) ,
+    b1 ~ dnorm( 0 , 1) ,
+    b2 ~ dnorm( 0 , 1) ,
+    sigma ~ dunif( 0 , 50 )
+  ) , data=d2 )
+
+b.reg3 <- quap(
+  alist(
+    height ~ dnorm( mu, sigma ),
+    mu <- b0 + b1*weight+b2*weight^2,
+    b0 ~ dnorm( 150 , 50 ) ,
+    b1 ~ dnorm( 0 , 1) ,
+    b2 ~ dnorm( 0 , 1) ,
+    sigma ~ dunif( 0 , 50 )
+  ) , data=d2 )
+\end{verbatim}
+
+
+
+
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+
+\begin{itemize}
+\item Let's compute DIC for each model: 
+
+\begin{verbatim}
+> DIC(b.reg1)
+[1] 2148.409
+attr(,"pD")
+[1] 3.190277
+> DIC(b.reg2)
+[1] 2149.218
+attr(,"pD")
+[1] 3.941273
+> DIC(b.reg3)
+[1] 2149.858
+attr(,"pD")
+[1] 3.805133
+\end{verbatim}
+
+
+\item In this case the lowest (better) score in achieved by the simplest model.
+
+\item What we just did is using information criteria for model comparison.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+
+\begin{itemize}
+\item With definition of DIC in hand, let's review one more simulation exercise.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{pics/DIC.png}
+\end{figure}
+
+\item The figure above shows the results of 10,000 simulations each for the five familiar models with
+between 1 and 5 parameters. 
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+
+\begin{itemize}
+ 
+\item The plot displays only out-of-sample deviance now, for simplicity. 
+\item The black points are average out-of-sample deviance resulting from simulations with nearly flat priors.
+\item The blue points result from simulations using regularizing Normal(0, 0.5)
+priors. 
+\item The black and blue lines show the estimated out-of-sample deviance from DIC, with colors corresponding to groups of points.
+
+\item DIC is an accurate estimate of out-of-sample deviance, being within 1 point of deviance of the actual average in most cases.
+
+
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}{Deviance Information Criterion (DIC)}
+\scriptsize{
+
+
+\begin{itemize}
+ 
+
+
+\item Also notice that the regularizing prior (blue) still helps, and that DIC tracks this help.
+\item This suggests that using both regularization and information criteria will always beat using only one or the other alone. 
+\item Regularization, as long as it's not too strong, reduces  overfitting for any particular model. \item Information criteria instead help us measure overfitting across models fit to the same data. \item These are complementary functions. 
+\item And since both are very easy to use and widely available, there's no reason to shy away from their use.
+
+
+\end{itemize}
+
+
+} 
+\end{frame}
 
 
 \begin{frame}{Conclusions}
 \scriptsize{
 
 \begin{itemize}
-\item Blabla
+\item This class has been a marathon. 
+\item It began with the problem of overfitting, a universal phenomenon by which models with more parameters fit a sample better, even when the additional parameters are meaningless.
+\item Theree common tools were introduced to address over-fitting: regularizing priors, cross-validation, and information criteria.
+\item Regularizing priors reduce overfitting during estimation, and both cross-validation and information criteria help estimate the degree of overfitting. 
+\item In all cases, keep in mind that these tools are heuristic. 
+\item They provide no guarantees. 
+\item No statistical procedure will ever substitute for iterative scientific investigation.
 \end{itemize}
 
 

@@ -78,15 +78,16 @@ rid.ev.4<- lm.ridge(brain ~ mass + I(mass^2)
          + I(mass^3) + I(mass^4),data=d,lambda = 0.1) 
 rid.ev.4
 
+
+-2*logLik(reg.ev.1)+2*3
+
 AIC(reg.ev.1)
+AIC(reg.ev.2)
+AIC(reg.ev.3)
+AIC(reg.ev.4)
+AIC(reg.ev.5)
 
-deviance(reg.ev.1)
-AIC(reg.ev.2,k=2)
--2*logLik(reg.ev.2)+2*4
 
-library(rethinking)
-
-DIC
 
 library(rethinking)
 data(Howell1)
@@ -102,8 +103,6 @@ b.reg1 <- quap(
     sigma ~ dunif( 0 , 50 )
   ) , data=d2 )
 
-DIC(b.reg1)
-
 b.reg2 <- quap(
   alist(
     height ~ dnorm( mu, sigma ),
@@ -114,8 +113,8 @@ b.reg2 <- quap(
     sigma ~ dunif( 0 , 50 )
   ) , data=d2 )
 
-precis( b.reg2, prob=0.95 )
-DIC(b.reg2)
+
+
 
 b.reg3 <- quap(
   alist(
@@ -127,7 +126,8 @@ b.reg3 <- quap(
     sigma ~ dunif( 0 , 50 )
   ) , data=d2 )
 
-precis( b.reg3, prob=0.95 )
+DIC(b.reg1)
+DIC(b.reg2)
 DIC(b.reg3)
 
 compare(b.reg1,b.reg2,b.reg3)
