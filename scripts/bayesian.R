@@ -120,6 +120,10 @@ mean(samples.a)
 median(samples.a)
 
 
+mean(samples)
+median(samples)
+chainmode( samples, adj=0.01 )
+
 # Posterior Predictive
 rbinom( 1, size=9 , prob=0.67)
 
