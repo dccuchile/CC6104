@@ -102,7 +102,7 @@
 }
 \end{itemize}
  
-\item In the theoretical world (when the posterior has a closed mathematical expressions), answering these questions implies calculating complicated integrals to cancel out (or average) different variables.
+\item In the theoretical world (when the posterior has a closed mathematical form), answering these questions implies calculating complicated integrals to cancel out (or average) different variables.
 
 \item In the practical world, however, the same results can be approximated  using \textbf{samples} from the posterior. 
  
@@ -141,6 +141,7 @@ prior <- rep( 1 , 1000 )
 likelihood <- dbinom( 6 , size=9 , prob=p_grid )
 posterior <- likelihood * prior
 posterior <- posterior / sum(posterior)
+
 \end{verbatim}
 
 \item Now we wish to draw 10,000 samples from this posterior. 
@@ -154,6 +155,32 @@ posterior <- posterior / sum(posterior)
 
 
 } 
+
+\end{frame}
+
+\begin{frame}[fragile]{Sampling from a grid-approximate posterior}
+\scriptsize{
+\begin{itemize}
+
+\item We can visualize this bucket by plotting the posterior probabilities against the grid of parameter values.
+
+\begin{verbatim}
+plot(posterior~p_grid)
+
+\end{verbatim}
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.85]{pics/post_grid.pdf}
+	\end{figure}
+
+
+
+\end{itemize}
+
+
+
+}
 
 \end{frame}
 
@@ -257,7 +284,7 @@ dens(teo.samples)
 
 \item Suppose we are asked for the posterior probability that the proportion of water is less than 0.5. 
 
-\item We could calculate this from the theoretical posterior:
+\item We could calculate this from the theoretical posterior's CDF:
 
 \begin{verbatim}
 > pbeta(0.5,7,4)
@@ -1060,20 +1087,47 @@ distribution of outcomes.
 \end{itemize}
 
 
-
-
-
-
-
-
-
-
 } 
 \end{frame}
 
 
+\begin{frame}[fragile]{Posterior Predictive Distribution}
+\scriptsize{
 
 
+\begin{itemize}
+
+
+\item When the posterior is a beta distribution and the likelihood is a binomial, such as in our globe tossing experiment, the posterior predictive distribution has a closed mathematical expression defined by the beta-binomial distribution.
+
+\item The beta-binomial distribution is the binomial distribution in which the probability of success at each of n trials is not fixed but randomly drawn from a beta distribution \cite{wiki:Beta-binomial_distribution}.
+
+\item We can generate posterior predictive simulations using the ``rbetabinom'' function from the ``rethinking'' package:
+
+\begin{verbatim}
+post_pred_w_betabinom <-rbetabinom( n=1e4, size=9 ,
+                                    shape1=7 , shape2=4)
+simplehist( post_pred_w_betabinom ,
+            xlab="beta-binomial posterior predictions")
+\end{verbatim}
+
+
+
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+\begin{frame}{Posterior Predictive Distribution}
+
+   \begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{pics/betabinom.pdf}
+	\end{figure}
+
+\end{frame}
 
 
 

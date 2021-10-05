@@ -32,18 +32,18 @@ ggplot(d, aes(theta,Prob)) +
   library(rstan)
   
   
-  globe.qa <- quap(
-    alist(
-      W ~ dbinom( W+L ,p) , # binomial likelihood
-      p ~ dunif(0,1)   # uniform prior
-    ) ,
-    data=list(W=6,L=3) )
-  
-  # display summary of quadratic approximation
-  precis( globe.qa )
-  sample.quap <- extract.samples(  globe.qa )
-  dens(sample.quap)
-  
+globe.qa <- quap(
+  alist(
+    W ~ dbinom( W+L ,p) , # binomial likelihood
+    p ~ dunif(0,1)   # uniform prior
+  ) ,
+  data=list(W=6,L=3) )
+
+# display summary of quadratic approximation
+precis( globe.qa )
+sample.quap <- extract.samples(  globe.qa )
+dens(sample.quap)
+
 
 # globe tossing model posterior using grid approximation
 p_grid <- seq( from=0 , to=1 , length.out=1000 )
@@ -51,6 +51,8 @@ prior <- rep( 1 , 1000 )
 likelihood <- dbinom( 6 , size=9 , prob=p_grid )
 posterior <- likelihood * prior
 posterior <- posterior / sum(posterior)
+
+plot(posterior~p_grid)
 
 samples <- sample( p_grid , prob=posterior , size=1e4 , replace=TRUE )
 
@@ -126,4 +128,12 @@ simplehist( new_w , xlab="new water predictions")
 
 post_pred_w <- rbinom( 1e4 , size=9 , prob=samples )
 simplehist( post_pred_w , xlab="posterior predictions")
+
+
+
+post_pred_w_betabinom <-rbetabinom( n=1e4, size=9 , 
+                                    shape1=7 , shape2=4)
+
+simplehist( post_pred_w_betabinom , 
+            xlab="beta-binomial posterior predictions")
   
