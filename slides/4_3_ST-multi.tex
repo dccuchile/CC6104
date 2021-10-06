@@ -235,11 +235,25 @@ The logit link transforms a linear model (left) into a probability
 \end{frame}
 
 
-\begin{frame}{Binomial Regression}
+\begin{frame}{Generalized Linear Models}
 \scriptsize{
 \begin{itemize}
 
-\item There are two common flavors of GLM that use binomial likelihood functions:
+\item There are two common flavors of GLM that use binomial likelihood functions and logit link functions:
+
+\begin{enumerate}\scriptsize{
+ \item \textbf{Logistic regression}: when the data are organized into single-trial cases $(n=1)$, such that the outcome variable can only take values 0 and 1. In this case the likelihood function can also be represented with a Bernoulli distribution.
+\item \textbf{Aggregated binomial regression}: when the outcome can take the value zero or any positive integer up to $n$, the number of trials.}
+\end{enumerate}
+
+\item Other distributions that can be used in GLMs are the Exponential, the Poisson and the Gamma distribution.
+
+\item These distributions along with the Gaussian and the Binomial are part of the exponential family, which is a set of probability distributions that can be parameterized with the following expression:
+
+\begin{equation}
+f(y;\eta)=b(y)\exp(\eta^T T(y)-a(\eta))
+\end{equation}
+
 
 \end{itemize}
 
