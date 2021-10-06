@@ -156,7 +156,7 @@ $f(p_i) = \beta_0 + \beta_1 x_i$ & [generalized linear model] \\
 \item  The first change we can note is that likelihood is binomial instead of Gaussian.
 \item For a count outcome $y$ for which each observation arises from $n$ trials and with constant expected value $n*p$, the binomial distribution is the de facto choice.
 
-\item The function $f$ represents a link function, to be determined separately from the choice of distribution.
+\item The function $f$ represents a \textbf{link} function, to be determined separately from the choice of distribution.
 
 \item Generalized linear models need a link function, because rarely is there a ``$\mu$'', a parameter describing the average outcome.
 \item Parameters are also rarely unbounded in both directions, like $\mu$.
@@ -179,10 +179,83 @@ $f(p_i) = \beta_0 + \beta_1 x_i$ & [generalized linear model] \\
 \item Since $n$ is usually known (but not always), it is most common to attach a linear model to the unknown part, $p$.
 \item But $p$ is a probability, so $p_i$ must lie between zero and one.
 \item But there's nothing to stop the linear model $\beta_0 + \beta_1 x_i$ from falling below zero or exceeding one.
-\item The link function $f$ provides a solution to this common problem.
+\item The \textbf{link} function $f$ provides a solution to this common problem.
+
+\item The link function that is commonly used when working with binomial GLMs is the logit function.
+
+\item It maps a parameter that is defined as a probability $p$ (i.e., $0\leq p\leq 1$), onto a linear model that can take on any real value.
+
+ \vspace{0.3cm}
+ \begin{table}
+ \centering
+ \begin{tabular}{l}
+logit$(p_i) = \beta_0 + \beta_1 x_i$ \\ \\
+logit$(p_i) = \log\left(\frac{p_i}{1-p_i}\right)$
+\end{tabular}
+\end{table}
+ \vspace{0.3cm}
+
 
 \end{itemize}
 
+
+
+}
+
+\end{frame}
+
+
+\begin{frame}{Generalized Linear Models}
+\scriptsize{
+\begin{itemize}
+
+\item If we solve the logit equation for $p_i$ we get:
+
+\begin{equation}
+ p_i = \frac{\exp (\beta_0 + \beta_1 x_i)}{1+\exp (\beta_0 + \beta_1 x_i)}
+\end{equation}
+
+which is known as the \textbf{sigmoid} function.
+
+\item It is also called the \textbf{logistic} or the \textbf{inverse-logit} function.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/sigmoid.png}
+\end{figure}
+
+The logit link transforms a linear model (left) into a probability
+(right).
+
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+\begin{frame}{Binomial Regression}
+\scriptsize{
+\begin{itemize}
+
+\item There are two common flavors of GLM that use binomial likelihood functions:
+
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+\begin{frame}{Other types of GLMs}
+\scriptsize{
+\begin{itemize}
+
+\item There are two common flavors of GLM that use binomial likelihood functions:
+
+\end{itemize}
 
 
 }
