@@ -85,7 +85,25 @@
 \begin{frame}{Generalized Linear Models}
 \scriptsize{
 \begin{itemize}
-\item ghghg  gfhfg\cite{mcelreath2020statistical}
+\item The linear regression models of previous classes worked by first assuming a Gaussian distribution over outcomes.
+\item Then, we replaced the parameter that defines the mean of that distribution, $\mu$, with a linear model.
+\item This resulted in likelihood definitions of the sort:
+
+ \vspace{0.3cm}
+ \begin{table}
+ \centering
+ \begin{tabular}{lr}
+$y_i \sim N(\mu_i,\sigma)$ & [likelihood] \\
+$\mu_i = \beta_0 + \beta_1 x_i$ & [linear model] \\
+\end{tabular}
+\end{table}
+ \vspace{0.3cm}
+
+\item When the outcome variable is either discrete or bounded, a Gaussian likelihood is not the most powerful choice.
+
+\item Consider for example a count outcome, such as the number of blue marbles pulled from a bag.
+\item Such a variable is constrained to be zero or a positive integer.
+
  
 \end{itemize}
 
@@ -95,7 +113,81 @@
 
 \end{frame}
 
+\begin{frame}{Generalized Linear Models}
+\scriptsize{
+\begin{itemize}
 
+
+\item The problem of using a Gaussian model with such a variable is that the model wouldn't know that counts can't be negative.
+
+\item So it would happily predict negative values, whenever the mean count is close to zero \cite{mcelreath2020statistical}.
+
+\item In linear regression we basically replace the parameter describing the shape of the Gaussian likelihood $\mu$ with a linear model.
+
+\item The the essence of a Generalized Linear Model (GLM) is to generalize this strategy to probability distributions other than the Gaussian.
+
+\item And it results in models that look like this:
+
+ \vspace{0.3cm}
+ \begin{table}
+ \centering
+ \begin{tabular}{lr}
+$y_i \sim \text{Binomial}(n,p_i)$ & [likelihood] \\
+$f(p_i) = \beta_0 + \beta_1 x_i$ & [generalized linear model] \\
+\end{tabular}
+\end{table}
+ \vspace{0.3cm}
+
+
+\end{itemize}
+
+
+
+}
+
+\end{frame}
+
+
+\begin{frame}{Generalized Linear Models}
+\scriptsize{
+\begin{itemize}
+
+
+\item  The first change we can note is that likelihood is binomial instead of Gaussian.
+\item For a count outcome $y$ for which each observation arises from $n$ trials and with constant expected value $n*p$, the binomial distribution is the de facto choice.
+
+\item The function $f$ represents a link function, to be determined separately from the choice of distribution.
+
+\item Generalized linear models need a link function, because rarely is there a ``$\mu$'', a parameter describing the average outcome.
+\item Parameters are also rarely unbounded in both directions, like $\mu$.
+\item For example, the shape of the binomial distribution is determined, like the Gaussian, by two parameters.
+\end{itemize}
+
+
+
+}
+
+\end{frame}
+
+
+\begin{frame}{Generalized Linear Models}
+\scriptsize{
+\begin{itemize}
+
+\item But unlike the Gaussian, neither of these parameters is the mean.
+\item Instead, the mean outcome is $n*p$, which is a function of both parameters.
+\item Since $n$ is usually known (but not always), it is most common to attach a linear model to the unknown part, $p$.
+\item But $p$ is a probability, so $p_i$ must lie between zero and one.
+\item But there's nothing to stop the linear model $\beta_0 + \beta_1 x_i$ from falling below zero or exceeding one.
+\item The link function $f$ provides a solution to this common problem.
+
+\end{itemize}
+
+
+
+}
+
+\end{frame}
 
 
 \begin{frame}{Conclusions}
