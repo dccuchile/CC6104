@@ -248,7 +248,7 @@ The logit link transforms a linear model (left) into a probability
 
 \item Other distributions that can be used in GLMs are the Exponential, the Poisson and the Gamma distribution.
 
-\item These distributions along with the Gaussian and the Binomial are part of the exponential family, which is a set of probability distributions that can be parameterized with unified expression.
+\item These distributions along with the Gaussian and Binomial are part of the exponential family, which is a set of probability distributions that share some common algebraic properties.
 
 \item We won't go into details of the exponential family here.
 
@@ -262,11 +262,78 @@ The logit link transforms a linear model (left) into a probability
 \end{frame}
 
 
-\begin{frame}{Other types of GLMs}
+\begin{frame}{Expontential Family}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.45]{pics/expfamily.png}
+\end{figure}
+source: \cite{mcelreath2020statistical}
+
+}
+
+\end{frame}
+
+
+\begin{frame}{Logistic regression: Prosocial chimpanzees.}
 \scriptsize{
 \begin{itemize}
 
-\item There are two common flavors of GLM that use binomial likelihood functions:
+\item Now we will go through an example of logistic regression given in \cite{mcelreath2020statistical}.
+
+\item The data for this example come from an experiment aimed at evaluating the \textbf{prosocial} tendencies of chimpanzees \cite{silk2005chimpanzees}.
+
+\item A \textbf{focal} chimpanzee sits at one end of a long table with two levers, one on the left and one on the right.
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.38]{pics/prosocial.png}
+\end{figure}
+
+
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+\begin{frame}{Logistic regression: Prosocial chimpanzees.}
+\scriptsize{
+\begin{itemize}
+
+\item On the table are four dishes which may contain desirable food items.
+\item The two dishes on the right side of the table are attached by a mechanism to the right-hand lever.
+\item The two dishes on the left side are similarly attached to the left-hand lever.
+\item When either the left or right lever is pulled by the focal animal, the two dishes on the same side slide towards opposite ends of the table.
+\item This delivers whatever is in those dishes to the opposite ends.
+\item In all experimental trials, both dishes on the focal animal's side contain
+food items.
+\item But only one of the dishes on the other side of the table contains a food item.
+\item Therefore while both levers deliver food to the focal animal, only one of the levers delivers food to the other side of the table.
+
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+\begin{frame}{Logistic regression: Prosocial chimpanzees.}
+\scriptsize{
+\begin{itemize}
+
+\item There are two experimental conditions.
+\item In the \textbf{partner} condition, another chimpanzee is seated at the opposite end of the table, as pictured in the figure.
+\item In the \textbf{control} condition, the other side of the table is empty. \item Finally, two \textbf{counterbalancing} treatments alternate which side, left or right, has a food item for the other side of the table.
+\item This helps detect any \textbf{handedness} preferences for individual focal animals.
+
+\item When human students participate in an experiment like this, they nearly always choose the lever linked to two pieces of food, the prosocial option, but only when another student sits on the opposite side of the table.
+\item The motivating question is whether a focal chimpanzee behaves similarly, choosing the prosocial option more often when another animal is present.
+
 
 \end{itemize}
 

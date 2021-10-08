@@ -5,25 +5,23 @@ data(chimpanzees)
 d <- chimpanzees
 
 
-m10.7glm <- glm( pulled_left~ 1 , data=d , family=binomial )
+glm.f1 <- glm( pulled_left~ 1 , data=d , family=binomial )
+summary(glm.f1)
 
-m10.4glm <- glm(
-  pulled_left ~ as.factor(actor) + prosoc_left:condition,
-  data=d , family=binomial )
-
-summary(m10.4glm)
-
-
-m10.1 <- quap(
+glm.b1 <- quap(
   alist(
     pulled_left ~ dbinom( 1 , p ) ,
     logit(p) <- a ,
     a ~ dnorm(0,10)
   ) ,
   data=d )
-precis(m10.1)
+precis(glm.b1)
 
-m10.2 <- quap(
+glm.f2 <- glm( pulled_left~as.factor(prosoc_left) , data=d , family=binomial )
+summary(glm.f2)
+
+
+glm.b2 <- quap(
   alist(
     pulled_left ~ dbinom( 1 , p ) ,
     logit(p) <- a + bp*prosoc_left ,
@@ -31,9 +29,13 @@ m10.2 <- quap(
     bp ~ dnorm(0,10)
   ) ,
   data=d )
-precis(m10.2)
+precis(glm.b2)
 
-m10.3 <- quap(
+
+glm.f3 <- glm( pulled_left~prosoc_left+prosoc_left:condition , data=d , family=binomial )
+summary(glm.f3)
+
+glm.b3 <- quap(
   alist(
     pulled_left ~ dbinom( 1 , p ) ,
     logit(p) <- a + (bp + bpC*condition)*prosoc_left ,
@@ -42,9 +44,7 @@ m10.3 <- quap(
     bpC ~ dnorm(0,10)
   ) ,
   data=d )
-precis(m10.3)
-
-
+precis(glm.b3)
 
 
 
@@ -56,7 +56,7 @@ dat_list <- list(
 
 # ulam can use lists, an integers must be set as integers.
 
-m10.4 <- ulam(
+glm.b4 <- ulam(
   alist(
     pulled_left ~ dbinom( 1 , p ) ,
     logit(p) <- a[actor] + (bp + bpC*condition)*prosoc_left ,
@@ -65,16 +65,14 @@ m10.4 <- ulam(
     bpC ~ dnorm(0,10)
   )  , data=dat_list , chains=4 , log_lik=TRUE )
 
-precis(m10.4,depth = 2)
+precis(glm.b4,depth = 2)
 
 
 
 
-## multi-level chimpanzees
+## multi-level chimpanzees adding varying intercepts on actor.
 
-
-
-m10.5 <- ulam(
+ml.1 <- ulam(
   alist(
     pulled_left ~ dbinom( 1 , p ) ,
     logit(p) <- a + a_actor[actor] + (bp + bpC*condition)*prosoc_left ,
@@ -86,12 +84,12 @@ m10.5 <- ulam(
   ) ,
   data=dat_list , warmup=1000 , iter=5000 , chains=4 , cores=3 )
 
-precis(m10.5,depth = 2)
+precis(ml.1,depth = 2)
 
 
 dat_list$block_id <- d$block
 
-m10.6 <- ulam(
+ml.2 <- ulam(
   alist(
     pulled_left ~ dbinom( 1 , p ),
     logit(p) <- a + a_actor[actor] + a_block[block_id] +
@@ -104,8 +102,8 @@ m10.6 <- ulam(
   ) ,
   data=dat_list, warmup=1000 , iter=6000 , chains=4 , cores=3 )
 
-precis(m10.6,depth=2) # depth=2 displays varying effects
-plot(precis(m10.6,depth=2)) # also plot
+precis(ml.2,depth=2) # depth=2 displays varying effects
+plot(precis(ml.2,depth=2)) # also plot
 
 
 #### Multi-level reedfrogs
