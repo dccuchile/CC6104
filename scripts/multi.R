@@ -59,18 +59,36 @@ dat_list <- list(
 glm.b4 <- ulam(
   alist(
     pulled_left ~ dbinom( 1 , p ) ,
-    logit(p) <- a[actor] + (bp + bpC*condition)*prosoc_left ,
-    a[actor] ~ dnorm(0,10),
+    logit(p) <- a_actor[actor] + (bp + bpC*condition)*prosoc_left ,
+    a_actor[actor] ~ dnorm(0,10),
     bp ~ dnorm(0,10),
     bpC ~ dnorm(0,10)
   )  , data=dat_list , chains=4 , log_lik=TRUE )
 
 precis(glm.b4,depth = 2)
 
-
+stancode(glm.b4) 
 
 
 ## multi-level chimpanzees adding varying intercepts on actor.
+
+ml.0 <- ulam(
+  alist(
+    pulled_left ~ dbinom( 1 , p ) ,
+    logit(p) <- a_actor[actor] + (bp + bpC*condition)*prosoc_left ,
+    a_actor[actor] ~ dnorm( a , sigma_actor ),
+    a ~ dnorm(0,10),
+    bp ~ dnorm(0,10),
+    bpC ~ dnorm(0,10),
+    sigma_actor ~ dcauchy(0,1)
+  ) ,
+  data=dat_list , warmup=1000 , iter=5000 , chains=4 , cores=3 )
+
+precis(ml.0,depth = 2)
+
+
+stancode(ml.0) 
+
 
 ml.1 <- ulam(
   alist(
@@ -86,6 +104,7 @@ ml.1 <- ulam(
 
 precis(ml.1,depth = 2)
 
+stancode(ml.1) 
 
 dat_list$block_id <- d$block
 
