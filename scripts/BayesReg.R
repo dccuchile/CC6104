@@ -101,8 +101,8 @@ lines( weight.seq , mu.mean )
 # plot a shaded region for 95% HPPDI
 shade( mu.HPDI , weight.seq )
 
-# The same could have beem done using the link function
-mu <- link( b.reg1 , data=data.frame(weight=weight.seq), n=1000 )
+# The same could have been done using the link function
+mu <- link( b.reg1 , data=data.frame(weight=weight.seq), n=1e4 )
 
 
 
@@ -124,7 +124,7 @@ dim(sim.height)
 
 
 #or alternatively
-#sim.height <- sim( b.reg1 , data=list(weight=weight.seq) )
+#sim.height <- sim( b.reg1 ,n=1e4, data=list(weight=weight.seq) )
 
 height.HPDI <- apply( sim.height , 2 , HPDI , prob=0.95 )
 

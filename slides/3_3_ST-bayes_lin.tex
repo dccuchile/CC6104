@@ -862,9 +862,9 @@ weight.seq <- seq( from=25 , to=70 , by=1 )
 mu.link <- function(weight) post$b0 + post$b1*weight
 \end{verbatim}
 
-\item The function above will use the $1000$ different sampled regression lines to compute various values of $\mu$ for a given weight.
+\item The function above will use the $10,000$ different sampled regression lines to compute various values of $\mu$ for a given weight.
 
-\item We can apply this function to all our 46 weights (from 25 to 70) and obtain a matrix of $1000 \times 46$:
+\item We can apply this function to all our 46 weights (from 25 to 70) and obtain a matrix of $10,000 \times 46$:
 
 \begin{verbatim}
 > mu <- sapply( weight.seq , mu.link )
@@ -939,8 +939,8 @@ shade( mu.HPDI , weight.seq )
 \item In case of working with more complex linear models (i.e., multiple attributes, interactions) we can use the \textbf{link} function from the rethinking package:
 
 \begin{verbatim}
-mu <- link( b.reg1 , data=data.frame(weight=weight.seq),
-n=1000 ) 
+mu <- link(b.reg1 ,data=data.frame(weight=weight.seq), n=1e4)
+
 \end{verbatim}
 
 \item This function will generate distributions of posterior values for $\mu$ using the formula declared in \textbf{quap} (e.g., $\mu= \beta_0 + \beta_1 * x$).
@@ -1144,8 +1144,8 @@ distribution of $\mu$.
 \item Finally, the \textbf{sim} function of the rethinking package allows to easily generate samples of the posterior predictive distribution of any linear model declared with \textbf{quap}:
 
 \begin{verbatim}
-sim.height <- sim( b.reg1 , data=list(weight=weight.seq) )
- 
+sim.height <- sim( b.reg1 ,n=1e4, data=list(weight=weight.seq))
+
 \end{verbatim}
 
 
