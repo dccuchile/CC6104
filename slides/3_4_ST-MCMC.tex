@@ -69,10 +69,7 @@ as \textbf{Markov chain Monte Carlo} (MCMC).
 
 \item But the benefit is escaping multivariate normality assumption of the Laplace approximation.
 
-\item More advanced models such as the generalized linear and multilevel models tend to produce non-Gaussian posterior distributions.
 
-\item In most cases  they cannot
-be estimated at all with the techniques of earlier classes. 
 
 
 \item This class is based on Chapter 9 of \cite{mcelreath2020statistical} and Chapter 7 of \cite{kruschke2014doing}.
@@ -91,17 +88,14 @@ be estimated at all with the techniques of earlier classes.
 \begin{frame}{Markov Chain Monte Carlo}
 \scriptsize{
 \begin{itemize}
+
+\item More advanced models such as generalized and multilevel models tend to produce non-Gaussian posterior distributions.
+
+\item In most cases  they cannot be estimated at all with the techniques of earlier classes.
+
 \item The essence of MCMC is to produce samples from the posterior $f(\theta|d)$ by only accessing a function that is proportial to it.
 \item This proportial function is the product of the likelihood and the prior $f(d|\theta)*f(\theta)$, which is always available in a Bayesian model.
-\item So, merely by evaluating $f(d|\theta)*f(\theta)$, without normalizing it by $f(d)$, MCMC allows us to generate random representative values from the posterior distribution.
 
-\item This property is wonderful because the method obviates direct computation of the evidence $f(d)$, which, as you'll recall, is one of the most difficult aspects of Bayesian
-inference. 
-
-\item It has only been with the development of MCMC algorithms an software that Bayesian inference is applicable to complex data analysis.
-\item And it has only been with the production of fast and cheap computer hardware that Bayesian inference is accessible to a wide audience.
-
-\item The question then becomes this: How does MCMC work? For an answer, let's ask a politician. 
  
 \end{itemize}
 
@@ -112,6 +106,30 @@ inference.
 \end{frame}
 
 
+
+\begin{frame}{Markov Chain Monte Carlo}
+\scriptsize{
+\begin{itemize}
+\item So, merely by evaluating $f(d|\theta)*f(\theta)$, without normalizing it by $f(d)$, MCMC allows us to generate random representative values from the posterior distribution.
+
+\item This property is wonderful because the method obviates direct computation of the evidence $f(d)$.
+
+\item Which is one of the most difficult aspects of Bayesian inference.
+
+\item It has only been with the development of MCMC algorithms an software that Bayesian inference is applicable to complex data analysis.
+\item And it has only been with the production of fast and cheap computer hardware that Bayesian inference is accessible to a wide audience.
+
+\item The question then becomes this: How does MCMC work?
+
+\item For an answer, let's ask a politician.
+
+\end{itemize}
+
+
+
+}
+
+\end{frame}
 
 
 \begin{frame}{A politician stumbles upon the Metropolis algorithm}
@@ -302,6 +320,9 @@ the number of days to simulate, an empty history vector, and a starting island p
 \item The ``population sizes'' in our objective are the posterior probabilities (or densities) at each parameter value: $f(\theta|d)$
 \item The ``days'' in our objective are samples taken from the posterior distribution.
 
+\item  The coin flip represents the \textbf{proposal distribution} $q(\theta)$, which for continuous parameters is usually replaced by a Gaussian distribution.
+
+
 \item The Metropolis algorithm will eventually give us a collection of samples from the posterior. 
 
 \item We can then use these samples just like all the samples we have already used in this course.
@@ -394,15 +415,21 @@ long run, adjacent positions will be visited proportionally to their relative va
 \begin{itemize}
 \item So far, we have only considered the case with a single discrete parameter $\theta$ that can only move to the left or right.
 
-\item The general Metropolis algorithm allows working with multiple continuous parameters $\theta_1,\theta_2,\dots,\theta_m$ and more general proposal distributions.  
+\item The general Metropolis algorithm allows working with multiple continuous parameters $\vec{\theta}=\{\theta_1,\theta_2,\dots,\theta_m\}$ and more general proposal distributions.
 
 
 \item The essentials of the general method are the same as for the simple case. 
 
-\item First, we have some target distribution $P(\theta)$ ($\theta$ can be a vector of parameters) from which we would like to generate representative sample values. 
+\item First, we have some target density $p(\theta)$ ($\theta$ can be a vector of parameters $\vec{\theta}$) from which we would like to generate representative sample values:
 
-\item We must be able to compute the value of $P(\theta)$ for any candidate value of $\theta$. 
-\item The distribution, $P(\theta)$, does not have to be normalized, however. 
+\begin{displaymath}
+\theta^{(1)},\theta^{(2)},\dots,\theta^{(j)}, \dots, \theta^{(k)}
+\end{displaymath}
+
+\item Note that each parameter sample $\theta^{(j)}$  can be a multidimensional vector $\vec{\theta}^{(j)}$ if we have multiple parameters.
+
+\item We must be able to compute the value of $p(\theta)$ for any candidate value of $\theta$.
+\item The density $p(\theta)$, does not have to be normalized, however.
 
 \item Just needs needs to be nonnegative. 
 
@@ -419,21 +446,16 @@ long run, adjacent positions will be visited proportionally to their relative va
 
 \begin{itemize}
 
-\item In our Bayesian inference application $P(\theta)$ is the unnormalized posterior distribution on  $\theta$, which is the product of the likelihood and the prior: $f(d|\theta)*f(\theta)$.
+\item In our Bayesian inference application $p(\theta)$ is the unnormalized posterior density on  $\theta$, which is the product of the likelihood and the prior: $f(d|\theta)*f(\theta)$.
 
 \item This is a very important property of MCMC, as it allows us to draw samples from the posterior without having to calculate the evidence $f(d)$.
 
-\item Sample values from the target distribution are generated by taking a random walk through the parameter space.
+\item Sample values from the target distribution $\theta^{(1)},\theta^{(2)},\dots,\theta^{(k)}$ are generated by taking a random walk through the parameter space.
 
-\item Proposal distributions can take many different forms,  the goal being to use a proposal distribution
-that efficiently explores the regions of the parameter space where $P(\theta)$ has most of its probability area. 
+\item The proposal distribution $q(\theta)$ aims to efficiently explore $p(\theta)$ allowing us to visit any parameter value on the continuum.
 
-\item The generic case is using a Gaussian distribution  centered at the current position. 
 
-\item So the proposed move will typically be near the current position, with the probability of proposing a more distant position dropping off according to the normal curve.
-
-\item For multivariate target distributions, we can use a Multi-variate Gaussian to propose multi-dimensional points in each step. 
-
+\item The proposals from $q(\theta)$ should cause regions with high probability density in $p(\theta)$ to be visited more frequently than regions with low probability density.
 
 \end{itemize}
 
@@ -442,12 +464,109 @@ that efficiently explores the regions of the parameter space where $P(\theta)$ h
 \end{frame}
 
 
+\begin{frame}{The Metropolis Algorithm more Generally}
+\scriptsize{
+
+\begin{itemize}
+
+
+
+
+
+\item The generic case for $q(\theta)$ is using a Gaussian distribution centered at the current position $\theta^{(t-1)}$.
+
+\begin{displaymath}
+ q(\theta^{(t)}|\theta^{(t-1)})=N(\theta^{(t-1)},\sigma^2)
+\end{displaymath}
+
+where $\sigma$ is a user-specified parameter.
+
+\item So the proposed move will typically be near the current position, with the probability of proposing a more distant position dropping off according to the normal curve.
+
+\item For multivariate target distributions, we can use a Multi-variate Gaussian to propose multi-dimensional points in each step.
+
+
+\end{itemize}
+
+
+
+}
+\end{frame}
+
+
+\begin{frame}{The Metropolis Algorithm more Generally}
+\scriptsize{
+
+\begin{itemize}
+
+
+
+
+
+\item A general form of the Metropolis algorithm as described in \cite{gelman2013bayesian} is given below:
+
+
+\end{itemize}
+
+\begin{block}{The Metropolis Algorithm}
+
+\begin{enumerate}
+ \item Draw a starting point $\theta^0$ for which $p(\theta^0)>0$.
+
+ \item For $t=1,2,\dots,k:$
+
+ \begin{enumerate}
+ \scriptsize{
+  \item Sample a proposal $\theta^{*}$ from the proposal distribution at time $t$: $q(\theta^{*}|\theta^{(t-1)})$
+
+  \item Calculate the ratio of the densities:
+
+  \begin{equation}
+   r = \frac{p(\theta^*)}{p(\theta^{t-1})}
+  \end{equation}
+
+
+  \item Set
+
+  \begin{equation}
+  \theta^{(t)} =
+    \begin{cases}
+      \theta^{*} & \text{with probability} \min(r,1)\\
+      \theta^{(t-1)} & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+\item Return $\theta^{(1)},\dots,\theta^{(k)}$.
+
+  }
+ \end{enumerate}
+
+\end{enumerate}
+
+
+
+
+
+
+\end{block}
+
+
+
+}
+\end{frame}
+
+
 \begin{frame}{Gibbs Sampling}
 \scriptsize{
 
 \begin{itemize}
 
-\item The Metropolis algorithm works whenever the probability of proposing a jump to B from A is equal to the probability of proposing A from B, when the proposal distribution is symmetric (such as a Gaussian distribution). 
+\item The Metropolis algorithm works whenever the probability of proposing a jump to B from A is equal to the probability of proposing A from B, when the proposal distribution is symmetric (such as a Gaussian distribution).
+
+\begin{displaymath}
+q(\theta^{(a)}|\theta^{(b)}) =  q(\theta^{(b)}|\theta^{(a)})
+\end{displaymath}
+
 
 \item There is a more general method, known as Metropolis-Hastings, that allows asymmetric proposals.
 
