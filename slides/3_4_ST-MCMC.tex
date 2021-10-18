@@ -171,7 +171,7 @@ as \textbf{Markov chain Monte Carlo} (MCMC).
 \item If the proposed island has a larger population than
 the current island ($P_{proposed}>P_{current}$), then he  goes to the proposed island.
 
-\item If the proposed island has a smaller population than the current island ($P_{proposed}<P_{current}$), then he goes to the proposed island with probability $p_{move}=P_{proposed}/P_{current}$.
+\item If the proposed island has a smaller population than the current island ($P_{proposed}<P_{current}$), then he goes to the proposed island with probability $\mathbb{P}_{move}=P_{proposed}/P_{current}$.
 
 
 \item In the long run, the probability that the politician is on any one of the islands exactly matches the relative population of the island!
@@ -224,14 +224,14 @@ the third three times as populous as the first.
 \item But before that, we will combine combine the two possibilities for the probability of moving into a single expression: the proposed island having a 1) higher or 2) lower population than the current island.
 
 \begin{equation}
-p_{move}=\min(1,P_{proposed}/P_{current}). 
+\mathbb{P}_{move}=\min(1,P_{proposed}/P_{current}).
 \end{equation}
 
-\item So, if $P_{proposed}>P_{current}$, $P_{proposed}/P_{current}>1$ and $p_{move}=1$.
+\item So, if $P_{proposed}>P_{current}$, $P_{proposed}/P_{current}>1$ and $\mathbb{P}_{move}=1$.
 
 \item For example, $current=4$ and $proposed=5$, $5/4>1$ so we move to the proposed island (with probability 1). 
 
-\item On the other hand, if $P_{proposed}<P_{current}$, $P_{proposed}/P_{current}<1$, and $p_{move}=P_{proposed}/P_{current}$.
+\item On the other hand, if $P_{proposed}<P_{current}$, $P_{proposed}/P_{current}<1$, and $\mathbb{P}_{move}=P_{proposed}/P_{current}$.
 
 \item For example, $current=4$ and $proposed=3$, $3/4<1$ so we move to the proposed island with probability $3/4$.
 
@@ -341,19 +341,19 @@ the number of days to simulate, an empty history vector, and a starting island p
 \begin{itemize}
 \item Now, let's try to understand why the algorithm works.
 
+\item We are going to denote our target probability density from which we want to draw samples  as $p(\theta)$.
+
+\item Bear in mind that $p(\theta)$ is usually a posterior density $f(\theta|d)$.
+
 \item Consider two adjacent positions and the probabilities of moving from one to the other. 
-\item We'll see that the relative transition probabilities, between adjacent positions, exactly match the relative values of the target distribution.
+\item We'll see that the relative transition probabilities, between adjacent positions, exactly match the relative values of the target density $p(\theta)$.
 
 \item Extrapolate that result across all the positions, and you can see that, in the long run, each position will be visited proportionally to its target value.
 
 \item Suppose we are at position $\theta$. 
 
-\item The probability of moving to $\theta+ 1$, denoted
-$P(\theta \rightarrow \theta + 1)$, is the probability of proposing that move times the probability of
-accepting it if proposed, which is:
-\begin{displaymath}
-P(\theta \rightarrow \theta + 1) = 0.5 \times \min(P(\theta+ 1)/P(\theta),1) 
-\end{displaymath}
+
+
 
 
 
@@ -369,17 +369,31 @@ P(\theta \rightarrow \theta + 1) = 0.5 \times \min(P(\theta+ 1)/P(\theta),1)
 \scriptsize{
 
 \begin{itemize}
+
+\item The probability of moving to $\theta+ 1$, denoted
+$\mathbb{P}(\theta \rightarrow \theta + 1)$, is the probability of proposing that move times the probability of
+accepting it if proposed, which is:
+\begin{displaymath}
+\mathbb{P}(\theta \rightarrow \theta + 1) = 0.5 \times \min(p(\theta+ 1)/p(\theta),1)
+\end{displaymath}
+
 \item On the other hand, if we are presently at position $\theta+ 1$, the probability of moving to $\theta$ is:
 \begin{displaymath}
-P(\theta+1 \rightarrow \theta) = 0.5 \times \min(P(\theta)/P(\theta+1),1) 
+\mathbb{P}(\theta+1 \rightarrow \theta) = 0.5 \times \min(p(\theta)/p(\theta+1),1)
 \end{displaymath}
 
 \item The ratio of the transition probabilities is:
 
-  \begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.4]{pics/trans_ratio.png}
-	\end{figure} 
+
+   \begin{align}
+\frac{\mathbb{P}(\theta \rightarrow \theta+1)}{\mathbb{P}(\theta +1 \rightarrow \theta)} & = \frac{0.5 \times \min(p(\theta+1)/p(\theta),1) }{0.5 \times \min(p(\theta)/p(\theta+1),1) }\\
+& =     \begin{cases}
+      \frac{1}{p(\theta)/p(\theta+1)} & \text{if} p(\theta+1) > p(\theta)\\ \\
+      \frac{p(\theta+1)/p(\theta)}{1} & \text{if} p(\theta+1) < p(\theta)
+    \end{cases} \\
+ & =   \frac{p(\theta+1)}{p(\theta)}
+ \end{align}
+
 
 \end{itemize}
 
