@@ -598,7 +598,7 @@ q(\theta^{(a)}|\theta^{(b)}) =  q(\theta^{(b)}|\theta^{(a)})
 
 
 
-\item There is a more general method, known as Metropolis-Hastings, that allows asymmetric proposals (ie., $q(\theta^{(a)}|\theta^{(b)}) \neq  q(\theta^{(b)}|\theta^{(a)}$).
+\item There is a more general method, known as Metropolis-Hastings, that allows asymmetric proposals (i.e., $q(\theta^{(a)}|\theta^{(b)}) \neq  q(\theta^{(b)}|\theta^{(a)}$).
 
 \item This would mean, that the politician's coin were biased to lead him clockwise on average.
 
@@ -627,7 +627,7 @@ r = \frac{p(\theta^*)/q(\theta^{*}|\theta^{(t-1)})}{p(\theta^{t-1})/q(\theta^{(t
 
 \item Asymmetric proposal distributions allows us to explore the posterior distribution more efficiently (i.e., acquire a good image of the posterior distribution in fewer steps).
 
-\item The goal is that regions with high probability density in $p(\theta)$ to be visited more frequently than regions with low probability density.
+\item The goal is that regions with high probability density in $p(\theta)$ to be proposed more frequently than regions with low probability density.
 
 \item The ideal proposal distribution $q(\theta^{*}|\theta^{(t-1)})$ would be the target distribution $p(\theta^{*})$.
 
@@ -688,7 +688,7 @@ r = \frac{p(\theta^*)/q(\theta^{*}|\theta^{(t-1)})}{p(\theta^{t-1})/q(\theta^{(t
 the conditional probability distribution of that parameter given all the others:
 
 \begin{displaymath}
-q(\theta^{*}_j|\theta^{(t-1)}) = p(\theta^{*}_j | \theta^{(t-1)}_1,\dots, \theta^{(t-1)}_{j-1}, \theta^{(t-1)}_{j+1}, \dots,\theta^{(t-1)}_m)
+q(\theta^{*}_j|\theta^{(t-1)}) = p(\theta^{*}_j | \theta^{(t-1)}_{-j})= p(\theta^{*}_j | \theta^{(t-1)}_1,\dots, \theta^{(t-1)}_{j-1}, \theta^{(t-1)}_{j+1}, \dots,\theta^{(t-1)}_m)
 \end{displaymath}
 
 
@@ -789,7 +789,10 @@ parameters from the previous step in the chain.
 
 \begin{itemize}
 
-\item Because the proposal distribution exactly mirrors the posterior probability for that parameter, the proposed move is always accepted.\footnote{The proof of can be found on page on page 281 of \cite{gelman2013bayesian}.}
+\item Because the proposal distribution exactly mirrors the posterior probability for that parameter, the proposed move is always accepted.
+
+\item The proof of this can be found on page on page 281 of \cite{gelman2013bayesian}, but essentially since $q(\theta^{*}_j|\theta^{(t-1)}) = p(\theta^{*}_j | \theta^{(t-1)}_{-j})$, the ratio $r$ from Equation~\ref{eq:r_hastings} becomes 1.
+
 
 \item Hence, the algorithm is more efficient than the standard Metropolis algorithm in which proposals are rejected in many cases.
 
@@ -1101,7 +1104,7 @@ summary(dd.trim)
  \centering
  \begin{tabular}{lr}  
 $y_i \sim N(\mu_i,\sigma)$ & [likelihood] \\
-$\mu_i = \beta_0 + \beta_1 x_i+ \beta_2 A_i+\beta_3*x_i*A_i$ & [linear model] \\
+$\mu_i = \beta_0 + \beta_1 x_i+ \beta_2 A_i+\beta_3x_iA_i$ & [linear model] \\
 $\beta_0 \sim N(0,100)$ & [$\beta_0$ prior] \\
 $\beta_1 \sim N(0,10)$ & [$\beta_1$ prior] \\
 $\beta_2 \sim N(0,10)$ & [$\beta_2$ prior] \\
@@ -1182,8 +1185,8 @@ sigma  0.93 0.05  0.83  1.03
 \begin{itemize}\scriptsize{
  \item mean(b0) = 9.22: this is the intercept for non-African countries.
  \item mean(b1)=-0.20: this is the slope for non-African countries, which is clearly negative.
- \item mean(b2)=-1.95: this is the difference between the intercept for African and non-African countries, which indicates that African countries have a lower GDP than non-African countries when rugedness is zero.
-\item mean(b3)=0.39: this is the difference between the slopes for African and non-African countries, which indicates that the slope for non-African countries is positive (0.39-0.2).
+ \item mean(b2)=-1.95: this is the difference between the intercept for African and non-African countries, which indicates that African countries have a lower GDP than non-African countries when rugedness is zero ($9.22-1.95=7.27$)
+\item mean(b3)=0.39: this is the difference between the slopes for African and non-African countries, which indicates that the slope for African countries is positive ($-0.2+0.39=0.19$).
 }
  \end{itemize}
 
