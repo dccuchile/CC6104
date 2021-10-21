@@ -474,7 +474,7 @@ long run, adjacent positions will be visited proportionally to their relative va
 
 \item They should also not be rejected too frequently (otherwise the random walk wastes too much time standing still) \cite{gelman2013bayesian}.
 
-%cause regions with high probability density in $p(\theta)$ to be visited more frequently than regions with low probability density.
+
 
 \end{itemize}
 
@@ -540,9 +540,9 @@ where $\sigma$ is a user-specified parameter.
 
   \item Calculate the ratio of the densities:
 
-  \begin{equation}
+  \begin{equation}\label{eq:ratio}
    r = \frac{p(\theta^*)}{p(\theta^{t-1})}
-  \end{equation}\label{eq:ratio}
+  \end{equation}
 
 
   \item Set
@@ -574,7 +574,7 @@ If the proposed value $\theta^{*}$ happens to land outside the permissible bound
 \end{frame}
 
 
-\begin{frame}{Metropolis-Hastings}
+\begin{frame}[fragile]{The Metropolis-Hastings Algorithm}
 \scriptsize{
 
 \begin{itemize}
@@ -585,14 +585,40 @@ If the proposed value $\theta^{*}$ happens to land outside the permissible bound
 q(\theta^{(a)}|\theta^{(b)}) =  q(\theta^{(b)}|\theta^{(a)})
 \end{displaymath}
 
+\item We cam easilly check this using R:
+
+\begin{verbatim}
+> a<-0.5
+> b<-0.3
+> dnorm(x=a,mean=b)
+[1] 0.3910427
+> dnorm(x=b,mean=a)
+[1] 0.3910427
+\end{verbatim}
+
+
 
 \item There is a more general method, known as Metropolis-Hastings, that allows asymmetric proposals (ie., $q(\theta^{(a)}|\theta^{(b)}) \neq  q(\theta^{(b)}|\theta^{(a)}$).
 
 \item This would mean, that the politician's coin were biased to lead him clockwise on average.
 
+
+\end{itemize}
+
+
+} 
+\end{frame}
+
+
+\begin{frame}[fragile]{The Metropolis-Hastings Algorithm}
+\scriptsize{
+
+\begin{itemize}
+
+
 \item To correct for the asymmetry in the proposals, the ratio $r$ in Equation~\ref{eq:ratio} is replaced by a ratio of ratios:
 
-\begin{equation}
+\begin{equation}\label{eq:r_hastings}
 r = \frac{p(\theta^*)/q(\theta^{*}|\theta^{(t-1)})}{p(\theta^{t-1})/q(\theta^{(t-1)}|\theta^{*})}
 \end{equation}
 
@@ -601,12 +627,18 @@ r = \frac{p(\theta^*)/q(\theta^{*}|\theta^{(t-1)})}{p(\theta^{t-1})/q(\theta^{(t
 
 \item Asymmetric proposal distributions allows us to explore the posterior distribution more efficiently (i.e., acquire a good image of the posterior distribution in fewer steps).
 
+\item The goal is that regions with high probability density in $p(\theta)$ to be visited more frequently than regions with low probability density.
 
+\item The ideal proposal distribution $q(\theta^{*}|\theta^{(t-1)})$ would be the target distribution $p(\theta^{*})$.
+
+\item Then the ratio $r$ in Equation~\ref{eq:r_hastings} is always exactly 1.
+
+\item However, in practical settings is not possible so sample directly from $p(\theta^{*})$, which indeed is the reason why we use MCMC methods.
 
 \end{itemize}
 
 
-} 
+}
 \end{frame}
 
 
@@ -646,21 +678,23 @@ r = \frac{p(\theta^*)/q(\theta^{*}|\theta^{(t-1)})}{p(\theta^{t-1})/q(\theta^{(t
 
 \item The algorithm works as follows:
 
+\item First, we assume that our target parameter $\theta$ is multi-dimensional: $\vec{\theta}=\{\theta_1,\theta_2,\dots,\theta_m\}$
+
 \item At each point in the walk, the parameters are selected in an iterative cycle: $\theta_1, \theta_2, \theta_3 , \dots \theta_1, \theta_2, \theta_3, \dots.$
 
-\item Suppose that parameter $\theta_i$ has been selected.
+\item Suppose that parameter $\theta_j$ has been selected.
 
 \item Gibbs sampling then chooses a new value for that parameter by generating a random value directly from
-the conditional probability distribution of that parameter given all the others and $d$:
+the conditional probability distribution of that parameter given all the others:
 
 \begin{displaymath}
-f(\theta_i | \theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_m,d)
+q(\theta^{*}_j|\theta^{(t-1)}) = p(\theta^{*}_j | \theta^{(t-1)}_1,\dots, \theta^{(t-1)}_{j-1}, \theta^{(t-1)}_{j+1}, \dots,\theta^{(t-1)}_m)
 \end{displaymath}
 
 
 \item Since we are using conjugate combinations, this conditional distribution has a closed form that facilitates the sampling of random numbers from it.
 
-\item The new value for $\theta_i$ , combined with the unchanged values of $\theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_m$, constitutes the new position in the random walk.
+
 
 \end{itemize}
 
@@ -674,11 +708,18 @@ f(\theta_i | \theta_1,\dots, \theta_{i-1}, \theta_{i+1}, \dots,\theta_m,d)
 
 \begin{itemize}
 
-\item The process then repeats: select the next parameter $\theta_{i+1}$ and select a new value for that parameter from its conditional posterior distribution.
+\item The new value for $\theta_j^{(t)}$ , combined with the unchanged values of $\theta^{(t-1)}_1,\dots, \theta^{(t-1)}_{j-1}, \theta^{(t-1)}_{j+1}, \dots,\theta^{(t-1)}_m$, constitutes the new position in the random walk.
+
+\begin{displaymath}
+ \{\theta^{(t)}_1,\dots, \theta^{(t)}_{j-1}, \theta^{(t)}_{j}, \theta^{(t)}_{j+1}, \dots,\theta^{(t)}_m\} =  \{\theta^{(t-1)}_1,\dots, \theta^{(t-1)}_{j-1}, q(\theta^{*}_j|\theta^{(t-1)}), \theta^{(t-1)}_{j+1}, \dots,\theta^{(t-1)}_m\}
+\end{displaymath}
+
+
+\item The process then repeats: select the next parameter $\theta_{j+1}$ and select a new value for that parameter from its conditional posterior distribution.
 
 \item Let's illustrate this process for a two-parameter example: $\theta_1,\theta_2$.
 
-\item In the first step, we want to select a new value for $\theta_1$ .
+\item In the first step, we want to select a new value for $\theta_1^{(t)}$ .
 
 \item We conditionalize on the values of all the other
 parameters from the previous step in the chain.
@@ -699,14 +740,16 @@ parameters from the previous step in the chain.
 
  \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.4]{pics/gibbs1.png}
+	\includegraphics[scale=0.38]{pics/gibbs1.png}
 	\end{figure} 
 
 \begin{itemize}
 
-\item The figure shows a slice through the joint distribution at the current value of $\theta_2$. 
+\item The figure shows a slice through the target joint distribution $p(\theta)$ at the current value of $\theta_2^{(t-1)}$.
 
-\item The heavy curve is the posterior distribution conditional on this value of $\theta_2$, which is $f(\theta_1|\theta_2 , d)$ in this case because there is only one other parameter.
+\item The heavy curve is the target distribution conditional on this value of $\theta_2^{(t-1)}$.
+
+\item This corresponds to $p(\theta_1|\theta_2^{(t-1)})$ in this case because there is only one other parameter.
 
 \end{itemize}
 
@@ -721,16 +764,16 @@ parameters from the previous step in the chain.
 
 \begin{itemize}
 
-\item Because we are using conjugate distributions a computer can directly generate a random  value of $\theta_1$ from $f(\theta_1|\theta_2 , d)$. 
+\item Because we are using conjugate distributions a computer can directly generate a random  value of $\theta_1^{(t)}$ from $p(\theta_1|\theta_2^{(t-1)})$.
 
-\item Having generated a new value for $\theta_1$, we then conditionalize on it and determine the conditional distribution of the next parameter, $\theta_2$ using $f(\theta_2|\theta_1 , d)$  as shown below:
+\item Having generated $\theta_1^{(t)}$, we then conditionalize on it and determine the conditional distribution of the next parameter, $\theta_2^{(t+1)}$ using $p(\theta_2|\theta_1^{(t)})$  as shown below:
 
  \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.4]{pics/gibbs2.png}
 	\end{figure} 
 
-\item We generate a new value of $\theta_2$ , and the cycle repeats.
+\item We generate a new value $\theta_2^{(t+1)}$ , and the cycle repeats.
 
 
 

@@ -21,9 +21,11 @@ library(rethinking)
 simplehist(positions,xlab="island",ylab="number of days")
 
 
-# Symetry of Gaussian
-dnorm(x=0.5,mean=0.3)
-dnorm(x=0.3,mean=0.5)
+# Symmetry of a Gaussian
+a<-0.5
+b<-0.3
+dnorm(x=a,mean=b)
+dnorm(x=b,mean=a)
 
 library(rethinking)
 data(rugged)
