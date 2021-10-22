@@ -502,8 +502,13 @@ where $\sigma$ is a user-specified parameter.
 
 \item So the proposed move will typically be near the current position, with the probability of proposing a more distant position dropping off according to the normal curve.
 
-\item For multivariate target distributions, we can use a Multi-variate Gaussian to propose multi-dimensional points in each step.
+\item For multivariate target distributions $p(\vec{\theta})$, we can use a Multi-variate Gaussian to propose multi-dimensional points in each step.
 
+
+
+\begin{displaymath}
+ q(\vec{\theta}^{(t)}|\vec{\theta}^{(t-1)})=N(\vec{\theta}^{(t-1)},\Sigma)
+\end{displaymath}
 
 \end{itemize}
 
