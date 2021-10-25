@@ -47,14 +47,15 @@ glm.b3 <- quap(
 precis(glm.b3)
 
 
+# ulam requires a clean data.frame with only the variables we will use
 
-dat_list <- list(
+d.clean <- data.frame(
   pulled_left = d$pulled_left,
   actor = d$actor,
   condition = as.integer(d$condition),
   prosoc_left = as.integer(d$prosoc_left))
 
-# ulam can use lists, an integers must be set as integers.
+
 
 glm.b4 <- ulam(
   alist(
@@ -63,7 +64,7 @@ glm.b4 <- ulam(
     a_actor[actor] ~ dnorm(0,10),
     bp ~ dnorm(0,10),
     bpC ~ dnorm(0,10)
-  )  , data=dat_list , chains=4 , log_lik=TRUE )
+  )  , data=d.clean , chains=4 , log_lik=TRUE )
 
 precis(glm.b4,depth = 2)
 
@@ -82,7 +83,7 @@ ml.0 <- ulam(
     bpC ~ dnorm(0,10),
     sigma_actor ~ dcauchy(0,1)
   ) ,
-  data=dat_list , warmup=1000 , iter=5000 , chains=4 , cores=3 )
+  data=d.clean , warmup=1000 , iter=5000 , chains=4 , cores=3 )
 
 precis(ml.0,depth = 2)
 
@@ -100,13 +101,13 @@ ml.1 <- ulam(
     bpC ~ dnorm(0,10),
     sigma_actor ~ dcauchy(0,1)
   ) ,
-  data=dat_list , warmup=1000 , iter=5000 , chains=4 , cores=3 )
+  data=d.clean , warmup=1000 , iter=5000 , chains=4 , cores=3 )
 
 precis(ml.1,depth = 2)
 
 stancode(ml.1) 
 
-dat_list$block_id <- d$block
+d.clean$block_id <- d$block
 
 ml.2 <- ulam(
   alist(
@@ -119,7 +120,7 @@ ml.2 <- ulam(
     sigma_actor ~ dcauchy(0,1),
     sigma_block ~ dcauchy(0,1)
   ) ,
-  data=dat_list, warmup=1000 , iter=6000 , chains=4 , cores=3 )
+  data=d.clean, warmup=1000 , iter=6000 , chains=4 , cores=3 )
 
 precis(ml.2,depth=2) # depth=2 displays varying effects
 plot(precis(ml.2,depth=2)) # also plot
