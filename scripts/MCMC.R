@@ -75,6 +75,9 @@ stancode(m.reg1)
 m.reg2 <- ulam(model ,data=dd.trim, iter=3000, 
                warmup =1000, chains=4, cores=4) 
 
+
+precis(m.reg2, prob=0.95 )
+
 show(m.reg2)
 
 post <- extract.samples( m.reg1, n= 1e4 )

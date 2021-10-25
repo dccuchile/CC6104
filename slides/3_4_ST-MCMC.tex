@@ -1176,7 +1176,7 @@ The start values for the parameters were invalid.
 \item After trying to fit b.reg3 with quap many times, it worked!
 
 \begin{verbatim}
-> precis(b.reg3)
+> precis(b.reg3, prob=0.95 )
        mean   sd  2.5% 97.5%
 b0     9.22 0.14  8.95  9.49
 b1    -0.20 0.08 -0.35 -0.05
@@ -1231,7 +1231,7 @@ b3     0.39 0.13  0.10  0.66   243  1.03
 sigma  0.95 0.05  0.85  1.06   348  1.00
 \end{verbatim}
 
-\item These estimates are very similar to the Laplace approximation.
+\item These estimates are very similar to those obtained with Laplace approximation.
 
 
 \end{itemize}
