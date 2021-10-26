@@ -82,7 +82,7 @@ show(m.reg2)
 
 post <- extract.samples( m.reg1, n= 1e4 )
 str(post)
-
+post <- as.data.frame(post)
 
 
 

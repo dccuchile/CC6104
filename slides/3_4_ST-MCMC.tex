@@ -1450,7 +1450,16 @@ chain:4   0.37   0.82  1.19
 post <- extract.samples( m.reg1 )
 \end{verbatim}
 
-\item We also use \textbf{link} and \textbf{sim} functions to get posterior predictions.
+\item These samples come in the form of lists, but can easily be converted into a data.frame:
+
+\begin{verbatim}
+post <- as.data.frame(post)
+\end{verbatim}
+
+
+
+
+\item We can also use \textbf{link} and \textbf{sim} functions to get posterior predictions.
 
 \item  We can plot the correlations between samples using the function \textbf{pairs}:
 
