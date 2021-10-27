@@ -24,11 +24,11 @@
 | 10 | Jueves 28/10 | Markov Chain Monte Carlo | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_4_ST-MCMC.pdf), [video 4](https://youtu.be/kif9EG-sy2I), [video 5](https://youtu.be/iVgiowZvyZM), [video 6](https://youtu.be/r0BNqctisLg) | Horario de consulta con profesor (Discord) |  |
 | Receso Académico |  |  |  |  |  |
 | 11 | Martes 09/11 | Ponerse al día |  | Horario de consulta de tareas con auxiliar (Discord) |  |
-| 11 | Jueves 11/11 | Model Evaluation and Information Criteria | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf) | Horario de consulta con profesor (Discord) |  |
+| 11 | Jueves 11/11 | Ponerse al día |  | Horario de consulta con profesor (Discord) |  |
 | 12 | Martes 16/11 | Model Evaluation and Information Criteria | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf) | Horario de consulta de tareas con auxiliar (Discord) | Tarea 5 |
-| 12 | Jueves 18/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf) | Horario de consulta con profesor (Discord) |  |
+| 12 | Jueves 18/11 | Model Evaluation and Information Criteria | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf) | Horario de consulta con profesor (Discord) |  |
 | 13 | Martes 23/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf) | Horario de consulta de tareas con auxiliar (Discord) |  |
 | 13 | Jueves 25/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf) | Horario de consulta con profesor (Discord) |  |
-| 14 | Martes 30/11 | Ponerse al día |  |  |  |
+| 14 | Martes 30/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf) |  |  |
 | 14 | Jueves 02/12 | Reflexiones finales |  | Horario de consulta con profesor (Discord) |  |
 | Exámenes |  |  |  |  |  |
