@@ -295,7 +295,7 @@ hominins with body mass between 55 kg and about 60 kg.
 \item The model's equation for the mean has 7 parameters:
 
 \begin{displaymath}
- y_i=\beta_{0}+\beta_{1}x_i +\beta_{2}x_i^2 +\beta_{3}x_i^3 +\beta_{4}x_i^4 ++\beta_{5}x_i^5+\beta_{6}x_i^6+\epsilon_i \quad \forall i
+ y_i=\beta_{0}+\beta_{1}x_i +\beta_{2}x_i^2 +\beta_{3}x_i^3 +\beta_{4}x_i^4 +\beta_{5}x_i^5+\beta_{6}x_i^6+\epsilon_i \quad \forall i
 \end{displaymath}
 and there are 7 species to predict brain sizes for.
 
@@ -922,7 +922,7 @@ logLik1 <- sum(log(dnorm(
 
 
 
-\item Notice that the log-likelihood results for \textbf{reg.ev.1} differ between \verb+logLik+ and the manual calculation.
+\item Note that this log-likelihood differs from the one obtained with \verb+logLik+.
 
 \item This is because \verb+sigma(reg.ev.1)+ returns an unbiased estimator of $\sigma$: \begin{displaymath}
    \hat{\sigma} = \sqrt{\frac{\sum \epsilon_i^2}{df}}
@@ -989,7 +989,7 @@ logLik1.1 <- sum(log(dnorm(
 
 \begin{itemize}
 
-\item We can get the same results using the MAP estimates of a Bayesian model with flat priors:
+\item We can obtain the same results using MAP estimates from a Bayesian model with flat priors:
 
 \begin{verbatim}
 library(rethinking)
