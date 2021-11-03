@@ -535,11 +535,9 @@ rain, sun, and snow.
 	\centering
 	\includegraphics[scale=0.2]{pics/shannon.png}
 \end{figure}
+\vspace{3mm}
 
-\item The basic insight is to ask: How much is our uncertainty reduced by learning an outcome?
-
-
-\item To answer this question we need a way to quantify the uncertainty inherent in a probability distribution.
+\item The basic insight is to ask: How can we quantify the uncertainty inherent in a probability distribution?
 
 \end{itemize}
 
@@ -873,7 +871,7 @@ S(q) = \sum_{i=1}^m \log q(x_i)
 } 
 \end{frame}
 
-\begin{frame}[fragile]{Estimating divergence}
+\begin{frame}[fragile]{Calculating Log-Likelihood}
 \scriptsize{
 
 \begin{itemize}
@@ -894,13 +892,133 @@ S(q) = \sum_{i=1}^m \log q(x_i)
 
 \item Only the difference  $S(q) - S(r)$ informs us about the divergence of each model from the unknown target $f$.
 
+\item We can calculate the log-likelihood of a model by hand using the following code:
 
+\begin{verbatim}
+b0<-reg.ev.1$coefficients[1]
+b1<-reg.ev.1$coefficients[2]
+
+logLik1 <- sum(log(dnorm(
+  d$brain ,
+  mean=b0+b1*d$mass ,
+  sd=sigma(reg.ev.1))
+  ))
+> logLik1
+[1] -47.64015
+\end{verbatim}
 
 
 \end{itemize}
 
 
 } 
+\end{frame}
+
+\begin{frame}[fragile]{Calculating Log-Likelihood}
+\scriptsize{
+
+\begin{itemize}
+
+
+
+
+\item Notice that the log-likelihood results for \textbf{reg.ev.1} differ between \verb+logLik+ and the manual calculation.
+
+\item This is because \verb+sigma(reg.ev.1)+ returns an unbiased estimator of $\sigma$: \begin{displaymath}
+   \hat{\sigma} = \sqrt{\frac{\sum \epsilon_i^2}{df}}
+                                                                                        \end{displaymath}
+where $df=n-2=7-2=5$.
+
+\begin{verbatim}
+> sigma(reg.ev.1)
+[1] 252.0567
+> reg.ev.1$df.residual
+[1] 5
+> sigma.LM <-sqrt(sum(reg.ev.1$residuals^2)/
++                   reg.ev.1$df.residual)
+> sigma.LM
+[1] 252.0567
+\end{verbatim}
+
+
+
+\end{itemize}
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Calculating Log-Likelihood}
+\scriptsize{
+
+\begin{itemize}
+
+\item On the other hand, the function \verb+logLik+ uses the maximum likelihood estimator of $\sigma$:
+\begin{displaymath}
+ \hat{\sigma}_{ML} = \sqrt{\frac{\sum \epsilon_i^2}{n}}
+\end{displaymath}
+
+\begin{verbatim}
+sigma.ML<-sqrt(sum(reg.ev.1$residuals^2)
+               /dim(d)[1])
+
+> sigma.ML
+[1] 213.0268
+
+logLik1.1 <- sum(log(dnorm(
+  d$brain ,
+  mean=b0+b1*d$mass ,
+  sd=sigma.ML)
+))
+> logLik1.1
+[1] -47.46249
+\end{verbatim}
+
+
+
+\end{itemize}
+
+
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Calculating Log-Likelihood}
+\scriptsize{
+
+\begin{itemize}
+
+\item We can get the same results using the MAP estimates of a Bayesian model with flat priors:
+
+\begin{verbatim}
+library(rethinking)
+b.reg.ev.1<- quap(
+  alist(
+    brain ~ dnorm( mu , sigma ) ,
+    mu <- b0 + b1*mass
+  ) ,
+  data=d ,
+  start=list(b0=mean(d$brain),b1=0,sigma=sd(d$brain)) ,
+  method="Nelder-Mead" )
+
+theta <- coef(b.reg.ev.1)
+logLik1.2 <- sum(log(dnorm(
+  d$brain ,
+  mean=theta[1]+theta[2]*d$mass ,
+  sd=theta[3])
+  ))
+
+> logLik1.2
+[1] -47.46249
+\end{verbatim}
+
+
+
+\end{itemize}
+
+
+}
 \end{frame}
 
 
@@ -912,7 +1030,7 @@ S(q) = \sum_{i=1}^m \log q(x_i)
 \item It is also quite common to see something called the \textbf{deviance}, which is $S(q)$ multiplied by -2.
 
 \begin{equation}
-D(q) = -2\times S(q)= -2 \sum_{i=1}^m \log q(x_i)
+D(q) = -2\times S(q)= -2 \sum_{i=1}^n \log q(x_i)
 \end{equation}
 
 

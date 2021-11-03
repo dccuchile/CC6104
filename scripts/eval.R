@@ -68,6 +68,65 @@ t %>%
 logLik(reg.ev.1)
 logLik(reg.ev.2)
 
+b0<-reg.ev.1$coefficients[1]
+b1<-reg.ev.1$coefficients[2]
+
+logLik1 <- sum(log(dnorm(
+  d$brain ,
+  mean=b0+b1*d$mass ,
+  sd=sigma(reg.ev.1))
+  ))
+logLik1
+
+# is slightly different from logLik because logLik uses the ML estimator of sigma
+
+# the sigma function on the other hand uses and unbiased estimator
+sigma(reg.ev.1)
+
+# degrees of freedom are n-2
+reg.ev.1$df.residual
+sigma.LM <-sqrt(sum(reg.ev.1$residuals^2)/
+                  reg.ev.1$df.residual)
+sigma.LM
+
+# Sigma ML replaces the denominator by the number of examples
+sigma.ML<-sqrt(sum(reg.ev.1$residuals^2)
+               /dim(d)[1])
+
+sigma.ML
+
+logLik1.1 <- sum(log(dnorm(
+  d$brain ,
+  mean=b0+b1*d$mass ,
+  sd=sigma.ML)
+))
+logLik1.1
+
+
+# Lets computer logLik using quap with flat priors
+library(rethinking)
+
+b.reg.ev.1<- quap(
+  alist(
+    brain ~ dnorm( mu , sigma ) ,
+    mu <- b0 + b1*mass
+  ) ,
+  data=d ,
+  start=list(b0=mean(d$brain),b1=0,sigma=sd(d$brain)) ,
+  method="Nelder-Mead" )
+
+theta <- coef(b.reg.ev.1)
+# compute logLik
+logLik1.2 <- sum(log(dnorm(
+  d$brain ,
+  mean=theta[1]+theta[2]*d$mass ,
+  sd=theta[3]) 
+  ))
+logLik1.2
+
+# deviance
+
+
 -2*logLik(reg.ev.1)
 -2*logLik(reg.ev.2)
 -2*logLik(reg.ev.3)
@@ -89,7 +148,7 @@ AIC(reg.ev.5)
 
 
 
-library(rethinking)
+
 data(Howell1)
 d <- Howell1
 d2 <- d[ d$age >= 18 , ]
