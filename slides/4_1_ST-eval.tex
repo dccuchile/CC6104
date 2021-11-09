@@ -1180,42 +1180,6 @@ deviation.
 
 
 
-\begin{frame}{Cross Validation}
-\scriptsize{
-
-\begin{itemize}
-\item We just showed how to estimate the out-of-sample deviance by  evaluating the model on observations that were not used to fit the model. 
-
-\item However, in many cases, we do not want to waste a portion of our data just for evaluation. 
-
-\item So what is usually done is \textbf{cross-validation}: to divide the sample in a number of chunks, called ``folds''. 
-\item Then the model is asked to predict each fold, after training on all the others.
-\item We then average over the score (e.g., deviance) for each fold to get an estimate of out-of-sample performance. 
-\item The minimum number of folds is 2. 
-\item At the other extreme, you could make each point observation a fold and fit as many models as you have individual observations.
-\item This is called leave-one-out cross-validation (often abbreviated as LOOCV).
-\item The key trouble with leave-one-out cross-validation is that, if we have 1000 observations, that means computing 1000 models.
-\item That can be time consuming.
-\end{itemize}
-
-
-} 
-\end{frame}
-
-
-\begin{frame}{Cross Validation}
-\scriptsize{
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.4]{pics/crossvalidation.png}
-\end{figure}
-
-} 
-\end{frame}
-
-
-
 
 \begin{frame}{Regularization}
 \scriptsize{
@@ -1353,6 +1317,44 @@ regularizing prior right, then overfitting can be greatly reduced.
 
 } 
 \end{frame}
+
+
+
+\begin{frame}{Cross Validation}
+\scriptsize{
+
+\begin{itemize}
+\item We just showed how to estimate the out-of-sample deviance by  evaluating the model on observations that were not used to fit the model.
+
+\item However, in many cases, we do not want to waste a portion of our data just for evaluation.
+
+\item So what is usually done is \textbf{cross-validation}: to divide the sample in a number of chunks, called ``folds''.
+\item Then the model is asked to predict each fold, after training on all the others.
+\item We then average over the score (e.g., deviance) for each fold to get an estimate of out-of-sample performance.
+\item The minimum number of folds is 2.
+\item At the other extreme, you could make each point observation a fold and fit as many models as you have individual observations.
+\item This is called leave-one-out cross-validation (often abbreviated as LOOCV).
+\item The key trouble with leave-one-out cross-validation is that, if we have 1000 observations, that means computing 1000 models.
+\item That can be time consuming.
+\end{itemize}
+
+
+}
+\end{frame}
+
+
+\begin{frame}{Cross Validation}
+\scriptsize{
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.4]{pics/crossvalidation.png}
+\end{figure}
+
+}
+\end{frame}
+
+
 
 
 \begin{frame}{Information criteria}
