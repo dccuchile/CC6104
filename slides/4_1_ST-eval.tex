@@ -1170,15 +1170,39 @@ deviation.
 \item The point of this thought experiment is to demonstrate how deviance behaves, in theory. 
 \item While deviance on training data always improves with additional predictor variables, deviance on future data may or may not.
 
-
-
 \end{itemize}
+
+
 
 
 } 
 \end{frame}
 
 
+\begin{frame}{Regularization, Cross-Validation and Information Criteria}
+\scriptsize{
+
+So far we have presented two main ideas:
+\begin{enumerate}
+ \item  \textbf{Underfitting} and \textbf{overfitting} are the main problems of statistical models.
+ \item The \textbf{out-of-sample deviance}, which is motivated by ideas from information theory, is the right way to measure a model taking into account these two problems.
+\end{enumerate}
+
+In the remainder of this class we will introduce the following concepts:
+
+\begin{enumerate}
+ \item \textbf{Regularization}: a mechanism to prevent models from overfitting the data.
+ \item \textbf{Cross-validation}: a procedure for estimating the out-of-sample deviance of a model by systematically dividing the data into training and testing partitions.
+ \item \textbf{Information Criteria}: a family of scoring devices that estimate the out-of-sample deviance of a model using just the training data.
+\end{enumerate}
+
+
+
+
+
+
+}
+\end{frame}
 
 
 \begin{frame}{Regularization}
@@ -1757,7 +1781,7 @@ priors.
 \begin{itemize}
 \item This class has been a marathon. 
 \item It began with the problem of overfitting, a universal phenomenon by which models with more parameters fit a sample better, even when the additional parameters are meaningless.
-\item Theree common tools were introduced to address over-fitting: regularization, cross-validation, and information criteria.
+\item Theree common tools were introduced to address overfitting: regularization, cross-validation, and information criteria.
 \item Regularization reduces overfitting during estimation, and both cross-validation and information criteria help estimate the degree of overfitting. 
 \item In all cases, keep in mind that these tools are heuristic. 
 \item They provide no guarantees. 
