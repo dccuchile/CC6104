@@ -38,7 +38,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 1. [Markov Chain Monte Carlo](slides/3_4_ST-MCMC.pdf) | ([tex source file](slides/3_4_ST-MCMC.tex)),  [video 1](https://youtu.be/gsofPiPBIeU), [video 2](https://youtu.be/EJZWaph61p4),  [video 3](https://youtu.be/jfidS22imJM), [video 4](https://youtu.be/kif9EG-sy2I), [video 5](https://youtu.be/iVgiowZvyZM), [video 6](https://youtu.be/r0BNqctisLg) 
 
 ### Part IV: Other Topics
-1. [Model Evaluation and Information Criteria](slides/4_1_ST-eval.pdf) | ([tex source file](slides/4_1_ST-eval.tex)) 
+1. [Model Evaluation and Information Criteria](slides/4_1_ST-eval.pdf) | ([tex source file](slides/4_1_ST-eval.tex)), [video 1](https://youtu.be/HCCzwltLVCc), [video 2](https://youtu.be/twpZHZMmKgM),  [video 3](https://youtu.be/ny4SlO3rcTo), [video 4](https://youtu.be/6U7laePWt9M), [video 5](https://youtu.be/vE2VaK9tLV8), [video 6](https://youtu.be/wmBugs36H-4)  
 1. [Directed Graphical Models](slides/4_2_ST-dag.pdf) | ([tex source file](slides/4_2_ST-dag.tex)) 
 1. [Generalized and Multilevel Linear Models](slides/4_3_ST-multi.pdf) | ([tex source file](slides/4_3_ST-multi.tex))  (TODO: Chapter 13 of Statistical Rethinking)
 

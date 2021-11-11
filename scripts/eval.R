@@ -149,6 +149,29 @@ AIC(reg.ev.4)
 AIC(reg.ev.5)
 
 
+# DIC
+
+n<-10000
+b.reg.1.samples<-extract.samples(b.reg.ev.1,n)
+
+post.deviance<-vector()
+for(i in 1:n){
+  b0<-b.reg.1.samples[i,1]
+  b1<-b.reg.1.samples[i,2]
+  sig<-b.reg.1.samples[i,3]
+  sig<-ifelse(sig<0, 0, sig)
+  logLikDic <- sum(log(dnorm(
+    d$brain ,
+    mean=b0+b1*d$mass ,
+    sd=sig) 
+  ))
+  post.deviance[i]<- -2*logLikDic
+}
+
+d.bar<-mean(post.deviance,trim=0.01)
+d.hat<- -2*logLik1.2
+2*d.bar-d.hat
+DIC(b.reg.ev.1)
 
 
 data(Howell1)
