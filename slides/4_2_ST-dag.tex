@@ -274,7 +274,7 @@ f(x_3|x_2,x_1)=f(x_1,x_2,x_3)/f(x_1,x_2)
 
 \item The main idea of DGMs is that by assuming that some variables are conditionally independent we can use the probability chain rule to represent the joint distribution more compactly.
 
-\item For example in the previous example, a conditional independence assumption could be: $X_3 \perp X_2| X_1$: $f(x_3|x_2,x_1)= f(x_3|x_2)$.
+\item For example in the previous example, a conditional independence assumption could be: $X_3 \perp X_1| X_2$: $f(x_3|x_2,x_1)= f(x_3|x_2)$.
 
 \item Then our joint distribution would be reduced to:
 
@@ -1507,9 +1507,11 @@ hb _||_ lo | do
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.3]{pics/causalMeme.jpeg}
+	\includegraphics[scale=0.28]{pics/causalMeme.jpeg}
 	\end{figure} 
 
+	\footnotesize
+	Source: \url{https://github.com/rmcelreath/causal_salad_2021}
 
 
 \end{frame}
@@ -1546,10 +1548,14 @@ hb _||_ lo | do
 \begin{frame}{Estimation for DAGs}
 \scriptsize{
 \begin{itemize}
+\item So far we have only discussed how a given DAG can be used to determine conditional independecies between variables.
+
+\item But how can we use DAGs to perform statistical inference from a given datasets $d$?
+
 \item Two estimation questions arise in the context of DAGs. 
 \item First, given a DAG $\mathcal{G}$ and data $d_1,\dots,d_n$ from a distribution $f$ consistent with $\mathcal{G}$, how do we estimate f?
 
-\item Second, given data $d_1,\dots,d_n$ how do we estimate $\mathcal{G}$?
+\item Second, given data $d_1,\dots,d_n$ how do we estimate $\mathcal{G}$ (i.e., find the DAG structure, with all its underlying independence assumptions, that best fits the data)?
 
 \item The first question is pure estimation while the second involves model selection.
 
@@ -1576,14 +1582,14 @@ hb _||_ lo | do
 \item The likelihood function is then
 
 \begin{displaymath}
- \mathcal{L}(\theta) = \prod_{i=1}^nf(d_i;\theta) ) =  \prod_{i=1}^n\prod_{j=1}^mf(X_{ij}|\pi_j;\theta_j) 
+ \mathcal{L}(\theta) = \prod_{i=1}^nf(d_i;\theta) =  \prod_{i=1}^n\prod_{j=1}^mf(X_{ij}|\pi_j;\theta_j)
 \end{displaymath}
 
 \item where $X_{ij}$ is the value of $X_j$ for the ith data point and j are the parameters for the-jth conditional density. 
 
 \item We can then estimate the parameters by maximum likelihood.
 
-\item On the other hand, if we want to perform Bayesian inference we must set priors for all our variables $X_1,\dots,X_m$ and estimate the posterior accordingly (using MCMC for example).
+\item On the other hand, if we want to perform Bayesian inference we must set priors for all our parameters $\theta_j$ and estimate the posterior accordingly (using MCMC for example).
 
  
 \end{itemize}
@@ -1598,10 +1604,9 @@ hb _||_ lo | do
 \scriptsize{
 \begin{itemize}
 
-\item To estimate the structure of the DAG itself, we could fit every possible DAG using maximum likelihood and use AIC (or some other method) to choose a DAG. 
+\item To estimate the structure of the DAG itself, we could fit every possible DAG using maximum likelihood (or Bayesian inference) and use AIC (or some other information criteria) to choose a DAG.
 
-\item However, there are many possible DAGs so we would need much data
-for such a method to be reliable.
+\item However, there are many possible DAGs so we would need much data for such a method to be reliable.
 
 \item Also, searching through all possible DAGs is a serious computational challenge. 
 
@@ -1609,7 +1614,8 @@ for such a method to be reliable.
 
 \item If prior information is available about part of the DAG structure, the computational and statistical problems are at least partly ameliorated \cite{wasserman2013all}.
 
- 
+\item It is also important to note that a DAG found with this procedure will not necessarily capture a causal relationship between the variables.
+
 \end{itemize}
 
 
