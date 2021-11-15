@@ -625,7 +625,7 @@ $i^1$ & 0.74 & 0.17 & 0.09 \\
 
 	\item In this case, the alternative parameterization is more compact than the joint. 
 	\item We now have three Bernoulli distributions $f(i), f(s | i^1)$ and $f(s | i^0)$, and two three-valued categorical distributions $f(g | i_1 )$ and $f(g | i^0)$.
-	\item A categorical distribution is  discrete probability distribution that describes the possible results of a random variable that can take on one of K possible categories, with the probability of each category separately specified\footnote{\url{https://en.wikipedia.org/wiki/Categorical_distribution}}.
+	\item A categorical distribution is a discrete probability distribution that describes the possible results of a random variable that can take on one of K possible categories, with the probability of each category separately specified\footnote{\url{https://en.wikipedia.org/wiki/Categorical_distribution}}.
 
 	
 \end{itemize}
@@ -978,8 +978,8 @@ list( x=c(o=0,h=1,s=2,c=3) , y=c(o=0,h=1,s=0,c=1) )
 \item Or the parents:
 
 \begin{verbatim}
-> children(over,"s")
-[1] "c" "h" 
+> parents( over, "h" )
+[1] "o" "s"
 \end{verbatim}
 
 
