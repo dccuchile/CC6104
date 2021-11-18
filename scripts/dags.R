@@ -1,5 +1,20 @@
 library(dagitty)
 
+my_dag<-dagitty('dag {
+  bb="0,0,1,1"
+  v1 [pos="0.116,0.159"]
+  v2 [pos="0.653,0.166"]
+  v3 [pos="0.292,0.354"]
+  v4 [pos="0.569,0.375"]
+  v1 -> v3
+  v1 -> v4
+  v2 -> v3
+  v3 -> v4
+}
+')
+plot(my_dag)
+impliedConditionalIndependencies(my_dag)
+
 over <- dagitty("dag{ o -> h; s -> h; s ->c }")
 coordinates(over) <- list( x=c(o=0,h=1,s=2,c=3) , y=c(o=0,h=1,s=0,c=1) )
 plot(over)
@@ -7,7 +22,6 @@ plot(over)
 library(ggdag)
 tidy_dagitty(over)
 ggdag(over, layout="circle")
-
 
 
 children(over,"s")

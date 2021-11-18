@@ -27,8 +27,8 @@
 | 11 | Jueves 11/11 | Ponerse al día |  | Horario de consulta con profesor (Discord) |  |
 | 12 | Martes 16/11 | Model Evaluation and Information Criteria | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf), [video 1](https://youtu.be/HCCzwltLVCc), [video 2](https://youtu.be/twpZHZMmKgM),  [video 3](https://youtu.be/ny4SlO3rcTo) | Horario de consulta de tareas con auxiliar (Discord) | Tarea 5 |
 | 12 | Jueves 18/11 | Model Evaluation and Information Criteria | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf), [video 4](https://youtu.be/6U7laePWt9M), [video 5](https://youtu.be/vE2VaK9tLV8), [video 6](https://youtu.be/wmBugs36H-4) | Horario de consulta con profesor (Discord) |  |
-| 13 | Martes 23/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf) | Horario de consulta de tareas con auxiliar (Discord) |  |
-| 13 | Jueves 25/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf) | Horario de consulta con profesor (Discord) |  |
-| 14 | Martes 30/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf) |  |  |
+| 13 | Martes 23/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf), [video 1](https://youtu.be/2jnj-7xpK0E), [video 2](https://youtu.be/GZf8uB37noU) | Horario de consulta de tareas con auxiliar (Discord) |  |
+| 13 | Jueves 25/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf),  [video 3](https://youtu.be/3EDdNLOrj_4), [video 4](https://youtu.be/cODS9GgepA4), [video 5](https://youtu.be/JA8H-LjAatE), [video 6](https://youtu.be/YXf0wnzvCFM) | Horario de consulta con profesor (Discord) |  |
+| 14 | Martes 30/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf), [video 5](https://youtu.be/JA8H-LjAatE), [video 6](https://youtu.be/YXf0wnzvCFM) |  |  |
 | 14 | Jueves 02/12 | Reflexiones finales |  | Horario de consulta con profesor (Discord) |  |
 | Exámenes |  |  |  |  |  |
