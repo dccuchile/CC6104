@@ -70,6 +70,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 * [Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R by Paul Roback and Julie Legler](https://bookdown.org/roback/bookdown-BeyondMLR/)
 * [Patterns, Predictions, and Actions, A story about machine learning by Moritz Hardt and Benjamin Recht](https://mlstory.org/) 
 * [Bayes Rules! An Introduction to Bayesian Modeling with R](https://www.bayesrulesbook.com/)
+* [Regression and Other Stories by Andrew Gelman, Jennifer Hill, and Aki Vehtari](https://avehtari.github.io/ROS-Examples/)
 
 ## Courses
 
