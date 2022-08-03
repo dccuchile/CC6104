@@ -1,8 +1,8 @@
 ## Contenidos publicados por semana.
 | Semana | Fecha | Tema | Asíncrono (Revisar en casa) | Síncrono (En clase) | Evaluacion |
 |---|---|---|---|---|---|
-| 1 | Martes 09/08 | Introduction to Statistical Thinking | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/1_1_ST-intro.pdf) [video 1](https://youtu.be/X4SqJu6lExM), [video 2](https://youtu.be/YbiQU5TTBX4) | Presentación presencial |  |
-| 1 | Jueves 11/08 | Introduction to R | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/1_2_ST-R.pdf) , [video 1](https://youtu.be/MbeLD3hWWVo), [video 2](https://youtu.be/9W_eWCy86F4),  [video 3](https://youtu.be/QvFXSw2-1r4), [video 4](https://youtu.be/y4JY7klrbfQ) |  |  |
+| 1 | Martes 09/08 | Introduction to Statistical Thinking | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/1_1_ST-intro.pdf), [video 1](https://youtu.be/X4SqJu6lExM), [video 2](https://youtu.be/YbiQU5TTBX4) | Presentación presencial |  |
+| 1 | Jueves 11/08 | Introduction to R | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/1_2_ST-R.pdf), [video 1](https://youtu.be/MbeLD3hWWVo), [video 2](https://youtu.be/9W_eWCy86F4),  [video 3](https://youtu.be/QvFXSw2-1r4), [video 4](https://youtu.be/y4JY7klrbfQ) |  |  |
 | 2 | Martes 16/08 | Descriptive Statistics | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/1_3_ST-explore.pdf), [video 1](https://youtu.be/kWNskZ8_98o), [video 2](https://youtu.be/_FJ8x9M4b1w),  [video 3](https://youtu.be/m7VBNZ2mYWI), [video 4](https://youtu.be/ylGMJ_aSQk0) | Clase resumen presencial |  |
 | 2 | Jueves 18/08 | Probability | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/1_4_ST-prob.pdf), [video 1](https://youtu.be/R9AVYV73m1M), [video 2](https://youtu.be/zubh1jbRiKE) | Horario de consulta con auxiliares (Discord) | Tarea 1 |
 | 3 | Martes 23/08 | Probability | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/1_4_ST-prob.pdf),  [video 3](https://youtu.be/uiwToagp0z4), [video 4](https://youtu.be/RlhN3t_VIyw) | Clase resumen presencial |  |
