@@ -30,9 +30,9 @@
 | 12 | Martes 15/11 | Model Evaluation and Information Criteria | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf), [video 1](https://youtu.be/HCCzwltLVCc), [video 2](https://youtu.be/twpZHZMmKgM) | Clase resumen presencial | Tarea 5 |
 | 12 | Jueves 17/11 | Model Evaluation and Information Criteria | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf),  [video 3](https://youtu.be/ny4SlO3rcTo), [video 4](https://youtu.be/6U7laePWt9M) | Horario de consulta con auxiliares (Discord) |  |
 | 13 | Martes 22/11 | Model Evaluation and Information Criteria | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf), [video 5](https://youtu.be/vE2VaK9tLV8), [video 6](https://youtu.be/wmBugs36H-4) | Clase resumen presencial |  |
-| 13 | Jueves 24/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf),  [video 3](https://youtu.be/3EDdNLOrj_4), [video 4](https://youtu.be/cODS9GgepA4) | Horario de consulta con auxiliares (Discord) |  |
-| 14 | Martes 29/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf), [video 5](https://youtu.be/JA8H-LjAatE), [video 6](https://youtu.be/YXf0wnzvCFM) | Clase resumen presencial |  |
-| 14 | Jueves 01/12 | Directed Graphical Models |  |  |  |
+| 13 | Jueves 24/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf),   [video 1](https://youtu.be/2jnj-7xpK0E), [video 2](https://youtu.be/GZf8uB37noU) | Horario de consulta con auxiliares (Discord) |  |
+| 14 | Martes 29/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf),  [video 3](https://youtu.be/3EDdNLOrj_4), [video 4](https://youtu.be/cODS9GgepA4) | Clase resumen presencial |  |
+| 14 | Jueves 01/12 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf), [video 5](https://youtu.be/JA8H-LjAatE), [video 6](https://youtu.be/YXf0wnzvCFM) |  |  |
 | 15 | Martes 06/12 | Sin clases |  |  |  |
 | 15 | Jueves 08/12 | Sin clases |  | Horario de consulta con profesor (Discord) |  |
 | Exámenes |  |  |  |  |  |
