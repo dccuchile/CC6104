@@ -8,5 +8,5 @@ install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOpt
 
 cmdstanr::install_cmdstan()
 
-install.packages(c("coda","mvtnorm","devtools","loo","dagitty","shape"))
+install.packages(c("coda","mvtnorm","devtools","loo","dagitty","shape"), dependencies = TRUE)
 devtools::install_github("rmcelreath/rethinking")
