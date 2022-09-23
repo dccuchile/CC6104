@@ -32,7 +32,7 @@
 | 13 | Martes 22/11 | Model Evaluation and Information Criteria | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf), [video 5](https://youtu.be/vE2VaK9tLV8), [video 6](https://youtu.be/wmBugs36H-4) | Clase resumen presencial | Tarea 5 |
 | 13 | Jueves 24/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf),   [video 1](https://youtu.be/2jnj-7xpK0E), [video 2](https://youtu.be/GZf8uB37noU) | Horario de consulta con auxiliares (Discord) |  |
 | 14 | Martes 29/11 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf),  [video 3](https://youtu.be/3EDdNLOrj_4), [video 4](https://youtu.be/cODS9GgepA4) | Clase resumen presencial |  |
-| 14 | Jueves 01/12 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf), [video 5](https://youtu.be/JA8H-LjAatE), [video 6](https://youtu.be/YXf0wnzvCFM) |  |  |
-| 15 | Martes 06/12 | Sin clases |  |  |  |
+| 14 | Jueves 01/12 | Directed Graphical Models | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf), [video 5](https://youtu.be/JA8H-LjAatE), [video 6](https://youtu.be/YXf0wnzvCFM) | Horario de consulta con auxiliares (Discord) |  |
+| 15 | Martes 06/12 | Sin clases |  | Clase resumen presencial |  |
 | 15 | Jueves 08/12 | Sin clases |  | Horario de consulta con profesor (Discord) |  |
 | Exámenes |  |  |  |  |  |
