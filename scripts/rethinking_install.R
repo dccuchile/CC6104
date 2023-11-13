@@ -8,5 +8,5 @@ install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOpt
 
 cmdstanr::install_cmdstan()
 
-install.packages(c("mvtnorm","loo","coda","remotes"), repos="https://cloud.r-project.org/",dependencies=TRUE)
+install.packages(c("mvtnorm","loo","coda","remotes","shape"), repos="https://cloud.r-project.org/",dependencies=TRUE)
 remotes::install_github("rmcelreath/rethinking")
