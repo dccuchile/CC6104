@@ -1,4 +1,3 @@
-
 library(rethinking)
 data(Howell1)
 d <- Howell1
@@ -100,6 +99,7 @@ plot( height ~ weight , data=d2 , col=col.alpha(rangi2,0.5) )
 lines( weight.seq , mu.mean )
 # plot a shaded region for 95% HPPDI
 shade( mu.HPDI , weight.seq )
+
 
 # The same could have been done using the link function
 mu <- link( b.reg1 , data=data.frame(weight=weight.seq), n=1e4 )
