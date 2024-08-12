@@ -306,7 +306,9 @@ cor(USArrests)
 #Instalar librerías
 install.packages("rpart",dependencies=T)
 install.packages("NHANES")
-install.packages("tidyverse")
+# install.packages("tidyverse")
+install.packages("tibble",dependencies=T)
+install.packages("dplyr",dependencies=T)
 
 #library(tidyverse)
 library(NHANES)
