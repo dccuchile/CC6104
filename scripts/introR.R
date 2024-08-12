@@ -308,12 +308,14 @@ install.packages("rpart",dependencies=T)
 install.packages("NHANES")
 install.packages("tidyverse")
 
-library(tidyverse)
+#library(tidyverse)
 library(NHANES)
 
+library(tibble)
+library(dplyr)
 
 # first create the individual variables
-library(tidyverse)
+#library(tidyverse)
 ages.tibble<-as_tibble(ages.frame)
 print(ages.tibble)
 
