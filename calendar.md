@@ -16,7 +16,7 @@
 | Receso |  |  |  |
 | 7 | Lunes 22/09 | Clase: Design of Experiments & Hypothesis Testing  Parte I | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_2_ST-hypothesis.pdf), [video 1](https://youtu.be/3MueyHnNNig), [video 2](https://youtu.be/JuyIrya23E0), [video 3](https://youtu.be/OXTyG6DIvK4) |
 | 7 | Miércoles 24/09 |                                                             |                                                              |
-| 8 | Lunes 29/09 | Clase: Design of Experiments & Hypothesis Testing  Parte II | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_2_ST-hypothesis.pdf),  [video 4](https://youtu.be/95QeSwrNoLI), , [video 5](https://youtu.be/ZCr3WCdc-54), [video 6](https://youtu.be/T6ZR0KoKhBQ) |
+| 8 | Lunes 29/09 | Clase: Design of Experiments & Hypothesis Testing  Parte II | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_2_ST-hypothesis.pdf),  [video 4](https://youtu.be/95QeSwrNoLI), [video 5](https://youtu.be/ZCr3WCdc-54), [video 6](https://youtu.be/T6ZR0KoKhBQ) |
 | 8 | Miércoles 01/10 | Ejercicio 2 |  |
 | 9 | Lunes 06/10 | Clase: Linear Regression | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_3_ST-regression.pdf),  [video 1](https://youtu.be/ZLZXJPKH6tU), [video 2](https://youtu.be/mW7bHkJBcB4),  [video 3](https://youtu.be/SHa5Neb7bfg),  [video 4](https://youtu.be/rCD_jofxecY), [video 5](https://youtu.be/ir4P_f3s44g), [video 6](https://youtu.be/wfNhJWHPOi8) |
 | 9 | Miércoles 08/10 | Tarea 3 Publicación |  |
