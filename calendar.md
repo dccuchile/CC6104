@@ -27,10 +27,10 @@
 | Receso Académico |  |  |  |
 | 12 | Lunes 03/11 | Clase: Summarizing the Posterior | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_3_ST-posterior.pdf), [video 1](https://youtu.be/67o8wcZsgtk), [video 2](https://youtu.be/Xr8S1Uv_5GQ), , [video 3](https://youtu.be/XJKyW4tYp_0), [video 4](https://youtu.be/OMipgV727wo) |
 | 12 | Miércoles 05/11 | Tarea 4 Publicacón                                          |  |
-| 13 | Lunes 10/11 | Clase: Bayesian Linear Regression | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_3_ST-bayes_lin.pdf),  [video 1](https://youtu.be/DrwhRshBVjM), [video 2](https://youtu.be/lgNMDCzTV9k),  [video 3](https://youtu.be/ajMucPrZDpU) |
-| 13 | Miércoles 12/11 | Ejercicio 4 | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_4_ST-MCMC.pdf), [video 4](https://youtu.be/kif9EG-sy2I), [video 5](https://youtu.be/iVgiowZvyZM), [video 6](https://youtu.be/r0BNqctisLg) |
-| 14 | Lunes 17/11 | Clase: Markov Chain Monte Carlo | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf), [video 1](https://youtu.be/HCCzwltLVCc), [video 2](https://youtu.be/twpZHZMmKgM), [video 3](https://youtu.be/ny4SlO3rcTo) |
-| 14 | Miércoles 19/11 | Tarea 4 Publicación | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf), [video 4](https://youtu.be/6U7laePWt9M), [video 5](https://youtu.be/vE2VaK9tLV8), [video 6](https://youtu.be/wmBugs36H-4) |
-| 15 | Lunes 24/11 | Clase: Model Evaluation and Information Criteria            | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf),   [video 1](https://youtu.be/2jnj-7xpK0E), [video 2](https://youtu.be/GZf8uB37noU),  [video 3](https://youtu.be/3EDdNLOrj_4) |
-| 15 | Miércoles 26/11 | Ejercicio 5 | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_2_ST-dag.pdf), [video 4](https://youtu.be/cODS9GgepA4), [video 5](https://youtu.be/JA8H-LjAatE), [video 6](https://youtu.be/YXf0wnzvCFM) |
+| 13 | Lunes 10/11 | Clase: Bayesian Linear Regression | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_3_ST-bayes_lin.pdf),  [video 1](https://youtu.be/DrwhRshBVjM), [video 2](https://youtu.be/lgNMDCzTV9k),  [video 3](https://youtu.be/ajMucPrZDpU), [video 4](https://youtu.be/YSGWWSUMPOk), [video 5](https://youtu.be/Ma9V8Nown9Q) |
+| 13 | Miércoles 12/11 | Ejercicio 4 |  |
+| 14 | Lunes 17/11 | Clase: Markov Chain Monte Carlo | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_4_ST-MCMC.pdf),  [video 1](https://youtu.be/gsofPiPBIeU), [video 2](https://youtu.be/EJZWaph61p4),  [video 3](https://youtu.be/jfidS22imJM), [video 4](https://youtu.be/kif9EG-sy2I), [video 5](https://youtu.be/iVgiowZvyZM), [video 6](https://youtu.be/r0BNqctisLg) |
+| 14 | Miércoles 19/11 | Tarea 4 Publicación |  |
+| 15 | Lunes 24/11 | Clase: Model Evaluation and Information Criteria            | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/4_1_ST-eval.pdf), [video 1](https://youtu.be/HCCzwltLVCc), [video 2](https://youtu.be/twpZHZMmKgM), [video 3](https://youtu.be/ny4SlO3rcTo),  [video 4](https://youtu.be/6U7laePWt9M), [video 5](https://youtu.be/vE2VaK9tLV8), [video 6](https://youtu.be/wmBugs36H-4) |
+| 15 | Miércoles 26/11 | Ejercicio 5 |  |
 | Exámenes |  |  |  |
