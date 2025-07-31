@@ -25,7 +25,7 @@
 | 11 | Lunes 20/10 | Clase: Introduction to Bayesian Inference Parte II | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_1_ST-bayesian.pdf),  [video 4](https://youtu.be/yZW1V3X4J94), [video 5](https://youtu.be/-fw0ktR7psM), [video 6](https://youtu.be/0oK9M82sw8Q), [video 7](https://youtu.be/u7Qdw5rDDDU) |
 | 11 | Miércoles 22/10 | Ejercicio 3 |  |
 | Receso Académico |  |  |  |
-| 12 | Lunes 03/11 | Clase: Summarizing the Posterior | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_3_ST-posterior.pdf), [video 1](https://youtu.be/67o8wcZsgtk), [video 2](https://youtu.be/Xr8S1Uv_5GQ), , [video 3](https://youtu.be/XJKyW4tYp_0), [video 4](https://youtu.be/OMipgV727wo) |
+| 12 | Lunes 03/11 | Clase: Summarizing the Posterior | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_3_ST-posterior.pdf), [video 1](https://youtu.be/67o8wcZsgtk), [video 2](https://youtu.be/Xr8S1Uv_5GQ), [video 3](https://youtu.be/XJKyW4tYp_0), [video 4](https://youtu.be/OMipgV727wo) |
 | 12 | Miércoles 05/11 | Tarea 4 Publicacón                                          |  |
 | 13 | Lunes 10/11 | Clase: Bayesian Linear Regression | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_3_ST-bayes_lin.pdf),  [video 1](https://youtu.be/DrwhRshBVjM), [video 2](https://youtu.be/lgNMDCzTV9k),  [video 3](https://youtu.be/ajMucPrZDpU), [video 4](https://youtu.be/YSGWWSUMPOk), [video 5](https://youtu.be/Ma9V8Nown9Q) |
 | 13 | Miércoles 12/11 | Ejercicio 4 |  |
