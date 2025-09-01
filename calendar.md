@@ -9,7 +9,7 @@
 | 3 | Miércoles 20/08 | Tarea 1 Publicación |  |
 | 4 | Lunes 25/08 | Ejercicio 1 |  |
 | 4 | Miércoles 27/08 | Clase: Probability Parte II                                 | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/1_4_ST-prob.pdf), [video 4](https://youtu.be/RlhN3t_VIyw), [video 5](https://youtu.be/4kV1dBaeWVc), [video 6]( https://youtu.be/MGyXc70JdSk) |
-| 5 (semana olímpica) | Lunes 01/09 | Clase: Introduction to Statistical Inference Parte I | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_2_ST-hypothesis.pdf), [video 1](https://youtu.be/A0BAhO9_RSI), [video 2](https://youtu.be/6Io555e2stM),  [video 3](https://youtu.be/2-Q2f6zmTns), [video 4](https://youtu.be/Hp2A5EJoXbk) |
+| 5 (semana olímpica) | Lunes 01/09 | Clase: Introduction to Statistical Inference Parte I | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_1_ST-inference.pdf), [video 1](https://youtu.be/A0BAhO9_RSI), [video 2](https://youtu.be/6Io555e2stM),  [video 3](https://youtu.be/2-Q2f6zmTns), [video 4](https://youtu.be/Hp2A5EJoXbk) |
 | 5                | Miércoles 03/09 |                                                             |  |
 | 6 | Lunes 08/09 | Clase: Introduction to Statistical Inference Parte II | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_1_ST-inference.pdf), [video 5](https://youtu.be/M0Ag4bww7Q0), [video 6]( https://youtu.be/K7khgecup3I), [video 7](https://youtu.be/uZ126Lh3L-k), [video 8]( https://youtu.be/kHSPx99nJ7g) |
 | 6                | Miércoles 10/09 | Tarea 2 Publicación |  |
