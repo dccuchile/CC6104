@@ -21,8 +21,8 @@
 | 9 | Lunes 06/10 | Clase: Linear Regression | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/2_3_ST-regression.pdf),  [video 1](https://youtu.be/ZLZXJPKH6tU), [video 2](https://youtu.be/mW7bHkJBcB4),  [video 3](https://youtu.be/SHa5Neb7bfg),  [video 4](https://youtu.be/rCD_jofxecY), [video 5](https://youtu.be/ir4P_f3s44g), [video 6](https://youtu.be/wfNhJWHPOi8) |
 | 9 | Miércoles 08/10 | Tarea 3 Publicación |  |
 | 10 | Lunes 13/10 | Clase: Introduction to Bayesian Inference Parte I | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_1_ST-bayesian.pdf),  [video 1](https://youtu.be/Gf2uuElPH0g), [video 2](https://youtu.be/5ZZ3PTPdZQw), [video 3](https://youtu.be/d_jXwM_-5jc) |
-| 10 | Miércoles 15/10 |  |  |
-| 11 | Lunes 20/10 | Clase: Introduction to Bayesian Inference Parte II | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_1_ST-bayesian.pdf),  [video 4](https://youtu.be/yZW1V3X4J94), [video 5](https://youtu.be/-fw0ktR7psM), [video 6](https://youtu.be/0oK9M82sw8Q), [video 7](https://youtu.be/u7Qdw5rDDDU) |
+| 10 | Miércoles 15/10 | Clase: Introduction to Bayesian Inference Parte II | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_1_ST-bayesian.pdf),  [video 4](https://youtu.be/yZW1V3X4J94), [video 5](https://youtu.be/-fw0ktR7psM), [video 6](https://youtu.be/0oK9M82sw8Q), [video 7](https://youtu.be/u7Qdw5rDDDU) |
+| 11 | Lunes 20/10 |                                                             |                                                              |
 | 11 | Miércoles 22/10 | Ejercicio 3 |  |
 | Receso Académico |  |  |  |
 | 12 | Lunes 03/11 | Clase: Summarizing the Posterior | [Slides](https://github.com/dccuchile/CC6104/raw/master/slides/3_3_ST-posterior.pdf), [video 1](https://youtu.be/67o8wcZsgtk), [video 2](https://youtu.be/Xr8S1Uv_5GQ), [video 3](https://youtu.be/XJKyW4tYp_0), [video 4](https://youtu.be/OMipgV727wo) |
