@@ -808,35 +808,34 @@ f(p|W,L) = \text{Beta}(W+1 , L+1)
 
 \end{frame}
 
-
 \begin{frame}{Calculating the Posterior}
 \scriptsize{
 
 \begin{itemize}
-\item For any positive integer (such as W and L) the gamma function $\Gamma(n) = (n-1)!$
 
-\item Hence, if que assume W and L as integers, the density can be rewritten as follows:
+\item For any positive integer $n$, the gamma function satisfies $\Gamma(n) = (n-1)!$
 
+\item Therefore, if $W$ and $L$ are integers, the Beta \emph{pdf} with parameters $(W+1, L+1)$ is
 \begin{displaymath}
-\text{Beta}(W+1 , L+1) = \frac{p^W(1-p)^L}{\frac{\Gamma(W+1)\Gamma(L+1)}{\Gamma(W+1 + L+1)}} = \frac{p^W(1-p)^L}{\frac{W!L!}{(W+L)!}} = \frac{(W+L)!}{W!L!}p^W(1-p)^L
+\mathrm{Beta}(p \mid W+1,L+1)
+= \frac{p^{W}(1-p)^{L}}{B(W+1,L+1)}
+= \frac{(W+L+1)!}{W!\,L!}\,p^{W}(1-p)^{L}
 \end{displaymath}
 
-\item This surprisingly looks identical to the binomial distribution.
+\item This expression closely resembles the binomial distribution:
+\[
+\binom{W+L}{W}p^W(1-p)^L
+\]
+but the Beta density uses $(W+L+1)!$ instead of $(W+L)!$.
 
-\item This is because both distributions are very similar. 
-
-\item The binomial distribution models the number of successes (W) and the beta distribution models the probability $p$ of success. 
-
-
-\item Let's build our posterior from the likelihood and the prior:
-\begin{displaymath}
-f(p|W,L) = \frac{f(W,L|p)*f(p)}{f(W,L)} = \frac{f(W,L|p)*f(p)}{\int_0^1f(W,L|p)*f(p)dp} 
-\end{displaymath}
-
+\item Interpretation:
+\begin{itemize}\scriptsize
+\item the Binomial distribution models the number of successes $W$,
+\item the Beta distribution models our uncertainty about the probability $p$ of success.
 \end{itemize}
 
-} 
-
+\end{itemize}
+}
 \end{frame}
 
 
@@ -846,62 +845,68 @@ f(p|W,L) = \frac{f(W,L|p)*f(p)}{f(W,L)} = \frac{f(W,L|p)*f(p)}{\int_0^1f(W,L|p)*
 
 \begin{itemize}
 
+\item With a uniform prior $f(p)=1$, the posterior is proportional to the likelihood:
+\[
+f(p \mid W,L)\propto f(W,L\mid p) = p^W(1-p)^L
+\]
 
-\item Since $f(p)=1$ (uniform prior) we have that
-
-\begin{displaymath}
-f(p|W,L) = \frac{f(W,L|p)}{\int_0^1f(W,L|p)dp} 
-\end{displaymath}
-
-\item The integral of the denominator is equal to 1.
+\item This kernel is exactly the form of a Beta density, so the normalized posterior must be
+\[
+f(p \mid W,L) = \mathrm{Beta}(p \mid W+1, L+1)
+\]
 
 
+\end{itemize}
+}
+\end{frame}
+
+\begin{frame}{Calculating the Posterior}
+\scriptsize{
+
+\begin{itemize}
+
+\item The denominator in Bayes’ rule is
+\[
+\int_0^1 f(W,L\mid p)\,dp
+= \int_0^1 \frac{(W+L+1)!}{W!\,L!}\,p^W(1-p)^L \, dp
+\]
+which is equal to 1 because we are integrating a normalized Beta pdf over its entire support.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.25]{pics/wolfram.png}
 \end{figure}
 
-\item Essentially we are integrating a Beta density function over its whole parameter space $p$, so it must be 1 by definition of PDFs.
-
-
 \end{itemize}
-
-} 
-
+}
 \end{frame}
-
 
 \begin{frame}{Calculating the Posterior}
 \scriptsize{
 
 \begin{itemize}
 
-\item Replacing the denominator by one we get:
+\item Using the fact that the denominator integrates to 1 (because it normalizes a Beta kernel), we obtain:
 
-\begin{displaymath}
-f(p|W,L) =  \frac{(W+L)!}{W!L!}p^W(1-p)^L = \text{Beta}(W+1 , L+1) 
-\end{displaymath}
+\[
+f(p \mid W,L) = \frac{(W+L+1)!}{W!\,L!}\,p^W(1-p)^L
+= \mathrm{Beta}(p \mid W+1 , L+1)
+\]
 
+\item Therefore, in our globe–tossing example $(W=6,L=3)$, the posterior can be computed analytically as:
 
-\item That means that in our globe tossing model $(W=6,L=3)$, we can calculate the posterior distribution analytically: 
-
-\begin{displaymath}
-f(p|W=6,L=3) =  \text{Beta}(7,4) 
-\end{displaymath}
-
+\[
+f(p \mid W=6,L=3) = \mathrm{Beta}(p \mid 7,4)
+\]
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.5]{pics/beta(7,4).pdf}
+	\includegraphics[scale=0.4]{pics/beta(7,4).pdf}
 \end{figure}
-
-
 
 \end{itemize}
 
-} 
-
+}
 \end{frame}
 
 
