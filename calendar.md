@@ -14,8 +14,8 @@
 | 6 | Lunes 07/09 | Clase Cátedra: Linear Regression (Quiz) | [Linear Regression](https://github.com/dccuchile/CC6104/blob/master/slides/2_3_ST-regression.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/2_3_ST-regression.tex)), [video 1](https://youtu.be/ZLZXJPKH6tU), [video 2](https://youtu.be/mW7bHkJBcB4), [video 3](https://youtu.be/SHa5Neb7bfg), [video 4](https://youtu.be/rCD_jofxecY), [video 5](https://youtu.be/ir4P_f3s44g), [video 6](https://youtu.be/wfNhJWHPOi8) |
 | 6                | Miércoles 09/09 | Control 1 |  |
 | Receso |  |  |  |
-| 7 | Lunes 21/09 |  |  |
-| 7 | Miércoles 23/09 | Hito 1 Proyecto |                                                              |
+| 7 | Lunes 21/09 | Hito 1 (Parte I) |  |
+| 7 | Miércoles 23/09 | Hito 1 (Parte II) |                                                              |
 | 8 | Lunes 28/09 | Clase Cátedra: Introduction to Bayesian Inference (Quiz)     | [Introduction to Bayesian Inference](https://github.com/dccuchile/CC6104/blob/master/slides/3_1_ST-bayesian.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/3_1_ST-bayesian.tex)), [video 1](https://youtu.be/Gf2uuElPH0g), [video 2](https://youtu.be/5ZZ3PTPdZQw), [video 3](https://youtu.be/d_jXwM_-5jc), [video 4](https://youtu.be/yZW1V3X4J94), [video 5](https://youtu.be/-fw0ktR7psM), [video 6](https://youtu.be/0oK9M82sw8Q), [video 7](https://youtu.be/u7Qdw5rDDDU) |
 | 8 | Miércoles 30/09 |  |  |
 | 9 | Lunes 05/10 | Clase Cátedra: Summarizing the Posterior (Quiz)              | [Summarizing the Posterior](https://github.com/dccuchile/CC6104/blob/master/slides/3_2_ST-posterior.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/3_2_ST-posterior.tex)), [video 1](https://youtu.be/67o8wcZsgtk), [video 2](https://youtu.be/Xr8S1Uv_5GQ), [video 3](https://youtu.be/XJKyW4tYp_0), [video 4](https://youtu.be/OMipgV727wo) |
@@ -31,6 +31,6 @@
 | 13 | Miércoles 11/11 |  |  |
 | 14 | Lunes 16/11 | Clase Cátedra: Model Evaluation and Information Criteria (Quiz) | [Model Evaluation and Information Criteria](https://github.com/dccuchile/CC6104/blob/master/slides/4_1_ST-eval.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/4_1_ST-eval.tex)), [video 1](https://youtu.be/HCCzwltLVCc), [video 2](https://youtu.be/twpZHZMmKgM), [video 3](https://youtu.be/ny4SlO3rcTo), [video 4](https://youtu.be/6U7laePWt9M), [video 5](https://youtu.be/vE2VaK9tLV8), [video 6](https://youtu.be/wmBugs36H-4) |
 | 14 | Miércoles 18/11 | Control 2                                                    |  |
-| 15 | Lunes 23/11 | Clase Cátedra: Directed Graphical Models (Quiz) | [Directed Graphical Models](https://github.com/dccuchile/CC6104/blob/master/slides/4_2_ST-dag.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/4_2_ST-dag.tex)), [video 1](https://youtu.be/2jnj-7xpK0E), [video 2](https://youtu.be/GZf8uB37noU), [video 3](https://youtu.be/3EDdNLOrj_4), [video 4](https://youtu.be/cODS9GgepA4), [video 5](https://youtu.be/JA8H-LjAatE), [video 6](https://youtu.be/YXf0wnzvCFM) |
-| 15 | Miércoles 25/11 | Hito 2 Proyecto |  |
+| 15 | Lunes 23/11 | Hito 2 (Parte I)                                             |                                                              |
+| 15 | Miércoles 25/11 | Hito 2 (Parte II)                                            |  |
 | Exámenes |  |  |  |
