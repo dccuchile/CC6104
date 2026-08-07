@@ -20,9 +20,9 @@
 | 8 | Miércoles 30/09 |  |  |
 | 9 | Lunes 05/10 | Clase Cátedra: Summarizing the Posterior (Quiz)              | [Summarizing the Posterior](https://github.com/dccuchile/CC6104/blob/master/slides/3_2_ST-posterior.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/3_2_ST-posterior.tex)), [video 1](https://youtu.be/67o8wcZsgtk), [video 2](https://youtu.be/Xr8S1Uv_5GQ), [video 3](https://youtu.be/XJKyW4tYp_0), [video 4](https://youtu.be/OMipgV727wo) |
 | 9 | Miércoles 07/10 |  |  |
-| 10 | Lunes 12/10 | Clase Cátedra: Bayesian Linear Regression (Quiz)             | [Bayesian Linear Regression](https://github.com/dccuchile/CC6104/blob/master/slides/3_3_ST-bayes_lin.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/3_3_ST-bayes_lin.tex)), [video 1](https://youtu.be/DrwhRshBVjM), [video 2](https://youtu.be/lgNMDCzTV9k), [video 3](https://youtu.be/ajMucPrZDpU), [video 4](https://youtu.be/YSGWWSUMPOk), [video 5](https://youtu.be/Ma9V8Nown9Q) |
+| 10 | Lunes 12/10 | Feriado      |  |
 | 10 | Miércoles 14/10 |                                                              |                                                              |
-| 11 | Lunes 19/10 |  |  |
+| 11 | Lunes 19/10 | Clase Cátedra: Bayesian Linear Regression (Quiz) | [Bayesian Linear Regression](https://github.com/dccuchile/CC6104/blob/master/slides/3_3_ST-bayes_lin.pdf) \|([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/3_3_ST-bayes_lin.tex)), [video 1](https://youtu.be/DrwhRshBVjM), [video 2](https://youtu.be/lgNMDCzTV9k), [video 3](https://youtu.be/ajMucPrZDpU), [video 4](https://youtu.be/YSGWWSUMPOk), [video 5](https://youtu.be/Ma9V8Nown9Q) |
 | 11 | Miércoles 21/10 |  |  |
 | Receso Académico |  |  |  |
 | 12 | Lunes 02/11 | Clase Cátedra: Markov Chain Monte Carlo  (Quiz) | [Markov Chain Monte Carlo](https://github.com/dccuchile/CC6104/blob/master/slides/3_4_ST-MCMC.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/3_4_ST-MCMC.tex)), [video 1](https://youtu.be/gsofPiPBIeU), [video 2](https://youtu.be/EJZWaph61p4), [video 3](https://youtu.be/jfidS22imJM), [video 4](https://youtu.be/kif9EG-sy2I), [video 5](https://youtu.be/iVgiowZvyZM), [video 6](https://youtu.be/r0BNqctisLg) |
