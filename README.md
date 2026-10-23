@@ -6,7 +6,7 @@ The course introduces the fundamentals of statistical thinking, which are descri
 
 
 * Lecturer: [Felipe Bravo-Marquez](https://felipebravom.com/)
-* TAs: Martín Paredes
+* TA: Matías Godoy
 
 * Lectures: Monday 14:30 - 16:00, Wednesday 14:30 - 16:00  
 

@@ -26,10 +26,10 @@
 | 11 | Miércoles 21/10 |  |  |
 | Receso Académico |  |  |  |
 | 12 | Lunes 02/11 | Clase Cátedra: Markov Chain Monte Carlo  (Quiz) | [Markov Chain Monte Carlo](https://github.com/dccuchile/CC6104/blob/master/slides/3_4_ST-MCMC.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/3_4_ST-MCMC.tex)), [video 1](https://youtu.be/gsofPiPBIeU), [video 2](https://youtu.be/EJZWaph61p4), [video 3](https://youtu.be/jfidS22imJM), [video 4](https://youtu.be/kif9EG-sy2I), [video 5](https://youtu.be/iVgiowZvyZM), [video 6](https://youtu.be/r0BNqctisLg) |
-| 12 | Miércoles 04/11 | Sesión de Trabajo Hito 2 |  |
-| 13 | Lunes 09/11 |                                                              |                                                              |
-| 13 | Miércoles 11/11 |  |  |
-| 14 | Lunes 16/11 | Clase Cátedra: Model Evaluation and Information Criteria (Quiz) | [Model Evaluation and Information Criteria](https://github.com/dccuchile/CC6104/blob/master/slides/4_1_ST-eval.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/4_1_ST-eval.tex)), [video 1](https://youtu.be/HCCzwltLVCc), [video 2](https://youtu.be/twpZHZMmKgM), [video 3](https://youtu.be/ny4SlO3rcTo), [video 4](https://youtu.be/6U7laePWt9M), [video 5](https://youtu.be/vE2VaK9tLV8), [video 6](https://youtu.be/wmBugs36H-4) |
+| 12 | Miércoles 04/11 |  |  |
+| 13 | Lunes 09/11 | Clase Cátedra: Model Evaluation and Information Criteria (Quiz) | [Model Evaluation and Information Criteria](https://github.com/dccuchile/CC6104/blob/master/slides/4_1_ST-eval.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/4_1_ST-eval.tex)), [video 1](https://youtu.be/HCCzwltLVCc), [video 2](https://youtu.be/twpZHZMmKgM), [video 3](https://youtu.be/ny4SlO3rcTo), [video 4](https://youtu.be/6U7laePWt9M), [video 5](https://youtu.be/vE2VaK9tLV8), [video 6](https://youtu.be/wmBugs36H-4) |
+| 13 | Miércoles 11/11 | Sesión de Trabajo Hito 2 |  |
+| 14 | Lunes 16/11 | Clase Cátedra: Directed Graphical Models (Quiz) | [Directed Graphical Models](https://github.com/dccuchile/CC6104/blob/master/slides/4_2_ST-dag.pdf) \| ([tex source file](https://github.com/dccuchile/CC6104/blob/master/slides/4_2_ST-dag.tex)), [video 1](https://youtu.be/2jnj-7xpK0E), [video 2](https://youtu.be/GZf8uB37noU), [video 3](https://youtu.be/3EDdNLOrj_4), [video 4](https://youtu.be/cODS9GgepA4), [video 5](https://youtu.be/JA8H-LjAatE), [video 6](https://youtu.be/YXf0wnzvCFM) |
 | 14 | Miércoles 18/11 | Control 2                                                    |  |
 | 15 | Lunes 23/11 | Hito 2 (Parte I)                                             |                                                              |
 | 15 | Miércoles 25/11 | Hito 2 (Parte II)                                            |  |
